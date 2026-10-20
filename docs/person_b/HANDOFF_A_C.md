@@ -29,6 +29,12 @@ dùng đúng file `corpus.jsonl` và `source_manifest.json`. Nếu A cần thay 
 preprocessing, báo B rebuild artifact mới; không chỉ đổi tên field hash.
 Full public reference rankings hỗ trợ kiểm tích hợp; final split vẫn do A quản.
 
+Exporter offline hiện ghi label `method=dense`; registry mặc định dùng
+`id=dense_minilm`. Đây là hai nhãn của cùng backend, không phải hai model khác.
+Khi xuất quality CSV cho online report, A dùng ID từ registry và kiểm trùng
+`retriever_hash`/`corpus_sha256`/query set trước khi map nhãn. Không ghép chỉ theo
+tên method. Sidecar và worker provenance chứa các hash để đối chiếu.
+
 ## C dùng backend
 
 ```python

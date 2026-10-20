@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "domain": "programmers",
+  "revision": "e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c",
+  "scope": "public corpus/query input only; no qrels or study splits",
+  "files": [
+    {
+      "kind": "corpus",
+      "source_url": "https://huggingface.co/datasets/BeIR/cqadupstack/resolve/e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c/programmers/corpus/corpus-00000-of-00001.parquet",
+      "parquet": "corpus.parquet",
+      "parquet_sha256": "b8eefa212252fe5af6ee72ba530df053740ff30c2c0bea77089f8a9271e94f75",
+      "jsonl": "corpus.jsonl",
+      "jsonl_sha256": "26d98b95e51ff6a7bd36f401c5821cab140189a4bdf2525017af66960427662d",
+      "rows": 32176
+    },
+    {
+      "kind": "queries",
+      "source_url": "https://huggingface.co/datasets/BeIR/cqadupstack/resolve/e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c/programmers/queries/queries-00000-of-00001.parquet",
+      "parquet": "queries.parquet",
+      "parquet_sha256": "106ba4777034ccec608a623ac93b5cfad63d89effc64d0528759ea94e276345d",
+      "jsonl": "queries.jsonl",
+      "jsonl_sha256": "707fde4c6bdce38db97e1930d8fcdc4c025536c566bc41af980245e284a7da27",
+      "rows": 876
+    }
+  ]
+}

@@ -1,0 +1,433 @@
+{
+  "status": "passed",
+  "protocol": "standalone B local Windows physical4 development validation v1",
+  "runs": [
+    {
+      "run_id": "programmers-main-v1",
+      "status": "passed",
+      "unique_queries": 876,
+      "requests": 4380,
+      "encoder_calls": 4380,
+      "vector_search_call_counts": {
+        "1": 4380
+      },
+      "every_ranking_matches_offline": true
+    },
+    {
+      "run_id": "programmers-stages-v1",
+      "status": "passed",
+      "unique_queries": 128,
+      "requests": 128,
+      "encoder_calls": 128,
+      "vector_search_call_counts": {
+        "1": 128
+      },
+      "every_ranking_matches_offline": true
+    },
+    {
+      "run_id": "unix-main-v1",
+      "status": "passed",
+      "unique_queries": 1072,
+      "requests": 5360,
+      "encoder_calls": 5360,
+      "vector_search_call_counts": {
+        "1": 5360
+      },
+      "every_ranking_matches_offline": true
+    },
+    {
+      "run_id": "unix-stages-v1",
+      "status": "passed",
+      "unique_queries": 128,
+      "requests": 128,
+      "encoder_calls": 128,
+      "vector_search_call_counts": {
+        "1": 128
+      },
+      "every_ranking_matches_offline": true
+    }
+  ],
+  "measured_requests": 9996,
+  "shared_executable_source_hash": "befbf15fca472b278b72ca350b1308c2826caacae6cb9671b2e9137f742c8bf2",
+  "quality_scores_evaluated": false,
+  "copies": [
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\quality\\programmers-top100.jsonl.meta.json",
+      "sha256": "2c62ef0ee2b6e9554c5d8af1e3a3757cd0b94b54d30c1a1cbe698a42ea2b3a64",
+      "bytes": 11873,
+      "copy": "quality\\programmers-top100.jsonl.meta.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\manifest.json",
+      "sha256": "77f7a1d0ecd23cefc8a652d704b2e8d71f5083d6f46c75aab9b3f794b24c9f20",
+      "bytes": 7313,
+      "copy": "online\\programmers-main-v1\\manifest.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\summary.json",
+      "sha256": "c8ca8ecfb84ba5e5f8094149a37dc6aa2bd865275b07b89c81126b5c690e5842",
+      "bytes": 1253,
+      "copy": "online\\programmers-main-v1\\summary.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\summary.csv",
+      "sha256": "d39a082b0ddd122575b0a6481d82bb71c2f2ee7d86063238875be5e9dbb13dc5",
+      "bytes": 253,
+      "copy": "online\\programmers-main-v1\\summary.csv"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\REPORT.md",
+      "sha256": "f7c75c29b09f23c5bd26be085d161ad86aa7654bd49930c6a30918b2014cbb6d",
+      "bytes": 768,
+      "copy": "online\\programmers-main-v1\\REPORT.md"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\latency-cdf-programmers.png",
+      "sha256": "36a52c5f5d7519f8179bcf860b472f3b5af316762f417c7dc45843ac2a1748ef",
+      "bytes": 40350,
+      "copy": "online\\programmers-main-v1\\latency-cdf-programmers.png"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\00-dense_minilm\\worker.json",
+      "sha256": "69f21de5b7464a4f25e906a426b8ff36e0c867cc2e751e004826763c0066dfae",
+      "bytes": 3640,
+      "copy": "online\\programmers-main-v1\\00-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\01-dense_minilm\\worker.json",
+      "sha256": "31c3b6a64229b08b70adb84c48c74ad7113121461d229281331b3c3bd85633c9",
+      "bytes": 3639,
+      "copy": "online\\programmers-main-v1\\01-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\02-dense_minilm\\worker.json",
+      "sha256": "311136d514d112f8f5fc9d3df628fc8a53129ca10532496aa45c34044b8cc87f",
+      "bytes": 3639,
+      "copy": "online\\programmers-main-v1\\02-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\03-dense_minilm\\worker.json",
+      "sha256": "45cd157a6d5d07987e63a5ed52a93c654aee85d88a47454cf09ab3aac8a63ecd",
+      "bytes": 3640,
+      "copy": "online\\programmers-main-v1\\03-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\04-dense_minilm\\worker.json",
+      "sha256": "9d3e4b1c81f17aa209d85ee8196a7d55559f2ed1c12ed8da0ecd66d4fb19874c",
+      "bytes": 3639,
+      "copy": "online\\programmers-main-v1\\04-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-stages-v1\\manifest.json",
+      "sha256": "923a4193b31f75c38baab6511800998538c2bdfc8ca5937f5592baf33161976e",
+      "bytes": 6322,
+      "copy": "online\\programmers-stages-v1\\manifest.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-stages-v1\\summary.json",
+      "sha256": "b996b284298e4853e554cad9bab3d45ea4378f027332d8d4b479acdc180ea677",
+      "bytes": 1240,
+      "copy": "online\\programmers-stages-v1\\summary.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-stages-v1\\summary.csv",
+      "sha256": "b8717bc2184225ef934f74660c41e876532292d780874285502241c5cc12c175",
+      "bytes": 222,
+      "copy": "online\\programmers-stages-v1\\summary.csv"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-stages-v1\\REPORT.md",
+      "sha256": "0cfad4792d1d802f00a827d585bc4cf79b748c9164bbe7505f322d4f09bbb9f2",
+      "bytes": 770,
+      "copy": "online\\programmers-stages-v1\\REPORT.md"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-stages-v1\\latency-cdf-programmers.png",
+      "sha256": "b288e0e5b76d30bfd0c58c0723bde621c6dfdef4e6e7a74c84f076ae1b9457e3",
+      "bytes": 43035,
+      "copy": "online\\programmers-stages-v1\\latency-cdf-programmers.png"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-stages-v1\\stage-breakdown.png",
+      "sha256": "fdf291c02a5d87434e6c6e2c64b8a2921a689027cb09206b0e5478514cca2e74",
+      "bytes": 37414,
+      "copy": "online\\programmers-stages-v1\\stage-breakdown.png"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-stages-v1\\00-dense_minilm\\worker.json",
+      "sha256": "24ede3f702c2301084679c65ca9b1f5e9b457061402599d2253386a8dcd743ad",
+      "bytes": 3638,
+      "copy": "online\\programmers-stages-v1\\00-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\quality\\unix-top100.jsonl.meta.json",
+      "sha256": "bb4781d16fe7c2a8c2c05fdc2212e226de6ed4ccfc2b35f5c432bf76345f7605",
+      "bytes": 11874,
+      "copy": "quality\\unix-top100.jsonl.meta.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\manifest.json",
+      "sha256": "5a5068049022eca28efc83b09de61c67b4b86ab426e78b9b6c9107aafcafbf2a",
+      "bytes": 7298,
+      "copy": "online\\unix-main-v1\\manifest.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\summary.json",
+      "sha256": "a42262ebe4e38230305e41ccbb78339fd38df4483dada333e93a0147b87b566f",
+      "bytes": 1225,
+      "copy": "online\\unix-main-v1\\summary.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\summary.csv",
+      "sha256": "38bf82cbdf1c3b0fe4e44f0737df6ecf723ab4aa3353b405520b6283973785db",
+      "bytes": 232,
+      "copy": "online\\unix-main-v1\\summary.csv"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\REPORT.md",
+      "sha256": "9b1dd4731fe5d796400418e6af4f4f12dcf7058955d71d9b12e3d7ee115e7e84",
+      "bytes": 755,
+      "copy": "online\\unix-main-v1\\REPORT.md"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\latency-cdf-unix.png",
+      "sha256": "0fbdc5e67c73d4d915346f2ff72b5c8f5e07e70ab9d5368105074b0dd15af929",
+      "bytes": 39503,
+      "copy": "online\\unix-main-v1\\latency-cdf-unix.png"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\00-dense_minilm\\worker.json",
+      "sha256": "cb9ee35a57c9780132b21cdb9c238e1d9423e606f2db7d27cc7dc10bbad23ae7",
+      "bytes": 3641,
+      "copy": "online\\unix-main-v1\\00-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\01-dense_minilm\\worker.json",
+      "sha256": "2182714275e0fcd90adb46eb7eaae47980a104881c9e0eb24f13c5381ce83291",
+      "bytes": 3642,
+      "copy": "online\\unix-main-v1\\01-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\02-dense_minilm\\worker.json",
+      "sha256": "5a7bea950920f0bdbf8a54e03d4942d70ff9df7bfc1724206af1c269f27bb77b",
+      "bytes": 3669,
+      "copy": "online\\unix-main-v1\\02-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\03-dense_minilm\\worker.json",
+      "sha256": "466f05511b4465fc4495f8220cbe5ad7a4dc2fbeb057b4b8b58fb0350be7177f",
+      "bytes": 3670,
+      "copy": "online\\unix-main-v1\\03-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\04-dense_minilm\\worker.json",
+      "sha256": "7179813b751848188d43602d951874a33e3624f2d724b81ec5001c7a5baf23b7",
+      "bytes": 3703,
+      "copy": "online\\unix-main-v1\\04-dense_minilm.worker.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-stages-v1\\manifest.json",
+      "sha256": "7ca26e9f6f6785bae6e3167bab103d37391b26caece5e56cff61d69700bdc290",
+      "bytes": 6308,
+      "copy": "online\\unix-stages-v1\\manifest.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-stages-v1\\summary.json",
+      "sha256": "c9bddba7e3f82910dc545671446e5c22fe6aa4d0259d87adf5a3688a6d092159",
+      "bytes": 1241,
+      "copy": "online\\unix-stages-v1\\summary.json"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-stages-v1\\summary.csv",
+      "sha256": "e239d3215b64effa55da60e7c31a88acb1f4a5e0edfaec61ae34e3028ae8a6e6",
+      "bytes": 230,
+      "copy": "online\\unix-stages-v1\\summary.csv"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-stages-v1\\REPORT.md",
+      "sha256": "085c346ca9121dd30e345fdfa9c7734f6ff9f848dd9a9705b369b9ecd15f558f",
+      "bytes": 756,
+      "copy": "online\\unix-stages-v1\\REPORT.md"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-stages-v1\\latency-cdf-unix.png",
+      "sha256": "7e96e4ceb3adfe2bc03b87cca39f42e60373bb2d869039c8be8a754e7aaf5138",
+      "bytes": 39400,
+      "copy": "online\\unix-stages-v1\\latency-cdf-unix.png"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-stages-v1\\stage-breakdown.png",
+      "sha256": "695915ac9dc255a043f31d0f76a13bd8f6e5cbca7ca0358c37fa2a07a20000e6",
+      "bytes": 34075,
+      "copy": "online\\unix-stages-v1\\stage-breakdown.png"
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-stages-v1\\00-dense_minilm\\worker.json",
+      "sha256": "9b6af05fb2d02eef2aac48570b9d7be366568e2dfd0e50d738ff508430b6d4ed",
+      "bytes": 3699,
+      "copy": "online\\unix-stages-v1\\00-dense_minilm.worker.json"
+    }
+  ],
+  "large_artifacts_kept_outside_git": [
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\data\\programmers\\corpus.jsonl",
+      "sha256": "26d98b95e51ff6a7bd36f401c5821cab140189a4bdf2525017af66960427662d",
+      "bytes": 35249481
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\data\\programmers\\queries.jsonl",
+      "sha256": "707fde4c6bdce38db97e1930d8fcdc4c025536c566bc41af980245e284a7da27",
+      "bytes": 81381
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\quality\\programmers-top100.jsonl",
+      "sha256": "e2e1006c91b873d593bd624854a2fa26a162272996605f1d705c59c0477a399b",
+      "bytes": 6292047
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers\\index.faiss",
+      "sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+      "bytes": 49422381
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\00-dense_minilm\\requests.jsonl",
+      "sha256": "f1a236df883aa256b13ac4aec573aa95e330270d4efe582c2d46512d01b6f2ba",
+      "bytes": 532946
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\00-dense_minilm\\memory_samples.jsonl",
+      "sha256": "7187a794316fae887e62fa5dcb69b57365807ec3d16fffc204f40c441a35e2bb",
+      "bytes": 181354
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\01-dense_minilm\\requests.jsonl",
+      "sha256": "d0238f0db9487aa41018d49aa89b8b932c725a929bfc00ca8d3015436dfc325a",
+      "bytes": 532933
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\01-dense_minilm\\memory_samples.jsonl",
+      "sha256": "c9b08ace9521d858b2437ef124801e2f43e27877f33a0a8b1741da7bc9ad9007",
+      "bytes": 183186
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\02-dense_minilm\\requests.jsonl",
+      "sha256": "bb3b3696f7059117425104608e9f534f0f540517bb9a0b1b4e26642b00775254",
+      "bytes": 532946
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\02-dense_minilm\\memory_samples.jsonl",
+      "sha256": "085f02a6b0be8aeecb98ec506e2eab5bb1e959600e95e6470da2aa6d9e0abfd2",
+      "bytes": 183998
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\03-dense_minilm\\requests.jsonl",
+      "sha256": "c349df0a2f5df05452c46e358383677311d3384c3ba23a42c6259aef7c90a632",
+      "bytes": 532966
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\03-dense_minilm\\memory_samples.jsonl",
+      "sha256": "2922a5992c901a45e9fda6864f4925dfc2cbb78d96d4e216954687680f02870a",
+      "bytes": 187299
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\04-dense_minilm\\requests.jsonl",
+      "sha256": "e1d5a0f84dc914cc4d0e0b934562cf545abe565c44e07d30bfc48c7d5221e609",
+      "bytes": 533033
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-main-v1\\04-dense_minilm\\memory_samples.jsonl",
+      "sha256": "e386f2631545bbf0764d983b86a7b52d9fb93b548c251e4bc03b1244f046eb6c",
+      "bytes": 195505
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-stages-v1\\00-dense_minilm\\requests.jsonl",
+      "sha256": "5e7ddf2a1c19d4fa55961a6292aef34d8dc2ff23e546fc45e377dac62f056307",
+      "bytes": 79046
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\programmers-stages-v1\\00-dense_minilm\\memory_samples.jsonl",
+      "sha256": "f1a7588fba1ae540db2d3780a7c2c84fafd354103abe20777df68c0bba710982",
+      "bytes": 123302
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\data\\unix\\corpus.jsonl",
+      "sha256": "8d67fc0df3e01f490b38f81b72aa720644046db1e4c301900a4f4803550f4b7c",
+      "bytes": 49562849
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\data\\unix\\queries.jsonl",
+      "sha256": "69d6f23726f77a2892b21ee6e98432768c42b045c5790ba79b6ef66c1b02f73b",
+      "bytes": 93920
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\quality\\unix-top100.jsonl",
+      "sha256": "2f36fa3db203a98d481f7e556fe313ce475c8f3fc39b872f29f1e7bacc155984",
+      "bytes": 6884570
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix\\index.faiss",
+      "sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+      "bytes": 72778797
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\00-dense_minilm\\requests.jsonl",
+      "sha256": "663d18d1905db8bd3d5a04438be0d81da663c26bb24eb07e78b4afdd03ba33e7",
+      "bytes": 629441
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\00-dense_minilm\\memory_samples.jsonl",
+      "sha256": "7cc57a457dbe27d5aa63eea8a24d7c5574bce984345af9948a64ef00c72cd758",
+      "bytes": 301503
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\01-dense_minilm\\requests.jsonl",
+      "sha256": "e384731cff9ba6c44a908a9060f27e1da34b6cfb0805e137a06105a4d0ed38fb",
+      "bytes": 629443
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\01-dense_minilm\\memory_samples.jsonl",
+      "sha256": "d57f2c90931135e0ac58c4093abbaaf27510ccd5873dbc55fd4b1dfcb5130d64",
+      "bytes": 307178
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\02-dense_minilm\\requests.jsonl",
+      "sha256": "9c0807c288054edfe0500db03044e000dc4cba5e91c431facda6ad982ce309e0",
+      "bytes": 629447
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\02-dense_minilm\\memory_samples.jsonl",
+      "sha256": "6590fb87b4c4ff7f963b27652c32b02f411f6328c3c23812583577af820c1cea",
+      "bytes": 305881
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\03-dense_minilm\\requests.jsonl",
+      "sha256": "f6bf84e218460cf5198f1d36d2a7fe8eb6733390584e200ee6d16a327861aa1a",
+      "bytes": 629442
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\03-dense_minilm\\memory_samples.jsonl",
+      "sha256": "24c388835ce77cce5e6cf40dcb1c7c145a2eb8d64564ce98b06f3e33b412a282",
+      "bytes": 315606
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\04-dense_minilm\\requests.jsonl",
+      "sha256": "bd5661e4adb6c6b28d9ab993680a0524778198c5d8d7642b8a727dcad4c090ba",
+      "bytes": 629443
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-main-v1\\04-dense_minilm\\memory_samples.jsonl",
+      "sha256": "6a9ad6027611db4f782734e78a3eaab12d62dc04c59e2eb606fe7e07e6af75df",
+      "bytes": 294937
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-stages-v1\\00-dense_minilm\\requests.jsonl",
+      "sha256": "9c55cd75c53e43d0b4f94eb74e3ff5c8d30f0ea4dc25fb6408617aeffa9b9c9c",
+      "bytes": 76312
+    },
+    {
+      "original": "C:\\Users\\quang\\.cache\\pegh\\results\\online\\unix-stages-v1\\00-dense_minilm\\memory_samples.jsonl",
+      "sha256": "a0194e72ab1a4581cf32de13f35aebdd81a084b8a787c375f10ea969e1318361",
+      "bytes": 127028
+    }
+  ]
+}

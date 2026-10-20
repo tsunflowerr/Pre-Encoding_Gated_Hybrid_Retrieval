@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "run_id": "unix-stages-v1",
+  "run_manifest_sha256": "7ca26e9f6f6785bae6e3167bab103d37391b26caece5e56cff61d69700bdc290",
+  "split": "development_validation",
+  "fold": null,
+  "quantile_method": "numpy.linear on measured samples; repeats are not independent queries",
+  "quality_measured_by_this_report": false,
+  "summaries": [
+    {
+      "method": "dense_minilm",
+      "domain": "unix",
+      "unique_queries": 128,
+      "timing_samples": 128,
+      "repetitions": 1,
+      "mean_ms": 48.534207031250006,
+      "p50_ms": 46.018299999999996,
+      "p90_ms": 56.65858,
+      "p95_ms": 62.60439,
+      "cpu_mean_ms": 182.9833984375,
+      "dense_call_ratio": 1.0,
+      "mean_ms_ci95": [
+        46.788255644531255,
+        50.7775996875
+      ],
+      "bootstrap_unit": "query retaining all repeats; mean-latency CI only",
+      "bootstrap_samples": 1000,
+      "bootstrap_seed": 42,
+      "peak_rss_bytes": 538681344,
+      "rss_load_and_warmup_included": true,
+      "stage_means": {
+        "sparse_ms": 0.0,
+        "stats_ms": 0.0,
+        "features_ms": 0.0,
+        "gate_ms": 0.0,
+        "encode_ms": 26.6593265625,
+        "vector_ms": 21.33488671875,
+        "fusion_ms": 0.0
+      }
+    }
+  ]
+}

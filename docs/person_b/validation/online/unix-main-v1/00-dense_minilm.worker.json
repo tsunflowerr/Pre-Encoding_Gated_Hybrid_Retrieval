@@ -1,0 +1,108 @@
+{
+  "status": "complete",
+  "method": "dense_minilm",
+  "repetition": 0,
+  "source_hash": "befbf15fca472b278b72ca350b1308c2826caacae6cb9671b2e9137f742c8bf2",
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "C:\\Users\\quang\\.cache\\pegh\\b-dense-profiling\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+    "logical_cpus_host": 12,
+    "physical_cores_host": 6,
+    "host_ram_bytes": 16884793344,
+    "available_ram_before_load_bytes": 4655206400,
+    "system_cpu_percent_before_load": 45.9,
+    "settings": {
+      "logical_cpus": 4,
+      "affinity_cpus": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "memory_limit_bytes": 8000000000,
+      "enforce_memory_limit": true,
+      "online_batch_size": 1,
+      "concurrency": 1,
+      "warmup_queries": 50,
+      "repetitions": 5,
+      "seed": 42,
+      "detailed_stages": false,
+      "memory_sample_seconds": 0.02,
+      "worker_timeout_seconds": 3600.0
+    },
+    "resources": {
+      "requested_logical_cpus": 4,
+      "requested_affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "effective_affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "memory_limit_bytes": 8000000000,
+      "memory_limit_kind": "windows_job_process_commit_limit",
+      "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+    },
+    "package_versions": {
+      "numpy": "2.5.4",
+      "faiss-cpu": "1.15.1",
+      "torch": "2.14.1+cpu",
+      "sentence-transformers": "5.7.0",
+      "transformers": "4.57.6"
+    },
+    "git_commit": "6d25720b3b09e8aa86ad8df3ffc9cd3cf5dc5753",
+    "git_branch": "codex/b-dense-profiling",
+    "git_status": "M docs/person_b/IMPLEMENTATION_STATUS.md\n M docs/person_b/VALIDATION_PROTOCOL.md\n?? docs/person_b/validation/",
+    "pid": 5868,
+    "cwd": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+    "thread_environment": {
+      "OMP_NUM_THREADS": "4",
+      "MKL_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "backend_threads_after_factory": {
+      "torch": 4,
+      "faiss": 4
+    }
+  },
+  "method_provenance": {
+    "dense_config": {
+      "model_id": "sentence-transformers/msmarco-MiniLM-L6-cos-v5",
+      "revision": "14ca9be4bbcf1402eac0f43a2e2ccb6e0f994ba3",
+      "dimension": 384,
+      "max_length": 256,
+      "batch_size": 16,
+      "checkpoint_documents": 512,
+      "torch_threads": 4,
+      "faiss_threads": 4,
+      "device": "cpu",
+      "dtype": "float32",
+      "normalize": true
+    },
+    "corpus_sha256": "8d67fc0df3e01f490b38f81b72aa720644046db1e4c301900a4f4803550f4b7c",
+    "index_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+    "retriever_hash": "2281955bca7148bd10f50eab43d594470554e1336191f244b2e0a91b6f5aa0ab",
+    "query_embedding_cache": false
+  },
+  "warmup_encoder_calls": 50,
+  "memory": {
+    "sample_interval_seconds": 0.02,
+    "sampled_peak_rss_bytes": 548016128,
+    "os_peak_rss_bytes": 548282368,
+    "os_peak_source": "psutil.peak_wset",
+    "rss_source": "psutil.Process.memory_info.rss"
+  },
+  "completed_requests": 1072,
+  "expected_requests": 1072,
+  "quality_cache_used": false,
+  "requests_sha256": "663d18d1905db8bd3d5a04438be0d81da663c26bb24eb07e78b4afdd03ba33e7",
+  "memory_samples_sha256": "7cc57a457dbe27d5aa63eea8a24d7c5574bce984345af9948a64ef00c72cd758"
+}

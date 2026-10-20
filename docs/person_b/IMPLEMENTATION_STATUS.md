@@ -1,61 +1,63 @@
 # Trạng thái triển khai phần B
 
-- Trạng thái: `in_progress`.
+- Trạng thái: `complete` — đã triển khai, chạy dữ liệu thật và audit phần B.
 - Nhánh: `codex/b-dense-profiling`.
-- Ngày bắt đầu: 20/10/2026, Asia/Bangkok.
-- Quy tắc quota của người dùng: kiểm tra cửa sổ 300 phút thường xuyên; ngừng
-  triển khai khi `usedPercent >= 90`, lưu `resetsAt`, chỉ tiếp tục sau reset.
-- Heartbeat: `ti-p-t-c-pe-gh-ph-n-b-sau-reset-quota`.
-- Quota đầu lượt: đã dùng 1%, còn 99%; resetsAt=1792497940.
-- Quota gần nhất: đã dùng 40%, còn 60%; cùng cửa sổ reset.
+- Ngày: 20/10/2026, Asia/Bangkok.
+- Quy tắc quota: kiểm tra cửa sổ 300 phút thường xuyên; dừng khi usedPercent >=90,
+  chỉ tiếp tục sau reset. Đã hoàn tất trước ngưỡng, lần kiểm gần nhất dùng 58%, còn 42%.
+- Reset của cửa sổ đang theo dõi: `1792497940`.
+- Heartbeat riêng: `ti-p-t-c-pe-gh-ph-n-b-sau-reset-quota` đã đặt `PAUSED` sau khi
+  hoàn tất; không còn tự động tiếp tục công việc đã xong.
+- Không còn build/benchmark đang chạy: session 83667 và 13742 đều exit 0.
 
-## Đã làm
+## Đã nghiệm thu
 
-- Tạo nhánh riêng; đọc kế hoạch và xác nhận chưa có code A/C.
-- Bootstrap package và contracts theo kế hoạch; tạo môi trường riêng ngoài OneDrive.
-- Máy phát triển: Windows 11, 12 logical CPUs, RAM khoảng 16 GiB.
-- Docker daemon hiện chưa chạy; chưa có Linux distro dùng cho benchmark chính.
+- CPU encoder pinned, 384d/float32/L2/max_length=256; FAISS FlatIP exact và mapping.
+- Streaming build/checkpoint/resume/source hashes; query fresh encode một lần.
+- Full indices: programmers 32.176 docs, unix 47.382 docs; verify mọi vector passed.
+- Offline exports: 876/1.072 public queries, 100 hits/query.
+- Online main: 5 repeats/domain, 4.380/5.360 samples; detailed 128 query/domain riêng.
+- Full audit: 9.996 online requests và 1.948 offline rankings; mọi ranking online
+  khớp offline, encoder/vector calls đúng 1/request, không self-hit/fallback.
+- 37 tests passed gồm pinned model thật, NumPy/FAISS, integrity/resume và resource/
+  counters/skip checks. Ruff, lockfile và dependency compatibility passed.
+- README/handoff/protocol, background/results sections, summary CSV/JSON/figures,
+  receipts/checksums đã có. Hosted CI được khai báo, chưa push/chạy trên GitHub.
 
-## Đã kiểm tra thêm
+## Kết quả local
 
-- `uv.lock` đã resolve và cài thành công trong môi trường riêng Python 3.12.
-- Torch 2.14.1+cpu, FAISS 1.15.1; CUDA không khả dụng.
-- Toàn bộ 34 test đã qua, gồm model pinned thật, resource cap/affinity subprocess,
-  registry checksum binding và quality-plot integrity.
-- Đã tải/kiểm tra Parquet pinned đầy đủ: programmers 32.176 docs/876 queries;
-  unix 47.382 docs/1.072 queries. Không tải qrels hay tạo split thay người A.
-- Pilot batch16: 1.024 document, 2 checkpoint; khoảng 48,37 giây indexing.
-- Đã commit nền `6b3bbe1` trên master; phần B ở nhánh riêng, commit `8888845`.
-- Pilot batch32: 1.024 docs/50,94 giây, peak RSS OS khoảng 691 MB;
-  batch16: 48,37 giây, peak khoảng 594 MB. Giữ batch16, không tune theo quality.
-- Đã bổ sung validation provenance/checksums, warmup counter và chống overwrite output khác.
-- Pipeline embedding hiện đã đóng băng. Hai index đầy đủ dùng thư mục `final-v1`,
-  giữ nguyên các pilot cũ; không resume pilot có fingerprint phiên bản cũ.
-- Đã checkpoint programmers 3.584 docs để đổi affinity theo topology đã kiểm.
-  Profile đầu dùng CPU [0,1,2,3]; các build tiếp và online dùng [0,2,4,6],
-  vẫn tổng 4 logical CPUs. Build profile giữ lịch sử invocation, không gộp điều kiện.
-- Đang chạy programmers rồi unix tuần tự trong exec session 83667; manifest/lock
-  là nguồn xác nhận tiến độ. Không khởi chạy job trùng khi PID còn sống.
-- README/handoff và background paper B đã có lệnh tái lập đầy đủ.
+| Domain | Mean ms | p95 ms | Peak RSS MiB |
+|---|---:|---:|---:|
+| programmers |32,120|42,860|497,89|
+| unix |48,584|63,650|522,96|
 
-## Artifact ngoài OneDrive
+Đây là dense-only development validation trên Windows 11/i7-9850H, physical4
+logical processors [0,2,4,6], process commit cap 8 GB. Không phải final protected
+PE-GH test, quality scores hay chứng cứ speedup gate. Xem paper/05b_efficiency_results.md
+và docs/person_b/validation/FINAL_AUDIT.json để đọc phạm vi/nguồn số.
 
-- Môi trường: `C:/Users/quang/.cache/pegh/b-dense-profiling/.venv`.
-- Dữ liệu: `C:/Users/quang/.cache/pegh/data/{programmers,unix}`.
-- Model cache: `C:/Users/quang/.cache/pegh/models`.
-- Pilot16: `C:/Users/quang/.cache/pegh/artifacts/primary/programmers` (building, 1.024 docs).
-- Pilot32: `C:/Users/quang/.cache/pegh/artifacts/batch32/programmers`.
-- Full artifacts: `C:/Users/quang/.cache/pegh/artifacts/final-v1/{programmers,unix}`.
-- STOP điều khiển riêng: `C:/Users/quang/.cache/pegh/control/STOP_PART_B`.
-- Kiểm `.build.lock`/manifest và PID thực trước khởi chạy; không tạo build trùng.
+## Artifact ngoài Git
 
-## Tiếp theo
+- Venv: `C:/Users/quang/.cache/pegh/b-dense-profiling/.venv`.
+- Input: `C:/Users/quang/.cache/pegh/data/{programmers,unix}`.
+- Model: `C:/Users/quang/.cache/pegh/models`.
+- Full indices: `C:/Users/quang/.cache/pegh/artifacts/final-v1/{programmers,unix}`.
+- Quality: `C:/Users/quang/.cache/pegh/results/quality/*-top100.jsonl`.
+- Raw runs: `C:/Users/quang/.cache/pegh/results/online/{domain}-{main,stages}-v1`.
+- Small copied artifacts/catalog: `docs/person_b/validation/`.
+- Pilot16/32 cũ được giữ ở artifacts/primary và artifacts/batch32; không resume
+  chúng vì fingerprint phiên bản trước. Chúng không phải full indices.
+- STOP điều khiển: `C:/Users/quang/.cache/pegh/control/STOP_PART_B` (không tồn tại
+  ở thời điểm hoàn tất). Không tự tạo build/run trùng khi task này đã complete.
 
-1. Build đủ hai index final-v1 tuần tự; giữ nguyên encoder/pipeline code trong lúc build.
-2. Nếu job còn sống thì chỉ theo dõi manifest/PID; không khởi chạy job trùng.
-3. Export quality top100; chạy online profiling bằng model thật và nguồn query rõ ràng.
-4. Hoàn thiện report/figures/README và kết quả test; commit các thay đổi bổ sung.
-5. Hoàn thành thì tắt riêng heartbeat; nếu quota >=90% thì checkpoint và ghi paused_quota.
+## Provenance và tích hợp còn lại của nhóm
 
-Các run Windows sẽ ghi rõ môi trường thực tế, không gọi là kết quả Linux hoặc
-claim cải thiện gate khi phần C chưa có.
+- Baseline kế hoạch/contracts: 6b3bbe1; B implementation: 8888845,669da04,0c73cce,
+ 6d25720. Benchmark executable freeze tại 6d25720; script audit và tài liệu bàn giao
+  thêm sau timing. Source snapshots/commits trong receipts ghi điều kiện thực tế.
+- Programmers build có invocation đầu [0,1,2,3], đổi sau 3.584 docs sang physical4;
+  lịch sử được giữ, không gọi tổng build time là một phép so affinity công bằng.
+- A nhận canonical JSONL/hash/IDs, qrels/splits/evaluator; C nhận backend/factory/
+  trace và bổ sung BM25/hybrid/gate/app. Không tự triển khai toàn bộ A/C trong B.
+- Khi A/C có frozen methods và final query files, dùng harness đã bàn giao để chạy
+  phép so đầy đủ; không tiếp tục tự động các thí nghiệm đó từ heartbeat phần B.

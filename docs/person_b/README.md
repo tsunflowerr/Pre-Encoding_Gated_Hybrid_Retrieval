@@ -64,6 +64,12 @@ Các lệnh bên dưới dùng PowerShell. Trong môi trường triển khai hi�
 Venv, model, dữ liệu, index và raw result đặt ngoài OneDrive/Git để tránh sync
 file lớn. Không cần GPU, Java, Docker hoặc dịch vụ mạng khi model đã cache đủ.
 
+Sau lần tải/kiểm tra model thành công, có thể đặt `$env:HF_HUB_OFFLINE = '1'`
+(Linux: `export HF_HUB_OFFLINE=1`) trước khi khởi chạy để tránh HTTP revision
+checks khi load. Cache thiếu sẽ lỗi thay vì tải. Các run v1 trong bản bàn giao
+không bật biến này; model load nằm ngoài request timer, thời gian load quan sát
+ở build profile có thể bao gồm chờ mạng, không phải phép đo cold-load ổn định.
+
 ```powershell
 & $taskPython -m pytest tests/b -m 'not model' -q
 & $taskPython -m pytest tests/b -m model -q
@@ -242,4 +248,21 @@ bàn giao, chưa có BM25, fusion, gate train hoặc app; vì vậy dense-only d
 run xác nhận hạ tầng, không chứng minh PE-GH nhanh hơn hybrid. A/C cần cung cấp
 split/evaluator/factory để chạy so sánh cuối bằng đúng harness này. Những kết quả
 đó là tích hợp chung sau bàn giao, không phải code B bị thiếu.
+
+## 10. Bản bàn giao đã chạy
+
+[Báo cáo kết quả](../../paper/05b_efficiency_results.md) có bảng số thật và figures.
+[FINAL_AUDIT.json](validation/FINAL_AUDIT.json) kiểm 9.996 online requests, đối
+chiếu với 1.948 offline rankings và lưu catalog raw paths/checksums.
+
+```powershell
+& $taskPython scripts_b/audit_delivery.py --cache-root "$taskCache" --output docs/person_b/validation
+```
+
+Lệnh audit dành riêng cho standalone local protocol v1 đã ghi trong repository
+(Windows, physical4, dense-only); không dùng làm acceptance rule chung cho final
+gate experiments. Có thể chạy lại idempotent nếu copied artifact giữ nguyên;
+script từ chối thay bản copy có nội dung khác. Nó không load model hoặc suy quality
+scores. Các run v1 được đo tại source commit `6d25720`, trước khi thêm script audit;
+benchmark source hash gốc được giữ trong receipts, source mới ghi hash mới ở run mới.
 

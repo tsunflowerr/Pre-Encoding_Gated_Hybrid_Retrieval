@@ -1,0 +1,214 @@
+{
+  "schema_version": "1.0",
+  "status": "complete",
+  "run_id": "unix-main-v1",
+  "registry": [
+    {
+      "id": "dense_minilm",
+      "factory": "pegh.dense.factory:create_dense_method",
+      "kwargs": {
+        "index_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+        "expected_index_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+        "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models"
+      },
+      "require_dense_warmup": true
+    }
+  ],
+  "registry_hash": "34e24b19222ecae3bc7331567ee0318e05c315efc3de662dca518d9ad5b2bad3",
+  "query_ids_hash": "5978126908547b917c9ea16476dc581c127f7d2dbca57cfeb2cfac0fcf3c5596",
+  "queries_hash": "f9f273ebe60502dff44dd95c5eaa1d049ddcc7c835a19fdabc4c5262dfe44753",
+  "warmup_hash": "a145660d028426fae118eaaabe799c673a51dac417a15dcb3af0ddbdb2c5ca45",
+  "query_count": 1072,
+  "settings": {
+    "logical_cpus": 4,
+    "affinity_cpus": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "memory_limit_bytes": 8000000000,
+    "enforce_memory_limit": true,
+    "online_batch_size": 1,
+    "concurrency": 1,
+    "warmup_queries": 50,
+    "repetitions": 5,
+    "seed": 42,
+    "detailed_stages": false,
+    "memory_sample_seconds": 0.02,
+    "worker_timeout_seconds": 3600.0
+  },
+  "split": "development_validation",
+  "fold": null,
+  "k": 100,
+  "workers": [
+    {
+      "directory": "00-dense_minilm",
+      "method": "dense_minilm",
+      "repetition": 0,
+      "status": "complete",
+      "returncode": 0,
+      "receipt_sha256": "cb9ee35a57c9780132b21cdb9c238e1d9423e606f2db7d27cc7dc10bbad23ae7"
+    },
+    {
+      "directory": "01-dense_minilm",
+      "method": "dense_minilm",
+      "repetition": 1,
+      "status": "complete",
+      "returncode": 0,
+      "receipt_sha256": "2182714275e0fcd90adb46eb7eaae47980a104881c9e0eb24f13c5381ce83291"
+    },
+    {
+      "directory": "02-dense_minilm",
+      "method": "dense_minilm",
+      "repetition": 2,
+      "status": "complete",
+      "returncode": 0,
+      "receipt_sha256": "5a7bea950920f0bdbf8a54e03d4942d70ff9df7bfc1724206af1c269f27bb77b"
+    },
+    {
+      "directory": "03-dense_minilm",
+      "method": "dense_minilm",
+      "repetition": 3,
+      "status": "complete",
+      "returncode": 0,
+      "receipt_sha256": "466f05511b4465fc4495f8220cbe5ad7a4dc2fbeb057b4b8b58fb0350be7177f"
+    },
+    {
+      "directory": "04-dense_minilm",
+      "method": "dense_minilm",
+      "repetition": 4,
+      "status": "complete",
+      "returncode": 0,
+      "receipt_sha256": "7179813b751848188d43602d951874a33e3624f2d724b81ec5001c7a5baf23b7"
+    }
+  ],
+  "quality_cache_used": false,
+  "source_snapshot": {
+    "files": [
+      {
+        "path": "src/pegh/__init__.py",
+        "sha256": "84c78d5812b6f13e5f6e821e1a6f7ba7ac1683855b04b7666223a13b20d44455"
+      },
+      {
+        "path": "src/pegh/dense/__init__.py",
+        "sha256": "2f1aaa0640456cd6391facdc5d2cf3f78ddee2660aa5558b4a0eb56f665681b0"
+      },
+      {
+        "path": "src/pegh/dense/artifacts.py",
+        "sha256": "5d77e8c5de34d598b5ec2d8fb137e9959106228e5c530486d97b2bb3b1081bb9"
+      },
+      {
+        "path": "src/pegh/dense/config.py",
+        "sha256": "e8e8bd2513504e2a2bde4d6d25816521d53ffe2625831d8cfdb01bb4f7d0e898"
+      },
+      {
+        "path": "src/pegh/dense/corpus.py",
+        "sha256": "b756bd74640d6d27c087cb6ca4cf82b38eb996b7668b385a75b6bfd3683e6896"
+      },
+      {
+        "path": "src/pegh/dense/encoder.py",
+        "sha256": "a835c3d309f36d16fc1d9117d998d08884945cb097d8fe78deee75359c1a9a0e"
+      },
+      {
+        "path": "src/pegh/dense/factory.py",
+        "sha256": "a5dc7d57d1092650e446da53c312a91f00a7331f95b9b98b356b6e792c1017c3"
+      },
+      {
+        "path": "src/pegh/dense/index.py",
+        "sha256": "b09e368dd557706398b47d1ef02e7e1b2b17d66ca877f7e26a456c8e48d70931"
+      },
+      {
+        "path": "src/pegh/dense/retriever.py",
+        "sha256": "5ab88952c011ec5db668ba5b964b83e352492fd85399623222b81ab7ee4eeffb"
+      },
+      {
+        "path": "src/pegh/profiling/__init__.py",
+        "sha256": "4bc5497113a6f745781d4fdd0077f281a4f63fdb9ced4807cb9edf8a84fca359"
+      },
+      {
+        "path": "src/pegh/profiling/provenance.py",
+        "sha256": "d50419fe1fa8454b9ab34560628f0008007cc48a4dba9f4ea657f725efa3d609"
+      },
+      {
+        "path": "src/pegh/profiling/report.py",
+        "sha256": "1fa2d056b38bc003d2ed80015efa39323c11cd681a29ffcc699a5845ed8f0d63"
+      },
+      {
+        "path": "src/pegh/profiling/runner.py",
+        "sha256": "24a0ccb6538743c39a89267294b9ecbc5fb40148391a3eb479d68245aa1db48c"
+      },
+      {
+        "path": "src/pegh/profiling/runtime.py",
+        "sha256": "40aa5d7e20abc93bc985df68401ce08f4e9f0c727913e52353e39e468c831798"
+      },
+      {
+        "path": "src/pegh/profiling/trace.py",
+        "sha256": "ef956b33249d91dfe200ccbd63ba4aa31027696856669957019b1bd9e44c59f2"
+      },
+      {
+        "path": "src/pegh/profiling/worker.py",
+        "sha256": "adff6463031721d5bbed40a6321b0bb525bbb07a85e973efe3a24570c5030fb3"
+      },
+      {
+        "path": "contracts/__init__.py",
+        "sha256": "8b7c59f2afbbd16c9dba88691c08872ab53e8beadabda6c3f9194f942fc5b987"
+      },
+      {
+        "path": "contracts/types.py",
+        "sha256": "37b39829209a23656fab0297fad99d1f3b287a333443da6be0416b3b74ca1026"
+      },
+      {
+        "path": "configs/dense/primary.yaml",
+        "sha256": "9cd10384664031c899f62f3ef0cbd022c6a17e001fa85c01202f3b69075cc290"
+      },
+      {
+        "path": "configs/runtime/cpu4.yaml",
+        "sha256": "e44b16f43a93377a6eb474c0036017158d82b1157dc58ca3776231fe95526660"
+      },
+      {
+        "path": "configs/runtime/windows-physical4-local.yaml",
+        "sha256": "09985d86429fd7eb3cd2fbd1123e830237be509639cbdc3bac31b745d5c8d826"
+      },
+      {
+        "path": "scripts_b/benchmark_online.py",
+        "sha256": "7e24df0cf4351fc13ffa8d00dee57d910f4b9ee709cad8a974d1b7f4d4421a33"
+      },
+      {
+        "path": "scripts_b/build_dense.py",
+        "sha256": "ceafe65a0694ae20ec383599c3e650720607b6470c1020d69686bc1a66f0c202"
+      },
+      {
+        "path": "scripts_b/fetch_public_inputs.py",
+        "sha256": "abfb0a57ea0392f6ab82f45b72d5bbe652e89ca2e3fdefb00e745e4572506065"
+      },
+      {
+        "path": "scripts_b/generate_dense_runs.py",
+        "sha256": "ece974fabc87526baf7bc6371bbc16911073973de20bc2c8d72d4ffb0768aeca"
+      },
+      {
+        "path": "scripts_b/make_dense_registry.py",
+        "sha256": "27b72a812f62582ab8ec466e30a56004d318c1fb1e197e75e0dd32b4e7b1727f"
+      },
+      {
+        "path": "scripts_b/report_efficiency.py",
+        "sha256": "e4e84c3edffe137455af15a1f3dbfe66ce486ca2d21bb8d418ade50f6439b7b3"
+      },
+      {
+        "path": "scripts_b/verify_dense_index.py",
+        "sha256": "fbf8eb5abb7537dbee9e26dcea6fcee5ebcbd72ad01b3ec5e4c394b105e4a363"
+      },
+      {
+        "path": "pyproject.toml",
+        "sha256": "475513ed1cb40ddca5f05b4df505d5ae9d70aed75b83282a795001aa8745b21c"
+      },
+      {
+        "path": "uv.lock",
+        "sha256": "1d697591191218dd32f8fcacd1cc8fa75957a2276fd1a76b2000a8e8554ce467"
+      }
+    ],
+    "combined_sha256": "befbf15fca472b278b72ca350b1308c2826caacae6cb9671b2e9137f742c8bf2"
+  },
+  "started_at_unix": 1792491098.72687,
+  "ended_at_unix": 1792491519.4295282
+}

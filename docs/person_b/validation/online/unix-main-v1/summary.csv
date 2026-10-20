@@ -1,0 +1,2 @@
+method,domain,unique_queries,timing_samples,dense_call_ratio,mean_ms,p50_ms,p90_ms,p95_ms,cpu_mean_ms,peak_rss_bytes
+dense_minilm,unix,1072,5360,1.0,48.58432957089552,45.9028,59.25796000000001,63.64966,184.1884328358209,548360192

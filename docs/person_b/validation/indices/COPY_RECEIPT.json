@@ -1,0 +1,50 @@
+[
+  {
+    "copy": "docs/person_b/validation/indices/programmers-manifest.json",
+    "original": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers\\manifest.json",
+    "sha256": "a1254f3b629097816c036b377556f0a3eb69bc7f1f75839b4ebc2e8c4e999a3e",
+    "bytes": 21590
+  },
+  {
+    "copy": "docs/person_b/validation/indices/programmers-build-profile.json",
+    "original": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers\\build_profile.json",
+    "sha256": "7ec2528bf7e59ef8a86140509ef466c93f1bb449619c51db3b5a6311f565d6d9",
+    "bytes": 30856
+  },
+  {
+    "copy": "docs/person_b/validation/indices/programmers-verification.json",
+    "original": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\verify-programmers-v1.json",
+    "sha256": "58bbd24bbb6e27ce53d2f2849ba6aeefda2e2b5dee1ce7a3e74085b177d39239",
+    "bytes": 578
+  },
+  {
+    "copy": "docs/person_b/validation/indices/programmers-source.json",
+    "original": "C:\\Users\\quang\\.cache\\pegh\\data\\programmers\\source_manifest.json",
+    "sha256": "7617ad3dac95abe658832b05748c65861295a7796907cac61015f08769dfe480",
+    "bytes": 1156
+  },
+  {
+    "copy": "docs/person_b/validation/indices/unix-manifest.json",
+    "original": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix\\manifest.json",
+    "sha256": "7442dcd195489f316a71c9777e5e0814e632b3d5cd0294f4f8252922e5f7cb36",
+    "bytes": 30746
+  },
+  {
+    "copy": "docs/person_b/validation/indices/unix-build-profile.json",
+    "original": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix\\build_profile.json",
+    "sha256": "516466a09421523051be322be779cf6783c6a3c7ad6fec66890abd2a643aaa9e",
+    "bytes": 24411
+  },
+  {
+    "copy": "docs/person_b/validation/indices/unix-verification.json",
+    "original": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\verify-unix-v1.json",
+    "sha256": "e4b14e8a7ef2b6869c730aa31eb4f1e5b21393a8c6f815d72e797a4ac5ed01c3",
+    "bytes": 564
+  },
+  {
+    "copy": "docs/person_b/validation/indices/unix-source.json",
+    "original": "C:\\Users\\quang\\.cache\\pegh\\data\\unix\\source_manifest.json",
+    "sha256": "35048d45c37f35bbfaaeca9cb866643c1aed6317a2ffa8238e064761663b281b",
+    "bytes": 1136
+  }
+]

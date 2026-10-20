@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "run_id": "programmers-stages-v1",
+  "run_manifest_sha256": "923a4193b31f75c38baab6511800998538c2bdfc8ca5937f5592baf33161976e",
+  "split": "development_validation",
+  "fold": null,
+  "quantile_method": "numpy.linear on measured samples; repeats are not independent queries",
+  "quality_measured_by_this_report": false,
+  "summaries": [
+    {
+      "method": "dense_minilm",
+      "domain": "programmers",
+      "unique_queries": 128,
+      "timing_samples": 128,
+      "repetitions": 1,
+      "mean_ms": 42.49919609375,
+      "p50_ms": 40.6258,
+      "p90_ms": 50.68638,
+      "p95_ms": 54.651385,
+      "cpu_mean_ms": 160.888671875,
+      "dense_call_ratio": 1.0,
+      "mean_ms_ci95": [
+        41.4211577734375,
+        43.65498708984375
+      ],
+      "bootstrap_unit": "query retaining all repeats; mean-latency CI only",
+      "bootstrap_samples": 1000,
+      "bootstrap_seed": 42,
+      "peak_rss_bytes": 512053248,
+      "rss_load_and_warmup_included": true,
+      "stage_means": {
+        "sparse_ms": 0.0,
+        "stats_ms": 0.0,
+        "features_ms": 0.0,
+        "gate_ms": 0.0,
+        "encode_ms": 27.081784375,
+        "vector_ms": 14.8389828125,
+        "fusion_ms": 0.0
+      }
+    }
+  ]
+}
