@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.0",
+  "review_completed_client_date": "2026-10-20",
+  "timezone": "Asia/Bangkok",
+  "scope": "Planning, source inspection and query/qrels audit; no PE-GH retrieval experiment executed.",
+  "inputs": [
+    {
+      "path": "C:\\Users\\quang\\Downloads\\KE_HOACH_NGHIEN_CUU_HYBRID_IR.md",
+      "sha256": "7c4f21be4fb18bd2b501630b11579aa9e0aba53f2474b51146fedc78bfd6e516",
+      "bytes": 13561
+    },
+    {
+      "path": "C:\\Users\\quang\\Downloads\\writing-block.md",
+      "sha256": "3e38c1f3faff7dcefd6b8474793da98e9efcea8d066734150fa3e6835bdfab55",
+      "bytes": 82389
+    }
+  ],
+  "source_repositories": [
+    {
+      "repository": "https://github.com/beir-cellar/beir",
+      "commit": "ef83d29307061c65d04b035b4f4e7c18bd8374af",
+      "execution": "not executed",
+      "reviewed_files": [
+        "beir/datasets/data_loader.py",
+        "beir/retrieval/evaluation.py",
+        "examples/retrieval/evaluation/dense/evaluate_faiss_dense.py"
+      ]
+    },
+    {
+      "repository": "https://github.com/Narabzad/Retrieval-Strategy-Selection",
+      "commit": "b87b70ff9d7f6c32f547a20386a5e30f69ff9882",
+      "execution": "not executed",
+      "reviewed_files": [
+        "README.md",
+        "train_sparse_vs_hybrid.py",
+        "test_sparse_vs_hybrid.py"
+      ]
+    },
+    {
+      "repository": "https://github.com/madosh/query-adaptive-hybrid-search",
+      "commit": "9e644b6362e5d429b7b4154370efec2d36b98691",
+      "official_author_status": "not established",
+      "execution": "not executed",
+      "reviewed_files": [
+        "README.md",
+        "src/models/hybrid_retriever.py",
+        "src/models/dense_encoder.py",
+        "src/models/qdap_s.py",
+        "src/training/train_qdap.py",
+        "src/evaluation/metrics.py",
+        "src/evaluation/evaluate.py",
+        "src/evaluation/oracle.py",
+        "src/utils/score_normalization.py",
+        "configs/train_qdap.yaml",
+        "scripts/train.py",
+        "scripts/evaluate.py"
+      ],
+      "static_findings": [
+        "src/data is absent although scripts import modules under it",
+        "QDAP-S path encodes query in dense retrieval and again in predict_alpha",
+        "some utility functions infer IDCG from supplied candidate labels; complete-qrels variant also exists",
+        "precompute_targets passes candidate document IDs to encode_texts, contrary to text encoding contract",
+        "no standard root LICENSE file observed; README states research-purpose use"
+      ]
+    },
+    {
+      "repository": "https://github.com/xhluca/bm25s",
+      "commit": "af4549b9708653e0a13bd38b68a88c5b4e337a17",
+      "execution": "not executed",
+      "reviewed_files": [
+        "bm25s/__init__.py",
+        "bm25s/tokenization.py"
+      ],
+      "review_focus": "BM25 variant, token pattern and mmap load options"
+    }
+  ],
+  "publications": [
+    {
+      "url": "https://arxiv.org/html/2109.10739v1",
+      "reviewed": "method, experimental setup, results, latency assumptions"
+    },
+    {
+      "url": "https://www.atlantis-press.com/article/126020510.pdf",
+      "reviewed": "features, SVM routing, experimental setup, result and limitation sections"
+    },
+    {
+      "url": "https://www.mdpi.com/2504-4990/8/4/91",
+      "reviewed": "publisher-indexed method/results excerpts and DOI metadata",
+      "access_limit": "direct full page/XML/PDF fetch rate-limited or forbidden; no full-paper reproduction claimed"
+    },
+    {
+      "url": "https://arxiv.org/abs/2210.11934",
+      "reviewed": "fusion findings; used to motivate tuned CC/RRF controls"
+    },
+    {
+      "url": "https://ehsk.github.io/assets/pdf/SIGIR_2024__BEIR_Resource.pdf",
+      "reviewed": "publication metadata, reference-model and statistical-evaluation scope"
+    },
+    {
+      "url": "https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf",
+      "reviewed": "RRF definition and publication metadata"
+    },
+    {
+      "url": "https://arxiv.org/abs/2506.15862",
+      "reviewed": "abstract and related context only"
+    },
+    {
+      "url": "https://arxiv.org/html/2608.25625v1",
+      "reviewed": "abstract, related-work and approach overview; not reproduced"
+    }
+  ],
+  "models": [
+    {
+      "id": "sentence-transformers/msmarco-MiniLM-L6-cos-v5",
+      "revision": "14ca9be4bbcf1402eac0f43a2e2ccb6e0f994ba3",
+      "role": "primary planned model",
+      "loaded_or_benchmarked": false
+    },
+    {
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "role": "optional secondary model",
+      "loaded_or_benchmarked": false,
+      "training_overlap_status": "risk identified from model card/data_config; exact sample overlap not audited",
+      "data_config_entries_observed": [
+        "stackexchange_title_body/softwareengineering.stackexchange.com.jsonl.gz",
+        "stackexchange_title_body/unix.stackexchange.com.jsonl.gz",
+        "stackexchange_duplicate_questions_title_title.jsonl.gz"
+      ]
+    }
+  ],
+  "query_qrels_audit": {
+    "kind": "query_and_qrels_audit_not_retrieval_benchmark",
+    "dataset_revision_recorded": "e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c",
+    "qrels_revision_pinned": "13595a9f221256a9a21e91c8b0fed3563382b6a7",
+    "query_transport": "HF dataset-viewer rows API, current view",
+    "strict_regex_case_sensitive": "0x[0-9a-fA-F]+|\\b[A-Za-z_$][\\w.$]*(?:Exception|Error)\\b|\\bHTTP\\s+[45]\\d{2}\\b|\\b(?:EACCES|ENOENT|ECONNREFUSED|ETIMEDOUT|ERESOLVE|EADDRINUSE|ENOSPC|EPIPE)\\b",
+    "broad_regex_case_insensitive": "\\b(error|failed|failure|denied|cannot|unable|not found)\\b",
+    "domains": {
+      "programmers": {
+        "queries": 876,
+        "qrels_rows": 1675,
+        "positive_qrels": 1675,
+        "qrel_query_ids": 876,
+        "qrel_unique_doc_ids": 1675,
+        "mean_query_chars": 55.1837899543379,
+        "max_query_chars": 149,
+        "multiline_queries": 0,
+        "all_query_titles_empty": true,
+        "strict_identifier_regex_matches": 1,
+        "broad_error_word_matches": 3,
+        "strict_examples": [
+          {
+            "_id": "230250",
+            "title": "",
+            "text": "outOfMemoryException in android emulator"
+          }
+        ],
+        "queries_jsonl_sha256": "83a00c31128bd7d9875666d9f777468d5bde70e1aca2c9f6a3b38c3eb2b9f4f3",
+        "qrels_tsv_sha256": "ed69afa873c64d34298792d694c82c4293e4b7e3c6ea3edc7a73662d4b0cba76"
+      },
+      "unix": {
+        "queries": 1072,
+        "qrels_rows": 1693,
+        "positive_qrels": 1693,
+        "qrel_query_ids": 1072,
+        "qrel_unique_doc_ids": 1693,
+        "mean_query_chars": 50.32369402985075,
+        "max_query_chars": 124,
+        "multiline_queries": 0,
+        "all_query_titles_empty": true,
+        "strict_identifier_regex_matches": 2,
+        "broad_error_word_matches": 40,
+        "strict_examples": [
+          {
+            "_id": "83257",
+            "title": "",
+            "text": "Does kernel: EDAC MC0: UE page 0x0 point to bad memory, a driver, or something else?"
+          },
+          {
+            "_id": "139854",
+            "title": "",
+            "text": "Why does wget return a HTTP 403 error to download openSSH pet?"
+          }
+        ],
+        "queries_jsonl_sha256": "26161f4bcdc216373bf9a8a9437030dc8be678bcce23284bc46a12fa6b77a01d",
+        "qrels_tsv_sha256": "a7bd24ce081b0bb892602e9b0067017dc66fd03e7593563ad095cb3cd05e92ed"
+      }
+    }
+  },
+  "corpus_counts_from_official_card": {
+    "programmers": 32176,
+    "unix": 47382
+  },
+  "full_corpus_downloaded_or_indexed": false,
+  "retrieval_benchmark_executed": false,
+  "vector_storage_calculation": {
+    "dimension": 384,
+    "dtype_bytes": 4,
+    "programmers_bytes": 49422336,
+    "unix_bytes": 72778752,
+    "combined_bytes": 122201088
+  },
+  "audit_data_transport_note": "Query JSONL written as UTF-8 LF; earlier exploratory Windows write_text used CRLF and has different byte hashes. Counts/text and qrels agree. Viewer API is a current view; corpus counts are not a local corpus validation.",
+  "limitations": [
+    "focused literature review, not an exhaustive systematic review",
+    "static code findings do not establish errors in the corresponding published-paper experiments",
+    "no guaranteed novelty, publication, retrieval score or latency improvement",
+    "no claim that pretrained encoders are proven free of all overlap"
+  ]
+}
