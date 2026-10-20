@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from dataclasses import replace
 from pathlib import Path
 
@@ -58,7 +59,41 @@ def test_isolated_benchmark_and_report(built_index, tmp_path):
     assert len(make_figures(output)) == 2
 
 
-@pytest.mark.parametrize("factory", ["create_wrong_counter", "create_fallback_method"])
+def test_gated_fixture_really_skips_encoding(built_index, tmp_path):
+    queries, warmup = inputs()
+    output = tmp_path / "gated-fixture"
+    manifest = run_benchmark(
+        registry(built_index, "create_fixture_gated"),
+        queries,
+        warmup,
+        output,
+        settings(repetitions=1),
+        split="fixture",
+    )
+    rows = [
+        json.loads(line)
+        for line in (output / manifest["workers"][0]["directory"] / "requests.jsonl")
+        .read_text(encoding="utf-8")
+        .splitlines()
+    ]
+    skipped = [r for r in rows if not r["use_dense"]]
+    assert len(skipped) == 3
+    assert all(r["encoder_calls"] == r["vector_search_calls"] == 0 for r in skipped)
+    assert all(r["encode_ns"] == r["vector_ns"] == 0 for r in skipped)
+    assert all(r["stage_calls"]["sparse"] == 1 for r in rows)
+    summary = summarize_run(output, bootstrap_samples=10)["summaries"][0]
+    assert summary["dense_call_ratio"] == 0.4
+
+
+@pytest.mark.parametrize(
+    "factory",
+    [
+        "create_wrong_counter",
+        "create_fallback_method",
+        "create_false_empty_fallback",
+        "create_cached_query_vector",
+    ],
+)
 def test_invalid_worker_fails_without_a_valid_summary(built_index, tmp_path, factory):
     queries, warmup = inputs()
     output = tmp_path / factory

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib
+import math
 import random
 import sys
 import time
@@ -102,7 +103,13 @@ def execute(config_path: str | Path) -> int:
                 raise ValueError("declared/observed encoder calls mismatch or repeated encoding")
             if response.use_dense != (calls == 1):
                 raise ValueError("dense decision disagrees with actual encoder calls")
-            if response.fallback_reason not in (None, "empty_query"):
+            if measurement["vector_search_calls"] and not calls:
+                raise ValueError("vector search without fresh query encoding is not permitted")
+            if response.gate_score is not None and not math.isfinite(response.gate_score):
+                raise ValueError("nonfinite gate score")
+            if response.fallback_reason is not None and (
+                response.fallback_reason != "empty_query" or query.text.strip() or calls or hits
+            ):
                 raise ValueError("fallback is not permitted in a valid benchmark run")
             rows.append(
                 {
