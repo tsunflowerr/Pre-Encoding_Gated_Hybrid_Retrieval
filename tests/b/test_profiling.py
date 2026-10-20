@@ -1,0 +1,162 @@
+from __future__ import annotations
+
+from dataclasses import replace
+
+import pytest
+
+from contracts.types import Query
+from pegh.dense.artifacts import read_json
+from pegh.profiling.report import make_figures, summarize_run
+from pegh.profiling.runner import run_benchmark
+from pegh.profiling.runtime import RuntimeSettings
+from pegh.profiling.trace import TraceSink
+
+
+def registry(index, factory="create_fixture_dense"):
+    return [
+        {
+            "id": "fixture_dense",
+            "factory": "tests.b.fakes:" + factory,
+            "kwargs": {"index_dir": str(index)},
+        }
+    ]
+
+
+def inputs():
+    return (
+        [Query(f"unix:q{i}", "unix", f"query {i}") for i in range(5)],
+        [Query("unix:warm", "unix", "warmup query")],
+    )
+
+
+def settings(**overrides):
+    return replace(
+        RuntimeSettings(
+            warmup_queries=2, repetitions=2, enforce_memory_limit=False, detailed_stages=True
+        ),
+        **overrides,
+    )
+
+
+def test_isolated_benchmark_and_report(built_index, tmp_path):
+    queries, warmup = inputs()
+    output = tmp_path / "benchmark"
+    manifest = run_benchmark(
+        registry(built_index), queries, warmup, output, settings(), split="fixture"
+    )
+    assert manifest["status"] == "complete"
+    receipts = [read_json(output / w["directory"] / "worker.json") for w in manifest["workers"]]
+    assert len({r["runtime"]["pid"] for r in receipts}) == 2
+    assert all(len(r["runtime"]["resources"]["effective_affinity"]) <= 4 for r in receipts)
+    summary = summarize_run(output, bootstrap_samples=20)["summaries"][0]
+    assert summary["unique_queries"] == 5 and summary["timing_samples"] == 10
+    assert summary["dense_call_ratio"] == 1.0
+    assert summary["stage_means"]["encode_ms"] >= 0
+    assert summary["peak_rss_bytes"] > 0
+    assert len(make_figures(output)) == 2
+
+
+@pytest.mark.parametrize("factory", ["create_wrong_counter", "create_fallback_method"])
+def test_invalid_worker_fails_without_a_valid_summary(built_index, tmp_path, factory):
+    queries, warmup = inputs()
+    output = tmp_path / factory
+    with pytest.raises(RuntimeError, match="failed"):
+        run_benchmark(
+            registry(built_index, factory),
+            queries,
+            warmup,
+            output,
+            settings(repetitions=1),
+            split="fixture",
+        )
+    assert read_json(output / "manifest.json")["status"] == "failed"
+    with pytest.raises(ValueError, match="complete"):
+        summarize_run(output)
+
+
+def test_warmup_overlap_is_rejected_before_run(built_index, tmp_path):
+    queries, _ = inputs()
+    with pytest.raises(ValueError, match="overlap"):
+        run_benchmark(
+            registry(built_index),
+            queries,
+            queries[:1],
+            tmp_path / "bad",
+            settings(),
+            split="fixture",
+        )
+    assert not (tmp_path / "bad").exists()
+
+
+def test_stop_prevents_workers(built_index, tmp_path):
+    queries, warmup = inputs()
+    stop = tmp_path / "STOP"
+    stop.touch()
+    result = run_benchmark(
+        registry(built_index),
+        queries,
+        warmup,
+        tmp_path / "paused",
+        settings(),
+        split="fixture",
+        stop_file=stop,
+    )
+    assert result["status"] == "paused" and result["workers"] == []
+
+
+def test_strict_resource_limits_are_applied_in_worker_only(built_index, tmp_path):
+    queries, warmup = inputs()
+    output = tmp_path / "strict-limits"
+    manifest = run_benchmark(
+        registry(built_index),
+        queries,
+        warmup,
+        output,
+        settings(repetitions=1, enforce_memory_limit=True),
+        split="fixture",
+    )
+    receipt = read_json(output / manifest["workers"][0]["directory"] / "worker.json")
+    resources = receipt["runtime"]["resources"]
+    assert resources["memory_limit_kind"] != "observed_only"
+    assert resources["memory_limit_bytes"] == 8_000_000_000
+    assert len(resources["effective_affinity"]) <= 4
+
+
+def test_missing_request_cannot_be_silently_dropped(built_index, tmp_path):
+    queries, warmup = inputs()
+    output = tmp_path / "broken"
+    manifest = run_benchmark(
+        registry(built_index), queries, warmup, output, settings(repetitions=1), split="fixture"
+    )
+    path = output / manifest["workers"][0]["directory"] / "requests.jsonl"
+    path.write_text(
+        "\n".join(path.read_text(encoding="utf-8").splitlines()[1:]) + "\n", encoding="utf-8"
+    )
+    with pytest.raises(ValueError):
+        summarize_run(output)
+
+
+def test_trace_detects_nested_requests():
+    trace = TraceSink()
+    trace.begin_request()
+    with pytest.raises(RuntimeError, match="already"):
+        trace.begin_request()
+    with pytest.raises(ValueError, match="unregistered"):
+        with trace.stage("wrong_stage"):
+            pass
+    assert trace.end_request()["encoder_calls"] == 0
+
+
+def test_quality_csv_is_required_for_pareto_not_invented(built_index, tmp_path):
+    queries, warmup = inputs()
+    output = tmp_path / "run"
+    run_benchmark(
+        registry(built_index), queries, warmup, output, settings(repetitions=1), split="fixture"
+    )
+    summarize_run(output, bootstrap_samples=10)
+    quality = tmp_path / "quality.csv"
+    quality.write_text(
+        "method,domain,ndcg_at_10,run_id\nfixture_dense,unix,0.5,wrong-run\n", encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="identity"):
+        make_figures(output, quality)

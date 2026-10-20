@@ -1,0 +1,11 @@
+runtime:
+  logical_cpus: 4
+  memory_limit_bytes: 8000000000
+  enforce_memory_limit: true
+  online_batch_size: 1
+  concurrency: 1
+  warmup_queries: 50
+  repetitions: 5
+  seed: 42
+  detailed_stages: false
+
