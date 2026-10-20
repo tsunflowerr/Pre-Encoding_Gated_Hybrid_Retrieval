@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import time
+from dataclasses import replace
 from pathlib import Path
 
 from pegh.dense.artifacts import atomic_json
@@ -28,12 +29,19 @@ def main() -> int:
     parser.add_argument("--stop-file")
     parser.add_argument("--max-new-chunks", type=int)
     parser.add_argument("--runtime", default="configs/runtime/cpu4.yaml")
+    parser.add_argument(
+        "--batch-size", type=int, help="Indexing batch override; recorded in manifest"
+    )
     args = parser.parse_args()
     settings = RuntimeSettings.from_yaml(args.runtime)
     resources = configure_resources(settings)
     runtime = runtime_manifest(settings, resources)
+    snapshot_before = source_snapshot()
     started = time.perf_counter()
-    encoder = CPUEncoder(DenseConfig.from_yaml(args.config), cache_folder=args.cache_folder)
+    dense_config = DenseConfig.from_yaml(args.config)
+    if args.batch_size is not None:
+        dense_config = replace(dense_config, batch_size=args.batch_size)
+    encoder = CPUEncoder(dense_config, cache_folder=args.cache_folder)
     model_load_seconds = time.perf_counter() - started
     manifest = build_index(
         args.corpus,
@@ -52,7 +60,8 @@ def main() -> int:
         Path(args.output) / "build_profile.json",
         {
             "runtime": runtime,
-            "source_snapshot": source_snapshot(),
+            "source_snapshot_start": snapshot_before,
+            "source_snapshot_end": source_snapshot(),
             "latest_model_load_seconds": model_load_seconds,
             "all_indexing_sessions": manifest["sessions"],
             "document_count": manifest["ntotal"],

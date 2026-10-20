@@ -96,6 +96,10 @@ def build_index(
     implementation_hash = implementation_fingerprint(encoder)
     source_hash = file_hash(source)
     with index_lock(directory, recover_stale=recover_stale_lock):
+        if not manifest_path.exists() and any(
+            path.name != ".build.lock" for path in directory.iterdir()
+        ):
+            raise FileExistsError("nonempty output directory has no compatible build manifest")
         if manifest_path.exists():
             if not resume:
                 raise FileExistsError("index exists; use --resume or a new output directory")

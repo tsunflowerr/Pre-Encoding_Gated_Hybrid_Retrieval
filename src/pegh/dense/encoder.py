@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import inspect
 import os
+import re
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Protocol
@@ -46,6 +47,8 @@ class CPUEncoder:
     """Frozen, pinned SentenceTransformer. No query/vector cache is maintained."""
 
     def __init__(self, config: DenseConfig, *, cache_folder: str | None = None):
+        if re.fullmatch(r"[0-9a-fA-F]{40}", config.revision) is None:
+            raise ValueError("CPUEncoder requires a pinned 40-character model commit")
         os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
         os.environ.setdefault("HF_HUB_DISABLE_XET", "1")
         import torch
@@ -61,7 +64,7 @@ class CPUEncoder:
             device="cpu",
             cache_folder=cache_folder,
             trust_remote_code=False,
-            model_kwargs={"torch_dtype": torch.float32},
+            model_kwargs={"dtype": torch.float32},
         )
         self.model.max_seq_length = config.max_length
         self.model.eval()

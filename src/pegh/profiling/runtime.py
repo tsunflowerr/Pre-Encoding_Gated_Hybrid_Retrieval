@@ -202,12 +202,17 @@ class MemorySampler:
 
     def _sample(self) -> None:
         info = psutil.Process().memory_info()
+        peak = getattr(info, "peak_wset", None)
+        if peak is None and sys.platform.startswith("linux"):
+            import resource
+
+            peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
         self.samples.append(
             {
                 "elapsed_seconds": time.perf_counter() - self._start,
                 "rss_bytes": info.rss,
                 "vms_bytes": info.vms,
-                "os_peak_rss_bytes": getattr(info, "peak_wset", None),
+                "os_peak_rss_bytes": peak,
             }
         )
 
@@ -227,6 +232,12 @@ class MemorySampler:
             "sample_interval_seconds": self.interval,
             "sampled_peak_rss_bytes": max(s["rss_bytes"] for s in self.samples),
             "os_peak_rss_bytes": max(os_peaks) if os_peaks else None,
-            "os_peak_source": "psutil.peak_wset" if os_peaks else None,
+            "os_peak_source": (
+                "psutil.peak_wset"
+                if sys.platform == "win32"
+                else "getrusage.ru_maxrss_kib"
+                if os_peaks
+                else None
+            ),
             "rss_source": "psutil.Process.memory_info.rss",
         }

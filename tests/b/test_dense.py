@@ -233,3 +233,13 @@ def test_wrong_expected_count_does_not_complete(corpus, tmp_path):
 def test_existing_output_requires_explicit_resume(corpus, built_index):
     with pytest.raises(FileExistsError):
         build_index(corpus, built_index, "unix", DeterministicEncoder())
+
+
+def test_foreign_output_directory_is_not_overwritten(corpus, tmp_path):
+    output = tmp_path / "foreign"
+    output.mkdir()
+    marker = output / "important.txt"
+    marker.write_text("preserve", encoding="utf-8")
+    with pytest.raises(FileExistsError, match="nonempty"):
+        build_index(corpus, output, "unix", DeterministicEncoder())
+    assert marker.read_text(encoding="utf-8") == "preserve"

@@ -57,8 +57,19 @@ def execute(config_path: str | Path) -> int:
             "torch": sys.modules["torch"].get_num_threads() if "torch" in sys.modules else None,
             "faiss": sys.modules["faiss"].omp_get_max_threads() if "faiss" in sys.modules else None,
         }
+        warmup_calls = 0
         for i in range(settings.warmup_queries):
-            method.search(warmup[i % len(warmup)], k=payload["k"])
+            trace.begin_request()
+            try:
+                warm_response = method.search(warmup[i % len(warmup)], k=payload["k"])
+            finally:
+                warm_trace = trace.end_request()
+            if warm_response.encoder_calls != warm_trace["encoder_calls"]:
+                raise ValueError("encoder call mismatch during warmup")
+            warmup_calls += warm_trace["encoder_calls"]
+        result["warmup_encoder_calls"] = warmup_calls
+        if payload["method"].get("require_dense_warmup", False) and not warmup_calls:
+            raise ValueError("registered dense branch was not exercised during warmup")
         order = list(queries)
         random.Random(settings.seed + payload["repetition"]).shuffle(order)
         for query in order:
@@ -76,6 +87,9 @@ def execute(config_path: str | Path) -> int:
                 cpu_ns = time.process_time_ns() - cpu_start
                 measurement = trace.end_request()
             response.ranking.validate()
+            hits = response.ranking.hits
+            if list(hits) != sorted(hits, key=lambda hit: (-hit.score, hit.doc_id)):
+                raise ValueError("ranking violates descending-score/doc-ID tie order")
             if (
                 response.ranking.query_id != query.query_id
                 or response.ranking.domain != query.domain
