@@ -1,0 +1,6 @@
+{"_id":"B_WARM_PROGRAMMERS_01","text":"How can I avoid race conditions when several threads update a shared counter?"}
+{"_id":"B_WARM_PROGRAMMERS_02","text":"What is the difference between a mutable object and an immutable value?"}
+{"_id":"B_WARM_PROGRAMMERS_03","text":"When should a database transaction be retried after a serialization conflict?"}
+{"_id":"B_WARM_PROGRAMMERS_04","text":"How do I design an interface that supports several storage backends?"}
+{"_id":"B_WARM_PROGRAMMERS_05","text":"Why does a recursive algorithm consume more stack space than an iterative version?"}
+{"_id":"B_WARM_PROGRAMMERS_06","text":"How should an application distinguish network failures from invalid user input?"}

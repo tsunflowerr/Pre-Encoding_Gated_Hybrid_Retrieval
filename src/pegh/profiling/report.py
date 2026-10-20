@@ -262,7 +262,9 @@ def make_figures(directory: str | Path, quality_csv: str | Path | None = None) -
         if not {"method", "domain", "ndcg_at_10", "run_id"}.issubset(quality[0] if quality else {}):
             raise ValueError("quality CSV requires method,domain,ndcg_at_10,run_id")
         lookup = {(r["method"], r["domain"]): r for r in quality}
-        fig, axis = plt.subplots(figsize=(7, 4))
+        if len(lookup) != len(quality):
+            raise ValueError("duplicate quality method/domain rows")
+        points = []
         for summary in report["summaries"]:
             row = lookup.get((summary["method"], summary["domain"]))
             if row is None or row["run_id"] != manifest["run_id"]:
@@ -270,18 +272,36 @@ def make_figures(directory: str | Path, quality_csv: str | Path | None = None) -
             value = float(row["ndcg_at_10"])
             if not 0 <= value <= 1:
                 raise ValueError("nDCG must be on the 0..1 scale")
-            axis.scatter(summary["mean_ms"], value)
-            axis.annotate(
-                summary["method"] + "/" + summary["domain"], (summary["mean_ms"], value), fontsize=8
+            points.append((summary["domain"], summary["method"], summary["mean_ms"], value))
+        for domain in sorted({p[0] for p in points}):
+            selected = [p for p in points if p[0] == domain]
+            fig, axis = plt.subplots(figsize=(7, 4))
+            for _, method, latency, value in selected:
+                axis.scatter(latency, value)
+                axis.annotate(method, (latency, value), fontsize=8)
+            frontier = sorted(
+                (p[2], p[3])
+                for p in selected
+                if not any(
+                    q[2] <= p[2] and q[3] >= p[3] and (q[2] < p[2] or q[3] > p[3]) for q in selected
+                )
             )
-        axis.set(
-            xlabel="Measured mean latency (ms)",
-            ylabel="nDCG@10",
-            title="Quality/latency points supplied by evaluator A",
-        )
-        fig.tight_layout()
-        path = directory / "quality-latency.png"
-        fig.savefig(path, dpi=160)
-        plt.close(fig)
-        outputs.append(str(path))
+            axis.plot(
+                [p[0] for p in frontier],
+                [p[1] for p in frontier],
+                linestyle="--",
+                alpha=0.5,
+                label="Observed non-dominated points",
+            )
+            axis.set(
+                xlabel="Measured mean latency (ms)",
+                ylabel="nDCG@10",
+                title=f"{domain} · evaluator A quality · {manifest['split']}",
+            )
+            axis.legend(fontsize=8)
+            fig.tight_layout()
+            path = directory / f"quality-latency-{domain}.png"
+            fig.savefig(path, dpi=160)
+            plt.close(fig)
+            outputs.append(str(path))
     return outputs

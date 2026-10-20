@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from dataclasses import replace
+from pathlib import Path
 
+import psutil
 import pytest
 
 from contracts.types import Query
@@ -122,6 +124,24 @@ def test_strict_resource_limits_are_applied_in_worker_only(built_index, tmp_path
     assert len(resources["effective_affinity"]) <= 4
 
 
+def test_explicit_affinity_is_applied_without_changing_parent(built_index, tmp_path):
+    parent_affinity = psutil.Process().cpu_affinity()
+    requested = tuple(parent_affinity[::2][:2])
+    queries, warmup = inputs()
+    output = tmp_path / "explicit-affinity"
+    manifest = run_benchmark(
+        registry(built_index),
+        queries,
+        warmup,
+        output,
+        settings(repetitions=1, affinity_cpus=requested),
+        split="fixture",
+    )
+    receipt = read_json(output / manifest["workers"][0]["directory"] / "worker.json")
+    assert receipt["runtime"]["resources"]["effective_affinity"] == list(requested)
+    assert psutil.Process().cpu_affinity() == parent_affinity
+
+
 def test_missing_request_cannot_be_silently_dropped(built_index, tmp_path):
     queries, warmup = inputs()
     output = tmp_path / "broken"
@@ -159,4 +179,14 @@ def test_quality_csv_is_required_for_pareto_not_invented(built_index, tmp_path):
         "method,domain,ndcg_at_10,run_id\nfixture_dense,unix,0.5,wrong-run\n", encoding="utf-8"
     )
     with pytest.raises(ValueError, match="identity"):
+        make_figures(output, quality)
+    quality.write_text(
+        "method,domain,ndcg_at_10,run_id\nfixture_dense,unix,0.5,run\n", encoding="utf-8"
+    )
+    figures = make_figures(output, quality)
+    assert any(Path(path).name == "quality-latency-unix.png" for path in figures)
+    quality.write_text(
+        quality.read_text(encoding="utf-8") + "fixture_dense,unix,0.5,run\n", encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="duplicate"):
         make_figures(output, quality)

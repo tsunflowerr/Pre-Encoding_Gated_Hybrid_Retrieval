@@ -7,7 +7,7 @@
   triển khai khi `usedPercent >= 90`, lưu `resetsAt`, chỉ tiếp tục sau reset.
 - Heartbeat: `ti-p-t-c-pe-gh-ph-n-b-sau-reset-quota`.
 - Quota đầu lượt: đã dùng 1%, còn 99%; resetsAt=1792497940.
-- Quota gần nhất: đã dùng 23%, còn 77%; cùng cửa sổ reset.
+- Quota gần nhất: đã dùng 40%, còn 60%; cùng cửa sổ reset.
 
 ## Đã làm
 
@@ -20,7 +20,8 @@
 
 - `uv.lock` đã resolve và cài thành công trong môi trường riêng Python 3.12.
 - Torch 2.14.1+cpu, FAISS 1.15.1; CUDA không khả dụng.
-- Toàn bộ 32 test đã qua, gồm model pinned thật và resource cap trong subprocess.
+- Toàn bộ 34 test đã qua, gồm model pinned thật, resource cap/affinity subprocess,
+  registry checksum binding và quality-plot integrity.
 - Đã tải/kiểm tra Parquet pinned đầy đủ: programmers 32.176 docs/876 queries;
   unix 47.382 docs/1.072 queries. Không tải qrels hay tạo split thay người A.
 - Pilot batch16: 1.024 document, 2 checkpoint; khoảng 48,37 giây indexing.
@@ -30,6 +31,12 @@
 - Đã bổ sung validation provenance/checksums, warmup counter và chống overwrite output khác.
 - Pipeline embedding hiện đã đóng băng. Hai index đầy đủ dùng thư mục `final-v1`,
   giữ nguyên các pilot cũ; không resume pilot có fingerprint phiên bản cũ.
+- Đã checkpoint programmers 3.584 docs để đổi affinity theo topology đã kiểm.
+  Profile đầu dùng CPU [0,1,2,3]; các build tiếp và online dùng [0,2,4,6],
+  vẫn tổng 4 logical CPUs. Build profile giữ lịch sử invocation, không gộp điều kiện.
+- Đang chạy programmers rồi unix tuần tự trong exec session 83667; manifest/lock
+  là nguồn xác nhận tiến độ. Không khởi chạy job trùng khi PID còn sống.
+- README/handoff và background paper B đã có lệnh tái lập đầy đủ.
 
 ## Artifact ngoài OneDrive
 

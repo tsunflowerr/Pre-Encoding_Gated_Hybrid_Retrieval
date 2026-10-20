@@ -8,7 +8,7 @@ import time
 from dataclasses import replace
 from pathlib import Path
 
-from pegh.dense.artifacts import atomic_json
+from pegh.dense.artifacts import atomic_json, read_json
 from pegh.dense.config import DenseConfig
 from pegh.dense.encoder import CPUEncoder
 from pegh.dense.index import build_index
@@ -33,6 +33,8 @@ def main() -> int:
         "--batch-size", type=int, help="Indexing batch override; recorded in manifest"
     )
     args = parser.parse_args()
+    profile_path = Path(args.output) / "build_profile.json"
+    previous_profile = read_json(profile_path) if profile_path.exists() else None
     settings = RuntimeSettings.from_yaml(args.runtime)
     resources = configure_resources(settings)
     runtime = runtime_manifest(settings, resources)
@@ -56,13 +58,34 @@ def main() -> int:
         progress=lambda row: print(json.dumps(row), flush=True),
     )
     print(json.dumps({"status": manifest["status"], "documents": manifest["ntotal"]}))
+    invocation = {
+        "runtime": runtime,
+        "source_snapshot_start": snapshot_before,
+        "source_snapshot_end": source_snapshot(),
+        "model_load_seconds": model_load_seconds,
+        "indexing_session_count_after": len(manifest["sessions"]),
+    }
+    history = []
+    if previous_profile is not None:
+        history = previous_profile.get(
+            "invocations",
+            [
+                {
+                    "runtime": previous_profile["runtime"],
+                    "source_snapshot_start": previous_profile.get("source_snapshot_start"),
+                    "indexing_session_count_after": len(previous_profile["all_indexing_sessions"]),
+                    "model_load_seconds": previous_profile["latest_model_load_seconds"],
+                }
+            ],
+        )
     atomic_json(
-        Path(args.output) / "build_profile.json",
+        profile_path,
         {
             "runtime": runtime,
             "source_snapshot_start": snapshot_before,
             "source_snapshot_end": source_snapshot(),
             "latest_model_load_seconds": model_load_seconds,
+            "invocations": [*history, invocation],
             "all_indexing_sessions": manifest["sessions"],
             "document_count": manifest["ntotal"],
             "status": manifest["status"],

@@ -1,0 +1,15 @@
+# Local profile for this verified 6-core/12-thread host only.
+# Windows GetLogicalProcessorInformationEx reported sibling pairs (0,1),
+# (2,3), (4,5), (6,7), (8,9), (10,11). Select one thread on four cores.
+# On another host use cpu4.yaml or supply CPU IDs verified on that host.
+runtime:
+  logical_cpus: 4
+  affinity_cpus: [0, 2, 4, 6]
+  memory_limit_bytes: 8000000000
+  enforce_memory_limit: true
+  online_batch_size: 1
+  concurrency: 1
+  warmup_queries: 50
+  repetitions: 5
+  seed: 42
+  detailed_stages: false

@@ -21,6 +21,7 @@ _WINDOWS_JOB_HANDLES: list[int] = []
 @dataclass(frozen=True)
 class RuntimeSettings:
     logical_cpus: int = 4
+    affinity_cpus: tuple[int, ...] | None = None
     memory_limit_bytes: int = 8_000_000_000
     enforce_memory_limit: bool = True
     online_batch_size: int = 1
@@ -39,6 +40,17 @@ class RuntimeSettings:
             raise ValueError("invalid resource limit/repetitions")
         if self.warmup_queries < 0 or self.memory_sample_seconds <= 0:
             raise ValueError("invalid warmup/sampling interval")
+        if self.affinity_cpus is not None:
+            object.__setattr__(self, "affinity_cpus", tuple(self.affinity_cpus))
+            if (
+                not self.affinity_cpus
+                or len(set(self.affinity_cpus)) != len(self.affinity_cpus)
+                or len(self.affinity_cpus) > self.logical_cpus
+                or any(cpu < 0 for cpu in self.affinity_cpus)
+            ):
+                raise ValueError(
+                    "explicit affinity must contain unique CPU IDs within the CPU budget"
+                )
 
     @classmethod
     def from_yaml(cls, path: str | Path) -> RuntimeSettings:
@@ -120,7 +132,13 @@ def _windows_memory_limit(limit: int) -> str:
 def configure_resources(settings: RuntimeSettings) -> dict:
     process = psutil.Process()
     original = process.cpu_affinity()
-    selected = sorted(original)[: settings.logical_cpus]
+    selected = (
+        list(settings.affinity_cpus)
+        if settings.affinity_cpus is not None
+        else sorted(original)[: settings.logical_cpus]
+    )
+    if not set(selected).issubset(original):
+        raise ValueError("requested CPU affinity is not available in this process")
     process.cpu_affinity(selected)
     memory_kind = "observed_only"
     if settings.enforce_memory_limit:
@@ -141,6 +159,7 @@ def configure_resources(settings: RuntimeSettings) -> dict:
             raise RuntimeError("strict memory enforcement is unsupported on this platform")
     return {
         "requested_logical_cpus": settings.logical_cpus,
+        "requested_affinity": settings.affinity_cpus,
         "effective_affinity": process.cpu_affinity(),
         "memory_limit_bytes": settings.memory_limit_bytes,
         "memory_limit_kind": memory_kind,
@@ -156,11 +175,22 @@ def runtime_manifest(settings: RuntimeSettings, resources: dict) -> dict:
         result = subprocess.run(["git", *arguments], capture_output=True, text=True, check=False)
         return result.stdout.strip() if result.returncode == 0 else None
 
+    processor_name = platform.processor()
+    if sys.platform == "win32":
+        import winreg
+
+        try:
+            with winreg.OpenKey(
+                winreg.HKEY_LOCAL_MACHINE, r"HARDWARE\DESCRIPTION\System\CentralProcessor\0"
+            ) as key:
+                processor_name = winreg.QueryValueEx(key, "ProcessorNameString")[0].strip()
+        except OSError:
+            pass
     return {
         "python": sys.version,
         "executable": sys.executable,
         "platform": platform.platform(),
-        "processor": platform.processor(),
+        "processor": processor_name,
         "logical_cpus_host": psutil.cpu_count(),
         "physical_cores_host": psutil.cpu_count(False),
         "host_ram_bytes": psutil.virtual_memory().total,
