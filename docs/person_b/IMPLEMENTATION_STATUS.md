@@ -4,7 +4,7 @@
 - Nhánh: `codex/b-dense-profiling`.
 - Ngày: 20/10/2026, Asia/Bangkok.
 - Quy tắc quota: kiểm tra cửa sổ 300 phút thường xuyên; dừng khi usedPercent >=90,
-  chỉ tiếp tục sau reset. Đã hoàn tất trước ngưỡng, lần kiểm gần nhất dùng 58%, còn 42%.
+  chỉ tiếp tục sau reset. Đã hoàn tất trước ngưỡng, lần kiểm gần nhất dùng 61%, còn 39%.
 - Reset của cửa sổ đang theo dõi: `1792497940`.
 - Heartbeat riêng: `ti-p-t-c-pe-gh-ph-n-b-sau-reset-quota` đã đặt `PAUSED` sau khi
   hoàn tất; không còn tự động tiếp tục công việc đã xong.
@@ -23,6 +23,8 @@
   counters/skip checks. Ruff, lockfile và dependency compatibility passed.
 - README/handoff/protocol, background/results sections, summary CSV/JSON/figures,
   receipts/checksums đã có. Hosted CI được khai báo, chưa push/chạy trên GitHub.
+- Đã kiểm SHA256 của 44 evidence copies khớp Git blobs đã commit; archive giữ
+  nguyên bytes/newlines để checkout không phá catalog hashes.
 
 ## Kết quả local
 

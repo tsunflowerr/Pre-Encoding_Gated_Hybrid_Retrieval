@@ -28,3 +28,7 @@ Ubuntu/Windows đã được khai báo; kết quả local không được gọi 
 Sau khi timing hoàn tất, đã thêm script thu/audit artifact và chạy thành công trên
 toàn bộ 9.996 requests +1.948 offline rankings. Ruff check/format cuối passed với
 33 files; không đổi embedding/backend hoặc worker của benchmark đã ghi.
+
+Đã so SHA256 của cả 44 copied evidence files với Git blobs sau commit: khớp tất
+cả. `.gitattributes` giữ nguyên bytes archive để report/CSV không bị đổi newline
+khi checkout ở máy khác.

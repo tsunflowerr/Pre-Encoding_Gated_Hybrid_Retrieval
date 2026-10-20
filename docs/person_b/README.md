@@ -145,6 +145,8 @@ artifact đã đóng băng. Byte hashes của bốn file và source lớp encode
 implementation vào vectors; sửa—even chỉ format—cần artifact mới. `.gitattributes`
 giữ LF để checkout khác OS không vô tình đổi fingerprint. File factory, profiling,
 scripts không thay nghĩa vector nhưng vẫn nằm trong source snapshot của benchmark.
+Riêng evidence archive `docs/person_b/validation/**` giữ nguyên bytes gốc qua Git,
+kể cả newline của report/CSV; không áp EOL normalization lên các bản copy có checksum.
 
 ## 5. Quality run offline
 
