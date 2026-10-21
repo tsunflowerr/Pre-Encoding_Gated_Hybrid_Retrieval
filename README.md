@@ -5,6 +5,7 @@ Research plan and implementation for a three-person hybrid retrieval project.
 - [Kế hoạch nhóm](PE_GH_KE_HOACH_HOAN_CHINH_3_NGUOI_V2.md)
 - [Phần B: dense encoder, FAISS, online profiling](docs/person_b/README.md)
 - [Handoff cho A/C](docs/person_b/HANDOFF_A_C.md)
+- [Base chung: types, ID, text, fixture, iterator, model](docs/SHARED_BASE.md)
 - [Trạng thái triển khai/quota](docs/person_b/IMPLEMENTATION_STATUS.md)
 - [Kết quả thực chạy](paper/05b_efficiency_results.md)
 

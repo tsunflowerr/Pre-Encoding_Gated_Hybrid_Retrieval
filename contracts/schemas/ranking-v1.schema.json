@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PE-GH Ranking v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "query_id", "domain", "hits", "corpus_hash", "retriever_hash"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "query_id": {"$ref": "#/$defs/id"},
+    "domain": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$", "not": {"pattern": "\\s"}},
+    "corpus_hash": {"type": "string", "minLength": 1},
+    "retriever_hash": {"type": "string", "minLength": 1},
+    "method": {"type": "string", "minLength": 1},
+    "split": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "fold": {"type": ["integer", "null"], "minimum": 0},
+    "hits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["doc_id", "score", "rank"],
+        "properties": {
+          "doc_id": {"$ref": "#/$defs/id"},
+          "score": {"type": "number"},
+          "rank": {"type": "integer", "minimum": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*:[A-Za-z0-9][A-Za-z0-9_.-]*$", "not": {"pattern": "\\s"}}
+  }
+}

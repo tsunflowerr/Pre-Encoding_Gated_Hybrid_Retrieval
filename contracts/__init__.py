@@ -1,1 +1,5 @@
-"""Bootstrap of the agreed v1 contracts; future ownership belongs to person A."""
+"""Common public API for A/B/C; contains no Torch/FAISS imports."""
+
+from contracts.types import Document, Hit, Query, Ranking, SearchHit
+
+__all__ = ["Document", "Hit", "Query", "Ranking", "SearchHit"]

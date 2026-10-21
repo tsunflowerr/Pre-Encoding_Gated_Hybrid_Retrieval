@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "purpose": "Common integration fixture only; not benchmark/relevance labels",
+  "text_policy": "join_nonempty_title_text_newline_v1",
+  "domains": {
+    "programmers": {
+      "documents": 10,
+      "queries": 3
+    },
+    "unix": {
+      "documents": 10,
+      "queries": 3
+    }
+  },
+  "sha256": {
+    "programmers/corpus.jsonl": "f615e178cdfa8be28825bb174f90eb61c8afcf52fea61348dc5c47904d573e53",
+    "programmers/queries.jsonl": "51679fedb0ca0f19c0ebe2b2edb2517598c0133d8debf61cdc0351d6523d7852",
+    "unix/corpus.jsonl": "c7c5f1abcf29081587709f0abfaf27e0a1c0277f2b1fba5ba3e623e80631f0bf",
+    "unix/queries.jsonl": "b62493876438a41271b3743ed69f2cd1cc31af819614f7c9cfe2ff952c960ad1"
+  }
+}

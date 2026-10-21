@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-21",
+  "branch": "codex/shared-base",
+  "baseline_b_commit": "9556f0d",
+  "tests": {
+    "passed": 70,
+    "junit_file": "C:\\Users\\quang\\.cache\\pegh\\shared-base-tests.xml",
+    "junit_sha256": "3b0d84451d96e3c277c7a2899824cb4390d81852ca319ef9764fef429f2f1419"
+  },
+  "full_corpus_id_text_parity": {
+    "programmers": 32176,
+    "unix": 47382
+  },
+  "legacy_query_and_ranking_wire_compatibility": 1948,
+  "fixture": {
+    "documents": 20,
+    "queries": 6
+  },
+  "cli_real_model_smoke": {
+    "quality_rankings": 3,
+    "online_requests": 3,
+    "warmup_encoder_calls": 50,
+    "encoder_calls_per_request": 1,
+    "every_online_ranking_matches_offline": true,
+    "raw_path": "C:\\Users\\quang\\.cache\\pegh\\shared-base-smoke",
+    "worker_sha256": "a66644a9572b667524814cf5aa3bd3a429b63573b9724fa3f0874b43f85ab886"
+  },
+  "frozen_dense_files_unchanged": {
+    "encoder.py": "a835c3d309f36d16fc1d9117d998d08884945cb097d8fe78deee75359c1a9a0e",
+    "config.py": "e8e8bd2513504e2a2bde4d6d25816521d53ffe2625831d8cfdb01bb4f7d0e898",
+    "corpus.py": "b756bd74640d6d27c087cb6ca4cf82b38eb996b7668b385a75b6bfd3683e6896",
+    "index.py": "b09e368dd557706398b47d1ef02e7e1b2b17d66ca877f7e26a456c8e48d70931"
+  },
+  "wheel": {
+    "path": "C:\\Users\\quang\\.cache\\pegh\\shared-base-dist\\pegh_research-0.1.0-py3-none-any.whl",
+    "sha256": "947159b89ea9b3bad5152be042c1b309cdd3469c1362ff9d8b56c26f05a6e4fb",
+    "isolated_stdlib_only_contract_import": "passed",
+    "schema_and_registry_packaged": true
+  },
+  "hosted_ci_executed": false
+}

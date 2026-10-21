@@ -3,8 +3,8 @@ from __future__ import annotations
 import argparse
 from dataclasses import replace
 
+from contracts.io import load_queries
 from pegh.dense.artifacts import read_json
-from pegh.dense.corpus import load_queries
 from pegh.profiling.runner import run_benchmark
 from pegh.profiling.runtime import RuntimeSettings
 

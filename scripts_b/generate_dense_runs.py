@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import asdict
 from pathlib import Path
 
+from contracts.io import load_queries
+from contracts.ranking import ranking_to_record
 from pegh.dense.artifacts import atomic_json, file_hash, read_json, write_jsonl
 from pegh.dense.config import DenseConfig
-from pegh.dense.corpus import load_queries
 from pegh.dense.encoder import CPUEncoder
 from pegh.dense.retriever import FaissDenseRetriever
 from pegh.profiling.provenance import source_snapshot
@@ -41,12 +41,7 @@ def main() -> None:
     def records():
         for query in queries:
             ranking = retriever.search(query, k=args.k)
-            yield {
-                "schema_version": "1.0",
-                "method": "dense",
-                "split": args.split,
-                **asdict(ranking),
-            }
+            yield ranking_to_record(ranking, method="dense", split=args.split)
 
     write_jsonl(output, records())
     atomic_json(

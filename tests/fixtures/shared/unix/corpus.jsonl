@@ -1,0 +1,10 @@
+{"_id":"001","title":"Find a listening TCP process","text":"Inspect listening sockets and their processes with ss -ltnp. Permissions may affect process information."}
+{"_id":"unix:002","title":"Variables in a subshell","text":"Changes made in a subshell do not update the parent shell environment. A pipeline may create a subshell."}
+{"_id":"003","title":"Inspect disk usage","text":"The du command reports file and directory disk usage. Symbolic-link handling depends on the selected options."}
+{"_id":"004","title":"Directory permission bits","text":"Read permission lists entries. Execute permission allows traversing the directory."}
+{"_id":"005","title":"Exit codes in shell pipelines","text":"In Bash, PIPESTATUS contains exit statuses for the most recently executed foreground pipeline."}
+{"_id":"006","title":"Quoted paths with spaces","text":"file='my report.txt'\nprintf '%s\\n' \"$file\"\ncat -- \"$file\""}
+{"_id":"007","title":"","text":"Use journalctl to inspect system journal messages. Filter by unit when investigating a service."}
+{"_id":"008","title":"Difference between a hard link and a symbolic link","text":""}
+{"_id":"009","title":"Case-sensitive file names","text":"Readme and README can name different files on a case-sensitive filesystem. Keep the original text."}
+{"_id":"010","title":"  Whitespace is data  ","text":"\n\tprintf 'hello'\n\n"}

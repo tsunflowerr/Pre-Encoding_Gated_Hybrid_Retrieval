@@ -1,0 +1,10 @@
+{"_id":"001","title":"Protecting a shared counter","text":"Two threads increment counter += 1. Use a lock or an atomic operation to avoid lost updates."}
+{"_id":"programmers:002","title":"Immutable configuration objects","text":"An immutable value cannot change after construction. Create a new value to update configuration."}
+{"_id":"003","title":"Database transaction retries","text":"Retry a complete transaction after a serialization failure. Use a bounded retry policy."}
+{"_id":"004","title":"Testing a storage interface","text":"Inject an implementation of Storage into the service. A fake adapter can be used in unit tests."}
+{"_id":"005","title":"Recursion and stack depth","text":"Recursive calls consume stack frames. An iterative algorithm can store its state explicitly."}
+{"_id":"006","title":"Preserve exception context","text":"try:\n    read_file(path)\nexcept OSError as exc:\n    raise InputError(path) from exc"}
+{"_id":"007","title":"","text":"A Python dictionary maps keys to values. Test membership with key in mapping."}
+{"_id":"008","title":"When to use composition instead of inheritance","text":""}
+{"_id":"009","title":"Unicode identifiers in examples","text":"Giữ nguyên chữ tiếng Việt và Unicode: cấu_hình = {'tên': 'Quang'}. Do not lowercase or strip punctuation in shared ingestion."}
+{"_id":"010","title":"  Preserve formatting  ","text":"\n    value = items[0]\n\n"}

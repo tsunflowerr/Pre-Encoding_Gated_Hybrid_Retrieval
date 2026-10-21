@@ -21,14 +21,18 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8,<10", "ruff>=0.12,<1"]
+dev = ["pytest>=8,<10", "ruff>=0.12,<1", "jsonschema>=4.23,<5"]
 
 [tool.setuptools]
+include-package-data = false
 packages = ["contracts", "pegh", "pegh.dense", "pegh.profiling"]
 package-dir = {"" = "src", "contracts" = "contracts"}
 
+[tool.setuptools.package-data]
+contracts = ["schemas/*.json", "resources/*.json"]
+
 [tool.pytest.ini_options]
-testpaths = ["tests/b"]
+testpaths = ["tests/shared", "tests/b"]
 markers = ["model: needs the pinned real model and network/local model cache"]
 addopts = "-ra"
 

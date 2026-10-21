@@ -1,0 +1,9 @@
+{
+  "model_id": "sentence-transformers/msmarco-MiniLM-L6-cos-v5",
+  "revision": "14ca9be4bbcf1402eac0f43a2e2ccb6e0f994ba3",
+  "dimension": 384,
+  "max_length": 256,
+  "device": "cpu",
+  "dtype": "float32",
+  "normalize": true
+}

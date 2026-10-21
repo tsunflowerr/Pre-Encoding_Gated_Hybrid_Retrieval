@@ -1,5 +1,10 @@
 # Handoff phần B cho A và C
 
+Bổ sung base chung trên nhánh `codex/shared-base`: xem
+[SHARED_BASE.md](../SHARED_BASE.md). A/C import `contracts` và `contracts.io` thay
+vì tạo local types/loader. B v1 giữ adapter nội bộ đã khóa vào artifacts; parity
+checks bảo đảm text/IDs và model config thống nhất với base mới.
+
 ## Ranh giới merge
 
 B sở hữu `src/pegh/dense`, `src/pegh/profiling`, `configs/dense`, `configs/runtime`,
