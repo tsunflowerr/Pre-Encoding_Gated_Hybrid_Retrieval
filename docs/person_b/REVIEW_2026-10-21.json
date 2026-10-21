@@ -1,0 +1,290 @@
+{
+  "review_date": "2026-10-21",
+  "timezone": "Asia/Bangkok",
+  "branch": "thanh",
+  "scope": "Part B correctness and shared-contract integration review",
+  "status": "passed",
+  "source_snapshot": {
+    "files": [
+      {
+        "path": "src/pegh/__init__.py",
+        "sha256": "84c78d5812b6f13e5f6e821e1a6f7ba7ac1683855b04b7666223a13b20d44455"
+      },
+      {
+        "path": "src/pegh/dense/__init__.py",
+        "sha256": "2f1aaa0640456cd6391facdc5d2cf3f78ddee2660aa5558b4a0eb56f665681b0"
+      },
+      {
+        "path": "src/pegh/dense/artifacts.py",
+        "sha256": "5d77e8c5de34d598b5ec2d8fb137e9959106228e5c530486d97b2bb3b1081bb9"
+      },
+      {
+        "path": "src/pegh/dense/config.py",
+        "sha256": "e8e8bd2513504e2a2bde4d6d25816521d53ffe2625831d8cfdb01bb4f7d0e898"
+      },
+      {
+        "path": "src/pegh/dense/corpus.py",
+        "sha256": "b756bd74640d6d27c087cb6ca4cf82b38eb996b7668b385a75b6bfd3683e6896"
+      },
+      {
+        "path": "src/pegh/dense/encoder.py",
+        "sha256": "a835c3d309f36d16fc1d9117d998d08884945cb097d8fe78deee75359c1a9a0e"
+      },
+      {
+        "path": "src/pegh/dense/factory.py",
+        "sha256": "a5dc7d57d1092650e446da53c312a91f00a7331f95b9b98b356b6e792c1017c3"
+      },
+      {
+        "path": "src/pegh/dense/index.py",
+        "sha256": "b09e368dd557706398b47d1ef02e7e1b2b17d66ca877f7e26a456c8e48d70931"
+      },
+      {
+        "path": "src/pegh/dense/retriever.py",
+        "sha256": "4ec58e29f46d1c46f08c311d64067f36aaf04bf8232a3292bae7365f4e1e6ba7"
+      },
+      {
+        "path": "src/pegh/profiling/__init__.py",
+        "sha256": "4bc5497113a6f745781d4fdd0077f281a4f63fdb9ced4807cb9edf8a84fca359"
+      },
+      {
+        "path": "src/pegh/profiling/provenance.py",
+        "sha256": "44a282f465ec1bd52d597135dd7ffe92524c827f8a0cc9b71762d4ead1e5a1ce"
+      },
+      {
+        "path": "src/pegh/profiling/report.py",
+        "sha256": "e4c2dfb42b5adf6c47b9d024db60e5722063bed78be931d17c0a55581ec7ec13"
+      },
+      {
+        "path": "src/pegh/profiling/runner.py",
+        "sha256": "10099d0cd84220d3cfd0964b485771b87ca9346a0a6c515405330d72a5396bf7"
+      },
+      {
+        "path": "src/pegh/profiling/runtime.py",
+        "sha256": "79f947a8462ba61963428a9169e3b4da0023a9ae909190f6b4e31fa7d65be1a0"
+      },
+      {
+        "path": "src/pegh/profiling/trace.py",
+        "sha256": "ef956b33249d91dfe200ccbd63ba4aa31027696856669957019b1bd9e44c59f2"
+      },
+      {
+        "path": "src/pegh/profiling/worker.py",
+        "sha256": "d252a7b9d5e7789743ddb274a8c2b45d0717b96fb8aa358b0d4edc7b76b2c548"
+      },
+      {
+        "path": "contracts/__init__.py",
+        "sha256": "7b92035d1ae9403c2989b000205518d9332417c961b332c83561d9bbf8aa8768"
+      },
+      {
+        "path": "contracts/ids.py",
+        "sha256": "9da4462a9e7b97f3547fd814b5ebc11836be38d240d460eaa4b0cb1c60b0c4df"
+      },
+      {
+        "path": "contracts/io.py",
+        "sha256": "b3af05efaa094518e5db96946e601c19588ddb3149929b57d77f4b9e839ee9cb"
+      },
+      {
+        "path": "contracts/model.py",
+        "sha256": "8ff6d596be668dcf67794d97d0ad1da1b70d6be4588de1d546f7f30c835103e3"
+      },
+      {
+        "path": "contracts/ranking.py",
+        "sha256": "5b4147847bd7a012eee43b93ce50381bd63340ae59a666b466efb0b29d504164"
+      },
+      {
+        "path": "contracts/resources/primary_model.json",
+        "sha256": "375f24730f2227206679345f7b6978237ac14e9cd60b80c35f5b9017b458c297"
+      },
+      {
+        "path": "contracts/schemas/ranking-v1.schema.json",
+        "sha256": "cff79c73592ecbd84542348051a278ef65fb0ce55ba374336fa36e074450b843"
+      },
+      {
+        "path": "contracts/text.py",
+        "sha256": "daa1ef22a24c699cb7ec02667f1d69c788ba568466c45f4f18c0bed0600734d5"
+      },
+      {
+        "path": "contracts/types.py",
+        "sha256": "1ee4b41a3ba4f9f7ee11f13580fddf01ad11ff5239af36e373ca7575d4eb9b61"
+      },
+      {
+        "path": "configs/dense/primary.yaml",
+        "sha256": "9cd10384664031c899f62f3ef0cbd022c6a17e001fa85c01202f3b69075cc290"
+      },
+      {
+        "path": "configs/runtime/cpu4.yaml",
+        "sha256": "e44b16f43a93377a6eb474c0036017158d82b1157dc58ca3776231fe95526660"
+      },
+      {
+        "path": "configs/runtime/windows-physical4-local.yaml",
+        "sha256": "09985d86429fd7eb3cd2fbd1123e830237be509639cbdc3bac31b745d5c8d826"
+      },
+      {
+        "path": "scripts_b/audit_delivery.py",
+        "sha256": "6bfd3139d882df61db547b6e4ca598fee4e5188e3d9f9d4641b0e96f3fe6fe31"
+      },
+      {
+        "path": "scripts_b/benchmark_online.py",
+        "sha256": "9a1977ce00b65a6b20abf4041826d8514ee0d9b1507f5440875506eea5cfd8cf"
+      },
+      {
+        "path": "scripts_b/build_dense.py",
+        "sha256": "ceafe65a0694ae20ec383599c3e650720607b6470c1020d69686bc1a66f0c202"
+      },
+      {
+        "path": "scripts_b/fetch_public_inputs.py",
+        "sha256": "abfb0a57ea0392f6ab82f45b72d5bbe652e89ca2e3fdefb00e745e4572506065"
+      },
+      {
+        "path": "scripts_b/generate_dense_runs.py",
+        "sha256": "e6db610ae39bff84f222d444d2dcdc7b471e3361b759a2adfa87efe199d76a3e"
+      },
+      {
+        "path": "scripts_b/make_dense_registry.py",
+        "sha256": "27b72a812f62582ab8ec466e30a56004d318c1fb1e197e75e0dd32b4e7b1727f"
+      },
+      {
+        "path": "scripts_b/report_efficiency.py",
+        "sha256": "e4e84c3edffe137455af15a1f3dbfe66ce486ca2d21bb8d418ade50f6439b7b3"
+      },
+      {
+        "path": "scripts_b/verify_dense_index.py",
+        "sha256": "fbf8eb5abb7537dbee9e26dcea6fcee5ebcbd72ad01b3ec5e4c394b105e4a363"
+      },
+      {
+        "path": "pyproject.toml",
+        "sha256": "22402bfc087a70886e6c34d0c3b35b7925b83d2835a1ba38a55b35d320117591"
+      },
+      {
+        "path": "uv.lock",
+        "sha256": "c119cc0b09cc3a12706d51248d3c5b1715c776164e8ded7ba759d1721da19ec8"
+      }
+    ],
+    "combined_sha256": "ab92ce294de779eab568c458382040c2eebb1ee1971cdb04793c2892b55c3e51"
+  },
+  "full_test_suite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "84",
+    "time": "79.231",
+    "timestamp": "2026-10-21T23:02:15.852337+07:00",
+    "hostname": "Thanks",
+    "junit_path": "C:\\Users\\quang\\.cache\\pegh\\review-b-tests.xml",
+    "junit_sha256": "56b027c580367936c5873ad1a2082d1ab1f74fd9793e18bbad59ebac8d94a3c2"
+  },
+  "frozen_embedding_files_unchanged": {
+    "src/pegh/dense/encoder.py": "a835c3d309f36d16fc1d9117d998d08884945cb097d8fe78deee75359c1a9a0e",
+    "src/pegh/dense/config.py": "e8e8bd2513504e2a2bde4d6d25816521d53ffe2625831d8cfdb01bb4f7d0e898",
+    "src/pegh/dense/corpus.py": "b756bd74640d6d27c087cb6ca4cf82b38eb996b7668b385a75b6bfd3683e6896",
+    "src/pegh/dense/index.py": "b09e368dd557706398b47d1ef02e7e1b2b17d66ca877f7e26a456c8e48d70931"
+  },
+  "historical_archive_files_unchanged_from_git": 47,
+  "historical_audit": {
+    "path": "C:\\Users\\quang\\.cache\\pegh\\review-b-v1\\archive\\FINAL_AUDIT.json",
+    "sha256": "0dcb4fd2f18bb50cfbd67d6ca99a4a109e6490693c1e383b0d010d83e3c018bb",
+    "requests": 9996,
+    "offline_rankings": 1948,
+    "all_online_rankings_match_offline": true
+  },
+  "saved_index_verifications": [
+    {
+      "status": "passed",
+      "index": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+      "index_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+      "manifest_sha256": "a1254f3b629097816c036b377556f0a3eb69bc7f1f75839b4ebc2e8c4e999a3e",
+      "domain": "programmers",
+      "document_count": 32176,
+      "dimension": 384,
+      "index_type": "IndexFlatIP",
+      "every_vector_checked": true,
+      "norm_min": 0.9999998807907104,
+      "norm_max": 1.0000001192092896,
+      "raw_vector_bytes": 49422336,
+      "index_file_bytes": 49422381,
+      "quality_evaluated": false
+    },
+    {
+      "status": "passed",
+      "index": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+      "index_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+      "manifest_sha256": "7442dcd195489f316a71c9777e5e0814e632b3d5cd0294f4f8252922e5f7cb36",
+      "domain": "unix",
+      "document_count": 47382,
+      "dimension": 384,
+      "index_type": "IndexFlatIP",
+      "every_vector_checked": true,
+      "norm_min": 0.9999998807907104,
+      "norm_max": 1.0000001192092896,
+      "raw_vector_bytes": 72778752,
+      "index_file_bytes": 72778797,
+      "quality_evaluated": false
+    }
+  ],
+  "recomputed_historical_summary_metrics": [
+    {
+      "run": "programmers-main-v1",
+      "requests": 4380,
+      "stored_metrics_match_raw": true,
+      "metrics": {
+        "mean_ms": 32.120215844748856,
+        "p50_ms": 34.420199999999994,
+        "p90_ms": 39.991080000000004,
+        "p95_ms": 42.859905,
+        "cpu_mean_ms": 123.56592465753425,
+        "peak_rss_bytes": 522072064
+      }
+    },
+    {
+      "run": "programmers-stages-v1",
+      "requests": 128,
+      "stored_metrics_match_raw": true,
+      "metrics": {
+        "mean_ms": 42.49919609375,
+        "p50_ms": 40.6258,
+        "p90_ms": 50.68638,
+        "p95_ms": 54.651385,
+        "cpu_mean_ms": 160.888671875,
+        "peak_rss_bytes": 512053248
+      }
+    },
+    {
+      "run": "unix-main-v1",
+      "requests": 5360,
+      "stored_metrics_match_raw": true,
+      "metrics": {
+        "mean_ms": 48.58432957089552,
+        "p50_ms": 45.9028,
+        "p90_ms": 59.25796000000001,
+        "p95_ms": 63.64966,
+        "cpu_mean_ms": 184.1884328358209,
+        "peak_rss_bytes": 548360192
+      }
+    },
+    {
+      "run": "unix-stages-v1",
+      "requests": 128,
+      "stored_metrics_match_raw": true,
+      "metrics": {
+        "mean_ms": 48.534207031250006,
+        "p50_ms": 46.018299999999996,
+        "p90_ms": 56.65858,
+        "p95_ms": 62.60439,
+        "cpu_mean_ms": 182.9833984375,
+        "peak_rss_bytes": 538681344
+      }
+    }
+  ],
+  "real_model_cli_smoke": {
+    "path": "C:\\Users\\quang\\.cache\\pegh\\review-b-v1\\smoke-online",
+    "manifest_sha256": "18a40d30863fd9560b9e9ec4dc79f5a6b90c2bb4dc206f2d61ede931d02de2eb",
+    "quality_metadata_sha256": "11d1a66fce435ec8c7dc3210b03650b01382b2098fc220f605b71bd38d4dea9d",
+    "requests": 3,
+    "warmup_encodes": 50,
+    "every_ranking_matches_offline": true,
+    "query_and_method_bindings_match": true,
+    "invoked_outside_checkout": true,
+    "is_research_result": false
+  },
+  "quality_scores_evaluated": false
+}

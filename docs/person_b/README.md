@@ -37,6 +37,12 @@ trên từng máy rồi gộp kết quả. CI khai báo Ubuntu/Python 3.11 và W
 Hosted CI chỉ được coi là đã chạy khi thực sự có job trên GitHub; test local không
 thay thế trạng thái đó.
 
+Retriever từ chối load nếu phiên bản năm package ghi trong index khác môi trường
+query. Dùng frozen environment của artifact; không sửa manifest để bỏ qua check.
+Benchmark cần editable source checkout (cách `uv sync` mặc định): source snapshot
+và Git metadata lấy từ checkout chứa module, không phụ thuộc thư mục gọi lệnh.
+Wheel không kèm source checkout sẽ lỗi rõ khi yêu cầu benchmark provenance.
+
 Nếu chưa có uv, cài bằng `python -m pip install uv==0.13.3` trong môi trường
 Python của bạn; sau đó dùng các lệnh dưới đây. Không cần quyền administrator.
 
@@ -191,7 +197,10 @@ breakdown, chạy **run khác** với `--detailed-stages --repetitions 1 --limit
 không trộn timing instrumented này vào operating point chính. `--limit` bị cấm
 với `--split test` để không vô tình bỏ phần test chậm.
 
-Harness từ chối counters lệch, encode hơn một lần/request, self-hit, ranking lỗi,
+Mỗi run chỉ đo một domain, với warmup cùng domain và IDs không giao measured set.
+Final `split=test` bắt buộc factory cung cấp dict `.provenance` không rỗng.
+
+Harness từ chối counters lệch, encode hoặc sparse retrieval hơn một lần/request, self-hit, ranking lỗi,
 fallback ngoài empty query, source drift, thiếu worker/request/repetition hoặc
 raw checksum sai. STOP file dừng giữa requests/worker, đánh dấu paused. Run
 paused/failed không được summarize; bắt đầu run mới đầy đủ sau xử lý nguyên nhân
@@ -229,16 +238,32 @@ non-inferiority chất lượng.
 Khi A đã chấm đúng cùng query set/method/config/run, xuất CSV:
 
 ```csv
-method,domain,ndcg_at_10,run_id
-dense_minilm,programmers,VALUE_FROM_EVALUATOR,programmers-main-v1
+method,domain,ndcg_at_10,run_id,queries_hash,method_provenance_hash
+dense_minilm,programmers,VALUE_FROM_EVALUATOR,programmers-main-v1,QUERY_HASH_FROM_EVALUATED_INPUT,METHOD_HASH_FROM_EVALUATED_PROVENANCE
 ```
 
 ```powershell
 & $taskPython scripts_b/report_efficiency.py --run "$taskCache/results/online/programmers-main-v1" --quality-csv "$taskCache/results/quality/quality-for-main.csv"
 ```
 
-CSV không được dùng placeholder khi chạy thật. nDCG phải nằm 0..1, đúng run_id,
-không trùng method/domain, đủ coverage. Script vẽ từng domain riêng và đường nối
+Report xuất `quality_binding.json` cho từng method khi provenance đầy đủ.
+`queries_hash` là `object_hash([asdict(q) for q in queries])` trên danh sách Query
+chuẩn theo thứ tự đầu vào; gồm ID, domain và text. Nó khác `queries_sha256` của
+bytes file. `method_provenance_hash` là `object_hash(method.provenance)`; cùng
+backend dense-only có cùng hash giữa exporter mới và worker online. Với hybrid,
+C phải khai đầy đủ sparse/fusion/gate/training/config trong provenance.
+
+A đối chiếu hai hash từ sidecar ranking **đã dùng để chấm**, cùng split/k, với
+binding của timing run rồi mới xuất CSV. Không chỉ sao chép hash từ timing run
+vào score của cấu hình khác. Sidecar v1 cũ được giữ nguyên; nếu dùng nó thì tính
+binding từ Query list/provenance gốc đã kiểm checksum. Harness kiểm được sự nhất
+quán các artifact; evaluator A chịu trách nhiệm nội dung qrels và cách chấm.
+
+CSV không được dùng placeholder khi chạy thật. nDCG phải nằm 0..1, đúng run_id
+và cả hai binding hashes, không trùng method/domain, đủ coverage. CSV bốn cột cũ
+sẽ bị từ chối. Reporter cũng kiểm worker source/runtime/packages, provenance giữa
+repetitions và run/split/fold của mỗi request trước khi tổng hợp.
+Script vẽ từng domain riêng và đường nối
 các điểm không bị chi phối về mean latency/nDCG. Đây là frontier quan sát, không
 nội suy hệ thống mới hoặc tuyên bố ý nghĩa thống kê. Khi chưa có quality A thì
 không dựng số nDCG hoặc Pareto giả.

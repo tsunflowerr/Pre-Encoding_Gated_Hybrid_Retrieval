@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 from dataclasses import replace
 from pathlib import Path
@@ -9,7 +10,7 @@ import pytest
 
 from contracts.types import Query
 from pegh.dense.artifacts import read_json
-from pegh.profiling.report import make_figures, summarize_run
+from pegh.profiling.report import make_figures, quality_bindings, summarize_run
 from pegh.profiling.runner import run_benchmark
 from pegh.profiling.runtime import RuntimeSettings
 from pegh.profiling.trace import TraceSink
@@ -92,6 +93,7 @@ def test_gated_fixture_really_skips_encoding(built_index, tmp_path):
         "create_fallback_method",
         "create_false_empty_fallback",
         "create_cached_query_vector",
+        "create_repeated_sparse",
     ],
 )
 def test_invalid_worker_fails_without_a_valid_summary(built_index, tmp_path, factory):
@@ -210,18 +212,22 @@ def test_quality_csv_is_required_for_pareto_not_invented(built_index, tmp_path):
     )
     summarize_run(output, bootstrap_samples=10)
     quality = tmp_path / "quality.csv"
-    quality.write_text(
-        "method,domain,ndcg_at_10,run_id\nfixture_dense,unix,0.5,wrong-run\n", encoding="utf-8"
-    )
+    binding = quality_bindings(output)[0]
+    assert read_json(output / "quality_binding.json") == [binding]
+    correct = {**binding, "ndcg_at_10": 0.5}
+
+    def write_quality(rows):
+        with quality.open("w", encoding="utf-8", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=list(correct))
+            writer.writeheader()
+            writer.writerows(rows)
+
+    write_quality([{**correct, "run_id": "wrong-run"}])
     with pytest.raises(ValueError, match="identity"):
         make_figures(output, quality)
-    quality.write_text(
-        "method,domain,ndcg_at_10,run_id\nfixture_dense,unix,0.5,run\n", encoding="utf-8"
-    )
+    write_quality([correct])
     figures = make_figures(output, quality)
     assert any(Path(path).name == "quality-latency-unix.png" for path in figures)
-    quality.write_text(
-        quality.read_text(encoding="utf-8") + "fixture_dense,unix,0.5,run\n", encoding="utf-8"
-    )
+    write_quality([correct, correct])
     with pytest.raises(ValueError, match="duplicate"):
         make_figures(output, quality)
