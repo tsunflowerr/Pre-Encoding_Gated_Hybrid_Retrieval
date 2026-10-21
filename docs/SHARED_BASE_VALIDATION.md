@@ -1,6 +1,6 @@
 # Kiểm chứng base chung
 
-Ngày 21/10/2026 (Asia/Bangkok), nhánh `codex/shared-base`, kế thừa B tại `9556f0d`.
+Ngày 21/10/2026 (Asia/Bangkok), nhánh `base`, kế thừa B tại `9556f0d`.
 Chi tiết hashes/raw paths: [SHARED_BASE_VALIDATION.json](SHARED_BASE_VALIDATION.json).
 
 | Kiểm tra thực chạy | Kết quả |

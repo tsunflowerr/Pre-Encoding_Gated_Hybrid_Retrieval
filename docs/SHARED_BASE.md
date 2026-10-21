@@ -1,6 +1,6 @@
 # Base dùng chung cho A, B, C
 
-Nhánh `codex/shared-base` kế thừa phần B đã hoàn thành. A và C nên tạo nhánh làm
+Nhánh `base` kế thừa phần B đã hoàn thành. A và C nên tạo nhánh làm
 việc từ base này để cùng dùng một bộ contracts, fixture và lockfile. Không tạo
 `Document`, `Query`, `Hit` hoặc loader riêng trong module của từng người.
 
@@ -188,7 +188,7 @@ Kiểm cùng parser B trên corpus thật:
 uv run --no-sync python scripts_shared/check_base.py --corpus <corpus.jsonl> --domain unix
 ```
 
-A và C tạo branch từ cùng commit của `codex/shared-base`; A/C sửa module của mình
+A và C tạo branch từ cùng commit của `base`; A/C sửa module của mình
 và thêm tests riêng, cùng import contracts. Khi cần thêm field/model/config thì
 review contract chung trước; không tự đổi ranking envelope, text hoặc ID policy.
 B quản lý dependency/lockfile chung, A quản lý canonical data/qrels/split; C quản

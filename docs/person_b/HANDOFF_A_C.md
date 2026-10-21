@@ -1,6 +1,6 @@
 # Handoff phần B cho A và C
 
-Bổ sung base chung trên nhánh `codex/shared-base`: xem
+Bổ sung base chung trên nhánh `base`: xem
 [SHARED_BASE.md](../SHARED_BASE.md). A/C import `contracts` và `contracts.io` thay
 vì tạo local types/loader. B v1 giữ adapter nội bộ đã khóa vào artifacts; parity
 checks bảo đảm text/IDs và model config thống nhất với base mới.
@@ -15,7 +15,7 @@ Mọi thay đổi API cần cả ba thống nhất trước. Không commit model
 benchmarks vào Git; small manifests, reports và figures có thể bàn giao riêng.
 
 Nhánh B có baseline kế hoạch trên master rồi các commit triển khai riêng; merge
-nhánh `codex/b-dense-profiling` vào nhánh tích hợp sau review. Nếu A/C đã phát triển
+nhánh `thanh` vào nhánh tích hợp sau review. Nếu A/C đã phát triển
 độc lập, đối chiếu root `pyproject.toml`/contracts/CI trước; không overwrite bản của
 nhau. B giữ lockfile để thêm dependency mới một lần cho cả nhóm.
 

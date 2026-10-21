@@ -1,6 +1,6 @@
 # PE-GH — phần B
 
-Nhánh triển khai: `codex/b-dense-profiling`.
+Nhánh triển khai: `thanh`.
 
 Phần này cung cấp dense encoder CPU, FAISS exact search, resumable indexing,
 quality-run export và online profiling. Các module dữ liệu/BM25/evaluator (A)

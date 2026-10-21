@@ -1308,7 +1308,7 @@ Các tên minh họa:
 ```text
 main
 codex/a-data-sparse-eval
-codex/b-dense-profiling
+thanh
 codex/c-fusion-gating
 ```
 

@@ -1,7 +1,7 @@
 # Trạng thái triển khai phần B
 
 - Trạng thái: `complete` — đã triển khai, chạy dữ liệu thật và audit phần B.
-- Nhánh: `codex/b-dense-profiling`.
+- Nhánh: `thanh`.
 - Ngày: 20/10/2026, Asia/Bangkok.
 - Quy tắc quota: kiểm tra cửa sổ 300 phút thường xuyên; dừng khi usedPercent >=90,
   chỉ tiếp tục sau reset. Đã hoàn tất trước ngưỡng, lần kiểm gần nhất dùng 61%, còn 39%.
