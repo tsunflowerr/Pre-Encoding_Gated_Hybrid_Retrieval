@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-21",
+  "purpose": "Resolve historical benchmark commit IDs after correcting author and committer identity. Every rewritten commit keeps exactly the same file tree.",
+  "author_name": "Trần Quang Thành",
+  "author_email": "161426709+tsunflowerr@users.noreply.github.com",
+  "rewritten_commits": 10,
+  "all_original_file_trees_unchanged": true,
+  "old_to_new": {
+    "6b3bbe1f411e147c7ebc91936133d16da0939062": "c42d860d79ea976263ea78db1c75121253b5d148",
+    "8888845a495237da499a7c352005a7218a44d521": "470c154cb0ab3c36a84668ea5a00d493556538d0",
+    "669da04971c653603e5c42d45593d956886f9b27": "e51fb5e84dd4b9a932e1464bbfffe78c660b08ed",
+    "0c73cce2eabe92cfde94f2bdbd2c6233ac66a8bf": "788b3afa99052fcdd0e3f5bc9298cdc95a69b774",
+    "6d25720b3b09e8aa86ad8df3ffc9cd3cf5dc5753": "7db3d3299a3783788c3315453450a37a1fa2adfa",
+    "fe367c3a8d92453c33b0cbbf81f954d43531de64": "f8f311b20144a531103545a39ae9504a67f6132f",
+    "0eb52522b739a6f9eff91f9241910849d5cc145f": "1aac767343774d763ac7ddb46b3b70363b3a610a",
+    "9556f0d7f8bb2f7fbb6fcc0a82440e79658ca8a9": "9ec0db88b31d6413523ecacc6a1e529a7feecfbb",
+    "5103a619e4f1e1c948e00f6779928e487db33622": "70e5d8b863cb6c117f5b5875942e09232e977437",
+    "584c0dc15bccfd42184eadb66b8399fc98821ad7": "e3bd798dcade5540faf858061f7a01f594ee62fe"
+  }
+}

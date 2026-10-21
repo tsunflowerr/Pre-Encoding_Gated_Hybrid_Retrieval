@@ -8,6 +8,7 @@ Research plan and implementation for a three-person hybrid retrieval project.
 - [Base chung: types, ID, text, fixture, iterator, model](docs/SHARED_BASE.md)
 - [Trạng thái triển khai/quota](docs/person_b/IMPLEMENTATION_STATUS.md)
 - [Kết quả thực chạy](paper/05b_efficiency_results.md)
+- [Ánh xạ commit sau khi sửa tác giả](docs/GIT_AUTHOR_MIGRATION.json)
 
 Code hiện có là phần B và shared contracts tối thiểu. A phụ trách dữ liệu/BM25/
 evaluator; C phụ trách fusion/gate/app. Xem hướng dẫn phần B để cài `uv.lock` và
