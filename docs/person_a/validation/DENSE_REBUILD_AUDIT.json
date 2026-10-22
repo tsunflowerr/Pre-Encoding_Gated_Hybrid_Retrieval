@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-22",
+  "status": "passed_rebuilt_not_byte_identical",
+  "model_revision": "14ca9be4bbcf1402eac0f43a2e2ccb6e0f994ba3",
+  "build_config_hash": "b59329da05e0b3b547a4d3e4053426a51e2a6daa5ebc378cf7133e3cc5123a07",
+  "embedding_fingerprint": "12f6bdcf8cf391a9b1d0e4e30b8fffba68df56891362e5cb40ae4f01a6caa1b6",
+  "encoder_implementation_hash": "5fcc583190bc56bbd7c6621f330aa8c7903a415972e41daac70f9a704281b929",
+  "domains": {
+    "programmers": {
+      "document_count": 32176,
+      "query_count": 876,
+      "index_sha256": "4e735e31852614f9eed33fca1589fdb59c843d294b74c64433888ae4f562b128",
+      "registered_index_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+      "ids_sha256": "72c683509f7201997857eb5a71a23ccf241450404b9f8cd62cf2dfe8ac8c8162",
+      "ranking_sha256": "102405176254039cb3d282a89764ac78a731af694dd87afc6f20d23c97d807f1",
+      "registered_ranking_sha256": "e2e1006c91b873d593bd624854a2fa26a162272996605f1d705c59c0477a399b",
+      "retriever_hash": "124f2248a8f83765083619f56ff0dc5f9432ce34a09f4361f9d703060692df0a",
+      "metrics": {
+        "ndcg_at_10": 0.24849664204481514,
+        "mrr_at_10": 0.2458985649054142,
+        "recall_at_10": 0.33351047447592913,
+        "recall_at_100": 0.5555589779824404
+      }
+    },
+    "unix": {
+      "document_count": 47382,
+      "query_count": 1072,
+      "index_sha256": "c114ae58c347d254eb990b330900ba3e9c3d016ee325e0368eb7e133d8f070bf",
+      "registered_index_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+      "ids_sha256": "216ee61e5459ad90555b849a1a171dcfab866f2c384828cd11ac55b74e4f2706",
+      "ranking_sha256": "20a657cd5d66cb77ac803538eec4fa26af59f6965ea2031e554fc3ac72aa1566",
+      "registered_ranking_sha256": "2f36fa3db203a98d481f7e556fe313ce475c8f3fc39b872f29f1e7bacc155984",
+      "retriever_hash": "e915b500b32f554aa9a93c5869bdc1d0e2881f166fc2528a5147d9ed2107f40f",
+      "metrics": {
+        "ndcg_at_10": 0.22210511681734177,
+        "mrr_at_10": 0.214060649135276,
+        "recall_at_10": 0.2877058161573087,
+        "recall_at_100": 0.48000714433783465
+      }
+    }
+  },
+  "verification": {
+    "every_vector_checked": true,
+    "dimension": 384,
+    "index_type": "IndexFlatIP",
+    "norm_min": 0.9999998807907104,
+    "norm_max": 1.0000001192092896,
+    "model_config_corpus_and_id_order_match_registered_manifests": true,
+    "index_and_ranking_bytes_match_registered_artifacts": false
+  },
+  "note": "Use these locally rebuilt runs for the current quality table; do not represent them as byte-identical copies of B's earlier artifacts."
+}

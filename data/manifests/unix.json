@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "domain": "unix",
+  "files": {
+    "corpus": {
+      "path": "data\\raw\\unix\\corpus.jsonl",
+      "sha256": "8d67fc0df3e01f490b38f81b72aa720644046db1e4c301900a4f4803550f4b7c"
+    },
+    "queries": {
+      "path": "data\\raw\\unix\\queries.jsonl",
+      "sha256": "69d6f23726f77a2892b21ee6e98432768c42b045c5790ba79b6ef66c1b02f73b"
+    },
+    "qrels": {
+      "path": "data\\raw\\unix\\qrels.tsv",
+      "sha256": "a7bd24ce081b0bb892602e9b0067017dc66fd03e7593563ad095cb3cd05e92ed"
+    }
+  },
+  "counts": {
+    "documents": 47382,
+    "queries": 1072,
+    "qrel_queries": 1072,
+    "qrel_pairs": 1693
+  },
+  "coverage": {
+    "missing_qrels": [],
+    "queries_without_positive_nonself_qrel": [],
+    "dangling_query_ids": [],
+    "dangling_document_ids": []
+  },
+  "policies": {
+    "id": "domain:source_id",
+    "text": "join_nonempty_title_text_newline_v1",
+    "evaluation_self_qrel": "removed"
+  },
+  "source": {
+    "schema_version": "1.0",
+    "domain": "unix",
+    "dataset_id": "BeIR/cqadupstack",
+    "dataset_revision": "e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c",
+    "qrels_dataset_id": "BeIR/cqadupstack-qrels",
+    "qrels_revision": "13595a9f221256a9a21e91c8b0fed3563382b6a7",
+    "license": "cc-by-sa-4.0",
+    "files": [
+      {
+        "kind": "corpus",
+        "source_url": "https://huggingface.co/datasets/BeIR/cqadupstack/resolve/e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c/unix/corpus/corpus-00000-of-00001.parquet",
+        "source_revision": "e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c",
+        "source_sha256": "7bd20096c9ca2aacf2fe95c0f86660aa174a8c6eccd54240067a09aeabe6c8d1",
+        "canonical_path": "data\\raw\\unix\\corpus.jsonl",
+        "canonical_sha256": "8d67fc0df3e01f490b38f81b72aa720644046db1e4c301900a4f4803550f4b7c",
+        "rows": 47382
+      },
+      {
+        "kind": "queries",
+        "source_url": "https://huggingface.co/datasets/BeIR/cqadupstack/resolve/e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c/unix/queries/queries-00000-of-00001.parquet",
+        "source_revision": "e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c",
+        "source_sha256": "51032d3c2ed37ad83eae8af36543743dc7b6af2d2dfe7cbd14853bcfdf81ac6c",
+        "canonical_path": "data\\raw\\unix\\queries.jsonl",
+        "canonical_sha256": "69d6f23726f77a2892b21ee6e98432768c42b045c5790ba79b6ef66c1b02f73b",
+        "rows": 1072
+      },
+      {
+        "kind": "qrels",
+        "source_url": "https://huggingface.co/datasets/BeIR/cqadupstack-qrels/resolve/13595a9f221256a9a21e91c8b0fed3563382b6a7/unix/test.tsv",
+        "source_revision": "13595a9f221256a9a21e91c8b0fed3563382b6a7",
+        "canonical_path": "data\\raw\\unix\\qrels.tsv",
+        "canonical_sha256": "a7bd24ce081b0bb892602e9b0067017dc66fd03e7593563ad095cb3cd05e92ed",
+        "rows": 1693
+      }
+    ]
+  },
+  "manifest_hash": "d2658b60339a79a5d7e9bb9de0aa8febf6aa6f01e1dc28b20ac79f5eebc67959"
+}

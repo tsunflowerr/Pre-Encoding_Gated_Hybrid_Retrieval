@@ -1,0 +1,81 @@
+method,domain,fold,query_id,query_class,ndcg_at_10,mrr_at_10,recall_at_100,query
+bm25,programmers,3,programmers:100095,natural_language,0.0,0.0,0.2,Should organizations penalize developers for the amount of defect reports filed against code they worked on?
+bm25,programmers,1,programmers:100959,natural_language,0.0,0.0,1.0,How do you unit test private methods?
+bm25,programmers,2,programmers:102348,code_or_cli,0.0,0.0,0.0,My lead does not co-operate (may be lack of knowledge or unwillingness)
+bm25,programmers,4,programmers:102518,code_or_cli,0.0,0.0,0.0,"What are the benefits and disadvantages in the approaches of C#, Java and Scala to Closures/Lambdas/...?"
+bm25,programmers,1,programmers:102679,natural_language,0.0,0.0,0.0,What should I do before open sourcing a project?
+bm25,programmers,1,programmers:103089,natural_language,0.0,0.0,0.0,How to improve my programming knowledge?
+bm25,programmers,0,programmers:104122,natural_language,0.0,0.0,1.0,Dealing with change requests from clients for an old system that only take 5 minutes to implement
+bm25,programmers,1,programmers:104517,natural_language,0.0,0.0,0.0,How can I get more experience with lower level programming?
+bm25,programmers,1,programmers:105380,natural_language,0.0,0.0,1.0,Architectural differences between dynamic and static languages
+bm25,programmers,2,programmers:106693,code_or_cli,0.0,0.0,0.0,Should a design document contain a discussion of the pros/cons to a given design or should it focus on facts and rationale?
+bm25,programmers,4,programmers:107986,natural_language,0.0,0.0,0.0,"Should we encourage coding styles in favor of developer's autonomy, or discourage it in favor of consistency?"
+bm25,programmers,0,programmers:108292,short,0.0,0.0,1.0,Java developing server-client solutions
+bm25,programmers,0,programmers:10857,natural_language,0.0,0.0,0.0,Should you document everything or just most?
+bm25,programmers,3,programmers:108855,natural_language,0.0,0.0,1.0,When is it necessary to use ORM tools?
+bm25,programmers,0,programmers:109279,natural_language,0.0,0.0,0.0,License validation and calling home
+bm25,programmers,3,programmers:109818,code_or_cli,0.0,0.0,0.0,"Is code like this a ""train wreck"" (in violation of Law of Demeter)?"
+bm25,programmers,3,programmers:10998,natural_language,0.0,0.0,1.0,What does the Jamie Zawinski's quotation about regular expressions mean?
+bm25,programmers,1,programmers:110190,natural_language,0.0,0.0,1.0,How granular should TDD tests be?
+bm25,programmers,1,programmers:110518,short,0.0,0.0,0.0,Binaries in source control
+bm25,programmers,1,programmers:110730,natural_language,0.0,0.0,0.0,"Benefits to starting JavaScript ""for"" loops at 0, or just traditional?"
+bm25,unix,1,unix:10055,natural_language,0.0,0.0,0.0,Why does `last` show '{' and '|' in the TTY field?
+bm25,unix,4,unix:101118,natural_language,0.0,0.0,0.0,Is there an easy method for installing binary builds of glibc?
+bm25,unix,3,unix:101158,natural_language,0.0,0.0,0.0,SSH tunneling via few hosts
+bm25,unix,2,unix:101285,natural_language,0.0,0.0,0.0,What does a high load with an empty top mean?
+bm25,unix,0,unix:101321,code_or_cli,0.0,0.0,0.0,Proper escape sequence for a non-standard file name
+bm25,unix,4,unix:101326,code_or_cli,0.0,0.0,0.0,Set Static IP in CentOS 6.4?
+bm25,unix,4,unix:101330,code_or_cli,0.0,0.0,1.0,Pin or hold? What's the proper way to tell apt-get dist-upgrade that I want to keep a particular package over another?
+bm25,unix,2,unix:101392,natural_language,0.0,0.0,1.0,Why does halt not turn the machine off?
+bm25,unix,2,unix:101772,code_or_cli,0.0,0.0,1.0,Xorg.conf to only use part of screen
+bm25,unix,2,unix:101847,natural_language,0.0,0.0,0.0,Cannot expand asterisk without proper permission
+bm25,unix,4,unix:102016,natural_language,0.0,0.0,0.0,How do I columnate a list of items with minimal width?
+bm25,unix,1,unix:102024,code_or_cli,0.0,0.0,0.0,How to install linux (BackBox) and windows on the same computer?
+bm25,unix,0,unix:102312,code_or_cli,0.0,0.0,0.0,"No matter how many times I try re-installing Linux Mint, I get a GRUB error. How do I fix it?"
+bm25,unix,3,unix:102492,natural_language,0.0,0.0,1.0,raid5 exchange 1 of 3 harddrives
+bm25,unix,2,unix:102504,code_or_cli,0.0,0.0,1.0,Hard links versus symbolic links: which one is faster / smaller?
+bm25,unix,0,unix:102553,natural_language,0.0,0.0,0.0,Current IP address as visible from the internet?
+bm25,unix,1,unix:102624,natural_language,0.0,0.0,0.0,What does a dot after the file permission bits mean?
+bm25,unix,2,unix:102732,natural_language,0.0,0.0,0.0,Regex and patterns on a ksh command line
+bm25,unix,4,unix:102812,natural_language,0.0,0.0,0.0,Can't execute a file with execute permission bit set
+bm25,unix,2,unix:103019,short,0.0,0.0,1.0,Can't install new applications
+dense,programmers,3,programmers:100095,natural_language,0.0,0.0,0.2,Should organizations penalize developers for the amount of defect reports filed against code they worked on?
+dense,programmers,2,programmers:102348,code_or_cli,0.0,0.0,0.0,My lead does not co-operate (may be lack of knowledge or unwillingness)
+dense,programmers,4,programmers:102518,code_or_cli,0.0,0.0,0.5,"What are the benefits and disadvantages in the approaches of C#, Java and Scala to Closures/Lambdas/...?"
+dense,programmers,1,programmers:102679,natural_language,0.0,0.0,1.0,What should I do before open sourcing a project?
+dense,programmers,1,programmers:103089,natural_language,0.0,0.0,0.0,How to improve my programming knowledge?
+dense,programmers,0,programmers:103471,natural_language,0.0,0.0,1.0,How should I handle invalid user input?
+dense,programmers,0,programmers:104096,natural_language,0.0,0.0,0.0,"Which platform to choose, Java or .NET?"
+dense,programmers,0,programmers:104122,natural_language,0.0,0.0,0.0,Dealing with change requests from clients for an old system that only take 5 minutes to implement
+dense,programmers,1,programmers:104517,natural_language,0.0,0.0,0.0,How can I get more experience with lower level programming?
+dense,programmers,1,programmers:105380,natural_language,0.0,0.0,1.0,Architectural differences between dynamic and static languages
+dense,programmers,2,programmers:106693,code_or_cli,0.0,0.0,0.0,Should a design document contain a discussion of the pros/cons to a given design or should it focus on facts and rationale?
+dense,programmers,4,programmers:107986,natural_language,0.0,0.0,0.0,"Should we encourage coding styles in favor of developer's autonomy, or discourage it in favor of consistency?"
+dense,programmers,1,programmers:108395,code_or_cli,0.0,0.0,0.0,Application development practices in a non-software company
+dense,programmers,0,programmers:10857,natural_language,0.0,0.0,0.0,Should you document everything or just most?
+dense,programmers,3,programmers:108855,natural_language,0.0,0.0,1.0,When is it necessary to use ORM tools?
+dense,programmers,0,programmers:109279,natural_language,0.0,0.0,0.0,License validation and calling home
+dense,programmers,3,programmers:109818,code_or_cli,0.0,0.0,0.0,"Is code like this a ""train wreck"" (in violation of Law of Demeter)?"
+dense,programmers,1,programmers:110190,natural_language,0.0,0.0,1.0,How granular should TDD tests be?
+dense,programmers,1,programmers:110518,short,0.0,0.0,0.0,Binaries in source control
+dense,programmers,1,programmers:110730,natural_language,0.0,0.0,0.0,"Benefits to starting JavaScript ""for"" loops at 0, or just traditional?"
+dense,unix,1,unix:10055,natural_language,0.0,0.0,0.0,Why does `last` show '{' and '|' in the TTY field?
+dense,unix,4,unix:101118,natural_language,0.0,0.0,1.0,Is there an easy method for installing binary builds of glibc?
+dense,unix,3,unix:101158,natural_language,0.0,0.0,0.0,SSH tunneling via few hosts
+dense,unix,2,unix:101285,natural_language,0.0,0.0,1.0,What does a high load with an empty top mean?
+dense,unix,0,unix:101321,code_or_cli,0.0,0.0,0.0,Proper escape sequence for a non-standard file name
+dense,unix,4,unix:101326,code_or_cli,0.0,0.0,1.0,Set Static IP in CentOS 6.4?
+dense,unix,4,unix:101330,code_or_cli,0.0,0.0,0.0,Pin or hold? What's the proper way to tell apt-get dist-upgrade that I want to keep a particular package over another?
+dense,unix,2,unix:101392,natural_language,0.0,0.0,0.0,Why does halt not turn the machine off?
+dense,unix,3,unix:101797,natural_language,0.0,0.0,0.5,How to report time and other information on all bash commands?
+dense,unix,2,unix:101847,natural_language,0.0,0.0,0.0,Cannot expand asterisk without proper permission
+dense,unix,4,unix:102016,natural_language,0.0,0.0,0.0,How do I columnate a list of items with minimal width?
+dense,unix,1,unix:102024,code_or_cli,0.0,0.0,0.0,How to install linux (BackBox) and windows on the same computer?
+dense,unix,2,unix:10220,code_or_cli,0.0,0.0,1.0,"listing packages in Debian, a la `dpkg -l`, but including the package origin/source"
+dense,unix,0,unix:102312,code_or_cli,0.0,0.0,0.0,"No matter how many times I try re-installing Linux Mint, I get a GRUB error. How do I fix it?"
+dense,unix,1,unix:102453,natural_language,0.0,0.0,1.0,What does `init [2]` mean in the COMMAND column of ps?
+dense,unix,3,unix:102492,natural_language,0.0,0.0,1.0,raid5 exchange 1 of 3 harddrives
+dense,unix,2,unix:102504,code_or_cli,0.0,0.0,0.0,Hard links versus symbolic links: which one is faster / smaller?
+dense,unix,0,unix:102553,natural_language,0.0,0.0,0.0,Current IP address as visible from the internet?
+dense,unix,1,unix:102624,natural_language,0.0,0.0,0.0,What does a dot after the file permission bits mean?
+dense,unix,2,unix:102732,natural_language,0.0,0.0,1.0,Regex and patterns on a ksh command line

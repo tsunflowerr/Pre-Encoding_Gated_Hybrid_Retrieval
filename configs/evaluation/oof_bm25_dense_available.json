@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "split_manifest": "../../data/splits/manifest.json",
+  "domains": {
+    "programmers": {
+      "dataset_manifest": "../../data/manifests/programmers.json",
+      "queries": "../../data/raw/programmers/queries.jsonl",
+      "qrels": "../../data/raw/programmers/qrels.tsv",
+      "runs": {
+        "bm25": {
+          "0": "../../results/oof_runs/bm25/programmers/fold_0.jsonl",
+          "1": "../../results/oof_runs/bm25/programmers/fold_1.jsonl",
+          "2": "../../results/oof_runs/bm25/programmers/fold_2.jsonl",
+          "3": "../../results/oof_runs/bm25/programmers/fold_3.jsonl",
+          "4": "../../results/oof_runs/bm25/programmers/fold_4.jsonl"
+        },
+        "dense": {
+          "0": "../../results/oof_runs/dense/programmers/fold_0.jsonl",
+          "1": "../../results/oof_runs/dense/programmers/fold_1.jsonl",
+          "2": "../../results/oof_runs/dense/programmers/fold_2.jsonl",
+          "3": "../../results/oof_runs/dense/programmers/fold_3.jsonl",
+          "4": "../../results/oof_runs/dense/programmers/fold_4.jsonl"
+        }
+      }
+    },
+    "unix": {
+      "dataset_manifest": "../../data/manifests/unix.json",
+      "queries": "../../data/raw/unix/queries.jsonl",
+      "qrels": "../../data/raw/unix/qrels.tsv",
+      "runs": {
+        "bm25": {
+          "0": "../../results/oof_runs/bm25/unix/fold_0.jsonl",
+          "1": "../../results/oof_runs/bm25/unix/fold_1.jsonl",
+          "2": "../../results/oof_runs/bm25/unix/fold_2.jsonl",
+          "3": "../../results/oof_runs/bm25/unix/fold_3.jsonl",
+          "4": "../../results/oof_runs/bm25/unix/fold_4.jsonl"
+        },
+        "dense": {
+          "0": "../../results/oof_runs/dense/unix/fold_0.jsonl",
+          "1": "../../results/oof_runs/dense/unix/fold_1.jsonl",
+          "2": "../../results/oof_runs/dense/unix/fold_2.jsonl",
+          "3": "../../results/oof_runs/dense/unix/fold_3.jsonl",
+          "4": "../../results/oof_runs/dense/unix/fold_4.jsonl"
+        }
+      }
+    }
+  },
+  "utilities": [
+    {"name": "dense_gain", "baseline": "bm25", "candidate": "dense", "metric": "ndcg_at_10"}
+  ]
+}

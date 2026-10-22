@@ -1,0 +1,32 @@
+data:
+  seed: 42
+  output_dir: data
+  source:
+    dataset_id: BeIR/cqadupstack
+    dataset_revision: e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c
+    qrels_dataset_id: BeIR/cqadupstack-qrels
+    qrels_revision: 13595a9f221256a9a21e91c8b0fed3563382b6a7
+    license: cc-by-sa-4.0
+  domains:
+    programmers:
+      corpus: data/raw/programmers/corpus.jsonl
+      queries: data/raw/programmers/queries.jsonl
+      qrels: data/raw/programmers/qrels.tsv
+      expected:
+        documents: 32176
+        queries: 876
+        qrel_pairs: 1675
+        corpus_sha256: 26d98b95e51ff6a7bd36f401c5821cab140189a4bdf2525017af66960427662d
+        queries_sha256: 707fde4c6bdce38db97e1930d8fcdc4c025536c566bc41af980245e284a7da27
+        qrels_sha256: ed69afa873c64d34298792d694c82c4293e4b7e3c6ea3edc7a73662d4b0cba76
+    unix:
+      corpus: data/raw/unix/corpus.jsonl
+      queries: data/raw/unix/queries.jsonl
+      qrels: data/raw/unix/qrels.tsv
+      expected:
+        documents: 47382
+        queries: 1072
+        qrel_pairs: 1693
+        corpus_sha256: 8d67fc0df3e01f490b38f81b72aa720644046db1e4c301900a4f4803550f4b7c
+        queries_sha256: 69d6f23726f77a2892b21ee6e98432768c42b045c5790ba79b6ef66c1b02f73b
+        qrels_sha256: a7bd24ce081b0bb892602e9b0067017dc66fd03e7593563ad095cb3cd05e92ed
