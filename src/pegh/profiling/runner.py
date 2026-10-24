@@ -35,6 +35,9 @@ def run_benchmark(
         raise ValueError("method IDs must be safe filename components")
     if len({q.query_id for q in queries}) != len(queries):
         raise ValueError("measured query IDs must be unique")
+    domains = {q.domain for q in queries}
+    if len(domains) != 1 or any(q.domain not in domains for q in warmup_queries):
+        raise ValueError("run one domain at a time, with warmup queries from that same domain")
     if {q.query_id for q in queries} & {q.query_id for q in warmup_queries}:
         raise ValueError("warmup queries overlap measured queries")
     if settings.warmup_queries and not warmup_queries:
@@ -48,9 +51,11 @@ def run_benchmark(
         "registry": registry,
         "registry_hash": object_hash(registry),
         "query_ids_hash": object_hash([q.query_id for q in queries]),
+        "query_id_set_hash": object_hash(sorted(q.query_id for q in queries)),
         "queries_hash": object_hash([asdict(q) for q in queries]),
         "warmup_hash": object_hash([asdict(q) for q in warmup_queries]),
         "query_count": len(queries),
+        "domain": queries[0].domain,
         "settings": asdict(settings),
         "split": split,
         "fold": fold,

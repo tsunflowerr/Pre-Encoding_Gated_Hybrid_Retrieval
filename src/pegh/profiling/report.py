@@ -7,7 +7,7 @@ from pathlib import Path
 
 import numpy as np
 
-from pegh.dense.artifacts import atomic_json, checked_child, file_hash, read_json
+from pegh.dense.artifacts import atomic_json, checked_child, file_hash, object_hash, read_json
 from pegh.profiling.trace import STAGES
 
 
@@ -22,6 +22,8 @@ def load_complete_run(directory: str | Path) -> tuple[dict, list[dict], list[dic
     rows: list[dict] = []
     receipts: list[dict] = []
     seen: set[tuple] = set()
+    provenance_by_method: dict[str, str] = {}
+    runtime_conditions: str | None = None
     for worker in manifest["workers"]:
         path = checked_child(directory, worker["directory"])
         receipt = read_json(path / "worker.json")
@@ -37,6 +39,28 @@ def load_complete_run(directory: str | Path) -> tuple[dict, list[dict], list[dic
             or receipt["completed_requests"] != manifest["query_count"]
         ):
             raise ValueError("incomplete/failed worker receipt")
+        if receipt["source_hash"] != manifest["source_snapshot"]["combined_sha256"]:
+            raise ValueError("worker source snapshot differs from the run manifest")
+        if (
+            receipt["method"] != worker["method"]
+            or receipt["repetition"] != worker["repetition"]
+            or receipt["runtime"]["settings"] != manifest["settings"]
+            or receipt.get("quality_cache_used") is not False
+        ):
+            raise ValueError("worker metadata differs from the run manifest")
+        provenance_hash = object_hash(receipt.get("method_provenance"))
+        previous_hash = provenance_by_method.setdefault(worker["method"], provenance_hash)
+        if provenance_hash != previous_hash:
+            raise ValueError("method provenance changed between timing repetitions")
+        conditions = object_hash(
+            {
+                key: receipt["runtime"][key]
+                for key in ("platform", "processor", "resources", "package_versions")
+            }
+        )
+        if runtime_conditions is not None and conditions != runtime_conditions:
+            raise ValueError("runtime resources/platform/packages differ between workers")
+        runtime_conditions = conditions
         receipts.append(receipt)
         current = [
             json.loads(line)
@@ -52,6 +76,9 @@ def load_complete_run(directory: str | Path) -> tuple[dict, list[dict], list[dic
             if (
                 row["method"] != worker["method"]
                 or row["repetition"] != worker["repetition"]
+                or row["run_id"] != manifest["run_id"]
+                or row["split"] != manifest["split"]
+                or row["fold"] != manifest["fold"]
                 or row["total_ns"] < 0
                 or row["process_cpu_ns"] < 0
             ):
@@ -59,6 +86,9 @@ def load_complete_run(directory: str | Path) -> tuple[dict, list[dict], list[dic
             if row["encoder_calls"] not in (0, 1):
                 raise ValueError("invalid encoder call count")
         rows.extend(current)
+    domains = {row["domain"] for row in rows}
+    if len(domains) != 1 or ("domain" in manifest and domains != {manifest["domain"]}):
+        raise ValueError("one domain per run is required for isolated CPU/RSS reporting")
     methods = {method["id"] for method in manifest["registry"]}
     by_method: dict[str, dict[int, set[str]]] = defaultdict(lambda: defaultdict(set))
     for row in rows:
@@ -74,7 +104,37 @@ def load_complete_run(directory: str | Path) -> tuple[dict, list[dict], list[dic
                 canonical_ids = ids
             if ids != canonical_ids:
                 raise ValueError("query coverage differs across methods/repetitions")
+    if (
+        "query_id_set_hash" in manifest
+        and object_hash(sorted(canonical_ids)) != manifest["query_id_set_hash"]
+    ):
+        raise ValueError("measured query IDs differ from the run manifest")
     return manifest, rows, receipts
+
+
+def _quality_bindings(manifest: dict, rows: list[dict], receipts: list[dict]) -> list[dict]:
+    if any(
+        not isinstance(r.get("method_provenance"), dict) or not r["method_provenance"]
+        for r in receipts
+    ):
+        raise ValueError("method provenance is required for quality/latency binding")
+    return [
+        {
+            "method": method,
+            "domain": rows[0]["domain"],
+            "run_id": manifest["run_id"],
+            "queries_hash": manifest["queries_hash"],
+            "method_provenance_hash": object_hash(
+                next(r["method_provenance"] for r in receipts if r["method"] == method)
+            ),
+        }
+        for method in sorted({r["method"] for r in rows})
+    ]
+
+
+def quality_bindings(directory: str | Path) -> list[dict]:
+    """Return the exact query/model identities evaluator A must bind to its scores."""
+    return _quality_bindings(*load_complete_run(directory))
 
 
 def summarize_run(directory: str | Path, *, bootstrap_samples: int = 1000, seed: int = 42) -> dict:
@@ -143,6 +203,10 @@ def summarize_run(directory: str | Path, *, bootstrap_samples: int = 1000, seed:
         "summaries": summaries,
     }
     atomic_json(directory / "summary.json", report)
+    if all(
+        isinstance(r.get("method_provenance"), dict) and r["method_provenance"] for r in receipts
+    ):
+        atomic_json(directory / "quality_binding.json", _quality_bindings(manifest, rows, receipts))
     flat_rows = [
         {
             key: summary[key]
@@ -214,6 +278,41 @@ def make_figures(directory: str | Path, quality_csv: str | Path | None = None) -
     directory = Path(directory)
     manifest, rows, _ = load_complete_run(directory)
     report = read_json(directory / "summary.json")
+    if report["run_manifest_sha256"] != file_hash(directory / "manifest.json"):
+        raise ValueError("summary is stale; summarize the current complete run before plotting")
+    points = []
+    if quality_csv is not None:
+        bindings = quality_bindings(directory)
+        with Path(quality_csv).open(encoding="utf-8", newline="") as stream:
+            quality = list(csv.DictReader(stream))
+        required = {
+            "method",
+            "domain",
+            "ndcg_at_10",
+            "run_id",
+            "queries_hash",
+            "method_provenance_hash",
+        }
+        if not required.issubset(quality[0] if quality else {}):
+            raise ValueError(
+                "quality CSV requires query/model binding hashes as well as method,domain,ndcg_at_10,run_id"
+            )
+        lookup = {(r["method"], r["domain"]): r for r in quality}
+        if len(lookup) != len(quality):
+            raise ValueError("duplicate quality method/domain rows")
+        if set(lookup) != {(b["method"], b["domain"]) for b in bindings}:
+            raise ValueError("quality/latency identity or coverage mismatch")
+        for binding in bindings:
+            row = lookup[(binding["method"], binding["domain"])]
+            if row["run_id"] != binding["run_id"]:
+                raise ValueError("quality/latency run identity mismatch")
+            if any(row[key] != binding[key] for key in ("queries_hash", "method_provenance_hash")):
+                raise ValueError("quality/latency query or model binding mismatch")
+        for summary in report["summaries"]:
+            value = float(lookup[(summary["method"], summary["domain"])]["ndcg_at_10"])
+            if not 0 <= value <= 1:
+                raise ValueError("nDCG must be on the 0..1 scale")
+            points.append((summary["domain"], summary["method"], summary["mean_ms"], value))
     outputs = []
     for domain in sorted({r["domain"] for r in rows}):
         fig, axis = plt.subplots(figsize=(7, 4))
@@ -257,22 +356,6 @@ def make_figures(directory: str | Path, quality_csv: str | Path | None = None) -
         plt.close(fig)
         outputs.append(str(path))
     if quality_csv is not None:
-        with Path(quality_csv).open(encoding="utf-8", newline="") as stream:
-            quality = list(csv.DictReader(stream))
-        if not {"method", "domain", "ndcg_at_10", "run_id"}.issubset(quality[0] if quality else {}):
-            raise ValueError("quality CSV requires method,domain,ndcg_at_10,run_id")
-        lookup = {(r["method"], r["domain"]): r for r in quality}
-        if len(lookup) != len(quality):
-            raise ValueError("duplicate quality method/domain rows")
-        points = []
-        for summary in report["summaries"]:
-            row = lookup.get((summary["method"], summary["domain"]))
-            if row is None or row["run_id"] != manifest["run_id"]:
-                raise ValueError("quality/latency run identity or coverage mismatch")
-            value = float(row["ndcg_at_10"])
-            if not 0 <= value <= 1:
-                raise ValueError("nDCG must be on the 0..1 scale")
-            points.append((summary["domain"], summary["method"], summary["mean_ms"], value))
         for domain in sorted({p[0] for p in points}):
             selected = [p for p in points if p[0] == domain]
             fig, axis = plt.subplots(figsize=(7, 4))

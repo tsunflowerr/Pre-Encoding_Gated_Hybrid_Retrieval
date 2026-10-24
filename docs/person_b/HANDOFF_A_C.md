@@ -1,6 +1,6 @@
 # Handoff phần B cho A và C
 
-Bổ sung base chung trên nhánh `base`: xem
+Bổ sung base chung trên nhánh `main` (đã đổi tên từ `base`): xem
 [SHARED_BASE.md](../SHARED_BASE.md). A/C import `contracts` và `contracts.io` thay
 vì tạo local types/loader. B v1 giữ adapter nội bộ đã khóa vào artifacts; parity
 checks bảo đảm text/IDs và model config thống nhất với base mới.
@@ -38,7 +38,13 @@ Exporter offline hiện ghi label `method=dense`; registry mặc định dùng
 `id=dense_minilm`. Đây là hai nhãn của cùng backend, không phải hai model khác.
 Khi xuất quality CSV cho online report, A dùng ID từ registry và kiểm trùng
 `retriever_hash`/`corpus_sha256`/query set trước khi map nhãn. Không ghép chỉ theo
-tên method. Sidecar và worker provenance chứa các hash để đối chiếu.
+tên method. Sidecar mới chứa `queries_hash` và `method_provenance_hash`; hai giá
+trị phải khớp hàng tương ứng trong `quality_binding.json` do report online xuất.
+`queries_hash` ràng buộc cả text/thứ tự query; không phải SHA256 bytes file JSONL.
+A chỉ điền quality CSV sau khi đối chiếu ranking đầu vào evaluator, cùng split,
+k và provenance; không sao chép hash từ timing run để hợp thức hóa score khác.
+CSV cần đủ sáu cột như README. Với artifact v1 thiếu hai field mới, dựng binding
+từ queries/provenance gốc đã kiểm hash, giữ nguyên sidecar lịch sử.
 
 ## C dùng backend
 
@@ -86,9 +92,11 @@ Factory registry mẫu:
 ```
 
 Đường `pegh.app.factories` trên là interface C sẽ cung cấp, chưa tồn tại trong B.
-C trả object có `search(Query,k)->SearchResponse` và nên có `.provenance` JSON
+C trả object có `search(Query,k)->SearchResponse`. Với final `split=test` hoặc
+khi nối quality–latency, `.provenance` bắt buộc là dict không rỗng, JSON
 serializable: model/index/corpus/sparse/fusion/gate/config/training/split hashes,
-không ghi secret. Harness lưu provenance nguyên vẹn trong worker receipt.
+không ghi secret. Harness lưu provenance nguyên vẹn trong worker receipt và
+từ chối provenance thay đổi giữa repetitions của cùng method.
 
 ## Instrumentation và điều kiện lỗi
 
@@ -97,6 +105,10 @@ không ghi secret. Harness lưu provenance nguyên vẹn trong worker receipt.
 không wrap lại cùng stage phía ngoài tạo double-count. `TraceSink` không hỗ trợ
 concurrent requests; batch=concurrency=1 đã chốt. Các stage phải không chồng nhau
 nếu dùng stacked bars để phân tích thành phần tổng.
+
+Sparse retrieval phải có đúng một scope `sparse` ở nơi thực thi thật nếu được
+chạy; harness từ chối hơn một lần/request. Mỗi run chỉ chứa một domain; warmup
+cũng thuộc domain đó. Không gộp hai corpus vào một process rồi tách bảng RSS.
 
 `SearchResponse.encoder_calls` là số lần gọi thật của request, phải bằng observed
 trace. `use_dense` phải khớp 0/1 encoder calls. Gated request không có dense trả0;

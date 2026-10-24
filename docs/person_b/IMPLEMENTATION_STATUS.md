@@ -1,5 +1,21 @@
 # Trạng thái triển khai phần B
 
+## Cập nhật sau review 21/10/2026
+
+- Nhánh `thanh` đã lấy base chung từ `main`; tên base tích hợp hiện là `main`.
+- Đã sửa kiểm dependency/index, source root, domain isolation, sparse gọi lặp,
+  provenance/runtime giữa workers và quality–latency binding.
+- 84 tests qua gồm model thật; Ruff đúng phạm vi CI, lockfile và pip check qua.
+- Kiểm lại mọi vector của hai full indices; audit 9.996 requests/1.948 rankings
+  qua; số summary tính lại khớp raw. 47 archive files giữ nguyên so với Git.
+- CLI smoke thật từ ngoài checkout qua: offline/online rankings và hai binding
+  hashes khớp. Không dùng smoke làm số liệu nghiên cứu.
+- Parent main đã qua hosted CI cả Ubuntu/Python 3.11 và Windows/Python 3.12.
+- Báo cáo và machine receipt: [REVIEW_2026-10-21.md](REVIEW_2026-10-21.md),
+  [REVIEW_2026-10-21.json](REVIEW_2026-10-21.json).
+
+## Bản nghiệm thu gốc 20/10/2026
+
 - Trạng thái: `complete` — đã triển khai, chạy dữ liệu thật và audit phần B.
 - Nhánh: `thanh`.
 - Ngày: 20/10/2026, Asia/Bangkok.

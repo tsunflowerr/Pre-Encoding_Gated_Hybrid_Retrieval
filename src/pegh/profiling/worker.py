@@ -54,6 +54,10 @@ def execute(config_path: str | Path) -> int:
         factory = getattr(importlib.import_module(module), function)
         method = factory(trace=trace, **payload["method"].get("kwargs", {}))
         result["method_provenance"] = getattr(method, "provenance", None)
+        if payload["split"] == "test" and (
+            not isinstance(result["method_provenance"], dict) or not result["method_provenance"]
+        ):
+            raise ValueError("final test methods must expose nonempty method provenance")
         result["runtime"]["backend_threads_after_factory"] = {
             "torch": sys.modules["torch"].get_num_threads() if "torch" in sys.modules else None,
             "faiss": sys.modules["faiss"].omp_get_max_threads() if "faiss" in sys.modules else None,
@@ -105,6 +109,8 @@ def execute(config_path: str | Path) -> int:
                 raise ValueError("dense decision disagrees with actual encoder calls")
             if measurement["vector_search_calls"] and not calls:
                 raise ValueError("vector search without fresh query encoding is not permitted")
+            if measurement["stage_calls"].get("sparse", 0) > 1:
+                raise ValueError("sparse retrieval ran more than once; reuse its ranking in fusion")
             if response.gate_score is not None and not math.isfinite(response.gate_score):
                 raise ValueError("nonfinite gate score")
             if response.fallback_reason is not None and (
