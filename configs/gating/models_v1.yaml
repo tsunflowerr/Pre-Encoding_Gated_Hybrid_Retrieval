@@ -1,0 +1,47 @@
+schema_version: '1.0'
+track: supervised_internal_five_fold
+split_manifest: data/splits/manifest.json
+training_manifest: results/training/c3_manifest.json
+feature_schema: results/features/schema_v1.json
+output_dir: results/models
+sample_weight_policy: per_domain_no_weights
+scaler: standard_train_only
+seed: 42
+
+methods:
+  ridge_gain_full:
+    family: ridge
+    features: full
+    target: delta_U
+    alpha: 1.0
+    score_unit: predicted_ndcg_gain
+  logistic_gain_full:
+    family: logistic
+    features: full
+    target: gain_binary_label
+    c: 1.0
+    solver: liblinear
+    max_iter: 2000
+    score_unit: probability_gain_positive
+  logistic_sparse_success_full:
+    family: logistic
+    features: full
+    target: sparse_success_label
+    c: 1.0
+    solver: liblinear
+    max_iter: 2000
+    score_unit: probability_sparse_failure
+  linear_svc_gain_general:
+    family: linear_svc
+    features: general
+    target: gain_binary_label
+    c: 1.0
+    dual: false
+    max_iter: 5000
+    score_unit: signed_margin_gain_positive
+  ridge_gain_general:
+    family: ridge
+    features: general
+    target: delta_U
+    alpha: 1.0
+    score_unit: predicted_ndcg_gain

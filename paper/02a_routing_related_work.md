@@ -1,0 +1,17 @@
+# Routing and fusion related work
+
+## Selective retrieval
+
+[Arabzadeh, Yan, and Clarke](https://arxiv.org/abs/2109.10739) investigate per-query selection among sparse, dense, and hybrid strategies, using a classifier to expose different effectiveness–efficiency operating points on MS MARCO. Our setting differs in the decision boundary: BM25 has already run when PE-GH decides whether to pay for a **fresh dense query encoding**. BM25 scores, gaps, lexical statistics, and text features are therefore available to the gate, but dense results and dense-derived features are not. This ordering makes the actual number of encoder calls a direct, testable consequence of the route.
+
+[LiteGator](https://www.atlantis-press.com/proceedings/icast-es-25/126020510) reports sparse/dense routing with shallow query features and a linear SVM on low-resource QA benchmarks. We include a LinearSVC over eight general features as an explicit comparator. The comparator shares our data splits, sparse/dense backends, and evaluation code, so its observed difference is a local ablation rather than a reproduction of LiteGator's reported QA experiments. PE-GH estimates the *incremental nDCG@10 of hybrid over BM25* with a Ridge model instead of treating the choice as a generic retriever-class label.
+
+[Faggioli et al.](https://arxiv.org/abs/2302.09947) study query performance prediction (QPP) without relevance labels at inference and report difficulty transferring lexical predictors to neural IR. PE-GH uses a post-BM25, pre-dense boundary; its training target is the marginal quality gain from dense fusion, rather than BM25 quality alone. The distinction matters because even a weak BM25 ranking can gain little from the particular dense retriever. The target is computed only on fold-specific train/validation rankings, then frozen before test.
+
+## Hybrid fusion and benchmarking
+
+[Cormack, Clarke, and Büttcher](https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf) introduce reciprocal rank fusion (RRF), combining rankings through reciprocal rank contributions. We retain RRF with (k=60) as a static comparator and allow validation to choose between it and min–max score combination. In this experiment H* selects score combination in every fold/domain, with dense weight from 0.2 to 0.5; S* also selects H* in every fold/domain. Those selections are outcomes of the registered validation protocol, not universal claims about fusion methods. On this test set RRF obtains lower macro nDCG@10 than the selected score fusion.
+
+The [BEIR study](https://arxiv.org/abs/2104.08663) emphasizes heterogeneous evaluation and robust lexical baselines. Our two CQADupStack domains are narrower than the full BEIR collection, and the selected dense model is weak as a standalone retriever here. We therefore include BM25, dense-only, fixed CC 0.5, RRF, H*, S*, simple margin rules, learned gate variants, and a random router. Offline quality and online runtime are kept separate: cached rankings are appropriate for the strict OOF evaluator, whereas timing uses a live SearchMethod with no query-embedding or quality cache.
+
+The primary comparison and controls are documented in [gate analysis](05c_gate_analysis.md). Source hashes, split bindings, and method configurations are in the [freeze manifest](../results/frozen/c6_manifest.json); the benchmark protocol is described in [experimental setup](04_experimental_setup.md).
