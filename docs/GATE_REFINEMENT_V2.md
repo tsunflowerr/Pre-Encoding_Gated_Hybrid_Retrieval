@@ -39,6 +39,8 @@ python -m scripts_c.refine_gate --stage freeze `
 
 `base-root` chứa `results/`, `artifacts/`, `data/raw/` của lượt v1 đã verify. `output-root` phải khác base và thư mục results cũ. Chạy tiếp `--stage quality`, `--stage online`, `--stage report` với cùng tham số và source. Stage freeze kiểm validation labels/predictions/provenance, parity mọi model và ghi hash đầu vào. Không sửa code sau freeze.
 
-Online đo H*, PE-v1 với sklearn và PE-v2 với NumPy, cùng baseline execution profile đã chọn bằng validation ở v1. Có 10 fold/domain, năm lần lặp, 29.220 request; v1/v2 và H* được đo lại cùng lượt, không ghép latency của hai lượt máy. S* v1 có cùng ranking H* nên không tạo thêm một method timing trùng chức năng trong thử nghiệm này. Main timing tắt stage instrumentation. Microbenchmark inference là phép đo riêng, không dùng thay latency request.
+Mặc định `--policy score_only` chỉ đổi execution sklearn → NumPy, dùng nguyên threshold v1 và bắt buộc ranking khớp v1. Muốn tái lập thử nghiệm threshold đã bị loại, dùng `--policy domain_threshold` ở mọi stage; không dùng chính sách đó cho bản chính. PE-v2 trong tên method là nhánh đối chiếu của policy đã ghi trong freeze, không mặc định có nghĩa là threshold mới.
+
+Online đo H*, PE-v1 với sklearn và PE-v2 với NumPy theo policy đã freeze, cùng baseline execution profile đã chọn bằng validation ở v1. Có 10 tổ hợp fold/domain, năm lần lặp, 29.220 request; v1/v2 và H* được đo lại cùng lượt, không ghép latency của hai lượt máy. S* v1 có cùng ranking H* nên không tạo thêm một method timing trùng chức năng trong thử nghiệm này. Main timing tắt stage instrumentation. Microbenchmark inference là phép đo riêng, không dùng thay latency request.
 
 Có thể dùng `--stop-file` và `--restart-incomplete` như runner B: thư mục fold dở được lưu trữ rồi chạy lại nguyên fold. Source, input, runtime và các fold complete phải khớp. Raw timing giữ ngoài Git. `report.json` kiểm ranking/counters và ghi cả kết quả thuận lẫn bất lợi.

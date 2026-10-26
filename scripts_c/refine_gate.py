@@ -99,7 +99,7 @@ def parity(base: Path, output: Path) -> dict:
     return result
 
 
-def freeze(base: Path, output: Path, runtime: Path) -> None:
+def freeze(base: Path, output: Path, runtime: Path, policy: str) -> None:
     destination = output / "freeze.json"
     if destination.exists():
         raise FileExistsError("choose a fresh refinement directory")
@@ -112,6 +112,7 @@ def freeze(base: Path, output: Path, runtime: Path) -> None:
     entries = {(r["fold"], r["domain"], r["split_role"]): r for r in c3["artifacts"]}
     result = {
         "schema_version": "domain_refinement_v2",
+        "policy": policy,
         "selection_scope": "validation_only",
         "test_qrels_used_for_selection": False,
         "evaluation_scope": SCOPE,
@@ -191,7 +192,10 @@ def freeze(base: Path, output: Path, runtime: Path) -> None:
             candidate = copy.deepcopy(reference)
             candidate["id"] = "pe_v2"
             candidate["kwargs"].update(
-                score_execution="numpy", threshold=selection["domains"][domain]["threshold"]
+                score_execution="numpy",
+                threshold=selection["domains"][domain]["threshold"]
+                if policy == "domain_threshold"
+                else old["selected_threshold"],
             )
             methods = [
                 next(m for m in registry["methods"] if m["id"] == "h_star"),
@@ -275,6 +279,11 @@ def quality(base: Path, output: Path, frozen: dict) -> None:
                 or scores[qid] > kwargs["threshold"]
                 for qid in ids
             }
+            if frozen["policy"] == "score_only" and any(
+                (h_star[qid] if decisions[qid] else sparse[qid]).hits != reference[qid].hits
+                for qid in ids
+            ):
+                raise ValueError("score-only optimization changed a frozen ranking")
             for method in (*METHODS, "bm25"):
                 rankings = (
                     h_star if method == "h_star" else reference if method == "pe_v1" else sparse
@@ -473,6 +482,7 @@ def report(output: Path, frozen: dict) -> None:
         "freeze_hash": frozen["freeze_hash"],
         "source_snapshot_hash": frozen["source_snapshot_hash"],
         "online_rankings_verified": sum(len(v) for v in grouped.values()),
+        "policy": frozen["policy"],
         "summaries": summaries,
         "paired_speedup_v2_vs_h_star_and_v1": paired_speedups(
             arrays, baseline_names=("h_star", "pe_v1")
@@ -494,15 +504,20 @@ def main() -> None:
     parser.add_argument("--runtime", type=Path, default=Path("configs/runtime/cpu4.yaml"))
     parser.add_argument("--stop-file")
     parser.add_argument("--restart-incomplete", action="store_true")
+    parser.add_argument(
+        "--policy", choices=("score_only", "domain_threshold"), default="score_only"
+    )
     args = parser.parse_args()
     base, output = args.base_root.resolve(), args.output_root.resolve()
     if output == base or output.is_relative_to(base / "results"):
         raise ValueError("refinement must use a separate output directory")
     output.mkdir(parents=True, exist_ok=True)
     if args.stage == "freeze":
-        freeze(base, output, args.runtime)
+        freeze(base, output, args.runtime, args.policy)
         return
     frozen = signed(output / "freeze.json", "freeze_hash")
+    if frozen["policy"] != args.policy:
+        raise ValueError("policy differs from the frozen experiment")
     if source_snapshot()["combined_sha256"] != frozen["source_snapshot_hash"]:
         raise ValueError("source changed after refinement freeze")
     if any(file_hash(path) != digest for path, digest in frozen["inputs"].items()):
