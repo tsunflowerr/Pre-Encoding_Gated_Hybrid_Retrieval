@@ -1,0 +1,9 @@
+{
+  "source_snapshot_hash": "a5533e43082e34b1efe913bb1ee9d97eb1865fd69dac596bbc34ebc82f70cea4",
+  "runtime_sha256": "09985d86429fd7eb3cd2fbd1123e830237be509639cbdc3bac31b745d5c8d826",
+  "dense_manifest_sha256": {
+    "programmers": "a1254f3b629097816c036b377556f0a3eb69bc7f1f75839b4ebc2e8c4e999a3e",
+    "unix": "7442dcd195489f316a71c9777e5e0814e632b3d5cd0294f4f8252922e5f7cb36"
+  },
+  "pilot_repetitions": 2
+}

@@ -2,9 +2,11 @@
 
 Nhánh triển khai: `thanh`.
 
+Đợt tích hợp A/B/C ngày 26/10 đã chạy end-to-end từ nhánh này, giữ nguyên bốn file dense đã đóng băng. Xem [kết quả mới](../integration/2026-10-26/README.md) và [driver tái lập](../INTEGRATION_V2.md). Các số dense-only bên dưới là bản nghiệm thu B lịch sử.
+
 Phần này cung cấp dense encoder CPU, FAISS exact search, resumable indexing,
-quality-run export và online profiling. Các module dữ liệu/BM25/evaluator (A)
-và fusion/gate/app (C) không được hiện thực thay trong nhánh này.
+quality-run export và online profiling. Phân công ownership vẫn là dữ liệu/BM25/evaluator cho A,
+dense/profiling cho B và fusion/gate/app cho C; nhánh tích hợp hiện chứa đầy đủ ba phần.
 
 Kho mã ban đầu chưa có contracts. `contracts/types.py` là bootstrap theo đúng
 interface của kế hoạch V2, để A/C có thể tích hợp; người A giữ ownership về sau.

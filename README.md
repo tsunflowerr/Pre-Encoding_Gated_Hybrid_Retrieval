@@ -2,18 +2,26 @@
 
 Reproducible implementation for a three-person pre-encoding gated hybrid retrieval study.
 
+- [Kết quả tích hợp đã kiểm chứng 26/10/2026](docs/integration/2026-10-26/README.md)
+- [Chạy lại toàn bộ pipeline A/B/C](docs/INTEGRATION_V2.md)
 - [Kế hoạch nhóm](PE_GH_KE_HOACH_HOAN_CHINH_3_NGUOI_V2.md)
 - [Phần A: dữ liệu, BM25 và đánh giá](docs/person_a/README.md)
 - [Trạng thái phần A](docs/person_a/IMPLEMENTATION_STATUS.md)
 - [Phần B: dense encoder, FAISS và profiling](docs/person_b/README.md)
 - [Handoff B cho A/C](docs/person_b/HANDOFF_A_C.md)
+- [Phần C: fusion, gate và app](docs/person_c/README.md)
 - [Shared contracts](docs/SHARED_BASE.md)
 - [Experimental setup](paper/04_experimental_setup.md)
 - [Quality results](paper/05a_quality_results.md)
 - [Efficiency results](paper/05b_efficiency_results.md)
 
-Phần A và B dùng chung canonical IDs, text policy, ranking-v1 schema và lockfile. Part A
-owns pinned data, leakage-safe splits, exact BM25, provider validation, OOF aggregation,
-utilities and quality reporting. Part B owns dense/FAISS and online profiling. Part C must
-provide fold-specific H*, S* and PE-GH ranking-v1 runs before the final effectiveness claim
-can be computed.
+Đợt tích hợp mới trên nhánh `thanh` đã chạy đủ 29.220 request online trên 1.948 query,
+10 tổ hợp fold/domain và ba phương pháp. PE-GH giảm mean latency 34,76% so H*, dùng dense
+57,75% và đạt biên non-inferiority đã đăng ký. Đây là kết quả gộp trên hai domain;
+programmers chỉ giảm mean 18,15%, p95 gộp hơi cao hơn S*. Xem báo cáo để biết đầy đủ
+khoảng tin cậy, đối chứng và giới hạn; chưa có kết luận thắng mọi phương pháp SOTA.
+
+A/B/C dùng chung canonical IDs, text policy, ranking-v1 schema và lockfile. A phụ trách
+dữ liệu/BM25/evaluation, B phụ trách dense/FAISS/profiling, C phụ trách fusion/gate/app.
+Các chỉ mục, raw timing và model lớn ở ngoài Git; snapshot kết quả mới và hướng dẫn
+tái lập nằm trong các liên kết đầu trang. Kết quả lịch sử B/C được giữ riêng.

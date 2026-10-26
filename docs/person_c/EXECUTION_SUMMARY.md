@@ -1,5 +1,7 @@
 # Tổng kết thực hiện phần C
 
+**Bản ghi lịch sử trước lượt tích hợp 26/10.** Kết quả mới với sparse tăng tốc, baseline chọn execution bằng validation và main timing không instrument stage nằm tại [báo cáo tích hợp](../integration/2026-10-26/README.md). Không lấy chênh lệch giữa máy i3 của lượt cũ và máy i7 của lượt mới làm speedup; mỗi lượt phải so các phương pháp trên cùng máy/profile. Snapshot và số liệu dưới đây được giữ nguyên.
+
 C6–C8 đã hoàn tất. Freeze chất lượng, benchmark online, review chéo và các sửa đổi sau audit được ghi theo thứ tự dưới đây. Snapshot nhỏ có hash ở [C7 facts](validation/C7_FACTS.json); ranking, index và raw benchmark ở `results/` bị Git bỏ qua.
 
 | Mốc | Kết quả chính | Bằng chứng |

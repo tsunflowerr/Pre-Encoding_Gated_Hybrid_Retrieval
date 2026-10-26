@@ -1,5 +1,7 @@
 # Kết quả hiệu năng phần B
 
+Lượt PE-GH tích hợp đầy đủ ngày 26/10/2026 nằm ở [báo cáo mới](../docs/integration/2026-10-26/README.md). Phần dưới là nghiệm thu **dense-only B ngày 20/10**, được giữ nguyên để truy vết; các phát biểu “chưa có A/C/gate” chỉ áp dụng cho lượt lịch sử này.
+
 **Đã chạy và audit ngày 20/10/2026.** Dense backend đã build đủ hai corpus, xuất
 top100 cho 1.948 public queries và đo đủ năm repetitions mỗi domain. Audit kiểm
 9.996 requests gồm 9.740 main samples và 256 detailed samples; mọi ranking online

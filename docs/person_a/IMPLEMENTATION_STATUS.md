@@ -1,5 +1,11 @@
 # Trạng thái triển khai phần A
 
+## Cập nhật tích hợp 26/10/2026
+
+Các lỗi kiểm chứng phát hiện trong [review A](../person_b/REVIEW_A_2026-10-25.md) đã được sửa: canonical query coverage, split/group integrity, sidecar/retriever identity, utility split/fold, provider score parity và SQLite manifest integrity. Backend NumPy mới khớp SQLite đến từng score trên 1.948 query. Đã có đủ run C và OOF chính/14 đối chứng trong lượt end-to-end mới; xem [báo cáo tích hợp](../integration/2026-10-26/README.md) và [cách tái lập](../INTEGRATION_V2.md).
+
+Phần dưới là bản ghi ngày 22/10, bao gồm các phụ thuộc và khẳng định kiểm tra tại thời điểm đó; không dùng mục “Phụ thuộc chưa có” làm trạng thái hiện tại.
+
 Ngày kiểm tra: 22/10/2026.
 
 ## Đã hoàn thành và chạy trên dữ liệu thật

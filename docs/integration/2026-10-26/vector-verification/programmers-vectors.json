@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "index": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+  "index_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+  "manifest_sha256": "a1254f3b629097816c036b377556f0a3eb69bc7f1f75839b4ebc2e8c4e999a3e",
+  "domain": "programmers",
+  "document_count": 32176,
+  "dimension": 384,
+  "index_type": "IndexFlatIP",
+  "every_vector_checked": true,
+  "norm_min": 0.9999998807907104,
+  "norm_max": 1.0000001192092896,
+  "raw_vector_bytes": 49422336,
+  "index_file_bytes": 49422381,
+  "quality_evaluated": false
+}

@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "index": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+  "index_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+  "manifest_sha256": "7442dcd195489f316a71c9777e5e0814e632b3d5cd0294f4f8252922e5f7cb36",
+  "domain": "unix",
+  "document_count": 47382,
+  "dimension": 384,
+  "index_type": "IndexFlatIP",
+  "every_vector_checked": true,
+  "norm_min": 0.9999998807907104,
+  "norm_max": 1.0000001192092896,
+  "raw_vector_bytes": 72778752,
+  "index_file_bytes": 72778797,
+  "quality_evaluated": false
+}

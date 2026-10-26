@@ -1,5 +1,12 @@
 # Trạng thái triển khai phần B
 
+## Tích hợp toàn hệ thống 26/10/2026
+
+- Nhánh `thanh` đã tích hợp A/B/C và sửa các lỗi review A; bốn file dense frozen giữ nguyên byte.
+- Lượt mới trên i7: 29.220/29.220 ranking online khớp OOF, ba method cùng backend sparse tăng tốc, baseline chọn execution trên validation.
+- Mean PE-GH giảm 34,76% so H*, dense ratio 57,75%, quality đạt biên đã đăng ký; kết quả từng domain và p95 có giới hạn cần công bố.
+- [Báo cáo/receipts](../integration/2026-10-26/README.md), [hướng dẫn tái lập](../INTEGRATION_V2.md). Các nghiệm thu B ngày 20–21/10 bên dưới được giữ làm lịch sử.
+
 ## Cập nhật sau review 21/10/2026
 
 - Nhánh `thanh` đã lấy base chung từ `main`; tên base tích hợp hiện là `main`.

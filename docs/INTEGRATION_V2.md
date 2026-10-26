@@ -1,6 +1,6 @@
 # PE-GH: tích hợp và tái lập phiên bản sửa lỗi
 
-Ngày chuẩn bị: 26/10/2026. Trạng thái tại commit triển khai: kiểm thử chức năng đã qua; lượt đo end-to-end mới phải được hoàn thành và công bố bằng receipt riêng trước khi kết luận đạt mục tiêu hiệu năng.
+Ngày cập nhật: 26/10/2026. Lượt end-to-end từ commit `1b4c83e` đã hoàn tất: 29.220 ranking online khớp OOF, mean giảm 34,76% so H*, dense-call ratio 57,75%, quality non-inferiority đạt macro và từng domain. [Báo cáo và receipt đầy đủ](integration/2026-10-26/README.md) ghi cả hạn chế: programmers giảm mean 18,15% và p95 gộp hơi cao hơn S*.
 
 ## Mục tiêu và giới hạn kết luận
 

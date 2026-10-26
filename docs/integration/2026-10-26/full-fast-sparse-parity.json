@@ -1,0 +1,34 @@
+{
+  "programmers": {
+    "queries": 876,
+    "exact_rankings_including_scores": 876,
+    "max_score_error": 0.0,
+    "all_id_orders_match": true,
+    "execution_provenance": {
+      "implementation": "numpy_bm25_postings_v1",
+      "implementation_sha256": "ff00ed09a3240cfd2abaff3c9cab5ce75bceea298d146786449f634333c49dd8",
+      "compiled_hash": "bc923451e9654b8e496a621e286d0e1f46218b89621939291c5812dd9a259460",
+      "logical_retriever_hash": "116adf4bbf069707040a99c87e54d782aaa47301d732897245b178bf55efd100",
+      "numpy_version": "2.5.4",
+      "score_dtype": "float64",
+      "query_result_cache": false
+    },
+    "correctness_loop_seconds_not_latency_result": 3.495834199944511
+  },
+  "unix": {
+    "queries": 1072,
+    "exact_rankings_including_scores": 1072,
+    "max_score_error": 0.0,
+    "all_id_orders_match": true,
+    "execution_provenance": {
+      "implementation": "numpy_bm25_postings_v1",
+      "implementation_sha256": "ff00ed09a3240cfd2abaff3c9cab5ce75bceea298d146786449f634333c49dd8",
+      "compiled_hash": "9accb29162510f839b98f244430350f34fdff045a3723c82010fb3e8cf29118f",
+      "logical_retriever_hash": "a28cea35a3aa33814ecef098e48c1557c6691a2028f231d9071fa46a7b6b3b1a",
+      "numpy_version": "2.5.4",
+      "score_dtype": "float64",
+      "query_result_cache": false
+    },
+    "correctness_loop_seconds_not_latency_result": 4.254218600108288
+  }
+}

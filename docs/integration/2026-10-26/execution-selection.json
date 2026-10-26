@@ -1,0 +1,128 @@
+{
+  "selection_scope": "validation_timing_only",
+  "test_qrels_used": false,
+  "source_snapshot_hash": "a5533e43082e34b1efe913bb1ee9d97eb1865fd69dac596bbc34ebc82f70cea4",
+  "folds": {
+    "programmers_fold_0": {
+      "selected": "sequential",
+      "mean_ms": {
+        "parallel": 37.79472742857143,
+        "sequential": 25.357196857142856
+      },
+      "ranking_identity_passed": {
+        "sequential": true,
+        "parallel": true
+      },
+      "run_manifest_sha256": "683f98c3cf4c23a90492e47007c5acd1197fb470ac803afb92a8b4366caf5333"
+    },
+    "programmers_fold_1": {
+      "selected": "parallel",
+      "mean_ms": {
+        "parallel": 22.508318,
+        "sequential": 27.094320000000003
+      },
+      "ranking_identity_passed": {
+        "sequential": true,
+        "parallel": true
+      },
+      "run_manifest_sha256": "4b9197171a2d98fb59e8bc8d81157622a278317338a59784e5daf6fed18dffd8"
+    },
+    "programmers_fold_2": {
+      "selected": "sequential",
+      "mean_ms": {
+        "parallel": 26.01188742857143,
+        "sequential": 23.522364857142858
+      },
+      "ranking_identity_passed": {
+        "sequential": true,
+        "parallel": true
+      },
+      "run_manifest_sha256": "7f0f7184b07135e0f690c3c1b21c4107478c5917eccbe2674121672fc0733c8f"
+    },
+    "programmers_fold_3": {
+      "selected": "parallel",
+      "mean_ms": {
+        "parallel": 22.54014628571429,
+        "sequential": 23.36264485714286
+      },
+      "ranking_identity_passed": {
+        "sequential": true,
+        "parallel": true
+      },
+      "run_manifest_sha256": "242080a65163ffdd396d49ee6b0cef4eda9b999988d1c9d46b56504871760657"
+    },
+    "programmers_fold_4": {
+      "selected": "parallel",
+      "mean_ms": {
+        "parallel": 23.89766761363636,
+        "sequential": 24.157055113636364
+      },
+      "ranking_identity_passed": {
+        "sequential": true,
+        "parallel": true
+      },
+      "run_manifest_sha256": "25911b55b98c49c51bbbaf25f1cd5d50975a995a7e2c467c0f12660e2fa014f7"
+    },
+    "unix_fold_0": {
+      "selected": "sequential",
+      "mean_ms": {
+        "parallel": 28.322657674418608,
+        "sequential": 26.999543023255814
+      },
+      "ranking_identity_passed": {
+        "sequential": true,
+        "parallel": true
+      },
+      "run_manifest_sha256": "42365a0d63d252f479fe83f44f0198efdb73f1d704b301cd63bd71326032414a"
+    },
+    "unix_fold_1": {
+      "selected": "sequential",
+      "mean_ms": {
+        "parallel": 28.610672663551405,
+        "sequential": 26.1542011682243
+      },
+      "ranking_identity_passed": {
+        "sequential": true,
+        "parallel": true
+      },
+      "run_manifest_sha256": "8d27d3488b36a93e1202647c299cc610746c868f8ca48bbd672da6dd15075046"
+    },
+    "unix_fold_2": {
+      "selected": "parallel",
+      "mean_ms": {
+        "parallel": 26.323851168224298,
+        "sequential": 26.97042710280374
+      },
+      "ranking_identity_passed": {
+        "sequential": true,
+        "parallel": true
+      },
+      "run_manifest_sha256": "29998baecc51d09c3b1832af7142f38a95a350ffde4058219821a27dd113a086"
+    },
+    "unix_fold_3": {
+      "selected": "sequential",
+      "mean_ms": {
+        "parallel": 26.60544742990654,
+        "sequential": 26.455868691588783
+      },
+      "ranking_identity_passed": {
+        "sequential": true,
+        "parallel": true
+      },
+      "run_manifest_sha256": "df8962461fb2fbce38fe686cb8947e40812822a2833cf0fa3b9433766a681ef6"
+    },
+    "unix_fold_4": {
+      "selected": "sequential",
+      "mean_ms": {
+        "parallel": 28.03648604651163,
+        "sequential": 26.55464139534884
+      },
+      "ranking_identity_passed": {
+        "sequential": true,
+        "parallel": true
+      },
+      "run_manifest_sha256": "c8b09ee9a22c49875836bdfaa30e4fc992a34a9d5953b078103bf1cc82bc4652"
+    }
+  },
+  "report_hash": "c04bbed286262f9c6998f4b92b6614f41759a8859604e9c42b284dc76594973e"
+}

@@ -1,5 +1,11 @@
 # Trạng thái triển khai phần C
 
+## Lượt tích hợp mới 26/10/2026
+
+Đã tái lập C1–C8 từ source cố định cùng backend sparse chính xác mới và chọn execution baseline bằng validation. Lượt online chính tắt stage timing, đủ 29.220 request, giữ nguyên chất lượng/threshold protocol. [Báo cáo tích hợp](../integration/2026-10-26/README.md) ghi mean giảm 34,76% so H*, dense ratio 57,75%, cùng CI và hạn chế p95/từng domain. [Driver tái lập](../INTEGRATION_V2.md) thống nhất các bước A/B/C.
+
+Các hash và bảng C1–C8 bên dưới thuộc lượt lịch sử trước tích hợp; snapshot cũ được giữ nguyên, không dùng làm manifest của lượt mới.
+
 C1–C5 đã hoàn tất trên dữ liệu thật. Quy tắc nguồn, split và hash đầu vào nằm ở [protocol C0](C0_PROTOCOL.md); kết quả sau freeze và kiểm tra tích hợp nằm ở [tổng kết](EXECUTION_SUMMARY.md). Các đường dẫn `results/` là artifact local bị Git bỏ qua.
 
 | Mốc | Kết quả chính | Artifact kiểm tra |
