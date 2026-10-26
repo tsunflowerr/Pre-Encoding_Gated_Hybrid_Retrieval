@@ -1,0 +1,23 @@
+{
+  "status": "experimental_domain_threshold_policy_not_promoted",
+  "scope": "exploratory_reassessment_of_previously_observed_test_not_fresh_confirmation",
+  "source_snapshot_hash": "d2ccd1ccce076fc207f0c545d1480b7f47083db9bfb892c32a85e210a4e9d1f1",
+  "reason": "programmers one-sided lower 95% vs H* is below -0.01; validation improvements did not generalize",
+  "scores": {
+    "bm25": 0.2899056486375368,
+    "h_star": 0.3146252335653041,
+    "pe_v1": 0.31216300915894646,
+    "pe_v2": 0.3089267888999032
+  },
+  "dense_counts": {
+    "pe_v1": {
+      "programmers": 654,
+      "unix": 471
+    },
+    "pe_v2": {
+      "programmers": 552,
+      "unix": 452
+    }
+  },
+  "production_policy": "retain v1 models and thresholds; deploy score-preserving execution optimization only"
+}

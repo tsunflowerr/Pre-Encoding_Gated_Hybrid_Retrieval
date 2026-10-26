@@ -10,6 +10,7 @@ from pathlib import Path
 import numpy as np
 import scipy
 import sklearn
+from scipy.special import expit
 from sklearn.linear_model import LogisticRegression, Ridge
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import LinearSVC
@@ -19,14 +20,38 @@ from pegh.data.artifacts import file_hash, object_hash
 
 
 class ModelPredictor:
-    def __init__(self, manifest: dict, scaler: StandardScaler, model: object) -> None:
+    def __init__(
+        self, manifest: dict, scaler: StandardScaler, model: object, *, execution: str = "numpy"
+    ) -> None:
+        if execution not in ("numpy", "sklearn"):
+            raise ValueError("unsupported linear inference execution")
+        self.execution = execution
         self.manifest = manifest
         self.scaler = scaler
         self.model = model
+        count = manifest["feature_count"]
+        if not scaler.with_mean or not scaler.with_std:
+            raise ValueError("linear inference requires the registered standard scaler")
+        self._mean = np.asarray(scaler.mean_, dtype=np.float64)
+        self._scale = np.asarray(scaler.scale_, dtype=np.float64)
+        self._coef = np.asarray(model.coef_, dtype=np.float64)
+        self._intercept = np.asarray(model.intercept_, dtype=np.float64)
+        shape = (count,) if manifest["family"] == "ridge" else (1, count)
+        if (
+            self._mean.shape != (count,)
+            or self._scale.shape != (count,)
+            or self._coef.shape != shape
+            or self._intercept.size != 1
+            or not all(
+                np.isfinite(a).all() for a in (self._mean, self._scale, self._coef, self._intercept)
+            )
+            or (self._scale <= 0).any()
+        ):
+            raise ValueError("invalid fitted linear/scaler parameters")
 
     @property
     def provenance(self) -> dict:
-        return {
+        result = {
             key: self.manifest[key]
             for key in (
                 "method",
@@ -39,14 +64,38 @@ class ModelPredictor:
                 "scaler_sha256",
             )
         }
+        result.update(
+            inference_execution=self.execution, inference_source_sha256=file_hash(Path(__file__))
+        )
+        return result
 
     def predict_score(self, features: FeatureVector) -> float:
+        """Keep sklearn's arithmetic order, avoiding its repeated estimator validation."""
+        if self.execution == "sklearn":
+            return self.predict_score_reference(features)
+        self._validate(features)
+        scaled = np.asarray([features.values], dtype=np.float64)
+        scaled -= self._mean
+        scaled /= self._scale
+        values = scaled @ self._coef.T + self._intercept
+        score = float(values.reshape(-1)[0])
+        if self.manifest["family"] == "logistic":
+            score = float(expit(score))
+        if not math.isfinite(score):
+            raise ValueError("model produced a non-finite score")
+        return score
+
+    def _validate(self, features: FeatureVector) -> None:
         if features.schema_hash != self.manifest["feature_schema_hash"]:
             raise ValueError("feature schema differs from fitted model")
         if len(features.values) != self.manifest["feature_count"] or not all(
             math.isfinite(value) for value in features.values
         ):
             raise ValueError("feature vector dimension or values are invalid")
+
+    def predict_score_reference(self, features: FeatureVector) -> float:
+        """Original sklearn route retained for independent parity and timing checks."""
+        self._validate(features)
         scaled = self.scaler.transform(np.asarray([features.values], dtype=np.float64))
         family = self.manifest["family"]
         if family == "ridge":
@@ -62,7 +111,7 @@ class ModelPredictor:
         return score
 
 
-def load_model(manifest_path: str | Path) -> ModelPredictor:
+def load_model(manifest_path: str | Path, *, execution: str = "numpy") -> ModelPredictor:
     path = Path(manifest_path).resolve()
     manifest = json.loads(path.read_text(encoding="utf-8"))
     recorded_hash = manifest.get("manifest_hash")
@@ -111,4 +160,4 @@ def load_model(manifest_path: str | Path) -> ModelPredictor:
         raise ValueError("scaler sample count differs from train table")
     if manifest["family"] != "ridge" and model.classes_.tolist() != [0, 1]:
         raise ValueError("binary model classes must be [0, 1]")
-    return ModelPredictor(manifest, scaler, model)
+    return ModelPredictor(manifest, scaler, model, execution=execution)

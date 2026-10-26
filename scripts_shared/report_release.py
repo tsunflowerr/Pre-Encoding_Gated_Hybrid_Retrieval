@@ -17,7 +17,11 @@ METHODS = ("h_star", "s_star", "pe_gh")
 
 
 def paired_speedups(
-    arrays: dict[str, np.ndarray], *, samples: int = 10_000, seed: int = 42
+    arrays: dict[str, np.ndarray],
+    *,
+    samples: int = 10_000,
+    seed: int = 42,
+    baseline_names: tuple[str, str] = ("h_star", "s_star"),
 ) -> dict:
     """Resample queries within domains, keeping all methods and timing repeats paired."""
     if (
@@ -54,7 +58,7 @@ def paired_speedups(
             "seed": seed,
             "unit": "query stratified by domain; all methods and all repeats retained",
         }
-        for index, baseline in enumerate(METHODS[:2])
+        for index, baseline in enumerate(baseline_names)
     }
 
 

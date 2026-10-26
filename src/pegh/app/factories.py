@@ -39,6 +39,7 @@ def create_gated_method(
     faiss_threads: int | None = None,
     sparse_execution: str = "numpy",
     expected_sparse_execution_hash: str | None = None,
+    score_execution: str = "numpy",
 ) -> HybridSearchMethod:
     """All artifact loading and model setup occurs outside search()."""
     if type(fold) is not int or fold not in range(5) or domain not in ("programmers", "unix"):
@@ -74,7 +75,7 @@ def create_gated_method(
             fusion = RRFFusion(protocol["fusion"]["rrf_k"])
         else:
             raise ValueError(f"unsupported H* method: {method}")
-        predictor = load_model(model_manifest_path)
+        predictor = load_model(model_manifest_path, execution=score_execution)
         manifest = predictor.manifest
         if manifest["manifest_hash"] != expected_model_manifest_hash:
             raise ValueError("model registry hash differs")

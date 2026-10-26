@@ -1,0 +1,23 @@
+{
+  "checked_scores": 48700,
+  "maximum_absolute_error": 0.0,
+  "bit_exact": true,
+  "inference_only_microseconds_per_call": {
+    "sklearn": [
+      266.183,
+      271.05634999999995,
+      270.07835,
+      348.0696,
+      274.78015000000005
+    ],
+    "numpy": [
+      9.0185,
+      9.17775,
+      12.56535,
+      11.16125,
+      9.614049999999999
+    ]
+  },
+  "not_request_latency_benchmark": true,
+  "implementation_sha256": "3b5ae39d01bfa67db9a9a347475c230993f84b1a22cc2d4e761ccdeab01b31a3"
+}

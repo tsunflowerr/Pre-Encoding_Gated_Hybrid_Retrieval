@@ -1,0 +1,44 @@
+{
+  "baseline": "h_star",
+  "candidate": "pe_v2",
+  "metric": "ndcg_at_10",
+  "domains": {
+    "programmers": {
+      "query_count": 876,
+      "group_count": 876,
+      "samples": 10000,
+      "seed": 20261019,
+      "mean_difference": -0.006901370895320402,
+      "one_sided_lower_95": -0.013156632484966459,
+      "two_sided_95": [
+        -0.014213843420525913,
+        0.00044601727608507705
+      ]
+    },
+    "unix": {
+      "query_count": 1072,
+      "group_count": 1072,
+      "samples": 10000,
+      "seed": 20261019,
+      "mean_difference": -0.004495518435481476,
+      "one_sided_lower_95": -0.009729367058777824,
+      "two_sided_95": [
+        -0.010733102139923149,
+        0.0013386163117169478
+      ]
+    }
+  },
+  "macro": {
+    "domain_count": 2,
+    "query_count": 1948,
+    "group_count": 1948,
+    "samples": 10000,
+    "seed": 20261019,
+    "mean_difference": -0.005698444665400939,
+    "one_sided_lower_95": -0.009798104284569243,
+    "two_sided_95": [
+      -0.010639420033543543,
+      -0.0009563737244525988
+    ]
+  }
+}

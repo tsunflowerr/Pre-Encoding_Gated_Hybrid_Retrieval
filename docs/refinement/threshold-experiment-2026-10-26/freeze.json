@@ -1,0 +1,1302 @@
+{
+  "schema_version": "domain_refinement_v2",
+  "selection_scope": "validation_only",
+  "test_qrels_used_for_selection": false,
+  "evaluation_scope": "exploratory_reassessment_of_previously_observed_test_not_fresh_confirmation",
+  "source_snapshot_hash": "d2ccd1ccce076fc207f0c545d1480b7f47083db9bfb892c32a85e210a4e9d1f1",
+  "base_freeze_hash": "6e81b7577336277d5282ae6dabc94746865eacc5ff84a41bd68ff2a60a44324b",
+  "base_freeze_sha256": "dafd14d364e90facccb73a9e44c048cc0b20a88cc485997f083b37664a397e25",
+  "runtime_sha256": "09985d86429fd7eb3cd2fbd1123e830237be509639cbdc3bac31b745d5c8d826",
+  "folds": {
+    "0": {
+      "selection": {
+        "domains": {
+          "programmers": {
+            "threshold": 0.013797002694597426,
+            "query_count": 175,
+            "dense_count": 137,
+            "dense_ratio": 0.7828571428571428,
+            "ndcg_at_10": 0.34168792190491853,
+            "loss_vs_s_star": -0.0014507784555235492
+          },
+          "unix": {
+            "threshold": 0.013797002694597426,
+            "query_count": 215,
+            "dense_count": 136,
+            "dense_ratio": 0.6325581395348837,
+            "ndcg_at_10": 0.29774800850738364,
+            "loss_vs_s_star": 0.009827287710043764
+          }
+        },
+        "actual_dense_ratio": 0.7,
+        "macro_ndcg_at_10": 0.3197179652061511,
+        "candidate_counts": {
+          "programmers": 12,
+          "unix": 12
+        },
+        "feasible_pairs": 10,
+        "reference_quality_preserved_each_domain": true,
+        "reference": {
+          "programmers": {
+            "threshold": 0.013797002694597426,
+            "query_count": 175,
+            "dense_count": 137,
+            "dense_ratio": 0.7828571428571428,
+            "ndcg_at_10": 0.34168792190491853,
+            "loss_vs_s_star": -0.0014507784555235492
+          },
+          "unix": {
+            "threshold": 0.013797002694597426,
+            "query_count": 215,
+            "dense_count": 136,
+            "dense_ratio": 0.6325581395348837,
+            "ndcg_at_10": 0.29774800850738364,
+            "loss_vs_s_star": 0.009827287710043764
+          }
+        }
+      },
+      "diagnostics": {
+        "programmers": {
+          "mean_score": 0.03585829719093169,
+          "std_score": 0.036356543652706366,
+          "score_gain_correlation": 0.14135096883818785,
+          "zero_gain_ratio": 0.68,
+          "error_identifier_ratio": 0.0,
+          "path_flag_ratio": 0.0
+        },
+        "unix": {
+          "mean_score": 0.018072023704612965,
+          "std_score": 0.01973404143493731,
+          "score_gain_correlation": -0.07569625224129366,
+          "zero_gain_ratio": 0.8325581395348837,
+          "error_identifier_ratio": 0.0,
+          "path_flag_ratio": 0.06976744186046512
+        }
+      },
+      "old_shared_threshold": 0.013797002694597426,
+      "registries": {
+        "programmers": {
+          "methods": [
+            {
+              "id": "h_star",
+              "factory": "pegh.app.factories:create_static_hybrid_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 0,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "mode": "h_star",
+                "parallel_branches": false
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v1",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 0,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_0\\programmers\\ridge_gain_full\\manifest.json",
+                "threshold": 0.013797002694597426,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "242b2c23771650742cd5d66811e612e50da10356b833d3901af4e8594cdd0258",
+                "score_execution": "sklearn"
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v2",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 0,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_0\\programmers\\ridge_gain_full\\manifest.json",
+                "threshold": 0.013797002694597426,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "242b2c23771650742cd5d66811e612e50da10356b833d3901af4e8594cdd0258",
+                "score_execution": "numpy"
+              },
+              "require_dense_warmup": true
+            }
+          ]
+        },
+        "unix": {
+          "methods": [
+            {
+              "id": "h_star",
+              "factory": "pegh.app.factories:create_static_hybrid_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 0,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "mode": "h_star",
+                "parallel_branches": false
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v1",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 0,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_0\\unix\\ridge_gain_full\\manifest.json",
+                "threshold": 0.013797002694597426,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "79420184204e328bfcc1846d7e8bad497224fc6a05ac7480b44ac9e81c5e790f",
+                "score_execution": "sklearn"
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v2",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 0,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_0\\unix\\ridge_gain_full\\manifest.json",
+                "threshold": 0.013797002694597426,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "79420184204e328bfcc1846d7e8bad497224fc6a05ac7480b44ac9e81c5e790f",
+                "score_execution": "numpy"
+              },
+              "require_dense_warmup": true
+            }
+          ]
+        }
+      },
+      "query_files": {
+        "programmers": {
+          "test": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\programmers_fold_0_test.jsonl",
+            "sha256": "0d4bec2ecebedbf1a96c9135c60417ea172b61cd1b56390d0a37bcce730b2b49"
+          },
+          "warmup": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\programmers_fold_0_warmup.jsonl",
+            "sha256": "fe2ee1bbcbc7e20eaaf6c70019c73a69d491218dd2e8ce66ad593d778513191a"
+          }
+        },
+        "unix": {
+          "test": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\unix_fold_0_test.jsonl",
+            "sha256": "050e945810bfd9e62b7e239d45ae9edad78aa7c7347ac2864e33ecacbaa6944d"
+          },
+          "warmup": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\unix_fold_0_warmup.jsonl",
+            "sha256": "bcb9fd998a6ee89fccd3a7663201d4f3364326e4d48c84067d79c01c55e22f77"
+          }
+        }
+      }
+    },
+    "1": {
+      "selection": {
+        "domains": {
+          "programmers": {
+            "threshold": 0.019704762830099573,
+            "query_count": 175,
+            "dense_count": 114,
+            "dense_ratio": 0.6514285714285715,
+            "ndcg_at_10": 0.32969585272469965,
+            "loss_vs_s_star": -0.0001495812956429643
+          },
+          "unix": {
+            "threshold": 0.019704762830099573,
+            "query_count": 214,
+            "dense_count": 80,
+            "dense_ratio": 0.37383177570093457,
+            "ndcg_at_10": 0.3223669356257283,
+            "loss_vs_s_star": 0.0016084978886542478
+          }
+        },
+        "actual_dense_ratio": 0.4987146529562982,
+        "macro_ndcg_at_10": 0.326031394175214,
+        "candidate_counts": {
+          "programmers": 12,
+          "unix": 12
+        },
+        "feasible_pairs": 24,
+        "reference_quality_preserved_each_domain": true,
+        "reference": {
+          "programmers": {
+            "threshold": 0.019704762830099573,
+            "query_count": 175,
+            "dense_count": 114,
+            "dense_ratio": 0.6514285714285715,
+            "ndcg_at_10": 0.32969585272469965,
+            "loss_vs_s_star": -0.0001495812956429643
+          },
+          "unix": {
+            "threshold": 0.019704762830099573,
+            "query_count": 214,
+            "dense_count": 80,
+            "dense_ratio": 0.37383177570093457,
+            "ndcg_at_10": 0.3223669356257283,
+            "loss_vs_s_star": 0.0016084978886542478
+          }
+        }
+      },
+      "diagnostics": {
+        "programmers": {
+          "mean_score": 0.032272587242699664,
+          "std_score": 0.04264159927010462,
+          "score_gain_correlation": 0.10711283747430596,
+          "zero_gain_ratio": 0.7257142857142858,
+          "error_identifier_ratio": 0.0,
+          "path_flag_ratio": 0.0
+        },
+        "unix": {
+          "mean_score": 0.015618473166616487,
+          "std_score": 0.01985678879778952,
+          "score_gain_correlation": 0.13364522526838013,
+          "zero_gain_ratio": 0.7663551401869159,
+          "error_identifier_ratio": 0.0,
+          "path_flag_ratio": 0.028037383177570093
+        }
+      },
+      "old_shared_threshold": 0.019704762830099573,
+      "registries": {
+        "programmers": {
+          "methods": [
+            {
+              "id": "h_star",
+              "factory": "pegh.app.factories:create_static_hybrid_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 1,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "mode": "h_star",
+                "parallel_branches": true
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v1",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 1,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_1\\programmers\\ridge_gain_full\\manifest.json",
+                "threshold": 0.019704762830099573,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "08c555a82ff83b46932072c3fd225aaae4e6fec028543abb26c760819d2ca6c0",
+                "score_execution": "sklearn"
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v2",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 1,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_1\\programmers\\ridge_gain_full\\manifest.json",
+                "threshold": 0.019704762830099573,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "08c555a82ff83b46932072c3fd225aaae4e6fec028543abb26c760819d2ca6c0",
+                "score_execution": "numpy"
+              },
+              "require_dense_warmup": true
+            }
+          ]
+        },
+        "unix": {
+          "methods": [
+            {
+              "id": "h_star",
+              "factory": "pegh.app.factories:create_static_hybrid_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 1,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "mode": "h_star",
+                "parallel_branches": false
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v1",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 1,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_1\\unix\\ridge_gain_full\\manifest.json",
+                "threshold": 0.019704762830099573,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "e1c6de98df4df34d402c052de75e4ca3b15f1e39df5c7beefd8d2b10a42e07e3",
+                "score_execution": "sklearn"
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v2",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 1,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_1\\unix\\ridge_gain_full\\manifest.json",
+                "threshold": 0.019704762830099573,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "e1c6de98df4df34d402c052de75e4ca3b15f1e39df5c7beefd8d2b10a42e07e3",
+                "score_execution": "numpy"
+              },
+              "require_dense_warmup": true
+            }
+          ]
+        }
+      },
+      "query_files": {
+        "programmers": {
+          "test": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\programmers_fold_1_test.jsonl",
+            "sha256": "fe2ee1bbcbc7e20eaaf6c70019c73a69d491218dd2e8ce66ad593d778513191a"
+          },
+          "warmup": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\programmers_fold_1_warmup.jsonl",
+            "sha256": "cf9edf23c109e5b6e11e283f311334521f712cf1729a90df2796c7eb50ef1405"
+          }
+        },
+        "unix": {
+          "test": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\unix_fold_1_test.jsonl",
+            "sha256": "bcb9fd998a6ee89fccd3a7663201d4f3364326e4d48c84067d79c01c55e22f77"
+          },
+          "warmup": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\unix_fold_1_warmup.jsonl",
+            "sha256": "7b6f36d57a4d99a870cd7a6376663e7bdbccb09dc9ff653a3d49b6c98402d63a"
+          }
+        }
+      }
+    },
+    "2": {
+      "selection": {
+        "domains": {
+          "programmers": {
+            "threshold": 0.033363907303493145,
+            "query_count": 175,
+            "dense_count": 105,
+            "dense_ratio": 0.6,
+            "ndcg_at_10": 0.3233915255374471,
+            "loss_vs_s_star": 0.0017909253954500048
+          },
+          "unix": {
+            "threshold": 0.020524949199227274,
+            "query_count": 214,
+            "dense_count": 74,
+            "dense_ratio": 0.34579439252336447,
+            "ndcg_at_10": 0.2782744962353426,
+            "loss_vs_s_star": 0.005660635688154725
+          }
+        },
+        "actual_dense_ratio": 0.4601542416452442,
+        "macro_ndcg_at_10": 0.30083301088639486,
+        "candidate_counts": {
+          "programmers": 12,
+          "unix": 12
+        },
+        "feasible_pairs": 42,
+        "reference_quality_preserved_each_domain": true,
+        "reference": {
+          "programmers": {
+            "threshold": 0.020524949199227274,
+            "query_count": 175,
+            "dense_count": 120,
+            "dense_ratio": 0.6857142857142857,
+            "ndcg_at_10": 0.32253010010598865,
+            "loss_vs_s_star": 0.002652350826908456
+          },
+          "unix": {
+            "threshold": 0.020524949199227274,
+            "query_count": 214,
+            "dense_count": 74,
+            "dense_ratio": 0.34579439252336447,
+            "ndcg_at_10": 0.2782744962353426,
+            "loss_vs_s_star": 0.005660635688154725
+          }
+        }
+      },
+      "diagnostics": {
+        "programmers": {
+          "mean_score": 0.029284738664854728,
+          "std_score": 0.0481599327563985,
+          "score_gain_correlation": 0.12103985746484465,
+          "zero_gain_ratio": 0.6457142857142857,
+          "error_identifier_ratio": 0.0,
+          "path_flag_ratio": 0.0
+        },
+        "unix": {
+          "mean_score": 0.01052822219198888,
+          "std_score": 0.02547214047550813,
+          "score_gain_correlation": 0.07065365728414894,
+          "zero_gain_ratio": 0.7429906542056075,
+          "error_identifier_ratio": 0.004672897196261682,
+          "path_flag_ratio": 0.056074766355140186
+        }
+      },
+      "old_shared_threshold": 0.020524949199227274,
+      "registries": {
+        "programmers": {
+          "methods": [
+            {
+              "id": "h_star",
+              "factory": "pegh.app.factories:create_static_hybrid_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 2,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "mode": "h_star",
+                "parallel_branches": false
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v1",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 2,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_2\\programmers\\ridge_gain_full\\manifest.json",
+                "threshold": 0.020524949199227274,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "a730f2f8d19e777ed9c68e15b352bec88690e955904c76b564d9efc8cba79260",
+                "score_execution": "sklearn"
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v2",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 2,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_2\\programmers\\ridge_gain_full\\manifest.json",
+                "threshold": 0.033363907303493145,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "a730f2f8d19e777ed9c68e15b352bec88690e955904c76b564d9efc8cba79260",
+                "score_execution": "numpy"
+              },
+              "require_dense_warmup": true
+            }
+          ]
+        },
+        "unix": {
+          "methods": [
+            {
+              "id": "h_star",
+              "factory": "pegh.app.factories:create_static_hybrid_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 2,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "mode": "h_star",
+                "parallel_branches": true
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v1",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 2,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_2\\unix\\ridge_gain_full\\manifest.json",
+                "threshold": 0.020524949199227274,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "6fd3bbef5fa89bd86e813d18b3097237f98b0a538ddc9eb52a01f1c98f79b809",
+                "score_execution": "sklearn"
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v2",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 2,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_2\\unix\\ridge_gain_full\\manifest.json",
+                "threshold": 0.020524949199227274,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "6fd3bbef5fa89bd86e813d18b3097237f98b0a538ddc9eb52a01f1c98f79b809",
+                "score_execution": "numpy"
+              },
+              "require_dense_warmup": true
+            }
+          ]
+        }
+      },
+      "query_files": {
+        "programmers": {
+          "test": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\programmers_fold_2_test.jsonl",
+            "sha256": "cf9edf23c109e5b6e11e283f311334521f712cf1729a90df2796c7eb50ef1405"
+          },
+          "warmup": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\programmers_fold_2_warmup.jsonl",
+            "sha256": "3a4de75c1fd929ce675d9cdac5b1a32ec7f904d453812d84f06800f8f7cdce7a"
+          }
+        },
+        "unix": {
+          "test": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\unix_fold_2_test.jsonl",
+            "sha256": "7b6f36d57a4d99a870cd7a6376663e7bdbccb09dc9ff653a3d49b6c98402d63a"
+          },
+          "warmup": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\unix_fold_2_warmup.jsonl",
+            "sha256": "7502e45b494d28fe561616fcead007b59fe71f724f55a885a7a1a4790b1275e5"
+          }
+        }
+      }
+    },
+    "3": {
+      "selection": {
+        "domains": {
+          "programmers": {
+            "threshold": 0.04617561462099831,
+            "query_count": 175,
+            "dense_count": 70,
+            "dense_ratio": 0.4,
+            "ndcg_at_10": 0.35119668227118517,
+            "loss_vs_s_star": -0.00013411522563894218
+          },
+          "unix": {
+            "threshold": -0.0017885057278355853,
+            "query_count": 214,
+            "dense_count": 128,
+            "dense_ratio": 0.5981308411214953,
+            "ndcg_at_10": 0.3031066066446488,
+            "loss_vs_s_star": 0.006799254853915637
+          }
+        },
+        "actual_dense_ratio": 0.5089974293059126,
+        "macro_ndcg_at_10": 0.327151644457917,
+        "candidate_counts": {
+          "programmers": 12,
+          "unix": 12
+        },
+        "feasible_pairs": 48,
+        "reference_quality_preserved_each_domain": true,
+        "reference": {
+          "programmers": {
+            "threshold": -0.00878242531993444,
+            "query_count": 175,
+            "dense_count": 169,
+            "dense_ratio": 0.9657142857142857,
+            "ndcg_at_10": 0.3510625670455462,
+            "loss_vs_s_star": 0.0
+          },
+          "unix": {
+            "threshold": -0.00878242531993444,
+            "query_count": 214,
+            "dense_count": 142,
+            "dense_ratio": 0.6635514018691588,
+            "ndcg_at_10": 0.30264860883277717,
+            "loss_vs_s_star": 0.0072572526657872505
+          }
+        }
+      },
+      "diagnostics": {
+        "programmers": {
+          "mean_score": 0.03884986502134669,
+          "std_score": 0.023239631232978494,
+          "score_gain_correlation": 0.21026319205210786,
+          "zero_gain_ratio": 0.7371428571428571,
+          "error_identifier_ratio": 0.005714285714285714,
+          "path_flag_ratio": 0.0
+        },
+        "unix": {
+          "mean_score": 0.006185494970798669,
+          "std_score": 0.04228913981748524,
+          "score_gain_correlation": 0.0006148488188878798,
+          "zero_gain_ratio": 0.7242990654205608,
+          "error_identifier_ratio": 0.004672897196261682,
+          "path_flag_ratio": 0.028037383177570093
+        }
+      },
+      "old_shared_threshold": -0.00878242531993444,
+      "registries": {
+        "programmers": {
+          "methods": [
+            {
+              "id": "h_star",
+              "factory": "pegh.app.factories:create_static_hybrid_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 3,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "mode": "h_star",
+                "parallel_branches": true
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v1",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 3,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_3\\programmers\\ridge_gain_full\\manifest.json",
+                "threshold": -0.00878242531993444,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "86cccf8f1c397213ce362fff734a8af6a4ed55167d15821c0bf90976fb36e0fc",
+                "score_execution": "sklearn"
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v2",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 3,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_3\\programmers\\ridge_gain_full\\manifest.json",
+                "threshold": 0.04617561462099831,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "86cccf8f1c397213ce362fff734a8af6a4ed55167d15821c0bf90976fb36e0fc",
+                "score_execution": "numpy"
+              },
+              "require_dense_warmup": true
+            }
+          ]
+        },
+        "unix": {
+          "methods": [
+            {
+              "id": "h_star",
+              "factory": "pegh.app.factories:create_static_hybrid_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 3,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "mode": "h_star",
+                "parallel_branches": false
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v1",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 3,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_3\\unix\\ridge_gain_full\\manifest.json",
+                "threshold": -0.00878242531993444,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "92c8c3cd231f1ded97e12af8ed1167b9ef12b398c6bbb5e7e10b100a13539937",
+                "score_execution": "sklearn"
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v2",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 3,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_3\\unix\\ridge_gain_full\\manifest.json",
+                "threshold": -0.0017885057278355853,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "92c8c3cd231f1ded97e12af8ed1167b9ef12b398c6bbb5e7e10b100a13539937",
+                "score_execution": "numpy"
+              },
+              "require_dense_warmup": true
+            }
+          ]
+        }
+      },
+      "query_files": {
+        "programmers": {
+          "test": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\programmers_fold_3_test.jsonl",
+            "sha256": "3a4de75c1fd929ce675d9cdac5b1a32ec7f904d453812d84f06800f8f7cdce7a"
+          },
+          "warmup": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\programmers_fold_3_warmup.jsonl",
+            "sha256": "22554d26664c7b2d179ffa616699deb28dac8eaf58132c5adb65f5f41b6dcc9c"
+          }
+        },
+        "unix": {
+          "test": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\unix_fold_3_test.jsonl",
+            "sha256": "7502e45b494d28fe561616fcead007b59fe71f724f55a885a7a1a4790b1275e5"
+          },
+          "warmup": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\unix_fold_3_warmup.jsonl",
+            "sha256": "ebeadcd13d70c0ce40318c5aa17e00444c3c885ff22ff8d7d49e44f0c7d6a4dd"
+          }
+        }
+      }
+    },
+    "4": {
+      "selection": {
+        "domains": {
+          "programmers": {
+            "threshold": 0.02676092149140037,
+            "query_count": 176,
+            "dense_count": 103,
+            "dense_ratio": 0.5852272727272727,
+            "ndcg_at_10": 0.3004033832426232,
+            "loss_vs_s_star": 0.005317513347238678
+          },
+          "unix": {
+            "threshold": 0.02676092149140037,
+            "query_count": 215,
+            "dense_count": 14,
+            "dense_ratio": 0.06511627906976744,
+            "ndcg_at_10": 0.3020073116865582,
+            "loss_vs_s_star": 0.003966519740622898
+          }
+        },
+        "actual_dense_ratio": 0.29923273657289,
+        "macro_ndcg_at_10": 0.3012053474645907,
+        "candidate_counts": {
+          "programmers": 12,
+          "unix": 12
+        },
+        "feasible_pairs": 35,
+        "reference_quality_preserved_each_domain": true,
+        "reference": {
+          "programmers": {
+            "threshold": 0.02676092149140037,
+            "query_count": 176,
+            "dense_count": 103,
+            "dense_ratio": 0.5852272727272727,
+            "ndcg_at_10": 0.3004033832426232,
+            "loss_vs_s_star": 0.005317513347238678
+          },
+          "unix": {
+            "threshold": 0.02676092149140037,
+            "query_count": 215,
+            "dense_count": 14,
+            "dense_ratio": 0.06511627906976744,
+            "ndcg_at_10": 0.3020073116865582,
+            "loss_vs_s_star": 0.003966519740622898
+          }
+        }
+      },
+      "diagnostics": {
+        "programmers": {
+          "mean_score": 0.027984177667567514,
+          "std_score": 0.03919410443562408,
+          "score_gain_correlation": 0.05493765720091402,
+          "zero_gain_ratio": 0.6818181818181818,
+          "error_identifier_ratio": 0.0,
+          "path_flag_ratio": 0.0
+        },
+        "unix": {
+          "mean_score": 0.010421923730286565,
+          "std_score": 0.011543902207403544,
+          "score_gain_correlation": 0.046257562587865175,
+          "zero_gain_ratio": 0.9023255813953488,
+          "error_identifier_ratio": 0.0,
+          "path_flag_ratio": 0.037209302325581395
+        }
+      },
+      "old_shared_threshold": 0.02676092149140037,
+      "registries": {
+        "programmers": {
+          "methods": [
+            {
+              "id": "h_star",
+              "factory": "pegh.app.factories:create_static_hybrid_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 4,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "mode": "h_star",
+                "parallel_branches": true
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v1",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 4,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_4\\programmers\\ridge_gain_full\\manifest.json",
+                "threshold": 0.02676092149140037,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "70aee98e2803e6eacea33de3e7c40cb426b671d1f72f2d6471389e70a874dcf9",
+                "score_execution": "sklearn"
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v2",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\programmers",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\programmers",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "programmers",
+                "fold": 4,
+                "expected_sparse_sha256": "329abd23b7106009d5ea0e5e21bf6e6fa34b2f384067c0efe71a0bbcc7659a9f",
+                "expected_dense_sha256": "1f83158e72d80385665c4d0e3c37feab1d6300dfa0fc38a1f6ef12f07b21c73b",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "3ef580e3c12d1b888b68c658c16729aeacf5fc8debcbb4e7c9d1cd50adf542d9",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_4\\programmers\\ridge_gain_full\\manifest.json",
+                "threshold": 0.02676092149140037,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "70aee98e2803e6eacea33de3e7c40cb426b671d1f72f2d6471389e70a874dcf9",
+                "score_execution": "numpy"
+              },
+              "require_dense_warmup": true
+            }
+          ]
+        },
+        "unix": {
+          "methods": [
+            {
+              "id": "h_star",
+              "factory": "pegh.app.factories:create_static_hybrid_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 4,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "mode": "h_star",
+                "parallel_branches": false
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v1",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 4,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_4\\unix\\ridge_gain_full\\manifest.json",
+                "threshold": 0.02676092149140037,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "f658fb03ec6dd3b6296d9b17ecdc8162429a7311f7dd64c2c3377f59aa9b3782",
+                "score_execution": "sklearn"
+              },
+              "require_dense_warmup": true
+            },
+            {
+              "id": "pe_v2",
+              "factory": "pegh.app.factories:create_gated_method",
+              "kwargs": {
+                "sparse_dir": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\artifacts\\sparse\\unix",
+                "dense_dir": "C:\\Users\\quang\\.cache\\pegh\\artifacts\\final-v1\\unix",
+                "selection_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\fusion\\selection_v1.json",
+                "domain": "unix",
+                "fold": 4,
+                "expected_sparse_sha256": "62683b4d4f28fa48478c761bb20929e21b2aa46e2721c359c16a391bda16542b",
+                "expected_dense_sha256": "f8e0dca93a1d5f26d0156f6fe96dde93956a1c1d82b0cf7d1c766431daef6fc4",
+                "expected_selection_sha256": "67ce106aa94f569fbbbdc061c24303ec7890d6b920fd0557d19f4be0cf000a4b",
+                "sparse_execution": "numpy",
+                "expected_sparse_execution_hash": "6bb33923533a6f30cc754fd7569a2d04d9627ac9fbd71baad83c5586d079292d",
+                "cache_folder": "C:\\Users\\quang\\.cache\\pegh\\models",
+                "protocol_path": "C:\\Users\\quang\\.codex\\worktrees\\pegh-validation\\PE-GH\\configs\\gating\\protocol_v1.yaml",
+                "model_manifest_path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_4\\unix\\ridge_gain_full\\manifest.json",
+                "threshold": 0.02676092149140037,
+                "expected_protocol_sha256": "3853a473b5fb89fe0571e68e75ce1991223397b74e0ed34efb7e8d6f1598d90d",
+                "expected_model_manifest_hash": "f658fb03ec6dd3b6296d9b17ecdc8162429a7311f7dd64c2c3377f59aa9b3782",
+                "score_execution": "numpy"
+              },
+              "require_dense_warmup": true
+            }
+          ]
+        }
+      },
+      "query_files": {
+        "programmers": {
+          "test": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\programmers_fold_4_test.jsonl",
+            "sha256": "22554d26664c7b2d179ffa616699deb28dac8eaf58132c5adb65f5f41b6dcc9c"
+          },
+          "warmup": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\programmers_fold_4_warmup.jsonl",
+            "sha256": "0d4bec2ecebedbf1a96c9135c60417ea172b61cd1b56390d0a37bcce730b2b49"
+          }
+        },
+        "unix": {
+          "test": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\unix_fold_4_test.jsonl",
+            "sha256": "ebeadcd13d70c0ce40318c5aa17e00444c3c885ff22ff8d7d49e44f0c7d6a4dd"
+          },
+          "warmup": {
+            "path": "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\frozen\\benchmark_inputs\\unix_fold_4_warmup.jsonl",
+            "sha256": "050e945810bfd9e62b7e239d45ae9edad78aa7c7347ac2864e33ecacbaa6944d"
+          }
+        }
+      }
+    }
+  },
+  "inputs": {
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_0\\programmers\\ridge_gain_full\\validation.jsonl": "364f054e1a902030a4350ec59c82dd61bfe44dc6f77cb4af34058703f5b6a8de",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_0\\programmers\\ridge_gain_full\\validation.jsonl.meta.json": "2b4eeee0b75db53927724e673e6ab5bfbe8c5deabf1ebad673e9c3b5e90da180",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_0\\programmers\\ridge_gain_full\\manifest.json": "04d592c59f6cb2a70c31780aa8acc7098cc7f5819d14e964201a0598ec5881bd",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\training\\fold_0\\programmers\\validation.jsonl": "fe9079d14ea8b64373b51876eeb8188e3fbaece1666266f8c19d0e5a018d7472",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_0\\unix\\ridge_gain_full\\validation.jsonl": "a66ebb644750d8ea04b47af047c2b92c4208d0dbd9c8bc9b159d6f4fd26a6344",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_0\\unix\\ridge_gain_full\\validation.jsonl.meta.json": "414cc38a523ca3fc6ca1b4a75581d728f926cca5f6dbba3386ba5ff1cec3520c",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_0\\unix\\ridge_gain_full\\manifest.json": "be32950887e2c3744f7629855ebd317f7a42681155b7c67b90212052cd298e57",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\training\\fold_0\\unix\\validation.jsonl": "65bab4d380480dcf41c2cd308c779032d2e3b0ae8d466e54f3cd5c2d10680ba6",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_1\\programmers\\ridge_gain_full\\validation.jsonl": "070472245dae4cd9f31ec6481af474b99516e32e2085b618f2eb036b829faa82",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_1\\programmers\\ridge_gain_full\\validation.jsonl.meta.json": "4c1039135559babc169fbe779a01997239e57653ec327292ca9bcfe1b6f0913a",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_1\\programmers\\ridge_gain_full\\manifest.json": "2dfaeefbfccbaa38ef2aeddd25d0c7912cdb0794f1aaeb964e16c3d6855c5ead",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\training\\fold_1\\programmers\\validation.jsonl": "deca1d689e8bcb457098906aa6bd0173140b1535c7fa7b23bf8d434e0e99f10d",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_1\\unix\\ridge_gain_full\\validation.jsonl": "c5d45e8cf8f1f3cedf4fab5f3b3389603672f173bea50847b5413674dc53d416",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_1\\unix\\ridge_gain_full\\validation.jsonl.meta.json": "2095e0a1033ad2fb8635f08b5a78147b21f59d110d2fd4b2d5981ca39696e64d",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_1\\unix\\ridge_gain_full\\manifest.json": "9e4ae335a028d175d5d6088d83337ebcb239aa22898505e56c4527454680c9b7",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\training\\fold_1\\unix\\validation.jsonl": "2f10b22ebfbcad642caf453af505211d6828f372a5e2096c917f18bda1e2b3e4",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_2\\programmers\\ridge_gain_full\\validation.jsonl": "603ed83ffa381b71d633bb5b229c61e4cc823c0d15b0a1c81f2d007600d55433",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_2\\programmers\\ridge_gain_full\\validation.jsonl.meta.json": "56d8b596f1ab8d79479f05b7f32c5cc5f49c136aff6c0a52ccfb66a996713c0d",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_2\\programmers\\ridge_gain_full\\manifest.json": "6caaf41230eceef05cedb69bb256d01eb47ac304571b7eebd2df69fb53ce2b04",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\training\\fold_2\\programmers\\validation.jsonl": "ca7a6ae0a675e8cf6a7145708d4ccd8bf7d7071500343125550729743c0d6194",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_2\\unix\\ridge_gain_full\\validation.jsonl": "c993f3024fa8a64a24a84cd5298ce4e0f3120754928451f6eefcf4bac4800edf",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_2\\unix\\ridge_gain_full\\validation.jsonl.meta.json": "a4e71a03b92a738b7e548bca21058d04920bcaf3d14b5042d75dfca153a3cf04",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_2\\unix\\ridge_gain_full\\manifest.json": "335d11324c540f31ebaad322ee7cbc793c84655d9e19e170d7a0060dd4bdaffb",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\training\\fold_2\\unix\\validation.jsonl": "12995f2549bf3fc7e9b040265351be0f007ddb3f6f158d7fe953f3f9416ed945",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_3\\programmers\\ridge_gain_full\\validation.jsonl": "e85fa2d71739ccce1f0b2a51d6c4538162a4706eaf22cd41c0b15d187d914da8",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_3\\programmers\\ridge_gain_full\\validation.jsonl.meta.json": "752bcb7945abe86c505074a81b40ad9e0b7726fb9fc22879c68f1b56e6fe134a",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_3\\programmers\\ridge_gain_full\\manifest.json": "e769e5066a7220813c32f23b0581469b1683ae5df4e195870fd22a3ae4000143",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\training\\fold_3\\programmers\\validation.jsonl": "8807b8501fcdffdf738105bdda5867d1cfae2232137cab7df4ede7d23d4f230d",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_3\\unix\\ridge_gain_full\\validation.jsonl": "a5130966888d90bf6a7a11e30570d7c3226fa6dcd20f87da37049080c567b0a0",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_3\\unix\\ridge_gain_full\\validation.jsonl.meta.json": "a3e34240bb7807ba8d69469f278cc635cc1e017f701662c402ca5757cafaefaf",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_3\\unix\\ridge_gain_full\\manifest.json": "a3cc74f1a4c23a4510f8f40e96baf024c2689d0c31fbcb1b776dd9220b62910a",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\training\\fold_3\\unix\\validation.jsonl": "657793ee6bf9f46526ecb80c8420e678a8c9f5e4cbe9c9c640fa8d986445e974",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_4\\programmers\\ridge_gain_full\\validation.jsonl": "0b34087e377bb6864f86c15e2068f465915da72aab52d1dede078ae5f465a449",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_4\\programmers\\ridge_gain_full\\validation.jsonl.meta.json": "6ed0a4d15c387d21e92c2344d8cbd15ebeb3911d088606d88f8c221c863105b4",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_4\\programmers\\ridge_gain_full\\manifest.json": "ef52f76328093a31e2a74ea16d1741d5cb305aeed476fddcc40ed39a9352785a",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\training\\fold_4\\programmers\\validation.jsonl": "6846ea02138a13daf8100ee06ffc0b9c5f1cc30c7ee8ecfdd6245f6a2495ef26",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_4\\unix\\ridge_gain_full\\validation.jsonl": "304fc4d0f829b690867a04f2c6d654c65bbde692bb3a775b1fb71111bea84ab4",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_4\\unix\\ridge_gain_full\\validation.jsonl.meta.json": "f787e3a189312704987e6ef1e45ad2f17ff9d7aceb4d3d32e42a53f63ef121d9",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\models\\fold_4\\unix\\ridge_gain_full\\manifest.json": "288f46ffc9e8f4aeb5c2ec1c97bb517708aa21eb1f69b8b1255b23c7eccdfba2",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\training\\fold_4\\unix\\validation.jsonl": "edbc163b68e7441b692367319459ef65354cff873a024fe26b8d0d3b6bb91d9d",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\data\\raw\\programmers\\queries.jsonl": "707fde4c6bdce38db97e1930d8fcdc4c025536c566bc41af980245e284a7da27",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\data\\raw\\programmers\\qrels.tsv": "ed69afa873c64d34298792d694c82c4293e4b7e3c6ea3edc7a73662d4b0cba76",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\features\\programmers.jsonl": "55e52f1b24fdba4023f8e6efcd581bf902a76c4a401aac95f00a3ba4ff20516a",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\features\\programmers.jsonl.meta.json": "21dbd639ef6697b2dccfc16b9a6068d5e33f158b60dcaff5114d50bf724ae3da",
+    "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH\\data\\manifests\\programmers.json": "fc63e0d8eef1bfe0165e369bceaecce3a0004cae8fbde59fd96e507a06a07a29",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\programmers\\fold_0.jsonl": "1964c650bc44faa9a7bc641a210f112c05676cb3f878f4b0ff204441c1c16166",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\programmers\\fold_0.jsonl.meta.json": "7ee16956e238a81e40b035ba098a991ef79ca893c66bf76474e2b966b22a752d",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\programmers\\fold_0.jsonl": "a1c57b77675011226d89dc3cc5b5de0d82e1bb18295c11bc0862251fd70e4648",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\programmers\\fold_0.jsonl.meta.json": "679ccfff1d0b2308d3500cb1cd8ae933cb33db79ffca043e3fc3f6cb6d2c75e1",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\programmers\\fold_0.jsonl": "cf91166c59c04c6e7685c5891d58f92a9df99c203ddb68e0770808a9349b8855",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\programmers\\fold_0.jsonl.meta.json": "a638df469a9d48560d7d6531f6be518d98d647f07c6d58195daabf228d72461f",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\programmers\\fold_1.jsonl": "fbc398720e03844e0ed7b6381f49269c2350581e49db244f552cdafe82c6df65",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\programmers\\fold_1.jsonl.meta.json": "ac3418ad7104f7d98939fb43fd63abb731dd4032fb0839374751e2dad1dc66a6",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\programmers\\fold_1.jsonl": "dc8de3b2f761df88c0734ac6bfb957401e865215fed9f6c817e9421897808258",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\programmers\\fold_1.jsonl.meta.json": "b6b21bacc426a6b1b703e837477f1094a596c5b6a05b34f6b9e132a644d69101",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\programmers\\fold_1.jsonl": "cb031c829b7d5e4652ddd8de2bc82364f448a4ca74cae8091b1ec380f14d73ba",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\programmers\\fold_1.jsonl.meta.json": "f72c6e8333956bfae10eca0b46b5701ba31361b1f0f7d864d6e6c8d461f32a15",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\programmers\\fold_2.jsonl": "457e7580689d3f85bb9c8624e7fd2e13b10a7cc61bc6463933444e84ce46d6ac",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\programmers\\fold_2.jsonl.meta.json": "cb375c17bc6825fa21a9831f95a575cdaff90a7ad707cd685b0560999bd55eab",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\programmers\\fold_2.jsonl": "f7d6ec233cefa9d4a42a0186c12cb68529d1c02fcf233e5f873199f8eef126d2",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\programmers\\fold_2.jsonl.meta.json": "bac5a9b01e85c6feb8f444119c5863961333fafc8387b1d280ba98eadbcf5034",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\programmers\\fold_2.jsonl": "ad29e53bd42b7d8703720dea27941f0b7e425751b70c5872d9f13794ed603b9b",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\programmers\\fold_2.jsonl.meta.json": "0e02e1b92fa94a2a72aa83361ced849cca1cf3d399336b762b33ebef59a159f0",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\programmers\\fold_3.jsonl": "27ca5297a6d57659014db5d13766d7acd3e25eba904e9982f71df403c74ae1b3",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\programmers\\fold_3.jsonl.meta.json": "7cbccee728f6e6966c9b59b64636346ad13f917c4a1a1c12d133a7fb692f5c22",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\programmers\\fold_3.jsonl": "2cd80ccca9dc894eb0d80cf1f5816ca63bb1de9d342c483bd4e4fe7c440e54a8",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\programmers\\fold_3.jsonl.meta.json": "b2a7e0d32e4be496858ae0d4595a4f0299b888ad0780ba3a5091821adc484e47",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\programmers\\fold_3.jsonl": "2a1d5b864b2d1bc5e98f595780fe7af177c06c34fb6eea0f3dbfdbfbc9ef039f",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\programmers\\fold_3.jsonl.meta.json": "88df7dfb47423801da4893205323990f0a7fca390a68d3096aa1229e662bdf51",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\programmers\\fold_4.jsonl": "8839882bda8bc53f8484d3d23ef0e886a1d4fce76a49491ad0befa7f2fb840c8",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\programmers\\fold_4.jsonl.meta.json": "411fba57c0d021a76414651795b77370e171eba3581a85354cfd61af281711aa",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\programmers\\fold_4.jsonl": "62f89d0e1e9af767ba3725139cf513ac8ea45e535302daf839c6a4e32fc4d686",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\programmers\\fold_4.jsonl.meta.json": "55fd93ebacf626cd9543675a571c825b8b68e01fe9bdad416b991370bd38c290",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\programmers\\fold_4.jsonl": "a067e428956136dc8e754573ad85d680b7b4ab852057d1f82177b03339168ce1",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\programmers\\fold_4.jsonl.meta.json": "5c9b2d61ea5cd1126edbcc21d18d843a5cda1c2929cf8384d97a36bc75789b22",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\data\\raw\\unix\\queries.jsonl": "69d6f23726f77a2892b21ee6e98432768c42b045c5790ba79b6ef66c1b02f73b",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\data\\raw\\unix\\qrels.tsv": "a7bd24ce081b0bb892602e9b0067017dc66fd03e7593563ad095cb3cd05e92ed",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\features\\unix.jsonl": "c981ccc31e6d7cd479dadb80994aa3957ff1f67e96647d91efc7413d4a8e8343",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\features\\unix.jsonl.meta.json": "e5df35955deadd00bd7dd163d6e6ae4151ea9b5c4ff3bc4da6bc242a37c75072",
+    "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH\\data\\manifests\\unix.json": "02123e5c652cee90003a85a8edad747ba45a3cdbb3e6bd9ede30743347741b63",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\unix\\fold_0.jsonl": "bbbdd4a6067936cbf62f78e3d73a3978135842c3710ae349241768630e88c4b2",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\unix\\fold_0.jsonl.meta.json": "8af4d85c925f8248e23425d36d98c4b4b33d5e21e9dbe6a9d7839c8015a53573",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\unix\\fold_0.jsonl": "b4e0cb1cf1847a1a8c3ad59e819da5375c4472f532b1630f2d00e55faf872591",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\unix\\fold_0.jsonl.meta.json": "bc585c568c4ff4e8bf7555f820cbedc7ada6aa2a0343443906e6efe7a9b84a28",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\unix\\fold_0.jsonl": "f692f769fbfd4305590daf893735a36e4f481d6bb1424119d69c4d61dff3d183",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\unix\\fold_0.jsonl.meta.json": "8d2b99bafc5c1bcb7b9bb409fd5d529b8287134fc0b1cd7c8bafa5569f091b62",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\unix\\fold_1.jsonl": "3ee3d20a40827c86e4697c58afea781b7a8bb77aa673aea192d539272e728e96",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\unix\\fold_1.jsonl.meta.json": "8d1263699baba2002d7edc7027c820297f64649680732066fcdb6e167d2a271e",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\unix\\fold_1.jsonl": "a85581a3ae69f758ac20f37fe7808d041a6fae1edb1fbadd17747768ce6d82a4",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\unix\\fold_1.jsonl.meta.json": "b81b07b1b9a345b4405c1cef3bb903e44a1a0fae5c1cfc6a33d64a03e49cc10f",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\unix\\fold_1.jsonl": "1237ae68fea7a87784072f74b638ce39500e15c0fca20123a2765c18955d0e42",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\unix\\fold_1.jsonl.meta.json": "7d11386bf45a52e1d26c10149de3f295eb8bb3c0616923be22e32ad80fad8e64",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\unix\\fold_2.jsonl": "9f7b9d2a58974c534b9f630bdee6132377d1b10836b6265add51ac9bf0071bb1",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\unix\\fold_2.jsonl.meta.json": "ebc154eda3b7ea9e7a113dc6386af147f67ab104e0655da2464706b85e800e17",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\unix\\fold_2.jsonl": "e26f48203465d3bce6cdf40876d89d904d64d04e1ba6713b82ba8333bce7c1d4",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\unix\\fold_2.jsonl.meta.json": "5499fcbd0fb41e7db34028063917ae19fbc7d3e87ffc96391ea2308ebf5629ec",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\unix\\fold_2.jsonl": "1727a4d8c0113c97a8b41291f26a8770e2e7c97f238cc64aa3be3b7ea84ae4ad",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\unix\\fold_2.jsonl.meta.json": "20ac458459701af1a5d20e5a3662fe55e2a9288dba384a1ee4b066acdeac7d52",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\unix\\fold_3.jsonl": "05d0e734e6af15e89034e81f8ac8ea55eb758754ef53cdd9036b454d0388be35",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\unix\\fold_3.jsonl.meta.json": "54f94d65c3a43c94d17ef37e59b5821cb38016da7e5911cac5f4eed428125d22",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\unix\\fold_3.jsonl": "886cabda6512039fdf1c551ceae85a7e4848fcc05f8d45840ea527ac9fc31834",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\unix\\fold_3.jsonl.meta.json": "d7a1162f361b541c7ba1ceba2c5de353402a59a13f97d480f70d517651ea00bf",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\unix\\fold_3.jsonl": "15029d82b20c16f0437588c7009d92f0d45aa161849dd302d3131d88ce39ab86",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\unix\\fold_3.jsonl.meta.json": "9676d53f4b83ac4a563d0415df802996a9d32d51912492abd2f1e373a680c5ae",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\unix\\fold_4.jsonl": "d528de2f1bbf19686c6f00fcac0a290723bd5359e8f6ee0f2f22080c807a6171",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\bm25\\unix\\fold_4.jsonl.meta.json": "985d4c2f37584b4cead58952bc5071e79b171c82682b3f91faa4382c037e5c28",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\unix\\fold_4.jsonl": "c7561bc243a8a594e00cf2f31d01e87b58e4c77650a4046dc382ea1d2c2e7fc9",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\h_star\\unix\\fold_4.jsonl.meta.json": "8901f335cbb1794163ebc76d404da36621b8e4efafa629ec97dc1268ccc25a2f",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\unix\\fold_4.jsonl": "dce56dca786642f542ce7fe797a7a42b4ab71b89f9bf733a2e1ea4f59b53222e",
+    "C:\\Users\\quang\\.cache\\pegh\\integration-20261026\\results\\oof_runs\\pe_gh\\unix\\fold_4.jsonl.meta.json": "9b5aaed7a6530445e5c2c73c17f29dbfbdb429d4c3fc10dc7597b5b9abd3eb90",
+    "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH\\data\\splits\\manifest.json": "be6aab6de86eee1ba3bdc89279469c6e47835296a72725725b42229437c65cca"
+  },
+  "parity_sha256": "0a54986e0c36a9d30294ad36c451787d12506b3c58b7484160a17b0c99afd990",
+  "freeze_hash": "834fc9790e7b68ec99452e8b81b6dae0ad976acbf0e059ce79b442b1bf6405c5"
+}
