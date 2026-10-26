@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "run_id": "programmers_fold_1",
+  "run_manifest_sha256": "c1a4edd6f5c50d7871323fd0598d22d1dad5c44392872e57dec05ba95715eba4",
+  "split": "test",
+  "fold": 1,
+  "quantile_method": "numpy.linear on measured samples; repeats are not independent queries",
+  "quality_measured_by_this_report": false,
+  "summaries": [
+    {
+      "method": "h_star",
+      "domain": "programmers",
+      "unique_queries": 175,
+      "timing_samples": 875,
+      "repetitions": 5,
+      "mean_ms": 24.055798857142857,
+      "p50_ms": 23.736,
+      "p90_ms": 27.16336,
+      "p95_ms": 28.29274,
+      "cpu_mean_ms": 94.16071428571429,
+      "dense_call_ratio": 1.0,
+      "mean_ms_ci95": [
+        23.808128514285716,
+        24.327173471428573
+      ],
+      "bootstrap_unit": "query retaining all repeats; mean-latency CI only",
+      "bootstrap_samples": 1000,
+      "bootstrap_seed": 42,
+      "peak_rss_bytes": 587882496,
+      "rss_load_and_warmup_included": true,
+      "stage_means": {
+        "sparse_ms": null,
+        "stats_ms": 0.0,
+        "features_ms": 0.0,
+        "gate_ms": 0.0,
+        "encode_ms": null,
+        "vector_ms": null,
+        "fusion_ms": null
+      }
+    },
+    {
+      "method": "pe_v1",
+      "domain": "programmers",
+      "unique_queries": 175,
+      "timing_samples": 875,
+      "repetitions": 5,
+      "mean_ms": 19.497035085714284,
+      "p50_ms": 23.7487,
+      "p90_ms": 28.11766,
+      "p95_ms": 29.75128,
+      "cpu_mean_ms": 74.19642857142857,
+      "dense_call_ratio": 0.7371428571428571,
+      "mean_ms_ci95": [
+        18.07563598,
+        20.93303319142857
+      ],
+      "bootstrap_unit": "query retaining all repeats; mean-latency CI only",
+      "bootstrap_samples": 1000,
+      "bootstrap_seed": 42,
+      "peak_rss_bytes": 586555392,
+      "rss_load_and_warmup_included": true,
+      "stage_means": {
+        "sparse_ms": null,
+        "stats_ms": null,
+        "features_ms": null,
+        "gate_ms": null,
+        "encode_ms": null,
+        "vector_ms": null,
+        "fusion_ms": null
+      }
+    },
+    {
+      "method": "pe_v2",
+      "domain": "programmers",
+      "unique_queries": 175,
+      "timing_samples": 875,
+      "repetitions": 5,
+      "mean_ms": 20.152246057142857,
+      "p50_ms": 24.7666,
+      "p90_ms": 29.24828,
+      "p95_ms": 30.95963,
+      "cpu_mean_ms": 77.57142857142857,
+      "dense_call_ratio": 0.7371428571428571,
+      "mean_ms_ci95": [
+        18.648028011428572,
+        21.647421320000003
+      ],
+      "bootstrap_unit": "query retaining all repeats; mean-latency CI only",
+      "bootstrap_samples": 1000,
+      "bootstrap_seed": 42,
+      "peak_rss_bytes": 586518528,
+      "rss_load_and_warmup_included": true,
+      "stage_means": {
+        "sparse_ms": null,
+        "stats_ms": null,
+        "features_ms": null,
+        "gate_ms": null,
+        "encode_ms": null,
+        "vector_ms": null,
+        "fusion_ms": null
+      }
+    }
+  ]
+}

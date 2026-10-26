@@ -1,5 +1,11 @@
 # Trạng thái triển khai phần B
 
+## Sửa chi phí gate inference sau reset quota 26/10/2026
+
+- Đã đo xong 150 worker/29.220 request từ source bất biến `b02191a`; fold dở được lưu và đo lại toàn fold, không trộn worker dở.
+- Score NumPy khớp 48.700 score sklearn; model, threshold, ranking và quality v1 giữ nguyên. Mean quan sát giảm thêm 2,09%, nhưng CI process repetition chứa 0; không phóng đại microbenchmark thành speedup toàn request.
+- [Báo cáo, CPU/RSS audit và hai bootstrap](../refinement/inference-2026-10-26/README.md). Thử threshold riêng đã loại vì chất lượng programmers không đạt biên; bản chính chỉ nhận sửa execution.
+
 ## Tích hợp toàn hệ thống 26/10/2026
 
 - Nhánh `thanh` đã tích hợp A/B/C và sửa các lỗi review A; bốn file dense frozen giữ nguyên byte.

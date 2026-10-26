@@ -2,6 +2,8 @@
 
 Lượt tích hợp v1 và toàn bộ receipt tại `docs/integration/2026-10-26/` được giữ nguyên. Bản này tách hai thay đổi: tối ưu thực thi giữ nguyên model/score; thử chính sách threshold theo domain. Không đổi encoder, feature schema, model weights hay biên non-inferiority.
 
+**Đã đo xong score-only:** [báo cáo và raw-receipt audit](refinement/inference-2026-10-26/README.md). 29.220 ranking online khớp OOF, 48.700 score khớp bit-exact. Mean quan sát PE-GH sklearn 18,492 → NumPy 18,106 ms (−2,09%), p95 35,908 → 35,394 ms; nDCG không đổi. CI theo process repetition [−0,09%, 4,23%] chứa 0, vì vậy không bảo đảm mức giảm request này ổn định qua lượt đo khác. Bản chính nhận tối ưu execution; giữ model/threshold v1.
+
 **Kết quả thử threshold riêng:** không đưa vào bản chính. Macro nDCG@10 giảm từ 0,312163 xuống 0,308927; cận dưới một phía 95% của programmers so H* là −0,013157, không đạt biên −0,01. [Receipt và quyết định](refinement/threshold-experiment-2026-10-26/decision.json) lưu cả kết quả bất lợi. Validation tốt hơn không đủ để bảo đảm tổng quát hóa khi mỗi domain chỉ có khoảng 175–215 query validation và nhiều nhãn gain=0. Tiếp tục đo riêng tối ưu inference, với threshold/model v1 giữ nguyên.
 
 ## Bằng chứng nguyên nhân

@@ -1,0 +1,44 @@
+{
+  "baseline": "pe_v1",
+  "candidate": "pe_v2",
+  "metric": "ndcg_at_10",
+  "domains": {
+    "programmers": {
+      "query_count": 876,
+      "group_count": 876,
+      "samples": 10000,
+      "seed": 20261019,
+      "mean_difference": 0.0,
+      "one_sided_lower_95": 0.0,
+      "two_sided_95": [
+        0.0,
+        0.0
+      ]
+    },
+    "unix": {
+      "query_count": 1072,
+      "group_count": 1072,
+      "samples": 10000,
+      "seed": 20261019,
+      "mean_difference": 0.0,
+      "one_sided_lower_95": 0.0,
+      "two_sided_95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "macro": {
+    "domain_count": 2,
+    "query_count": 1948,
+    "group_count": 1948,
+    "samples": 10000,
+    "seed": 20261019,
+    "mean_difference": 0.0,
+    "one_sided_lower_95": 0.0,
+    "two_sided_95": [
+      0.0,
+      0.0
+    ]
+  }
+}

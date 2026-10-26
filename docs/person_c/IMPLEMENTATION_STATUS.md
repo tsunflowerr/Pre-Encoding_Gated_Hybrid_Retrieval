@@ -1,5 +1,9 @@
 # Trạng thái triển khai phần C
 
+## Sửa gate execution 26/10/2026
+
+`ModelPredictor` mặc định dùng phép tính NumPy theo đúng thứ tự scaler/model, giữ reference sklearn qua factory để đối chiếu. Model/threshold v1 và nDCG giữ nguyên. [Lượt đối chiếu đủ 29.220 request](../refinement/inference-2026-10-26/README.md) ghi hiệu quả quan sát nhỏ và bất định giữa process. Thử threshold riêng chỉ tốt trên validation, không đạt quality programmers khi đánh giá lại nên không được dùng cho bản chính. Không coi tối ưu execution là cải thiện độ chính xác của gate.
+
 ## Lượt tích hợp mới 26/10/2026
 
 Đã tái lập C1–C8 từ source cố định cùng backend sparse chính xác mới và chọn execution baseline bằng validation. Lượt online chính tắt stage timing, đủ 29.220 request, giữ nguyên chất lượng/threshold protocol. [Báo cáo tích hợp](../integration/2026-10-26/README.md) ghi mean giảm 34,76% so H*, dense ratio 57,75%, cùng CI và hạn chế p95/từng domain. [Driver tái lập](../INTEGRATION_V2.md) thống nhất các bước A/B/C.
