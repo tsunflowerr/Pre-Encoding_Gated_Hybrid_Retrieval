@@ -46,7 +46,7 @@ package-dir = {"" = "src", "contracts" = "contracts"}
 contracts = ["schemas/*.json", "resources/*.json"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests/shared", "tests/a", "tests/b"]
+testpaths = ["tests/shared", "tests/a", "tests/b", "tests/c"]
 markers = ["model: needs the pinned real model and network/local model cache"]
 addopts = "-ra"
 

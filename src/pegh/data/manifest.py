@@ -1,11 +1,39 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from pathlib import Path
 
 from contracts.io import iter_corpus, load_queries
 from pegh.data.artifacts import file_hash, object_hash
 from pegh.data.qrels import load_qrels, positive_qrels
+
+PORTABLE_IDENTITY = "content_and_source_revision_v2"
+
+
+def dataset_identity_payload(manifest: dict, *, portable: bool = False) -> dict:
+    """Keep legacy frozen identities readable; new identities exclude machine-local paths."""
+    policy = PORTABLE_IDENTITY if portable else manifest.get("identity_policy")
+    if policy not in (None, PORTABLE_IDENTITY):
+        raise ValueError("unsupported dataset identity policy")
+    source = deepcopy(manifest.get("source"))
+    if policy == PORTABLE_IDENTITY and source is not None:
+        for record in source.get("files", []):
+            record.pop("canonical_path", None)
+    payload = {
+        "schema_version": manifest["schema_version"],
+        "domain": manifest["domain"],
+        "file_hashes": {
+            name: manifest["files"][name]["sha256"] for name in ("corpus", "queries", "qrels")
+        },
+        "counts": manifest["counts"],
+        "coverage": manifest["coverage"],
+        "policies": manifest["policies"],
+        "source": source,
+    }
+    if policy is not None:
+        payload["identity_policy"] = policy
+    return payload
 
 
 def audit_dataset(
@@ -71,6 +99,7 @@ def audit_dataset(
             raise ValueError("source manifest domain mismatch")
     payload = {
         "schema_version": "1.0",
+        "identity_policy": PORTABLE_IDENTITY,
         "domain": domain,
         "files": {
             "corpus": {"path": str(corpus_path), "sha256": hashes["corpus"]},
@@ -91,15 +120,5 @@ def audit_dataset(
         },
         "source": source_manifest,
     }
-    payload["manifest_hash"] = object_hash(
-        {
-            "schema_version": payload["schema_version"],
-            "domain": domain,
-            "file_hashes": hashes,
-            "counts": counts,
-            "coverage": payload["coverage"],
-            "policies": payload["policies"],
-            "source": source_manifest,
-        }
-    )
+    payload["manifest_hash"] = object_hash(dataset_identity_payload(payload))
     return payload

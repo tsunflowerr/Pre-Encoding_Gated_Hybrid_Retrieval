@@ -8,14 +8,14 @@ from pathlib import Path
 import yaml
 
 from pegh.app.methods import HybridSearchMethod, ScoreThresholdGate, StaticHybridMethod
-from pegh.dense.artifacts import file_hash, read_json
+from pegh.dense.artifacts import file_hash, object_hash, read_json
 from pegh.dense.config import DenseConfig
 from pegh.dense.encoder import CPUEncoder
 from pegh.dense.retriever import FaissDenseRetriever
 from pegh.fusion.engines import CCFusion, RRFFusion
 from pegh.gating.features import QueryFeatureExtractor
 from pegh.gating.models import load_model
-from pegh.sparse.index import SQLiteBM25
+from pegh.sparse.fast import open_backend
 
 
 def create_gated_method(
@@ -37,6 +37,8 @@ def create_gated_method(
     cache_folder: str | None = None,
     torch_threads: int | None = None,
     faiss_threads: int | None = None,
+    sparse_execution: str = "numpy",
+    expected_sparse_execution_hash: str | None = None,
 ) -> HybridSearchMethod:
     """All artifact loading and model setup occurs outside search()."""
     if type(fold) is not int or fold not in range(5) or domain not in ("programmers", "unix"):
@@ -50,8 +52,13 @@ def create_gated_method(
         raise ValueError("feature protocol checksum differs")
     if file_hash(selection_path) != expected_selection_sha256:
         raise ValueError("fusion selection checksum differs")
-    sparse = SQLiteBM25(sparse_path, trace=trace)
+    sparse = open_backend(sparse_path, trace=trace, execution=sparse_execution)
     try:
+        if (
+            expected_sparse_execution_hash is not None
+            and object_hash(sparse.execution_provenance) != expected_sparse_execution_hash
+        ):
+            raise ValueError("sparse execution artifact differs from registry")
         protocol = yaml.safe_load(Path(protocol_path).read_text(encoding="utf-8"))
         extractor = QueryFeatureExtractor(protocol["features"], sparse.tokenizer)
         selection = read_json(selection_path)
@@ -106,6 +113,7 @@ def create_gated_method(
             "corpus_sha256": sparse.manifest["corpus_sha256"],
             "sparse_index_sha256": expected_sparse_sha256,
             "sparse_retriever_hash": sparse.manifest["retriever_hash"],
+            "sparse_execution": sparse.execution_provenance,
             "dense_index_sha256": expected_dense_sha256,
             "dense_retriever_hash": dense.retriever_hash,
             "dense_config": config,
@@ -145,11 +153,23 @@ def create_static_hybrid_method(
     cache_folder: str | None = None,
     torch_threads: int | None = None,
     faiss_threads: int | None = None,
+    sparse_execution: str = "numpy",
+    expected_sparse_execution_hash: str | None = None,
+    parallel_branches: bool = False,
 ) -> StaticHybridMethod:
     if type(fold) is not int or fold not in range(5) or domain not in ("programmers", "unix"):
         raise ValueError("unsupported fold or domain")
     if mode not in ("h_star", "s_star", "cc_half", "rrf"):
         raise ValueError("unsupported static hybrid mode")
+    if parallel_branches and sparse_execution != "numpy":
+        raise ValueError("parallel baseline requires the thread-safe in-memory sparse backend")
+    if parallel_branches:
+        torch_threads = 3 if torch_threads is None else torch_threads
+        faiss_threads = 3 if faiss_threads is None else faiss_threads
+        if max(torch_threads, faiss_threads) > 3:
+            raise ValueError(
+                "parallel baseline reserves one of four CPU threads for sparse retrieval"
+            )
     sparse_path, dense_path = Path(sparse_dir), Path(dense_dir)
     if file_hash(sparse_path / "index.sqlite3") != expected_sparse_sha256:
         raise ValueError("sparse registry checksum differs")
@@ -157,8 +177,13 @@ def create_static_hybrid_method(
         raise ValueError("dense registry checksum differs")
     if file_hash(selection_path) != expected_selection_sha256:
         raise ValueError("fusion selection checksum differs")
-    sparse = SQLiteBM25(sparse_path, trace=trace)
+    sparse = open_backend(sparse_path, trace=trace, execution=sparse_execution)
     try:
+        if (
+            expected_sparse_execution_hash is not None
+            and object_hash(sparse.execution_provenance) != expected_sparse_execution_hash
+        ):
+            raise ValueError("sparse execution artifact differs from registry")
         selection = read_json(selection_path)
         selected = selection["domains"][domain]["folds"][str(fold)]
         if selection["domains"][domain]["corpus_sha256"] != sparse.manifest["corpus_sha256"]:
@@ -191,6 +216,7 @@ def create_static_hybrid_method(
             raise ValueError("selection/dense retriever differs")
         provenance = {
             "schema_version": "c6_static_method_v1",
+            "parallel_branches": parallel_branches,
             "mode": mode,
             "fold": fold,
             "domain": domain,
@@ -201,13 +227,16 @@ def create_static_hybrid_method(
             "sparse_index_sha256": expected_sparse_sha256,
             "dense_index_sha256": expected_dense_sha256,
             "sparse_retriever_hash": sparse.manifest["retriever_hash"],
+            "sparse_execution": sparse.execution_provenance,
             "dense_retriever_hash": dense.retriever_hash,
             "dense_config": config,
             "query_embedding_cache": False,
             "quality_cache_used": False,
         }
         json.dumps(provenance, allow_nan=False)
-        return StaticHybridMethod(sparse, dense, fusion, trace=trace, provenance=provenance)
+        return StaticHybridMethod(
+            sparse, dense, fusion, trace=trace, provenance=provenance, parallel=parallel_branches
+        )
     except Exception:
         sparse.close()
         raise

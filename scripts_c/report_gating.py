@@ -184,6 +184,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", default="results/reports/c7_report.json")
     parser.add_argument("--figure-dir", default="paper/figures")
+    parser.add_argument("--facts-output", default="docs/person_c/validation/C7_FACTS.json")
     args = parser.parse_args()
     root = Path.cwd()
     freeze_path = root / "results/frozen/c6_manifest.json"
@@ -354,7 +355,9 @@ def main() -> None:
                     "dense_call_ratio": sum(row["encoder_calls"] for row in measured)
                     / len(measured),
                     "peak_rss_bytes": max(online_rss[(domain, method)]),
-                    "sparse_mean_ms": float(np.mean([row["sparse_ns"] / 1e6 for row in measured])),
+                    "sparse_mean_ms": None
+                    if any(row["sparse_ns"] is None for row in measured)
+                    else float(np.mean([row["sparse_ns"] / 1e6 for row in measured])),
                 }
         online_pooled["all"] = {}
         for method in ("h_star", "s_star", "pe_gh"):
@@ -370,7 +373,9 @@ def main() -> None:
                 "peak_rss_bytes": max(
                     max(online_rss[(domain, method)]) for domain in ("programmers", "unix")
                 ),
-                "sparse_mean_ms": float(np.mean([row["sparse_ns"] / 1e6 for row in measured])),
+                "sparse_mean_ms": None
+                if any(row["sparse_ns"] is None for row in measured)
+                else float(np.mean([row["sparse_ns"] / 1e6 for row in measured])),
             }
             if online_pooled["all"][method]["unique_queries"] != 1948:
                 raise ValueError("full online query IDs do not cover the OOF test set exactly once")
@@ -426,7 +431,7 @@ def main() -> None:
     }
     report["report_hash"] = object_hash(report)
     atomic_json(root / args.output, report)
-    atomic_json(root / "docs/person_c/validation/C7_FACTS.json", report)
+    atomic_json(root / args.facts_output, report)
     print(f"C7 report: {report['report_hash']}")
     print(f"online status: {online_status}")
 

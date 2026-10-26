@@ -6,7 +6,8 @@ import argparse
 import math
 from pathlib import Path
 
-from pegh.dense.artifacts import atomic_json, file_hash, read_json
+from pegh.dense.artifacts import atomic_json, file_hash, object_hash, read_json
+from pegh.sparse.fast import open_backend
 
 
 def main() -> None:
@@ -18,6 +19,7 @@ def main() -> None:
     parser.add_argument("--output", required=True)
     parser.add_argument("--dense-dir")
     parser.add_argument("--cache-folder")
+    parser.add_argument("--sparse-execution", choices=("numpy", "sqlite"), default="numpy")
     args = parser.parse_args()
     if not math.isfinite(args.threshold):
         raise ValueError("threshold must be finite")
@@ -62,7 +64,10 @@ def main() -> None:
         "expected_protocol_sha256": file_hash(protocol),
         "expected_selection_sha256": file_hash(selection),
         "expected_model_manifest_hash": manifest["manifest_hash"],
+        "sparse_execution": args.sparse_execution,
     }
+    with open_backend(sparse, execution=args.sparse_execution) as backend:
+        kwargs["expected_sparse_execution_hash"] = object_hash(backend.execution_provenance)
     if args.cache_folder:
         kwargs["cache_folder"] = str(Path(args.cache_folder).resolve())
     atomic_json(

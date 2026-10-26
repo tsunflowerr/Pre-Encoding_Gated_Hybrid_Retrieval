@@ -16,14 +16,16 @@ from pegh.data.splits import (
 from pegh.evaluation.oof import run_oof
 
 
-def _fixture(tmp_path):
+def _fixture(tmp_path, query_count=5):
     domains = ("programmers", "unix")
     queries_by_domain = {
-        domain: [Query(f"{domain}:q{index}", domain, f"query {index}") for index in range(5)]
+        domain: [
+            Query(f"{domain}:q{index}", domain, f"query {index}") for index in range(query_count)
+        ]
         for domain in domains
     }
     qrels_by_domain = {
-        domain: {f"{domain}:q{index}": {f"{domain}:d{index}": 1.0} for index in range(5)}
+        domain: {f"{domain}:q{index}": {f"{domain}:d{index}": 1.0} for index in range(query_count)}
         for domain in domains
     }
     registry = {
@@ -42,7 +44,7 @@ def _fixture(tmp_path):
             corpus_path,
             (
                 {"_id": f"{domain}:d{index}", "title": "", "text": f"document {index}"}
-                for index in range(5)
+                for index in range(query_count)
             ),
         )
         write_jsonl(
@@ -52,7 +54,7 @@ def _fixture(tmp_path):
         with qrels_path.open("w", encoding="utf-8", newline="") as stream:
             writer = csv.writer(stream, delimiter="\t", lineterminator="\n")
             writer.writerow(("query-id", "corpus-id", "score"))
-            for index in range(5):
+            for index in range(query_count):
                 writer.writerow((f"{domain}:q{index}", f"{domain}:d{index}", 1))
         manifest = audit_dataset(corpus_path, queries_path, qrels_path, domain)
         manifest_path = tmp_path / f"{domain}-manifest.json"
@@ -106,6 +108,7 @@ def _fixture(tmp_path):
                         "split": "test",
                         "run_id": run_id,
                         "corpus_hash": manifests[domain]["files"]["corpus"]["sha256"],
+                        "retriever_hash": f"{method}-retriever-{fold}",
                     },
                 )
                 fold_runs[str(fold)] = str(run_path)

@@ -128,6 +128,14 @@ class SQLiteBM25:
 
         with (self.directory / "manifest.json").open(encoding="utf-8") as stream:
             self.manifest = json.load(stream)
+        unsigned = {key: value for key, value in self.manifest.items() if key != "retriever_hash"}
+        if object_hash(unsigned) != self.manifest.get("retriever_hash"):
+            raise ValueError("sparse manifest/retriever checksum mismatch")
+        if (
+            self.manifest.get("status") != "complete"
+            or self.manifest.get("schema_version") != "1.0"
+        ):
+            raise ValueError("sparse index is incomplete or has an unsupported schema")
         database = self.directory / self.manifest["database_file"]
         if file_hash(database) != self.manifest["database_sha256"]:
             raise ValueError("sparse index checksum mismatch")

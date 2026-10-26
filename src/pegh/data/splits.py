@@ -138,9 +138,20 @@ def validate_five_fold_splits(manifest: dict) -> None:
     if not isinstance(recorded_hash, str) or object_hash(unsigned) != recorded_hash:
         raise ValueError("split manifest hash is missing or does not match its contents")
     for domain, data in manifest["domains"].items():
-        expected = {query_id for bucket in data["buckets"] for query_id in bucket}
-        if len(expected) != data["query_count"]:
+        if len(data["buckets"]) != 5:
+            raise ValueError(f"{domain}: exactly five buckets are required")
+        flat_ids = [query_id for bucket in data["buckets"] for query_id in bucket]
+        expected = set(flat_ids)
+        if len(expected) != len(flat_ids) or len(expected) != data["query_count"]:
             raise ValueError(f"{domain}: duplicate or missing bucket query IDs")
+        group_ids = [qid for group in data["groups"] for qid in group]
+        if (
+            any(not group for group in data["groups"])
+            or len(group_ids) != len(set(group_ids))
+            or set(group_ids) != expected
+            or data["group_count"] != len(data["groups"])
+        ):
+            raise ValueError(f"{domain}: groups must partition all bucket query IDs")
         test_counts = {query_id: 0 for query_id in expected}
         group_bucket = {}
         for bucket_number, bucket in enumerate(data["buckets"]):

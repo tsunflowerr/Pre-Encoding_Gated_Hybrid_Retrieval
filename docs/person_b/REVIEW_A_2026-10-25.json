@@ -1,0 +1,314 @@
+{
+  "review_date": "2026-10-25",
+  "timezone": "Asia/Bangkok",
+  "branch": "bao",
+  "reviewed_commit": "522f6bae8310d075981f6cf03d36d5ab1d807abd",
+  "verdict": "real baselines reproduced; validation and portability fixes required before final acceptance",
+  "tracked_code_changed_by_reviewer": false,
+  "part_a_code_identical_in_origin_quang": true,
+  "tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "84",
+    "time": "27.424",
+    "timestamp": "2026-10-25T23:19:51.732216+07:00",
+    "hostname": "Thanks",
+    "model_test_deselected": 1,
+    "junit_path": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\tests.xml",
+    "junit_sha256": "dd3c4df11ffc719eb2a0c8fc8e78c350a2bd84ea65d61eec7c0b1418ae7b8640"
+  },
+  "checks": {
+    "ruff_lint": "passed",
+    "ruff_format_69_files": "passed",
+    "uv_lock_64_packages": "passed",
+    "uv_pip_check": "passed",
+    "compileall": "passed"
+  },
+  "github_actions": {
+    "run_id": 39738601327,
+    "reviewed_sha": "522f6bae8310d075981f6cf03d36d5ab1d807abd",
+    "windows_python_312": "success",
+    "ubuntu_python_311": "success"
+  },
+  "data_split_independent_audit": {
+    "programmers": {
+      "documents": 32176,
+      "queries": 876,
+      "qrel_pairs": 1675,
+      "independently_rebuilt_groups": 876,
+      "full_query_coverage": true,
+      "group_leakage_found": false,
+      "test_once": true,
+      "fold_files_match_manifest": true
+    },
+    "unix": {
+      "documents": 47382,
+      "queries": 1072,
+      "qrel_pairs": 1693,
+      "independently_rebuilt_groups": 1072,
+      "full_query_coverage": true,
+      "group_leakage_found": false,
+      "test_once": true,
+      "fold_files_match_manifest": true
+    },
+    "path_portability": {
+      "windows_manifest_hash": "d2658b60339a79a5d7e9bb9de0aa8febf6aa6f01e1dc28b20ac79f5eebc67959",
+      "posix_manifest_hash": "910312c92ac419bbde7932d16a935917604e15cd18300640344fb45064f3f864",
+      "same_content_hashes": true,
+      "hash_changes_with_path_separator_only": true
+    }
+  },
+  "finding_reproductions": {
+    "valid_original_b_oof": {
+      "dense_original_b": {
+        "domains": {
+          "programmers": {
+            "query_count": 876,
+            "missing_or_empty_rankings": 0,
+            "ndcg_at_10": 0.24849664204481514,
+            "mrr_at_10": 0.2458985649054142,
+            "recall_at_10": 0.33351047447592913,
+            "recall_at_100": 0.5555589779824404
+          },
+          "unix": {
+            "query_count": 1072,
+            "missing_or_empty_rankings": 0,
+            "ndcg_at_10": 0.22210511681734177,
+            "mrr_at_10": 0.214060649135276,
+            "recall_at_10": 0.2877058161573087,
+            "recall_at_100": 0.48000714433783465
+          }
+        },
+        "macro": {
+          "domain_count": 2,
+          "ndcg_at_10": 0.23530087943107847,
+          "mrr_at_10": 0.2299796070203451,
+          "recall_at_10": 0.31060814531661896,
+          "recall_at_100": 0.5177830611601375
+        },
+        "micro": {
+          "query_count": 1948,
+          "missing_or_empty_rankings": 0,
+          "ndcg_at_10": 0.23397317436316656,
+          "mrr_at_10": 0.2283779048922786,
+          "recall_at_10": 0.30830380418970676,
+          "recall_at_100": 0.5139821988925957
+        }
+      }
+    },
+    "canonical_query_omission": {
+      "accepted": true,
+      "removed_query": "programmers:103471",
+      "canonical_queries": 876,
+      "scored_queries": 875,
+      "macro_before": 0.23530087943107847,
+      "macro_after": 0.23544287751224693
+    },
+    "sidecar_retriever_disagreement": {
+      "accepted": true
+    },
+    "mixed_split_fold_utility": {
+      "accepted": true,
+      "baseline_split": "train",
+      "baseline_fold": 0,
+      "candidate_split": "test",
+      "candidate_fold": 1,
+      "rows": 5,
+      "nonzero_deltas": [
+        {
+          "delta_utility": 1.0,
+          "domain": "unix",
+          "query_id": "unix:q2",
+          "utility_baseline": 0.0,
+          "utility_candidate": 1.0
+        },
+        {
+          "delta_utility": -1.0,
+          "domain": "unix",
+          "query_id": "unix:q3",
+          "utility_baseline": 1.0,
+          "utility_candidate": 0.0
+        }
+      ]
+    },
+    "sparse_manifest_mutation": {
+      "accepted": true,
+      "unchanged_retriever_hash": true,
+      "score_before": 7.398496895488511,
+      "score_after": 12.115073659986209
+    },
+    "provider_inflated_score_check": {
+      "provider": "bm25s-0.3.14",
+      "provider_configuration": {
+        "method": "atire",
+        "idf_method": "lucene",
+        "tokenizer": "shared TechnicalTokenizer token lists",
+        "k1": 1.2,
+        "b": 0.75
+      },
+      "query_count": 3,
+      "top_k": 100,
+      "exact_order_count": 3,
+      "minimum_jaccard_at_k": 1.0,
+      "mean_jaccard_at_k": 1.0,
+      "compared_score_count": 14,
+      "maximum_absolute_score_difference": 732.4511919673691,
+      "passed": true
+    }
+  },
+  "full_bm25_provider_parity": {
+    "programmers": {
+      "schema_version": "1.0",
+      "domain": "programmers",
+      "inputs": {
+        "corpus_sha256": "26d98b95e51ff6a7bd36f401c5821cab140189a4bdf2525017af66960427662d",
+        "queries_sha256": "707fde4c6bdce38db97e1930d8fcdc4c025536c566bc41af980245e284a7da27",
+        "qrels_sha256": "ed69afa873c64d34298792d694c82c4293e4b7e3c6ea3edc7a73662d4b0cba76",
+        "run_sha256": "0e88c165f40fc45c4da20e19d8b111ccf87de4aa3059e37b0be2db09b2d34cb6"
+      },
+      "bm25": {
+        "provider": "bm25s-0.3.14",
+        "provider_configuration": {
+          "method": "atire",
+          "idf_method": "lucene",
+          "tokenizer": "shared TechnicalTokenizer token lists",
+          "k1": 1.2,
+          "b": 0.75
+        },
+        "query_count": 876,
+        "top_k": 100,
+        "exact_order_count": 876,
+        "minimum_jaccard_at_k": 1.0,
+        "mean_jaccard_at_k": 1.0,
+        "compared_score_count": 87600,
+        "maximum_absolute_score_difference": 7.243641327647765e-06,
+        "passed": true
+      },
+      "evaluator": {
+        "provider": "ir-measures-0.4.3",
+        "local": {
+          "ndcg_at_10": 0.29262023647856755,
+          "mrr_at_10": 0.29481046604334277,
+          "recall_at_10": 0.36766072912212705,
+          "recall_at_100": 0.5659661792021071
+        },
+        "provider_metrics": {
+          "ndcg_at_10": 0.29262023647856755,
+          "mrr_at_10": 0.29481046604334255,
+          "recall_at_10": 0.367660729122127,
+          "recall_at_100": 0.5659661792021071
+        },
+        "absolute_differences": {
+          "ndcg_at_10": 0.0,
+          "mrr_at_10": 2.220446049250313e-16,
+          "recall_at_10": 5.551115123125783e-17,
+          "recall_at_100": 0.0
+        },
+        "max_absolute_difference": 2.220446049250313e-16,
+        "passed": true
+      },
+      "passed": true
+    },
+    "unix": {
+      "schema_version": "1.0",
+      "domain": "unix",
+      "inputs": {
+        "corpus_sha256": "8d67fc0df3e01f490b38f81b72aa720644046db1e4c301900a4f4803550f4b7c",
+        "queries_sha256": "69d6f23726f77a2892b21ee6e98432768c42b045c5790ba79b6ef66c1b02f73b",
+        "qrels_sha256": "a7bd24ce081b0bb892602e9b0067017dc66fd03e7593563ad095cb3cd05e92ed",
+        "run_sha256": "7664d9edc94ce70c1fd89aa4f941888e594a2e286c790bf8c45f57e084688557"
+      },
+      "bm25": {
+        "provider": "bm25s-0.3.14",
+        "provider_configuration": {
+          "method": "atire",
+          "idf_method": "lucene",
+          "tokenizer": "shared TechnicalTokenizer token lists",
+          "k1": 1.2,
+          "b": 0.75
+        },
+        "query_count": 1072,
+        "top_k": 100,
+        "exact_order_count": 1068,
+        "minimum_jaccard_at_k": 1.0,
+        "mean_jaccard_at_k": 1.0,
+        "compared_score_count": 107200,
+        "maximum_absolute_score_difference": 7.76430151461227e-06,
+        "passed": true
+      },
+      "evaluator": {
+        "provider": "ir-measures-0.4.3",
+        "local": {
+          "ndcg_at_10": 0.2871910607965061,
+          "mrr_at_10": 0.2904121505567401,
+          "recall_at_10": 0.3451090899668325,
+          "recall_at_100": 0.5294593026169518
+        },
+        "provider_metrics": {
+          "ndcg_at_10": 0.2871910607965059,
+          "mrr_at_10": 0.29041215055674,
+          "recall_at_10": 0.3451090899668325,
+          "recall_at_100": 0.5294593026169518
+        },
+        "absolute_differences": {
+          "ndcg_at_10": 1.6653345369377348e-16,
+          "mrr_at_10": 5.551115123125783e-17,
+          "recall_at_10": 0.0,
+          "recall_at_100": 0.0
+        },
+        "max_absolute_difference": 1.6653345369377348e-16,
+        "passed": true
+      },
+      "passed": true
+    }
+  },
+  "full_bm25_oof_summaries": {
+    "bm25": {
+      "domains": {
+        "programmers": {
+          "query_count": 876,
+          "missing_or_empty_rankings": 0,
+          "ndcg_at_10": 0.29262023647856755,
+          "mrr_at_10": 0.29481046604334277,
+          "recall_at_10": 0.36766072912212705,
+          "recall_at_100": 0.5659661792021071
+        },
+        "unix": {
+          "query_count": 1072,
+          "missing_or_empty_rankings": 0,
+          "ndcg_at_10": 0.2871910607965061,
+          "mrr_at_10": 0.2904121505567401,
+          "recall_at_10": 0.3451090899668325,
+          "recall_at_100": 0.5294593026169518
+        }
+      },
+      "macro": {
+        "domain_count": 2,
+        "ndcg_at_10": 0.2899056486375368,
+        "mrr_at_10": 0.29261130830004145,
+        "recall_at_10": 0.35638490954447977,
+        "recall_at_100": 0.5477127409095295
+      },
+      "micro": {
+        "query_count": 1948,
+        "missing_or_empty_rankings": 0,
+        "ndcg_at_10": 0.28963251762273085,
+        "mrr_at_10": 0.29239003780841566,
+        "recall_at_10": 0.35525038149662613,
+        "recall_at_100": 0.5458761526624324
+      }
+    }
+  },
+  "registered_rebuilt_dense_metrics_match_original_b_metrics": true,
+  "correctness_runs_are_latency_benchmarks": false,
+  "large_review_artifacts_root": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025",
+  "finding_priorities": {
+    "oof_canonical_query_coverage": "P1",
+    "utility_split_and_fold": "P2",
+    "sparse_manifest_integrity": "P2",
+    "provider_score_and_order_tolerance": "P2",
+    "dataset_identity_path_portability": "P2"
+  }
+}

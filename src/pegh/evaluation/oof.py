@@ -8,8 +8,9 @@ from pathlib import Path
 
 from contracts.io import load_queries
 from pegh.data.artifacts import file_hash, object_hash
+from pegh.data.manifest import dataset_identity_payload
 from pegh.data.qrels import load_qrels
-from pegh.data.splits import fold_record, validate_five_fold_splits
+from pegh.data.splits import fold_record, query_groups, validate_five_fold_splits
 from pegh.evaluation.bootstrap import macro_group_bootstrap, paired_group_bootstrap
 from pegh.evaluation.metrics import QueryMetrics, aggregate_metrics, evaluate_rankings
 from pegh.evaluation.runs import load_rankings
@@ -33,17 +34,7 @@ def _load_dataset_manifest(path: Path, domain: str, split_manifest: dict) -> dic
         manifest = json.load(stream)
     if manifest.get("domain") != domain:
         raise ValueError(f"{domain}: dataset manifest domain differs")
-    unsigned = {
-        "schema_version": manifest["schema_version"],
-        "domain": domain,
-        "file_hashes": {
-            name: manifest["files"][name]["sha256"] for name in ("corpus", "queries", "qrels")
-        },
-        "counts": manifest["counts"],
-        "coverage": manifest["coverage"],
-        "policies": manifest["policies"],
-        "source": manifest.get("source"),
-    }
+    unsigned = dataset_identity_payload(manifest)
     if object_hash(unsigned) != manifest.get("manifest_hash"):
         raise ValueError(f"{domain}: dataset manifest hash differs from contents")
     if split_manifest.get("dataset_hashes", {}).get(domain) != manifest["manifest_hash"]:
@@ -61,7 +52,7 @@ def _verify_run_sidecar(
     split_hash: str,
     corpus_hash: str,
     run_metadata: dict,
-) -> None:
+) -> dict:
     sidecar_path = run_path.with_suffix(run_path.suffix + ".meta.json")
     if not sidecar_path.is_file():
         raise ValueError(f"{run_path}: required run sidecar is missing")
@@ -78,6 +69,7 @@ def _verify_run_sidecar(
         "split": "test",
         "run_id": run_metadata["run_id"],
         "corpus_hash": corpus_hash,
+        "retriever_hash": run_metadata["retriever_hash"],
     }
     mismatches = {
         key: {"expected": value, "actual": sidecar.get(key)}
@@ -86,6 +78,7 @@ def _verify_run_sidecar(
     }
     if mismatches:
         raise ValueError(f"{run_path}: sidecar provenance differs: {mismatches}")
+    return sidecar
 
 
 def run_oof(registry_path: str | Path, *, bootstrap_samples: int = 10_000) -> dict:
@@ -97,6 +90,8 @@ def run_oof(registry_path: str | Path, *, bootstrap_samples: int = 10_000) -> di
     with split_path.open(encoding="utf-8") as stream:
         split_manifest = json.load(stream)
     validate_five_fold_splits(split_manifest)
+    if not registry["domains"] or set(registry["domains"]) != set(split_manifest["domains"]):
+        raise ValueError("final OOF domains must equal the registered split domains")
     all_rows: list[dict] = []
     rows_by_method_domain: dict[str, dict[str, list[QueryMetrics]]] = defaultdict(
         lambda: defaultdict(list)
@@ -114,6 +109,21 @@ def run_oof(registry_path: str | Path, *, bootstrap_samples: int = 10_000) -> di
         queries = load_queries(queries_path, domain)
         query_by_id = {query.query_id: query for query in queries}
         qrels = load_qrels(qrels_path, domain)
+        bucket_ids = [
+            qid for bucket in split_manifest["domains"][domain]["buckets"] for qid in bucket
+        ]
+        if (
+            set(bucket_ids) != set(query_by_id)
+            or len(bucket_ids) != len(queries)
+            or len(queries) != dataset_manifest["counts"]["queries"]
+        ):
+            raise ValueError(f"{domain}: split must cover every canonical query exactly once")
+        actual_groups = {frozenset(group) for group in query_groups(queries, qrels)}
+        recorded_groups = {
+            frozenset(group) for group in split_manifest["domains"][domain]["groups"]
+        }
+        if actual_groups != recorded_groups:
+            raise ValueError(f"{domain}: split groups differ from canonical query/qrel grouping")
         input_hashes[f"{domain}.queries"] = file_hash(queries_path)
         input_hashes[f"{domain}.qrels"] = file_hash(qrels_path)
         input_hashes[f"{domain}.dataset_manifest"] = file_hash(dataset_manifest_path)
@@ -123,6 +133,8 @@ def run_oof(registry_path: str | Path, *, bootstrap_samples: int = 10_000) -> di
             raise ValueError(f"{domain}: qrels file differs from canonical dataset manifest")
         canonical_corpus_hash = dataset_manifest["files"]["corpus"]["sha256"]
         current_methods = set(domain_config["runs"])
+        if not current_methods:
+            raise ValueError("final OOF requires at least one method")
         if method_names is None:
             method_names = current_methods
         elif method_names != current_methods:
@@ -158,7 +170,7 @@ def run_oof(registry_path: str | Path, *, bootstrap_samples: int = 10_000) -> di
                     raise ValueError(f"{domain}/{method}/fold {fold}: run_id is required")
                 if metadata["corpus_hash"] != canonical_corpus_hash:
                     raise ValueError(f"{domain}/{method}/fold {fold}: noncanonical corpus hash")
-                _verify_run_sidecar(
+                sidecar = _verify_run_sidecar(
                     run_path,
                     domain=domain,
                     method=method,
@@ -168,11 +180,22 @@ def run_oof(registry_path: str | Path, *, bootstrap_samples: int = 10_000) -> di
                     corpus_hash=canonical_corpus_hash,
                     run_metadata=metadata,
                 )
+                if (
+                    registry.get("freeze_hash") is not None
+                    and method != "bm25"
+                    and sidecar.get("freeze_hash") != registry["freeze_hash"]
+                ):
+                    raise ValueError(
+                        f"{domain}/{method}/fold {fold}: sidecar freeze identity differs"
+                    )
                 rows = evaluate_rankings(expected, domain, qrels, rankings)
                 rows_by_method_domain[method][domain].extend(rows)
                 for row in rows:
                     all_rows.append({"method": method, "fold": fold, **row.as_dict()})
                 input_hashes[f"{domain}.{method}.fold_{fold}"] = file_hash(run_path)
+                input_hashes[f"{domain}.{method}.fold_{fold}.sidecar"] = file_hash(
+                    run_path.with_suffix(run_path.suffix + ".meta.json")
+                )
                 corpus_hashes.add(metadata["corpus_hash"])
                 retriever_hash_by_fold[str(fold)] = metadata["retriever_hash"]
             if len(corpus_hashes) != 1:

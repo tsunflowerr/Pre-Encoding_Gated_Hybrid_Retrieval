@@ -4,19 +4,34 @@ from __future__ import annotations
 
 import argparse
 import json
+from dataclasses import asdict
 from pathlib import Path
 
-from pegh.data.artifacts import atomic_json, file_hash, object_hash
+from contracts.io import load_queries
+from pegh.data.artifacts import atomic_json, file_hash, object_hash, write_jsonl
+from pegh.data.splits import fold_record
 from pegh.gating.models import load_model
 from pegh.profiling.provenance import source_snapshot
+from pegh.profiling.report import load_complete_run
+from pegh.sparse.fast import open_backend
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--thresholds", default="results/thresholds/c6_validation.json")
     parser.add_argument("--output", default="results/frozen/c6_manifest.json")
+    parser.add_argument("--dense-root", default=str(Path.home() / ".cache/pegh/artifacts/c0-v1"))
+    parser.add_argument("--cache-folder", default="artifacts/models")
+    parser.add_argument("--sparse-execution", choices=("numpy", "sqlite"), default="numpy")
+    parser.add_argument(
+        "--execution-selection",
+        help="Validation-only sequential/parallel baseline timing selection",
+    )
     args = parser.parse_args()
     root = Path.cwd()
+    output_path = root / args.output
+    if output_path.exists():
+        raise FileExistsError("freeze manifest already exists; choose a new path")
     threshold_path = root / args.thresholds
     threshold_report = json.loads(threshold_path.read_text(encoding="utf-8"))
     if (
@@ -58,11 +73,33 @@ def main() -> None:
         "source_snapshot_hash": source_snapshot()["combined_sha256"],
         "script_sha256": {name: file_hash(root / name) for name in script_names},
         "domains": {},
+        "benchmark_inputs": {},
     }
+    execution_selection = None
+    if args.execution_selection:
+        selection_file = Path(args.execution_selection)
+        execution_selection = json.loads(selection_file.read_text(encoding="utf-8"))
+        if (
+            execution_selection["selection_scope"] != "validation_timing_only"
+            or execution_selection["source_snapshot_hash"] != source_snapshot()["combined_sha256"]
+        ):
+            raise ValueError(
+                "execution profile must be selected on validation with the current source"
+            )
+        if (
+            execution_selection["test_qrels_used"]
+            or object_hash({k: v for k, v in execution_selection.items() if k != "report_hash"})
+            != execution_selection["report_hash"]
+        ):
+            raise ValueError("execution selection checksum/scope differs")
+        frozen["execution_selection_sha256"] = file_hash(selection_file)
     registries = {}
     for domain in ("programmers", "unix"):
+        queries = {
+            q.query_id: q for q in load_queries(root / f"data/raw/{domain}/queries.jsonl", domain)
+        }
         sparse_dir = (root / "artifacts/sparse" / domain).resolve()
-        dense_dir = (Path.home() / ".cache/pegh/artifacts/c0-v1" / domain).resolve()
+        dense_dir = (Path(args.dense_root) / domain).resolve()
         sparse_manifest = json.loads((sparse_dir / "manifest.json").read_text(encoding="utf-8"))
         dense_manifest = json.loads((dense_dir / "manifest.json").read_text(encoding="utf-8"))
         corpus_hash = selection["domains"][domain]["corpus_sha256"]
@@ -73,6 +110,8 @@ def main() -> None:
             raise ValueError("frozen indexes have different corpora")
         sparse_sha = file_hash(sparse_dir / "index.sqlite3")
         dense_sha = file_hash(dense_dir / "index.faiss")
+        with open_backend(sparse_dir, execution=args.sparse_execution) as sparse_backend:
+            sparse_execution = sparse_backend.execution_provenance
         if (
             sparse_sha != sparse_manifest["database_sha256"]
             or dense_sha != dense_manifest["index_sha256"]
@@ -82,11 +121,50 @@ def main() -> None:
             "corpus_sha256": corpus_hash,
             "sparse_index_sha256": sparse_sha,
             "dense_index_sha256": dense_sha,
+            "sparse_execution": sparse_execution,
             "sparse_run_sha256": file_hash(root / f"results/quality/bm25/{domain}.jsonl"),
             "dense_run_sha256": file_hash(root / f"results/quality/dense/{domain}.jsonl"),
             "folds": {},
         }
         for fold in range(5):
+            parts = fold_record(split, fold)["domains"][domain]
+            if execution_selection:
+                key = f"{domain}_fold_{fold}"
+                record = execution_selection["folds"][key]
+                run_dir = root / "results/execution_profiles" / key
+                profile_manifest, rows, _ = load_complete_run(run_dir)
+                if (
+                    file_hash(run_dir / "manifest.json") != record["run_manifest_sha256"]
+                    or profile_manifest["split"] != "validation"
+                    or {r["query_id"] for r in rows} != set(parts["validation"])
+                ):
+                    raise ValueError(
+                        "execution profile must cover exactly this fold's validation queries"
+                    )
+                means = {
+                    name: sum(r["total_ns"] / 1e6 for r in rows if r["method"] == name)
+                    / sum(r["method"] == name for r in rows)
+                    for name in ("sequential", "parallel")
+                }
+                allowed = [name for name in means if record["ranking_identity_passed"][name]]
+                if record["selected"] != min(allowed, key=means.__getitem__):
+                    raise ValueError("execution profile did not select the faster valid baseline")
+            inputs = {}
+            for role, name in (("test", "test"), ("validation", "warmup")):
+                destination = (
+                    output_path.parent / "benchmark_inputs" / f"{domain}_fold_{fold}_{name}.jsonl"
+                )
+                if destination.exists():
+                    raise FileExistsError(f"benchmark input already exists: {destination}")
+                selected_queries = [queries[qid] for qid in parts[role]]
+                write_jsonl(
+                    destination, ({"_id": q.query_id, "text": q.text} for q in selected_queries)
+                )
+                inputs[name] = {
+                    "sha256": file_hash(destination),
+                    "queries_hash": object_hash([asdict(q) for q in selected_queries]),
+                }
+            frozen["benchmark_inputs"][f"{domain}_fold_{fold}"] = inputs
             choice = selection["domains"][domain]["folds"][str(fold)]
             picked = threshold_report["folds"][str(fold)]["ridge_gain_full"]
             if picked["selected_mode"] != "threshold_gate" or picked["selected_threshold"] is None:
@@ -109,6 +187,11 @@ def main() -> None:
                 "threshold": picked["selected_threshold"],
                 "validation_dense_ratio": picked["selected_actual_dense_ratio"],
                 "validation_budget": picked["selected_budget"],
+                "static_execution": execution_selection["folds"][f"{domain}_fold_{fold}"][
+                    "selected"
+                ]
+                if execution_selection
+                else "sequential",
             }
             domain_record["folds"][str(fold)] = item
             base = {
@@ -120,6 +203,9 @@ def main() -> None:
                 "expected_sparse_sha256": sparse_sha,
                 "expected_dense_sha256": dense_sha,
                 "expected_selection_sha256": file_hash(selection_path),
+                "sparse_execution": args.sparse_execution,
+                "expected_sparse_execution_hash": object_hash(sparse_execution),
+                "cache_folder": str(Path(args.cache_folder).resolve()),
             }
             gated = {
                 **base,
@@ -136,7 +222,11 @@ def main() -> None:
                     {
                         "id": name,
                         "factory": "pegh.app.factories:create_static_hybrid_method",
-                        "kwargs": {**base, "mode": name},
+                        "kwargs": {
+                            **base,
+                            "mode": name,
+                            "parallel_branches": item["static_execution"] == "parallel",
+                        },
                         "require_dense_warmup": True,
                     }
                     for name in ("h_star", "s_star")
@@ -146,7 +236,7 @@ def main() -> None:
                         "id": "pe_gh",
                         "factory": "pegh.app.factories:create_gated_method",
                         "kwargs": gated,
-                        "require_dense_warmup": False,
+                        "require_dense_warmup": picked["selected_actual_dense_ratio"] > 0,
                     }
                 ],
             }

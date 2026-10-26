@@ -10,7 +10,7 @@ from contracts.io import load_queries
 from contracts.ranking import ranking_to_record
 from pegh.data.artifacts import atomic_json, file_hash, object_hash, write_jsonl
 from pegh.data.splits import fold_record
-from pegh.sparse.index import SQLiteBM25
+from pegh.sparse.fast import open_backend
 
 
 def main() -> None:
@@ -23,6 +23,7 @@ def main() -> None:
     parser.add_argument("--split-manifest")
     parser.add_argument("--run-id")
     parser.add_argument("--k", type=int, default=100)
+    parser.add_argument("--execution", choices=("numpy", "sqlite"), default="sqlite")
     args = parser.parse_args()
     output = Path(args.output)
     sidecar = output.with_suffix(output.suffix + ".meta.json")
@@ -30,7 +31,7 @@ def main() -> None:
         raise FileExistsError("choose a new sparse run output")
     if args.fold is not None and args.split_manifest is None:
         raise ValueError("--fold requires --split-manifest; a fold label alone is unsafe")
-    with SQLiteBM25(args.index) as backend:
+    with open_backend(args.index, execution=args.execution) as backend:
         queries = load_queries(args.queries, backend.manifest["domain"])
         split_hash = None
         if args.split_manifest is not None:
@@ -79,6 +80,7 @@ def main() -> None:
                 "run_id": args.run_id,
                 "split_hash": split_hash,
                 "output_k": args.k,
+                "execution_provenance": backend.execution_provenance,
             },
         )
     print(f"Wrote {len(queries)} BM25 rankings to {output}")

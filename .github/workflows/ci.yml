@@ -1,4 +1,4 @@
-name: Shared contracts and Parts A/B correctness
+name: Shared contracts and Parts A/B/C correctness
 
 on:
   push:
@@ -30,10 +30,10 @@ jobs:
       - run: uv lock --check
       - run: uv sync --locked --extra dev
       - run: uv pip check
-      - run: uv run --no-sync ruff check src contracts scripts_a scripts_b scripts_shared tests/a tests/b tests/shared
-      - run: uv run --no-sync ruff format --check src contracts scripts_a scripts_b scripts_shared tests/a tests/b tests/shared
-      - run: uv run --no-sync pytest tests/shared tests/a tests/b -m 'not model' -q
-      - run: uv run --no-sync python -m compileall -q contracts src scripts_a scripts_b scripts_shared
+      - run: uv run --no-sync ruff check src contracts scripts_a scripts_b scripts_c scripts_shared tests
+      - run: uv run --no-sync ruff format --check src contracts scripts_a scripts_b scripts_c scripts_shared tests
+      - run: uv run --no-sync pytest -m 'not model' -q
+      - run: uv run --no-sync python -m compileall -q contracts src scripts_a scripts_b scripts_c scripts_shared
       - if: github.event_name == 'workflow_dispatch' && inputs.real_model
         run: uv run --no-sync pytest tests/b/test_model.py -m model -q
 

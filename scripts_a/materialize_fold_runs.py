@@ -71,6 +71,7 @@ def main() -> None:
                 "split": "test",
                 "run_id": run_id,
                 "corpus_hash": source_metadata["corpus_hash"],
+                "retriever_hash": source_metadata["retriever_hash"],
             },
         )
     print(f"Wrote five exact OOF runs under {output}")

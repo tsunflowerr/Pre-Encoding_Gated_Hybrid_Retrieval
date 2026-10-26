@@ -85,6 +85,9 @@ def _bm25s_parity(
         exact_orders = 0
         maximum_score_difference = 0.0
         compared_scores = 0
+        score_tolerance_passed = True
+        non_tie_order_mismatches = 0
+        absolute_tolerance, relative_tolerance = 1e-5, 1e-6
         for query in queries:
             expected = local_rankings[query.query_id]
             tokens = local.tokenizer.tokenize(query.text)
@@ -104,11 +107,25 @@ def _bm25s_parity(
             denominator = max(1, len(set(expected_ids) | set(actual_ids)))
             overlaps.append(len(set(expected_ids) & set(actual_ids)) / denominator)
             actual_scores = dict(actual_pairs)
+            expected_scores = {hit.doc_id: hit.score for hit in expected.hits}
+            for (left, _), (right, _) in zip(actual_pairs, actual_pairs[1:], strict=False):
+                if left in expected_scores and right in expected_scores:
+                    tolerance = absolute_tolerance + relative_tolerance * max(
+                        abs(expected_scores[left]), abs(expected_scores[right])
+                    )
+                    if expected_scores[left] + tolerance < expected_scores[right]:
+                        non_tie_order_mismatches += 1
             for hit in expected.hits:
                 if hit.doc_id in actual_scores:
                     maximum_score_difference = max(
                         maximum_score_difference,
                         abs(hit.score - actual_scores[hit.doc_id]),
+                    )
+                    score_tolerance_passed &= math.isclose(
+                        hit.score,
+                        actual_scores[hit.doc_id],
+                        abs_tol=absolute_tolerance,
+                        rel_tol=relative_tolerance,
                     )
                     compared_scores += 1
         minimum_overlap = min(overlaps, default=1.0)
@@ -128,7 +145,14 @@ def _bm25s_parity(
             "mean_jaccard_at_k": sum(overlaps) / len(overlaps) if overlaps else 1.0,
             "compared_score_count": compared_scores,
             "maximum_absolute_score_difference": maximum_score_difference,
-            "passed": minimum_overlap >= 0.999999 and math.isfinite(maximum_score_difference),
+            "absolute_tolerance": absolute_tolerance,
+            "relative_tolerance": relative_tolerance,
+            "non_tie_order_mismatches": non_tie_order_mismatches,
+            "passed": bool(queries)
+            and minimum_overlap >= 0.999999
+            and score_tolerance_passed
+            and non_tie_order_mismatches == 0
+            and math.isfinite(maximum_score_difference),
         }
 
 
@@ -144,6 +168,8 @@ def main() -> None:
     parser.add_argument("--k", type=int, default=100)
     parser.add_argument("--max-queries", type=int)
     args = parser.parse_args()
+    if args.k < 1 or (args.max_queries is not None and args.max_queries < 1):
+        raise ValueError("k and max-queries must be positive")
     queries = load_queries(args.queries, args.domain)
     query_ids = [query.query_id for query in queries]
     report = {

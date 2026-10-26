@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from concurrent.futures import ThreadPoolExecutor
 
 from contracts.types import GateDecision, Query, Ranking, SearchResponse
 from pegh.profiling.trace import NullTraceSink
@@ -84,12 +85,15 @@ class HybridSearchMethod:
 class StaticHybridMethod:
     """Always execute the selected fusion baseline without gate work."""
 
-    def __init__(self, sparse, dense, fusion, *, trace=None, provenance: dict):
+    def __init__(
+        self, sparse, dense, fusion, *, trace=None, provenance: dict, parallel: bool = False
+    ):
         self.sparse = sparse
         self.dense = dense
         self.fusion = fusion
         self.trace = trace if trace is not None else NullTraceSink()
         self.provenance = provenance
+        self._executor = ThreadPoolExecutor(max_workers=1) if parallel else None
 
     def search(self, query: Query, k: int = 100) -> SearchResponse:
         if type(k) is not int or k < 1 or query.domain != self.sparse.manifest["domain"]:
@@ -104,9 +108,14 @@ class StaticHybridMethod:
             )
             ranking.validate()
             return SearchResponse(ranking, False, None, 0, "empty_query")
-        sparse = self.sparse.search(query, k=k)
+        sparse_future = (
+            self._executor.submit(self.sparse.search, query, k=k) if self._executor else None
+        )
+        sparse = self.sparse.search(query, k=k) if sparse_future is None else None
         before = self.dense.encoder_calls
         dense = self.dense.search(query, k=k)
+        if sparse_future is not None:
+            sparse = sparse_future.result()
         calls = self.dense.encoder_calls - before
         if calls != 1:
             raise ValueError("static hybrid must encode exactly once")
@@ -116,4 +125,6 @@ class StaticHybridMethod:
         return SearchResponse(ranking, True, None, calls, None)
 
     def close(self) -> None:
+        if self._executor is not None:
+            self._executor.shutdown(wait=True)
         self.sparse.close()

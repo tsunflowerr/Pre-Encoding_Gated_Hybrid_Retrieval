@@ -20,7 +20,15 @@ def source_snapshot(root: str | Path | None = None) -> dict:
     """Hash executable project sources/configuration, independently of Git cleanliness."""
     root = source_root(root)
     files = []
-    for directory in ("src", "contracts", "configs", "scripts_b"):
+    for directory in (
+        "src",
+        "contracts",
+        "configs",
+        "scripts_a",
+        "scripts_b",
+        "scripts_c",
+        "scripts_shared",
+    ):
         for path in sorted((root / directory).rglob("*")):
             if path.is_file() and path.suffix in (".py", ".yaml", ".yml", ".json", ".toml"):
                 files.append({"path": path.relative_to(root).as_posix(), "sha256": file_hash(path)})

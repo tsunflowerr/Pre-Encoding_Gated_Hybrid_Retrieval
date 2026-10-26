@@ -1,6 +1,8 @@
 param(
     [int]$Repetitions = 5,
     [string]$OutputRoot = 'results/benchmark/c6_full',
+    [string]$Runtime = 'configs/runtime/cpu4.yaml',
+    [switch]$DetailedStages,
     [ValidateSet('programmers', 'unix')][string]$OnlyDomain,
     [ValidateRange(0, 4)][Nullable[int]]$OnlyFold = $null,
     [switch]$RestartIncomplete
@@ -56,10 +58,11 @@ foreach ($domain in $domains) {
             Move-Item -LiteralPath $output -Destination $archive
             Write-Host "Archived interrupted run: $archive"
         }
+        $stageArgs = if ($DetailedStages) { @('--detailed-stages') } else { @() }
         & $python -X utf8 scripts_b/benchmark_online.py `
             --registry $registry --queries $queries --warmup-queries $warmup `
             --domain $domain --split test --fold $fold --output $output `
-            --repetitions $Repetitions --detailed-stages
+            --repetitions $Repetitions --runtime $Runtime @stageArgs
         if ($LASTEXITCODE -ne 0) { throw "Benchmark failed: $name" }
         & $python -X utf8 scripts_b/report_efficiency.py --run $output
         if ($LASTEXITCODE -ne 0) { throw "Efficiency report failed: $name" }
