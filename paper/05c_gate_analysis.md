@@ -42,17 +42,20 @@ At the exact PE-GH dense count in each fold/domain, 30 query-ID hash random seed
 
 ## Online execution and limits
 
-The full B-worker benchmark covers all 1,948 test queries across ten fold/domain runs, five repetitions each, for H*, S*, and PE-GH: 29,220 measured requests. All 29,220 online ranking-ID sequences match the corresponding frozen OOF ranking, and encoder-call totals match the frozen sidecars for every fold. The worker performs real retrieval and query encoding; its `quality_cache_used` receipt is false. The [C7 facts](../docs/person_c/validation/C7_FACTS.json) contain the verified per-fold summaries and pooled values. Means and p95 below pool request timings within each domain; repeats are correlated observations of the same queries. Peak RSS is the largest worker peak across the relevant folds and includes loading and warmup.
+The verified integration benchmark of 26 October covers all 1,948 test queries across ten fold/domain runs, five repetitions each, for H*, S*, and PE-GH: 29,220 measured requests on an Intel i7-9850H pinned to four physical cores. Every method uses the same exact in-memory BM25 backend (bit-identical to the SQLite reference on all 1,948 queries), and H*/S* use the sequential or parallel branch schedule chosen on validation per fold. All 29,220 online ranking-ID sequences match the frozen OOF rankings and encoder-call totals match the frozen gate decisions. Means and p95 pool raw request timings; repeats are correlated observations of the same queries. Peak RSS includes loading and warmup. Full receipts: [integration report](../docs/integration/2026-10-26/README.md).
 
 | Domain | Method | Dense % | Mean ms | p95 ms | CPU mean ms | Peak RSS MiB |
 |---|---|---:|---:|---:|---:|---:|
-| Programmers | S* | 100.0 | 691.9 | 1442.2 | 1121.5 | 521.5 |
-| Programmers | PE-GH | 74.7 | 737.9 | 1465.5 | 996.9 | 520.1 |
-| Unix | S* | 100.0 | 648.8 | 1224.6 | 1185.7 | 549.5 |
-| Unix | PE-GH | 43.9 | 606.0 | 1183.9 | 841.8 | 546.8 |
-| Both domains | S* | 100.0 | 668.2 | 1317.7 | 1156.8 | 549.5 |
-| Both domains | PE-GH | 57.8 | 665.3 | 1302.8 | 911.5 | 546.8 |
+| Programmers | H* | 100.0 | 23.51 | 29.73 | 91.61 | 559.6 |
+| Programmers | S* | 100.0 | 23.18 | 27.81 | 90.12 | 560.0 |
+| Programmers | PE-GH | 74.7 | 19.24 | 29.65 | 74.03 | 559.4 |
+| Unix | H* | 100.0 | 26.85 | 31.81 | 103.96 | 639.3 |
+| Unix | S* | 100.0 | 26.70 | 31.66 | 103.22 | 639.5 |
+| Unix | PE-GH | 43.9 | 14.32 | 31.41 | 54.91 | 638.0 |
+| Both domains | H* | 100.0 | 25.35 | 31.36 | 98.41 | 639.3 |
+| Both domains | S* | 100.0 | 25.11 | 30.66 | 97.33 | 639.5 |
+| Both domains | PE-GH | 57.8 | 16.54 | 30.97 | 63.51 | 638.0 |
 
-PE-GH is slower than S* on Programmers by 46.0 ms in the pooled mean and 23.3 ms at p95, while it is faster on Unix by 42.9 ms and 40.8 ms, respectively. Across both domains its mean is only 2.9 ms lower and p95 14.9 ms lower. Programmers fold 0 and fold 2 in particular show higher PE-GH mean latency than S*. The sparse stage dominates wall time and differs between methods despite using the same sparse backend: pooled sparse means on Programmers are 715.3 ms for PE-GH and 666.0 ms for S*. This indicates run-to-run conditions materially affect the end-to-end comparison; the pooled difference is too small and uneven to claim a reliable general latency speedup. CPU usage and dense calls fall substantially, but those savings should be reported separately from wall latency.
+PE-GH lowers pooled mean latency by 34.8% relative to H* (query-bootstrap 95% CI [32.9%, 36.7%]) and process CPU time by 35.5%. The saving follows the dense-call ratio: 18.2% on Programmers, where the shared threshold routes 74.7% of queries to dense, and 46.7% on Unix (43.9%). p95 does not improve, as expected when more than 5% of requests still take the dense branch, and is about 1% above S* pooled (6.6% on Programmers). Peak RSS is unchanged because the encoder and index stay resident. A separate stage sample (Programmers, H*) attributes about 2.3 ms to BM25, 11.3 ms to query encoding, 7.0 ms to exact FAISS search and 1.0 ms to fusion.
 
-H* and S* have identical ranked results here, yet H* pooled mean is 717.1 ms versus 668.2 ms for S*, another sign of timing variability. A previous one-fold, one-repeat integration sample remains a distinct check and is not included in this five-repeat table. The study uses two technical-question domains, one pinned dense model, and one local i3 CPU; broader hardware or workload claims need new measurements. [Experimental setup](04_experimental_setup.md) records split and metric semantics; [C6–C8 execution summary](../docs/person_c/EXECUTION_SUMMARY.md) lists exact commands and artifacts.
+A later refinement replaced per-query scikit-learn validation in the gate with the same NumPy arithmetic (48,700 scores bit-identical); in a fresh same-session run it lowered PE-GH's mean by 2.09%, with a process-repetition CI that includes zero ([refinement report](../docs/refinement/inference-2026-10-26/README.md)). An earlier five-repeat run on an i3 machine with the SQLite sparse backend showed no reliable wall-clock saving because sparse retrieval dominated; it is kept as a historical receipt in [C7 facts](../docs/person_c/validation/C7_FACTS.json) and is not pooled with the numbers above. The study uses two technical-question domains, one pinned dense model and one host; broader hardware or workload claims need new measurements.

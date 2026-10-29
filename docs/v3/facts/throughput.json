@@ -1,0 +1,393 @@
+{
+  "processes": 4,
+  "affinity": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "folds": [
+    0,
+    1
+  ],
+  "methods": {
+    "h_star": {
+      "runs": [
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 704,
+          "wall_seconds": 6.408978799998295,
+          "qps": 109.84589307740998,
+          "cpu_ms_per_query": 34.02432528409091,
+          "dense_ratio": 1.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 700,
+          "wall_seconds": 5.9404267000063555,
+          "qps": 117.83665304703635,
+          "cpu_ms_per_query": 33.058035714285715,
+          "dense_ratio": 1.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 8.21297889998823,
+          "qps": 104.71231090113145,
+          "cpu_ms_per_query": 36.991279069767444,
+          "dense_ratio": 1.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 8.924889600006281,
+          "qps": 96.3597353629332,
+          "cpu_ms_per_query": 39.97093023255814,
+          "dense_ratio": 1.0
+        }
+      ],
+      "qps": 105.94400825251222,
+      "cpu_ms_per_query": 36.26160371318822,
+      "dense_ratio": 1.0
+    },
+    "pe_gh": {
+      "runs": [
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 704,
+          "wall_seconds": 4.375937599994359,
+          "qps": 160.8798077927134,
+          "cpu_ms_per_query": 24.347478693181817,
+          "dense_ratio": 0.7386363636363636
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 700,
+          "wall_seconds": 4.207259899994824,
+          "qps": 166.37907251721273,
+          "cpu_ms_per_query": 23.59375,
+          "dense_ratio": 0.7371428571428571
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 5.371817799998098,
+          "qps": 160.09478206805608,
+          "cpu_ms_per_query": 24.473110465116278,
+          "dense_ratio": 0.6930232558139535
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 3.512682999993558,
+          "qps": 244.8271022467946,
+          "cpu_ms_per_query": 16.042877906976745,
+          "dense_ratio": 0.413953488372093
+        }
+      ],
+      "qps": 178.8443987496296,
+      "cpu_ms_per_query": 21.927016645326503,
+      "dense_ratio": 0.6363636363636364
+    },
+    "bm25": {
+      "runs": [
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 704,
+          "wall_seconds": 0.37990469999203924,
+          "qps": 1853.0963160359745,
+          "cpu_ms_per_query": 2.108487215909091,
+          "dense_ratio": 0.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 700,
+          "wall_seconds": 0.35786629999347497,
+          "qps": 1956.0377716839032,
+          "cpu_ms_per_query": 2.0535714285714284,
+          "dense_ratio": 0.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 0.5706593000068096,
+          "qps": 1507.0287998280894,
+          "cpu_ms_per_query": 2.616279069767442,
+          "dense_ratio": 0.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 0.5829318999894895,
+          "qps": 1475.3009742913473,
+          "cpu_ms_per_query": 2.6344476744186047,
+          "dense_ratio": 0.0
+        }
+      ],
+      "qps": 1651.7195913241997,
+      "cpu_ms_per_query": 2.3807618437900127,
+      "dense_ratio": 0.0
+    },
+    "proxy": {
+      "runs": [
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 704,
+          "wall_seconds": 0.7014354999992065,
+          "qps": 1003.6560738668009,
+          "cpu_ms_per_query": 3.928444602272727,
+          "dense_ratio": 0.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 700,
+          "wall_seconds": 0.6756405000051018,
+          "qps": 1036.0539369601352,
+          "cpu_ms_per_query": 3.794642857142857,
+          "dense_ratio": 0.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 0.9740250000031665,
+          "qps": 882.9342162646792,
+          "cpu_ms_per_query": 4.4876453488372094,
+          "dense_ratio": 0.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 1.322396999996272,
+          "qps": 650.3342037243161,
+          "cpu_ms_per_query": 4.723837209302325,
+          "dense_ratio": 0.0
+        }
+      ],
+      "qps": 850.4155984287493,
+      "cpu_ms_per_query": 4.271366837387964,
+      "dense_ratio": 0.0
+    },
+    "rescore": {
+      "runs": [
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 704,
+          "wall_seconds": 3.414780000006431,
+          "qps": 206.16262248188002,
+          "cpu_ms_per_query": 19.065163352272727,
+          "dense_ratio": 1.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 700,
+          "wall_seconds": 3.3868166000029305,
+          "qps": 206.68376315369255,
+          "cpu_ms_per_query": 18.883928571428573,
+          "dense_ratio": 1.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 4.3932066999987,
+          "qps": 195.75678057676058,
+          "cpu_ms_per_query": 19.894622093023255,
+          "dense_ratio": 1.0
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 4.698853099995176,
+          "qps": 183.02338500449883,
+          "cpu_ms_per_query": 20.76671511627907,
+          "dense_ratio": 1.0
+        }
+      ],
+      "qps": 196.556407246816,
+      "cpu_ms_per_query": 19.72131081946223,
+      "dense_ratio": 1.0
+    },
+    "cascade": {
+      "runs": [
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 704,
+          "wall_seconds": 3.3657919999968726,
+          "qps": 209.16325191831643,
+          "cpu_ms_per_query": 18.732244318181817,
+          "dense_ratio": 0.9375
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 700,
+          "wall_seconds": 3.1837235999992117,
+          "qps": 219.86833279125528,
+          "cpu_ms_per_query": 17.723214285714285,
+          "dense_ratio": 0.88
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 3.641389299998991,
+          "qps": 236.17359451246762,
+          "cpu_ms_per_query": 16.569767441860463,
+          "dense_ratio": 0.7255813953488373
+        },
+        {
+          "processes": 4,
+          "affinity": [
+            0,
+            2,
+            4,
+            6
+          ],
+          "queries": 860,
+          "wall_seconds": 3.1716106999956537,
+          "qps": 271.1555992673308,
+          "cpu_ms_per_query": 14.51671511627907,
+          "dense_ratio": 0.5767441860465117
+        }
+      ],
+      "qps": 233.78831452980063,
+      "cpu_ms_per_query": 16.750360115236877,
+      "dense_ratio": 0.7669654289372599
+    }
+  }
+}

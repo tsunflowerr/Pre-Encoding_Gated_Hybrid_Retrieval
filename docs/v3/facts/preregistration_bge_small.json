@@ -1,0 +1,64 @@
+{
+  "schema_version": "v3_preregistration_receipt_1",
+  "encoder": "bge_small",
+  "registration_sha256": "2e2f0d17fa18b4c1f370ba76a6196825f38ae28dd5df5a1c9121ba731e8e4ed5",
+  "registered_at_utc": "2026-10-28T19:32:15.166720+00:00",
+  "development_selection_sha256": "cbed73d55ca51a98a8dc6a9df7c794ff721f7ddb7a7afda2bd55a61a3d4533af",
+  "development_evaluation_sha256": "0fc6c439e37d6fa116edda557a0a5a1e07b49f9f3e50ba91a1e9b1a526031969",
+  "fresh_labels_scored_before_with": [
+    "minilm"
+  ],
+  "primary_gates": {
+    "v1": "v1_ridge",
+    "cascade": "v1_ridge"
+  },
+  "spec": {
+    "schema_version": "v3_preregistration_1",
+    "registered_on": "2026-10-29",
+    "fresh_domains": [
+      "android",
+      "gis",
+      "mathematica",
+      "webmasters"
+    ],
+    "dataset": {
+      "id": "BeIR/cqadupstack",
+      "revision": "e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c"
+    },
+    "qrels": {
+      "id": "BeIR/cqadupstack-qrels",
+      "revision": "13595a9f221256a9a21e91c8b0fed3563382b6a7"
+    },
+    "encoder": {
+      "model": "BAAI/bge-small-en-v1.5",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+    },
+    "splits": "the existing fresh five-fold split (seed 42), unchanged",
+    "selection": {
+      "policy": "identical to preregistration_fresh.yaml (validation-only, v1 tie rules)",
+      "thresholds": "v1 C6 rule, pooled validation rows, 0.005 macro / 0.01 per-domain vs S*"
+    },
+    "primary_gates": {
+      "v1": "v1_ridge",
+      "cascade": "v1_ridge"
+    },
+    "analysis": {
+      "metric": "nDCG@10, equal-weight macro over the four domains",
+      "bootstrap": "10000 group resamples within domain, seed 20261019",
+      "multiplicity": "Holm over B1-B4 at family-wise alpha 0.05 (one-sided bootstrap p-values)"
+    },
+    "hypothesis_tests": {
+      "B1_h_star_superior_to_r_star": "with an encoder stronger than BM25, FAISS candidates outside the BM25 top-100 matter (dev: H* - R* = +0.029)",
+      "B2_p_star_superior_to_bm25": "static bge proxy re-ranking improves BM25 (dev +0.011)",
+      "B3_pe_gh_v1_noninferior_to_s_star": "PE-GH v1 (bge) non-inferior to S*, margin 0.01",
+      "B4_pe_gh_v1_beats_random_matched": "v1_ridge beats 30-seed random routing at its own per-fold dense counts (dev +0.014)"
+    },
+    "secondary_reported_without_claims": [
+      "dense ratio of PE-GH v1 at its operating point (dev 87%)",
+      "BM25-margin and LiteGator-style SVM at matched budget; AUC/Spearman of gate scores",
+      "cascade mode is reported descriptively only; on dev it falls back to R* in every fold"
+    ],
+    "negative_results_policy": "every hypothesis is reported whatever the outcome; no threshold, alpha grid, feature or model change after the fresh bge-small rankings are scored"
+  },
+  "receipt_hash": "0682584e40f1c10f9f836f3a5b9f2e41a4ab37e393e204615ee3d81f59d9c552"
+}

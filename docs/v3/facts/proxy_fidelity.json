@@ -1,0 +1,170 @@
+{
+  "minilm/android": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.5381106344113303,
+      "mean_top10_overlap": 0.32933333333333337,
+      "mean_cos_proxy_vs_true_query": 0.3343912281716863
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.6678536520150624,
+      "mean_top10_overlap": 0.44433333333333336,
+      "mean_cos_proxy_vs_true_query": 0.4526802290479342
+    }
+  },
+  "minilm/programmers": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.5025497236154172,
+      "mean_top10_overlap": 0.3076666666666667,
+      "mean_cos_proxy_vs_true_query": 0.34354401177416244
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.699036719721571,
+      "mean_top10_overlap": 0.4633333333333333,
+      "mean_cos_proxy_vs_true_query": 0.49583696862061816
+    }
+  },
+  "minilm/unix": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.5410232042941222,
+      "mean_top10_overlap": 0.34900000000000003,
+      "mean_cos_proxy_vs_true_query": 0.34163410510867837
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.6727971778978876,
+      "mean_top10_overlap": 0.443,
+      "mean_cos_proxy_vs_true_query": 0.4610792055229346
+    }
+  },
+  "minilm/gis": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.5242480922082539,
+      "mean_top10_overlap": 0.31399999999999995,
+      "mean_cos_proxy_vs_true_query": 0.3113259383539359
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.588751673851321,
+      "mean_top10_overlap": 0.3826666666666666,
+      "mean_cos_proxy_vs_true_query": 0.4145081887145837
+    }
+  },
+  "minilm/mathematica": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.5668272044086441,
+      "mean_top10_overlap": 0.3473333333333333,
+      "mean_cos_proxy_vs_true_query": 0.3784868022799492
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.7036538348231528,
+      "mean_top10_overlap": 0.453,
+      "mean_cos_proxy_vs_true_query": 0.49996306002140045
+    }
+  },
+  "minilm/webmasters": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.5162704915350974,
+      "mean_top10_overlap": 0.308,
+      "mean_cos_proxy_vs_true_query": 0.3424623463799556
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.6389070352992092,
+      "mean_top10_overlap": 0.4036666666666667,
+      "mean_cos_proxy_vs_true_query": 0.4482911175986131
+    }
+  },
+  "bge_small/programmers": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.456894947324202,
+      "mean_top10_overlap": 0.2753333333333333,
+      "mean_cos_proxy_vs_true_query": 0.6978812692562739
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.6011773428598203,
+      "mean_top10_overlap": 0.37733333333333335,
+      "mean_cos_proxy_vs_true_query": 0.7424235014120738
+    }
+  },
+  "bge_small/unix": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.5455960617263619,
+      "mean_top10_overlap": 0.31866666666666665,
+      "mean_cos_proxy_vs_true_query": 0.7090877240896225
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.6338915205625155,
+      "mean_top10_overlap": 0.3856666666666666,
+      "mean_cos_proxy_vs_true_query": 0.7441319026549658
+    }
+  },
+  "bge_small/android": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.4600617553065816,
+      "mean_top10_overlap": 0.299,
+      "mean_cos_proxy_vs_true_query": 0.6739013965924581
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.5654628073878898,
+      "mean_top10_overlap": 0.382,
+      "mean_cos_proxy_vs_true_query": 0.708077479203542
+    }
+  },
+  "bge_small/gis": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.47093797980108587,
+      "mean_top10_overlap": 0.2836666666666666,
+      "mean_cos_proxy_vs_true_query": 0.711438362399737
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.5469749847114154,
+      "mean_top10_overlap": 0.3626666666666667,
+      "mean_cos_proxy_vs_true_query": 0.7441638751824697
+    }
+  },
+  "bge_small/mathematica": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.58850827454972,
+      "mean_top10_overlap": 0.35600000000000004,
+      "mean_cos_proxy_vs_true_query": 0.7425202691555023
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.6853288445124069,
+      "mean_top10_overlap": 0.4373333333333333,
+      "mean_cos_proxy_vs_true_query": 0.7788121477762858
+    }
+  },
+  "bge_small/webmasters": {
+    "uniform": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.4779280333411761,
+      "mean_top10_overlap": 0.2873333333333333,
+      "mean_cos_proxy_vs_true_query": 0.7007993406057358
+    },
+    "sif": {
+      "queries": 300,
+      "mean_pearson_candidate_scores": 0.565790986319215,
+      "mean_top10_overlap": 0.36566666666666664,
+      "mean_cos_proxy_vs_true_query": 0.7300096025069555
+    }
+  }
+}

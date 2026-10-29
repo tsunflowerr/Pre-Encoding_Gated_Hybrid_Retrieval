@@ -1,0 +1,133 @@
+{
+  "schema_version": "v3_development_selection_2",
+  "selection_scope": "development_validation_only",
+  "test_labels_used": false,
+  "encoder": "minilm",
+  "criterion": "mean exact-budget validation nDCG@10 over budgets 0.1..0.9, macro, 5 folds",
+  "tie_rule": "within 0.0005: fewer feature groups, then ridge, then name",
+  "modes": {
+    "v1": {
+      "validation_area": {
+        "v1_ridge": 0.3086000669089174,
+        "v1_logistic": 0.30804996940107665,
+        "v1_sparse_success": 0.308919049714949,
+        "v1_ridge_general": 0.30766205107895406,
+        "litegator_svc": 0.3077339299573193,
+        "v3_ridge_qpp": 0.3088028754385485,
+        "v3_ridge_proxy": 0.30689050389419337,
+        "v3_ridge_all": 0.3076220676484326,
+        "v3_logistic_qpp": 0.30864599967452183,
+        "v3_logistic_proxy": 0.30816744988329275,
+        "v3_logistic_all": 0.3084180271680206,
+        "bm25_margin": 0.30786326874421366,
+        "oracle": 0.3382144726526607,
+        "random30": 0.30433558548795614
+      },
+      "chosen": "v3_ridge_qpp"
+    },
+    "cascade": {
+      "validation_area": {
+        "v1_ridge": 0.3145637989410176,
+        "v1_logistic": 0.31399461033420617,
+        "v1_sparse_success": 0.3146660295343129,
+        "v1_ridge_general": 0.31497429808247196,
+        "litegator_svc": 0.3129559258141815,
+        "v3_ridge_qpp": 0.31393936904582376,
+        "v3_ridge_proxy": 0.3139218260955018,
+        "v3_ridge_all": 0.31386187809700844,
+        "v3_logistic_qpp": 0.31339433036897807,
+        "v3_logistic_proxy": 0.31316358472362227,
+        "v3_logistic_all": 0.31278326922679056,
+        "bm25_margin": 0.31447639159633745,
+        "oracle": 0.34173590731846365,
+        "random30": 0.3123264570116736
+      },
+      "chosen": "v1_ridge"
+    }
+  },
+  "static_validation_macro": {
+    "bm25": 0.28991514702296317,
+    "h_star": 0.318311488402781,
+    "p_star": 0.30222127707351865,
+    "r_star": 0.32202192553420056,
+    "s_star": 0.318311488402781,
+    "s_star_all": 0.32313903571034286
+  },
+  "fold_choices": {
+    "programmers": [
+      {
+        "h_star": "cc_alpha_0.4",
+        "s_star": "cc_alpha_0.4",
+        "p_star": "proxy_cc_0.6",
+        "r_star": "rescore_cc_0.6",
+        "s_star_all": "rescore_cc_0.6"
+      },
+      {
+        "h_star": "cc_alpha_0.5",
+        "s_star": "cc_alpha_0.5",
+        "p_star": "proxy_cc_0.4",
+        "r_star": "rescore_cc_0.7",
+        "s_star_all": "cc_alpha_0.5"
+      },
+      {
+        "h_star": "cc_alpha_0.5",
+        "s_star": "cc_alpha_0.5",
+        "p_star": "proxy_cc_0.2",
+        "r_star": "rescore_cc_0.8",
+        "s_star_all": "rescore_cc_0.8"
+      },
+      {
+        "h_star": "cc_alpha_0.4",
+        "s_star": "cc_alpha_0.4",
+        "p_star": "proxy_cc_0.2",
+        "r_star": "rescore_cc_0.7",
+        "s_star_all": "rescore_cc_0.7"
+      },
+      {
+        "h_star": "cc_alpha_0.5",
+        "s_star": "cc_alpha_0.5",
+        "p_star": "proxy_cc_0.5",
+        "r_star": "rescore_cc_0.6",
+        "s_star_all": "rescore_cc_0.6"
+      }
+    ],
+    "unix": [
+      {
+        "h_star": "cc_alpha_0.3",
+        "s_star": "cc_alpha_0.3",
+        "p_star": "proxy_cc_0.4",
+        "r_star": "rescore_cc_0.6",
+        "s_star_all": "rescore_cc_0.6"
+      },
+      {
+        "h_star": "cc_alpha_0.4",
+        "s_star": "cc_alpha_0.4",
+        "p_star": "proxy_cc_0.4",
+        "r_star": "rescore_cc_0.7",
+        "s_star_all": "rescore_cc_0.7"
+      },
+      {
+        "h_star": "cc_alpha_0.5",
+        "s_star": "cc_alpha_0.5",
+        "p_star": "proxy_cc_0.4",
+        "r_star": "rescore_cc_0.7",
+        "s_star_all": "cc_alpha_0.5"
+      },
+      {
+        "h_star": "cc_alpha_0.5",
+        "s_star": "cc_alpha_0.5",
+        "p_star": "proxy_cc_0.4",
+        "r_star": "rescore_cc_0.7",
+        "s_star_all": "cc_alpha_0.5"
+      },
+      {
+        "h_star": "cc_alpha_0.2",
+        "s_star": "cc_alpha_0.2",
+        "p_star": "proxy_cc_0.5",
+        "r_star": "rescore_cc_0.5",
+        "s_star_all": "rescore_cc_0.5"
+      }
+    ]
+  },
+  "report_hash": "5c8c0c4bba6c7d4e5ac97cc2eb0fcada5ec4dc03bec896cd6274e06aab1146c4"
+}

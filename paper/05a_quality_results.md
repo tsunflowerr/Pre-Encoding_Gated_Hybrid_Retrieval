@@ -28,11 +28,12 @@ The deterministic failure audit contains the bottom 20 queries per method and do
 rows): 23 code/CLI, 53 natural-language, and 4 short queries under lexical heuristic labels.
 These labels are descriptive, not causal diagnoses.
 
-## Results not yet claimable
+## Hybrid and gated results
 
-H*, S*, and PE-GH rows remain absent until their ranking-v1 artifacts and sidecars exist for
-both domains and all five folds. No C run is present in the repository as of the audit date.
-Therefore H* utility, the S*→PE-GH comparison, its paired confidence interval, and the
-paper's primary effectiveness claim cannot be produced without inventing data. The final
-strict OOF runner rejects missing metadata, forged provenance, wrong fold membership,
-missing sidecars, mixed retrievers, and rankings longer than top-100.
+The section above was written before C's runs existed and is kept as the 22 October audit.
+H*, S*, PE-GH and every control now have strict five-fold OOF runs; their quality, the
+paired S*→PE-GH comparison and its confidence interval are reported in
+[gate analysis](05c_gate_analysis.md) and the
+[integration report](../docs/integration/2026-10-26/README.md). The OOF runner still
+rejects missing metadata, forged provenance, wrong fold membership, missing sidecars, mixed
+retrievers, and rankings longer than top-100.

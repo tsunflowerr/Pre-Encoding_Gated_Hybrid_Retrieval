@@ -1,0 +1,152 @@
+{
+  "affinity": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "faiss_threads": 4,
+  "hnsw": {
+    "M": 32,
+    "ef_construction": 200,
+    "ef_search": [
+      128,
+      256,
+      512
+    ]
+  },
+  "encoders": {
+    "minilm": {
+      "domains": {
+        "programmers": {
+          "build_seconds": 30.407871099974727,
+          "flat_matches_cache": 1.0,
+          "flat": {
+            "median_ms": 5.61165,
+            "mean_ms": 6.290989726027397,
+            "overlap_at_10": 1.0,
+            "overlap_at_100": 1.0
+          },
+          "hnsw_ef128": {
+            "median_ms": 0.89235,
+            "mean_ms": 0.9767518264840183,
+            "overlap_at_10": 0.9923515981735159,
+            "overlap_at_100": 0.9517808219178082
+          },
+          "hnsw_ef256": {
+            "median_ms": 1.4188,
+            "mean_ms": 1.5678220319634704,
+            "overlap_at_10": 0.9986301369863013,
+            "overlap_at_100": 0.9869977168949773
+          },
+          "hnsw_ef512": {
+            "median_ms": 2.4814,
+            "mean_ms": 2.728750456621005,
+            "overlap_at_10": 0.9995433789954338,
+            "overlap_at_100": 0.9973858447488585
+          }
+        },
+        "unix": {
+          "build_seconds": 56.00010239999392,
+          "flat_matches_cache": 1.0,
+          "flat": {
+            "median_ms": 8.9698,
+            "mean_ms": 10.32366156716418,
+            "overlap_at_10": 1.0,
+            "overlap_at_100": 1.0
+          },
+          "hnsw_ef128": {
+            "median_ms": 1.0583,
+            "mean_ms": 1.2010254664179103,
+            "overlap_at_10": 0.9901119402985076,
+            "overlap_at_100": 0.9474533582089553
+          },
+          "hnsw_ef256": {
+            "median_ms": 1.70685,
+            "mean_ms": 1.8866377798507463,
+            "overlap_at_10": 0.9977611940298506,
+            "overlap_at_100": 0.9837220149253733
+          },
+          "hnsw_ef512": {
+            "median_ms": 3.0808,
+            "mean_ms": 3.3560898320895522,
+            "overlap_at_10": 0.9994402985074627,
+            "overlap_at_100": 0.9961473880597014
+          }
+        }
+      },
+      "h_star_macro": {
+        "flat": 0.31462523356530414,
+        "hnsw_ef128": 0.31438924285823766,
+        "hnsw_ef256": 0.3138659588214666,
+        "hnsw_ef512": 0.3143602856197445
+      }
+    },
+    "bge_small": {
+      "domains": {
+        "programmers": {
+          "build_seconds": 29.8305057999969,
+          "flat_matches_cache": 1.0,
+          "flat": {
+            "median_ms": 6.03775,
+            "mean_ms": 7.408061415525114,
+            "overlap_at_10": 1.0,
+            "overlap_at_100": 1.0
+          },
+          "hnsw_ef128": {
+            "median_ms": 0.83345,
+            "mean_ms": 0.9371917808219178,
+            "overlap_at_10": 0.9970319634703196,
+            "overlap_at_100": 0.9796118721461189
+          },
+          "hnsw_ef256": {
+            "median_ms": 1.2845499999999999,
+            "mean_ms": 1.4346334474885845,
+            "overlap_at_10": 0.998744292237443,
+            "overlap_at_100": 0.995296803652968
+          },
+          "hnsw_ef512": {
+            "median_ms": 2.26005,
+            "mean_ms": 2.454604109589041,
+            "overlap_at_10": 0.9997716894977169,
+            "overlap_at_100": 0.9991780821917808
+          }
+        },
+        "unix": {
+          "build_seconds": 53.474902699992526,
+          "flat_matches_cache": 1.0,
+          "flat": {
+            "median_ms": 11.428550000000001,
+            "mean_ms": 16.071519776119402,
+            "overlap_at_10": 1.0,
+            "overlap_at_100": 1.0
+          },
+          "hnsw_ef128": {
+            "median_ms": 1.06325,
+            "mean_ms": 1.4386224813432835,
+            "overlap_at_10": 0.9972014925373134,
+            "overlap_at_100": 0.9772574626865671
+          },
+          "hnsw_ef256": {
+            "median_ms": 1.7301,
+            "mean_ms": 2.320103917910448,
+            "overlap_at_10": 0.9995335820895522,
+            "overlap_at_100": 0.9946735074626868
+          },
+          "hnsw_ef512": {
+            "median_ms": 3.1201,
+            "mean_ms": 4.005524626865672,
+            "overlap_at_10": 0.9999067164179105,
+            "overlap_at_100": 0.999151119402985
+          }
+        }
+      },
+      "h_star_macro": {
+        "flat": 0.39710381541777184,
+        "hnsw_ef128": 0.39647386247095373,
+        "hnsw_ef256": 0.3970242453650125,
+        "hnsw_ef512": 0.39710381541777184
+      }
+    }
+  }
+}
