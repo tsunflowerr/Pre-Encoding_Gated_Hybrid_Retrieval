@@ -1,0 +1,38 @@
+# Confirmation protocol for the v3 round, fixed BEFORE any relevance label of the fresh
+# domains is scored. Everything here was chosen on programmers/unix, whose test split had
+# already been observed; those numbers are exploratory and are not part of this test.
+schema_version: v3_preregistration_1
+registered_on: "2026-10-28"
+fresh_domains: [android, gis, mathematica, webmasters]
+dataset: {id: BeIR/cqadupstack, revision: e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c}
+qrels: {id: BeIR/cqadupstack-qrels, revision: 13595a9f221256a9a21e91c8b0fed3563382b6a7}
+encoder: {model: sentence-transformers/msmarco-MiniLM-L6-cos-v5, revision: 14ca9be4bbcf1402eac0f43a2e2ccb6e0f994ba3}
+splits: same grouping/bucketing recipe and seed 42 as v1, five folds, validation=(test+1) mod 5
+selection:
+  policy: validation-only, per fold and domain; ties keep the cheaper / lower-alpha option
+  h_star: v1 rule over CC alpha 0.1..0.9 and RRF k=60 on FAISS top-100 lists
+  s_star: v1 rule over [bm25, dense, h_star]
+  p_star: best of [bm25, BM25+static-proxy CC alpha 0.1..0.9] on BM25 top-100
+  r_star: best of [BM25+query-vector re-scoring CC alpha 0.1..0.9] on BM25 top-100 (no FAISS)
+  thresholds: >-
+    v1 C6 rule, pooled over the four domains' validation rows, 0.005 macro and
+    0.01 per-domain loss vs S* (S*_all for the cascade), lowest dense ratio wins
+primary_gates: {v1: v1_ridge, cascade: v1_ridge}
+analysis:
+  metric: nDCG@10, equal-weight macro over the four domains
+  bootstrap: 10000 group resamples within domain, seed 20261019
+  multiplicity: Holm over H1-H5 at family-wise alpha 0.05 (one-sided bootstrap p-values)
+hypotheses:
+  H1: R* is non-inferior to H* (margin 0.01)                      # encode+re-score without FAISS
+  H2: P* is superior to BM25                                      # static proxy re-ranking
+  H3: PE-GH v1 (v1 mode, v1_ridge) is non-inferior to S* (margin 0.01)  # replication of v1
+  H4: PE-GH v1 beats the 30-seed random router at its own per-fold dense counts
+  H5: cascade v1_ridge beats the 30-seed random router at its own per-fold dense counts
+secondary_reported_without_claims:
+  - PE-GH v1 minus BM25-margin and minus LiteGator-style SVM at matched budget (two-sided CI);
+    development data predict no significant difference
+  - R* superiority over H*; per-domain results; quality-vs-budget curves; AUC/Spearman
+  - feature-group ablations (qpp, proxy) in both modes
+negative_results_policy: >-
+  every hypothesis is reported whatever the outcome; no threshold, alpha grid,
+  feature or model change after the fresh labels are scored
