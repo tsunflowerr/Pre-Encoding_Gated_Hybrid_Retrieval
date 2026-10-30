@@ -5,18 +5,12 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-import os
 import re
 from collections import defaultdict
 from pathlib import Path
 
-os.environ.setdefault("MPLCONFIGDIR", str(Path(".matplotlib").resolve()))
-import matplotlib  # noqa: E402
-
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
-
 from contracts.io import load_queries
+from pegh.evaluation.quality_plot import plot_quality
 
 
 def _query_class(text: str) -> str:
@@ -49,56 +43,19 @@ def main() -> None:
         query_text.update({query.query_id: query.text for query in load_queries(path, domain)})
 
     methods = sorted(summary["summaries"])
-    domains = sorted(next(iter(summary["summaries"].values()))["domains"])
-    width = 0.8 / len(methods)
-    figure, axis = plt.subplots(figsize=(7.2, 4.2))
-    x = list(range(len(domains) + 1))
-    for method_index, method in enumerate(methods):
-        values = [
-            summary["summaries"][method]["domains"][domain]["ndcg_at_10"] for domain in domains
-        ] + [summary["summaries"][method]["macro"]["ndcg_at_10"]]
-        offsets = [value + (method_index - (len(methods) - 1) / 2) * width for value in x]
-        axis.bar(offsets, values, width=width, label=method)
-    axis.set_xticks(x, [*domains, "macro"])
-    axis.set_ylabel("nDCG@10")
-    axis.set_ylim(bottom=0)
-    axis.grid(axis="y", alpha=0.25)
-    if len(methods) > 1:
-        axis.legend(frameon=False)
-    figure.tight_layout()
-    figure.savefig(output / "quality-ndcg10.png", dpi=200)
-    plt.close(figure)
+    plot_quality(summary, rows, output, methods=methods)
+    write_baseline_failures(rows, query_text, methods, output, args.worst)
 
-    by_fold: dict[tuple[str, str, int], list[float]] = defaultdict(list)
-    for row in rows:
-        by_fold[(row["method"], row["domain"], int(row["fold"]))].append(float(row["ndcg_at_10"]))
-    figure, axes = plt.subplots(1, len(domains), figsize=(7.2, 3.5), squeeze=False)
-    for domain_index, domain in enumerate(domains):
-        axis = axes[0][domain_index]
-        for method in methods:
-            values = [
-                sum(by_fold[(method, domain, fold)]) / len(by_fold[(method, domain, fold)])
-                for fold in range(5)
-            ]
-            axis.plot(range(5), values, marker="o", label=method)
-        axis.set_title(domain)
-        axis.set_xlabel("OOF test fold")
-        axis.set_xticks(range(5))
-        axis.grid(alpha=0.25)
-    axes[0][0].set_ylabel("mean nDCG@10")
-    if len(methods) > 1:
-        axes[0][-1].legend(frameon=False)
-    figure.tight_layout()
-    figure.savefig(output / "fold-stability.png", dpi=200)
-    plt.close(figure)
 
+def write_baseline_failures(rows, query_text, methods, output, worst):
+    domains = sorted({row["domain"] for row in rows})
     failure_rows = []
     for method in methods:
         for domain in domains:
             selected = sorted(
                 (row for row in rows if row["method"] == method and row["domain"] == domain),
                 key=lambda row: (float(row["ndcg_at_10"]), row["query_id"]),
-            )[: args.worst]
+            )[:worst]
             for row in selected:
                 text = query_text.get(row["query_id"], "")
                 failure_rows.append(
@@ -124,7 +81,7 @@ def main() -> None:
     lines = [
         "# Failure analysis",
         "",
-        f"Audit set: bottom {args.worst} nDCG@10 queries per method and domain.",
+        f"Audit set: bottom {worst} nDCG@10 queries per method and domain.",
         "",
         "| Query class | Count |",
         "|---|---:|",

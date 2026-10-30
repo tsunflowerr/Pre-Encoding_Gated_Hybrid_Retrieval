@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "domain": "unix",
+  "inputs": {
+    "corpus_sha256": "8d67fc0df3e01f490b38f81b72aa720644046db1e4c301900a4f4803550f4b7c",
+    "queries_sha256": "69d6f23726f77a2892b21ee6e98432768c42b045c5790ba79b6ef66c1b02f73b",
+    "qrels_sha256": "a7bd24ce081b0bb892602e9b0067017dc66fd03e7593563ad095cb3cd05e92ed",
+    "run_sha256": "0789a57032f0ea684007153dfd07ee05137ad8142935a3c9ddf6239189ba8c66"
+  },
+  "bm25": {
+    "provider": "bm25s-0.3.14",
+    "provider_configuration": {
+      "method": "atire",
+      "idf_method": "lucene",
+      "tokenizer": "shared TechnicalTokenizer token lists",
+      "k1": 1.2,
+      "b": 0.75
+    },
+    "query_count": 1072,
+    "top_k": 100,
+    "exact_order_count": 1068,
+    "minimum_jaccard_at_k": 1.0,
+    "mean_jaccard_at_k": 1.0,
+    "compared_score_count": 107200,
+    "maximum_absolute_score_difference": 7.76430151461227e-06,
+    "absolute_tolerance": 1e-05,
+    "relative_tolerance": 1e-06,
+    "non_tie_order_mismatches": 0,
+    "passed": true
+  },
+  "evaluator": {
+    "provider": "ir-measures-0.4.3",
+    "local": {
+      "ndcg_at_10": 0.2871910607965061,
+      "mrr_at_10": 0.2904121505567401,
+      "recall_at_10": 0.3451090899668325,
+      "recall_at_100": 0.5294593026169518
+    },
+    "provider_metrics": {
+      "ndcg_at_10": 0.2871910607965059,
+      "mrr_at_10": 0.29041215055674,
+      "recall_at_10": 0.3451090899668325,
+      "recall_at_100": 0.5294593026169518
+    },
+    "absolute_differences": {
+      "ndcg_at_10": 1.6653345369377348e-16,
+      "mrr_at_10": 5.551115123125783e-17,
+      "recall_at_10": 0.0,
+      "recall_at_100": 0.0
+    },
+    "max_absolute_difference": 1.6653345369377348e-16,
+    "passed": true
+  },
+  "passed": true
+}

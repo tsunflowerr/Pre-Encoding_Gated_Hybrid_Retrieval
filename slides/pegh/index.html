@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PE-GH: truy xuất câu hỏi kỹ thuật có chọn lọc trên CPU. Bộ slide HTML với giả thuyết, phương pháp và kết quả đã kiểm chứng.">
+  <meta name="theme-color" content="#004aad">
+  <title>PE-GH · Truy xuất câu hỏi kỹ thuật trên CPU</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#controls">Đi tới điều khiển trình chiếu</a>
+  <main id="viewport" aria-label="Bài trình bày PE-GH">
+    <div id="stage-wrap">
+      <div id="stage">
+
+        <section class="slide cover is-active" id="slide-1" data-title="PE-GH" data-chapter="Giới thiệu" aria-labelledby="title-1">
+          <header class="institution-header" aria-label="Trường Đại học Công nghệ, Đại học Quốc gia Hà Nội">
+            <img class="uet-lockup" src="assets/uet-lockup.png" alt="UET — Đại học Công nghệ, ĐHQGHN" width="1048" height="268">
+            <img class="vnu-lockup" src="assets/vnu-logo.png" alt="VNU — Đại học Quốc gia Hà Nội" width="1920" height="768">
+          </header>
+          <div class="institution-band" aria-hidden="true"><span></span><span></span></div>
+          <div class="cover-body content-bound">
+            <p class="cover-acronym">PE-GH</p>
+            <h1 id="title-1">Truy xuất câu hỏi kỹ thuật<br>có chọn lọc trên CPU</h1>
+            <p class="cover-subtitle">Pre-Encoding Gated Hybrid Retrieval</p>
+            <table class="cover-members">
+                <caption class="visually-hidden">Thành viên nhóm</caption>
+                <thead><tr><th scope="col">Họ và tên</th><th scope="col">MSSV</th></tr></thead>
+                <tbody>
+                  <tr><td>Đầu Hồng Quang</td><td>23020135</td></tr>
+                  <tr><td>Trần Quang Thành</td><td>23020155</td></tr>
+                  <tr><td>Hoàng Quốc Bảo</td><td>23020012</td></tr>
+                </tbody>
+              </table>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Giới thiệu PE-GH là một nghiên cứu truy xuất câu hỏi kỹ thuật. Nội dung đi từ vấn đề và giả thuyết tới phương pháp, rồi tới bằng chứng thực nghiệm. Nhóm tìm các câu hỏi trùng lặp đã có, không đánh giá khả năng sinh câu trả lời.</p>
+            <p>Nguồn nội dung: <a href="../../GIOI_THIEU_DE_TAI_PE_GH.md">Bản giới thiệu mới nhất</a>.</p>
+            <p>Logo UET: <a href="https://www.fit.uet.vnu.edu.vn/wp-content/uploads/2022/10/2022_Introduction-to-CS-Department.pdf">tài liệu Khoa CNTT, UET, trang 1</a>. Logo VNU: <a href="https://vnu.edu.vn/gioi-thieu/logo-dhqghn">bộ logo chính thức ĐHQGHN</a>.</p>
+          </aside>
+        </section>
+
+
+        <section class="slide agenda" id="slide-2" data-title="Nội dung" data-chapter="Tổng quan" aria-labelledby="title-2">
+          <h2 id="title-2">Nội dung</h2>
+          <div class="slide-body">
+          <ol class="agenda-list content-bound">
+            <li><span>01</span><div><strong>Bài toán và giả thuyết</strong></div></li>
+            <li><span>02</span><div><strong>Đề xuất và đóng góp</strong></div></li>
+            <li><span>03</span><div><strong>Phương pháp và đánh giá</strong></div></li>
+            <li><span>04</span><div><strong>Kết quả và giới hạn</strong></div></li>
+          </ol>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes"><p>Bài trình bày đi từ vấn đề, giả thuyết và mục tiêu đến phương pháp, sau đó trình bày bằng chứng và giới hạn. Phần đầu giải thích what trước khi đi vào how.</p></aside>
+        </section>
+
+        <section class="slide" id="slide-3" data-title="Bài toán và đầu ra" data-chapter="Bài toán" aria-labelledby="title-3">
+          <header class="slide-header"><span>BÀI TOÁN</span><span>01 / BỐI CẢNH</span></header>
+          <h2 id="title-3">Bài toán truy xuất câu hỏi kỹ thuật</h2>
+          <div class="slide-body">
+          <div class="retrieval-overview content-bound">
+            <div class="retrieval-copy">
+              <h3 class="input-title">Câu hỏi minh họa</h3>
+              <p class="retrieval-query" lang="en">“How do I change file permissions in Linux?”</p>
+              <h3>Người dùng cần gì?</h3>
+              <p>Tìm những câu hỏi đã có đề cập <em>cùng một vấn đề</em>, dù cách diễn đạt khác nhau.</p>
+              <p><strong>Đầu ra:</strong> tối đa 100 câu hỏi xếp theo mức độ phù hợp.</p>
+            </div>
+            <figure class="retrieval-art">
+              <img src="assets/technical-retrieval.png" width="1536" height="1024" alt="Minh họa một câu hỏi kỹ thuật mới được tìm trong kho bài viết, chọn ra các câu hỏi có cùng vấn đề.">
+            </figure>
+          </div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Điều quan trọng là người dùng có thể diễn đạt khác với bài viết đã có. Câu tiếng Anh trên chỉ minh họa dạng truy vấn, không được gán nhãn là một truy vấn thực nghiệm hay đầu ra của hệ thống. Corpus của mỗi miền là kho riêng.</p>
+            <p>Nhãn CQADupStack xác định câu hỏi trùng lặp; chúng không bao quát mọi tài liệu có liên quan ngữ nghĩa. Hệ thống loại exact self-hit.</p>
+            <p>Hình minh họa chủ đề do imagegen tạo, không biểu diễn kết quả benchmark. Prompt được lưu tại <a href="assets/IMAGE_PROMPT.md">thông tin tài nguyên</a>.</p>
+            <p>Nguồn: <a href="../../GIOI_THIEU_DE_TAI_PE_GH.md">mục 1 và 4</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-4" data-title="Vấn đề chất lượng và chi phí" data-chapter="Bài toán" aria-labelledby="title-4">
+          <header class="slide-header"><span>VẤN ĐỀ CẦN CẢI THIỆN</span><span>02 / ĐÁNH ĐỔI</span></header>
+          <h2 id="title-4">Chất lượng và chi phí truy xuất</h2>
+          <div class="slide-body">
+          <div class="method-visual-layout content-bound">
+            <div class="method-summary">
+              <article><h3>BM25</h3><p>Khớp từ khóa, chi phí thấp. Có thể bỏ sót câu hỏi cùng ý nhưng dùng từ khác.</p></article>
+              <article><h3>Dense</h3><p>Tìm theo ngữ nghĩa. Mỗi truy vấn cần mã hóa và tìm kiếm vector.</p></article>
+              <article><h3>Hybrid</h3><p>Kết hợp cả hai. Chạy thêm Dense làm tăng chi phí và <strong>không bảo đảm xếp hạng tốt hơn</strong> ở mọi truy vấn.</p></article>
+            </div>
+            <figure class="method-figure">
+              <img src="assets/retrieval-methods.svg" width="640" height="445" alt="Sơ đồ BM25 khớp từ khóa, Dense so sánh vector ngữ nghĩa và Hybrid kết hợp hai bảng xếp hạng.">
+            </figure>
+          </div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Đây là động cơ nghiên cứu, không phải khẳng định Dense luôn tốt hơn BM25. Trong thực nghiệm của nhóm, Dense độc lập có điểm trung bình thấp hơn BM25 nhưng vẫn có lợi ở một phần truy vấn. Cần đánh giá lợi ích của hành động Hybrid thực tế, không chỉ nhận xét BM25 có điểm thấp.</p>
+            <p>Nguồn: <a href="../../paper/05a_quality_results.md">phân tích complementarity</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide hypothesis" id="slide-5" data-title="Giả thuyết nghiên cứu" data-chapter="Giả thuyết" aria-labelledby="title-5">
+          <header class="slide-header"><span>GIẢ THUYẾT NGHIÊN CỨU</span><span>03 / CẦN KIỂM CHỨNG</span></header>
+          <h2 id="title-5">Giả thuyết nghiên cứu</h2>
+          <div class="slide-body">
+          <p class="hypothesis-statement">Lợi ích của Hybrid thay đổi theo truy vấn.</p>
+          <div class="hypothesis-body content-bound">
+            <p>Thông tin có sẵn <em>trước khi chạy Dense</em><br>có thể dự đoán một phần khác biệt này.</p>
+            <div class="hypothesis-condition"><h3>Điều kiện để có lợi</h3><p>Gate cần chính xác và ít tốn chi phí. Chọn sai truy vấn hoặc overhead lớn có thể làm mất lợi ích.</p></div>
+          </div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Giả thuyết gồm sự khác biệt về gain giữa các truy vấn và khả năng nhận biết khác biệt đó bằng tín hiệu rẻ. Dense-call ratio giảm chưa đủ chứng minh latency giảm vì phải trả chi phí đặc trưng và gate.</p>
+            <p>Nguồn: <a href="../../GIOI_THIEU_DE_TAI_PE_GH.md">giả thuyết nghiên cứu, mục 2</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-6" data-title="PE-GH quyết định điều gì?" data-chapter="Đề xuất" aria-labelledby="title-6">
+          <header class="slide-header"><span>ĐỀ XUẤT PE-GH</span><span>04 / HÀNH ĐỘNG</span></header>
+          <h2 id="title-6">PE-GH quyết định điều gì?</h2>
+          <div class="slide-body">
+          <p class="lead">Gate dự đoán <strong>lợi ích xếp hạng tăng thêm</strong> và chọn một trong hai hành động.</p>
+          <div class="choice-layout content-bound">
+            <article class="choice"><span class="choice-number">A</span><h3>Giữ BM25</h3><p>Bỏ qua mã hóa truy vấn<br>và tìm kiếm vector.</p></article>
+            <div class="choice-divider">GATE</div>
+            <article class="choice"><span class="choice-number accent">B</span><h3>Bổ sung Hybrid</h3><p>Chạy Dense và kết hợp<br>với kết quả BM25 đã có.</p></article>
+          </div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Đây là mô tả chức năng của hệ thống. Gate lựa chọn giữa BM25 và một cấu hình Hybrid đã cố định trong fold/miền. Không học lại fusion theo từng truy vấn. BM25 luôn chạy trước và được tái sử dụng khi fusion.</p>
+            <p>Nguồn: <a href="../../paper/03_method.md">retrieval branches và request policy</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-7" data-title="Đóng góp và nghiên cứu liên quan" data-chapter="Đề xuất" aria-labelledby="title-7">
+          <header class="slide-header"><span>ĐÓNG GÓP VÀ PHẠM VI TÍNH MỚI</span><span>05 / VỊ TRÍ NGHIÊN CỨU</span></header>
+          <h2 id="title-7">Đóng góp cần được kiểm chứng</h2>
+          <div class="slide-body">
+          <div class="contribution-layout content-bound">
+            <div class="contribution-statement"><p>Học <em>lợi ích của Hybrid so với BM25</em> để điều phối Dense trong giới hạn chất lượng.</p></div>
+            <div class="prior-work"><div><h3>Nghiên cứu đã có</h3><p>Arabzadeh, 2021<br>Chọn chiến lược theo truy vấn.</p><p>LiteGator, 2025<br>Định tuyến bằng mô hình nhẹ.</p></div><div><h3>Nhóm kiểm chứng</h3><p>Đích học lợi ích và bộ đặc trưng.</p><p>Chất lượng, chi phí và giới hạn trên câu hỏi kỹ thuật.</p></div></div>
+          </div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Không tuyên bố phát minh gating. Giá trị học gain hoặc feature kỹ thuật phải được kiểm tra với margin/random và prior-style controls. Các chênh lệch nhỏ giữa gate chưa chứng minh tính mới hoặc ý nghĩa thống kê ở cùng ngân sách.</p>
+            <p>Nguồn chính: <a href="https://arxiv.org/abs/2109.10739" target="_blank" rel="noopener noreferrer">Arabzadeh et al., 2021</a>; <a href="https://www.atlantis-press.com/proceedings/icast-es-25/126020510" target="_blank" rel="noopener noreferrer">LiteGator, 2025</a>. Đối chiếu: <a href="../../paper/02a_routing_related_work.md">related work của nhóm</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-8" data-title="Phạm vi và dữ liệu" data-chapter="Phạm vi" aria-labelledby="title-8">
+          <header class="slide-header"><span>PHẠM VI THỰC NGHIỆM</span><span>06 / DỮ LIỆU</span></header>
+          <h2 id="title-8">Hai miền câu hỏi kỹ thuật</h2>
+          <div class="slide-body">
+          <div class="dataset-layout content-bound">
+            <div class="dataset-total"><span class="big-number">79.558</span><span class="number-caption">bài viết trong kho</span><span class="medium-number">1.948</span><span class="number-caption">truy vấn thực nghiệm</span></div>
+            <div class="dataset-details"><h3 class="dataset-name">CQADupStack (BEIR)</h3><table class="data-table"><caption class="visually-hidden">CQADupStack qua bản dữ liệu BEIR</caption><thead><tr><th>Miền</th><th>Bài viết</th><th>Truy vấn</th></tr></thead><tbody><tr><th>Programmers</th><td>32.176</td><td>876</td></tr><tr><th>Unix</th><td>47.382</td><td>1.072</td></tr></tbody></table><p>Tiếng Anh, kho cố định.<br>Mỗi miền có corpus tìm kiếm riêng.</p><p>Qrels xác định câu hỏi trùng lặp.<br>Loại chính bài viết của truy vấn khỏi kết quả.</p></div>
+          </div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Programmers gồm thiết kế và phát triển phần mềm, không chỉ hỏi lỗi code. Corpus dùng title và text. Qrels là nhãn trùng lặp, không phải mọi tài liệu liên quan ngữ nghĩa. Không cộng hai corpus để tìm cross-domain.</p>
+            <p>Nguồn: <a href="../../paper/04_experimental_setup.md">data and splits</a>. Dataset revision e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c, qrels revision 13595a9f221256a9a21e91c8b0fed3563382b6a7.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-9" data-title="Tiêu chí thành công" data-chapter="Mục tiêu" aria-labelledby="title-9">
+          <header class="slide-header"><span>MỤC TIÊU ĐẶT TRƯỚC THỰC NGHIỆM</span><span>07 / TIÊU CHÍ</span></header>
+          <h2 id="title-9">Thế nào là một kết quả tốt?</h2>
+          <div class="slide-body">
+          <p class="baseline-definition"><strong>H*</strong>: Hybrid chọn trên validation.<br><strong>S*</strong>: phương án tĩnh tốt nhất trong BM25, Dense và H*.</p>
+          <div class="target-columns content-bound">
+            <article><span class="target-value">−0,01</span><h3>Biên chất lượng</h3><p>nDCG@10 đo chất lượng top-10. Cận dưới một phía 95% của chênh so S* phải &gt; −0,01 ở macro và từng miền.</p></article>
+            <article><span class="target-value">≤60<span>%</span></span><h3>Tỷ lệ gọi Dense</h3><p>Tỷ lệ truy vấn test gọi Dense, tính trên tập gộp hai miền.</p></article>
+            <article><span class="target-value accent">≥20<span>%</span></span><h3>Giảm mean latency</h3><p>Giảm mean latency so H* trên cùng máy, tính trên tập gộp hai miền.</p></article>
+          </div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>0,01 là điểm nDCG tuyệt đối. Noninferiority dùng cận dưới một phía, không suy ra từ việc p-value không có ý nghĩa. Macro cân bằng hai miền; tốc độ và dense ratio gộp cân theo query. H*/S* chọn trên validation trước khi mở test.</p>
+            <p>Nguồn: <a href="../../configs/gating/protocol_v1.yaml">protocol chất lượng</a> và <a href="../../PE_GH_KE_HOACH_HOAN_CHINH_3_NGUOI_V2.md">kế hoạch, mục 15</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-10" data-title="Kiến trúc online" data-chapter="Cách làm" aria-labelledby="title-10">
+          <header class="slide-header"><span>KIẾN TRÚC ONLINE</span><span>08 / CÁCH LÀM</span></header>
+          <h2 id="title-10">Một truy vấn trong PE-GH</h2>
+          <div class="slide-body">
+          <p class="architecture-intro">BM25 chạy một lần. Gate quyết định trước khi mã hóa truy vấn.<br>Corpus embeddings và chỉ mục được chuẩn bị trước.</p>
+          <figure class="architecture-figure content-bound">
+            <img src="assets/pegh-architecture.svg" width="1124" height="350" alt="Luồng PE-GH: truy vấn qua BM25 và Gate; nhánh skip trả BM25, nhánh Dense chạy MiniLM, FAISS và fusion để trả Hybrid.">
+          </figure>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Corpus embeddings và chỉ mục được tính/nạp trước. Query encoding chạy thật khi gate gọi Dense. MiniLM đóng băng, CPU float32, 384d L2, FAISS exact FlatIP. Truy vấn không rỗng nhưng toàn token OOV buộc Dense và được tính vào dense ratio. Empty query trả rỗng. Không chạy BM25 lại khi fusion.</p>
+            <p>Nguồn: <a href="../../paper/03_method.md">request policy</a>. Model sentence-transformers/msmarco-MiniLM-L6-cos-v5, revision 14ca9be4bbcf1402eac0f43a2e2ccb6e0f994ba3.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-11" data-title="Đích học của gate" data-chapter="Cách làm" aria-labelledby="title-11">
+          <header class="slide-header"><span>MÔ HÌNH GATE</span><span>09 / HỌC LỢI ÍCH</span></header>
+          <h2 id="title-11">Gate học lợi ích tăng thêm</h2>
+          <div class="slide-body">
+          <div class="gain-formula content-bound"><span>ΔU(q)</span><span>=</span><span>U<sub>H*</sub>(q)</span><span>−</span><span>U<sub>BM25</sub>(q)</span></div>
+          <p class="gain-explanation">U là nDCG@10. Ridge học ΔU, tức lợi ích của Hybrid so với BM25.<br>Lợi ích này có thể dương, bằng 0 hoặc âm.</p>
+          <figure class="learning-figure content-bound">
+            <img src="assets/gate-learning.svg" width="1124" height="230" alt="Học offline: đặc trưng và gain trên train để huấn luyện Ridge, chọn ngưỡng trên validation. Online: 21 đặc trưng trước Dense, dự đoán gain và quyết định BM25 hoặc Hybrid.">
+          </figure>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>StandardScaler chỉ fit train; Ridge alpha=1. Features gồm độ dài, entropy, IDF/OOV, technical signals và score/gap BM25. H* được chọn trên validation và giữ cố định cho fold/miền. Threshold giảm actual dense ratio dưới ràng buộc quality validation; ties skip. Score là dự đoán gain, không phải xác suất.</p>
+            <p>Nguồn: <a href="../../configs/gating/protocol_v1.yaml">protocol</a>, <a href="../../paper/03_method.md">pre-dense features and target</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-12" data-title="Năm fold và phép đo" data-chapter="Đánh giá" aria-labelledby="title-12">
+          <header class="slide-header"><span>KIỂM SOÁT THỰC NGHIỆM</span><span>10 / KHÔNG RÒ RỈ TEST</span></header>
+          <h2 id="title-12">Đánh giá bằng năm lượt chia</h2>
+          <div class="slide-body">
+          <div class="fold-layout content-bound"><div><table class="fold-table"><caption class="visually-hidden">Vai trò của từng phần dữ liệu trong mỗi lượt</caption><thead><tr><th>Lượt</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th></tr></thead><tbody><tr><th>1</th><td class="test-cell">Test</td><td class="val-cell">Val</td><td>Train</td><td>Train</td><td>Train</td></tr><tr><th>2</th><td>Train</td><td class="test-cell">Test</td><td class="val-cell">Val</td><td>Train</td><td>Train</td></tr><tr><th>3</th><td>Train</td><td>Train</td><td class="test-cell">Test</td><td class="val-cell">Val</td><td>Train</td></tr><tr><th>4</th><td>Train</td><td>Train</td><td>Train</td><td class="test-cell">Test</td><td class="val-cell">Val</td></tr><tr><th>5</th><td class="val-cell">Val</td><td>Train</td><td>Train</td><td>Train</td><td class="test-cell">Test</td></tr></tbody></table></div><div class="fold-copy"><p class="fold-ratio">60 / 20 / 20</p><p>Train / validation / test<br>trong mỗi lượt, xấp xỉ theo số query.</p><p><strong>Mỗi truy vấn làm test đúng một lần.</strong></p><p>Khóa model và threshold trước khi chấm test. Chỉ chia truy vấn và nhãn; corpus tìm kiếm giữ đầy đủ.</p></div></div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Giữ query có normalized text giống nhau hoặc shared positive qrels cùng phần. Corpus đầy đủ được dùng cho retrieval trong mọi fold. Mỗi query có đúng một prediction test. Đánh giá chất lượng có thể dùng cache đã xác minh; online không dùng query-vector/ranking cache. Bootstrap chất lượng 10.000 mẫu nhóm, paired và phân tầng domain.</p>
+            <p>Nguồn: <a href="../../paper/04_experimental_setup.md">splits and evaluation</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-13" data-title="Kết quả chất lượng" data-chapter="Kết quả" aria-labelledby="title-13">
+          <header class="slide-header"><span>KẾT QUẢ ĐÃ KIỂM CHỨNG</span><span>11 / CHẤT LƯỢNG</span></header>
+          <h2 id="title-13">Giữ chất lượng trong ngưỡng</h2>
+          <div class="slide-body">
+          <p class="quality-population">OOF trên 1.948 truy vấn, macro cân bằng hai miền.<br>H* và S* trùng bảng xếp hạng trong cả 10 fold/miền.</p>
+          <div class="quality-layout content-bound">
+            <div><table class="data-table results-table">
+              <caption class="visually-hidden">Kết quả chất lượng ngoài mẫu</caption>
+              <thead><tr><th>Phương pháp</th><th>nDCG@10</th><th>Gọi Dense</th></tr></thead>
+              <tbody><tr><th>H*</th><td>0,314625</td><td>100%</td></tr><tr><th>S*</th><td>0,314625</td><td>100%</td></tr><tr class="highlight-row"><th>PE-GH</th><td>0,312163</td><td>57,75%</td></tr></tbody>
+            </table></div>
+            <div class="quality-callout">
+              <h3>So với S*</h3>
+              <strong>−0,002462</strong><p>Chênh nDCG@10 (macro)</p>
+              <strong class="accent">−0,006009</strong><p>Cận dưới một phía 95%</p>
+              <p class="quality-decision">Lớn hơn biên −0,01 ở macro và từng miền.</p>
+            </div>
+          </div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Đã có OOF cho 14 phương pháp; bảng này chỉ trình bày ba method có full online trong cùng lượt. BM25 macro .289906, Dense .235301; đối chứng đầy đủ ở paper. Programmers lower bound −.005502, Unix −.009601. CI điều kiện trên model và selection cố định, không gồm retraining uncertainty.</p>
+            <p>Nguồn: <a href="../../paper/05a_quality_results.md">quality results</a>; <a href="../../docs/person_a/validation/2026-10-30/comparison.json">paired comparison</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-14" data-title="Kết quả latency" data-chapter="Kết quả" aria-labelledby="title-14">
+          <header class="slide-header"><span>KẾT QUẢ ĐO ONLINE</span><span>12 / CÙNG MÁY, CÙNG LƯỢT</span></header>
+          <h2 id="title-14">Mean latency giảm <em>33,80%</em></h2>
+          <div class="slide-body">
+          <p class="runtime-setup">Ryzen 7 8745H, Windows 11, 4 logical CPU.<br>Batch = 1, concurrency = 1, 5 lần lặp.</p>
+          <div class="latency-layout content-bound">
+            <figure class="bar-chart"><figcaption>Thời gian trung bình mỗi request (ms)</figcaption>
+              <div class="bar-row"><span>H*</span><div class="bar-track"><div class="bar baseline" style="width:100%"></div></div><strong>25,950</strong></div>
+              <div class="bar-row"><span>S*</span><div class="bar-track"><div class="bar baseline-secondary" style="width:99.3057%"></div></div><strong>25,770</strong></div>
+              <div class="bar-row"><span>PE-GH</span><div class="bar-track"><div class="bar candidate" style="width:66.1975%"></div></div><strong>17,178</strong></div>
+            </figure>
+            <div class="measurement-size"><strong>29.220</strong><p>request đo thật</p><hr><strong>57,75<span>%</span></strong><p>truy vấn gọi Dense</p><p class="latency-ci">CI 95% mức giảm so H*:<strong>32,01%–35,65%</strong></p></div>
+          </div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>1.948 query × 3 method × 5 repeats = 29.220 request. Fresh process theo method/repeat, 50 warmup trước đo. H* dùng execution sequential/parallel chọn trên validation. Bootstrap speedup ghép cặp theo query, giữ mọi repeat, phân tầng domain; CI điều kiện trên timing đã quan sát. Không trộn với số i3/i7 cũ. Windows cap 8 GB là process commit memory, RSS đo riêng.</p>
+            <p>Toàn bộ 29.220 ranking online khớp OOF. Nguồn: <a href="../../docs/person_a/validation/2026-10-30/release.json">release receipt 30/10/2026</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide" id="slide-15" data-title="Giới hạn và failure analysis" data-chapter="Giới hạn" aria-labelledby="title-15">
+          <header class="slide-header"><span>GIỚI HẠN CỦA KẾT QUẢ</span><span>13 / PHÂN TÍCH THẤT BẠI</span></header>
+          <h2 id="title-15">Những giới hạn phải giữ lại</h2>
+          <div class="slide-body">
+          <div class="limitations-layout content-bound"><div class="limitation-copy"><article><h3>Programmers</h3><p>Mean giảm <strong>19,73%</strong>, dưới mục tiêu 20%. p95 (độ trễ phân vị 95%) hơi cao hơn H*/S*.</p></article><article><h3>Chất lượng Unix</h3><p>Cận dưới <strong>−0,009601</strong>, sát biên −0,01.</p></article><article><h3>Phạm vi kết luận</h3><p>Hai miền, một encoder, một máy. Các gate đối chứng chưa có full online cùng lượt.</p></article></div><div class="failure-counts"><div><strong>96</strong><p>query bị skip<br>dù Hybrid có lợi</p></div><div><strong>921</strong><p>query gọi Dense<br>nhưng gain nDCG@10 ≤ 0</p></div></div></div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Failure audit còn có 204 useful dense và 727 safe skip. Wasted dense chứa cả zero gain, không khẳng định không giúp MRR hoặc recall. Đã chọn 40 case có quy tắc. Kết quả chưa chứng minh hơn mọi SOTA hoặc feature kỹ thuật vượt đối chứng ở cùng budget. Không sửa threshold sau khi xem test.</p>
+            <p>Nguồn: <a href="../../paper/figures/final-a/FAILURE_ANALYSIS.md">failure analysis</a>; <a href="../../docs/person_a/validation/2026-10-30/release.json">runtime receipt</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide closing" id="slide-16" data-title="Kết luận" data-chapter="Kết luận" aria-labelledby="title-16">
+          <header class="slide-header"><span>KẾT LUẬN TRONG PHẠM VI THỰC NGHIỆM</span><span>14 / PE-GH</span></header>
+          <h2 id="title-16">Kết luận</h2>
+          <div class="slide-body">
+          <div class="closing-body content-bound"><p class="closing-statement">Dense có chọn lọc.<br>Chất lượng có kiểm chứng.</p><p>PE-GH giảm công việc ngữ nghĩa và mean latency<br>trong khi đạt biên chất lượng đã đăng ký.</p><div class="closing-metrics"><div><strong>57,75<span>%</span></strong><span>truy vấn gọi Dense</span></div><div><strong>33,80<span>%</span></strong><span>giảm mean so H*</span></div><div><strong>−0,006009</strong><span>cận dưới quality so S*</span></div></div></div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes">
+            <p>Kết luận có giới hạn: quality là noninferiority với margin −.01, không phải superiority hoặc bằng hệt. Speedup 33.80% so H* ở cùng lượt máy Ryzen. Đối chứng S* có cùng ranking H*. Tiếp theo cần online controls và dữ liệu/hardware độc lập, không tiếp tục tune test hiện tại.</p>
+            <p>Nguồn: <a href="../../docs/person_a/EXECUTION_SUMMARY.md">biên bản nghiệm thu A</a>.</p>
+          </aside>
+        </section>
+
+        <section class="slide references" id="slide-17" data-title="Nguồn và trao đổi" data-chapter="Tài liệu" aria-labelledby="title-17">
+          <header class="slide-header"><span>TÀI LIỆU ĐỐI CHIẾU</span><span>15 / TRAO ĐỔI</span></header>
+          <h2 id="title-17">Nguồn và tài liệu đối chiếu</h2>
+          <div class="slide-body">
+          <div class="references-layout content-bound"><div><h3>Trong dự án</h3><ol><li><a href="../../GIOI_THIEU_DE_TAI_PE_GH.md">Bản giới thiệu PE-GH</a></li><li><a href="../../paper/03_method.md">Phương pháp và request policy</a></li><li><a href="../../paper/04_experimental_setup.md">Dữ liệu, chia fold và đánh giá</a></li><li><a href="../../paper/05a_quality_results.md">Chất lượng, CI và failure analysis</a></li><li><a href="../../docs/person_a/validation/2026-10-30/release.json">Receipt kết quả 30/10/2026</a></li></ol></div><div><h3>Nghiên cứu liên quan</h3><p><a href="https://arxiv.org/abs/2109.10739" target="_blank" rel="noopener noreferrer">Arabzadeh et al., 2021</a></p><p><a href="https://www.atlantis-press.com/proceedings/icast-es-25/126020510" target="_blank" rel="noopener noreferrer">LiteGator, 2025</a></p><p><a href="https://arxiv.org/abs/2104.08663" target="_blank" rel="noopener noreferrer">BEIR, 2021</a></p></div></div>
+          </div>
+          <footer class="slide-footer"><span class="page"></span></footer>
+          <aside class="speaker-notes"><p>Các nguồn kỹ thuật và bằng chứng gốc được liên kết trong ghi chú từng trang. Ghi chú chỉ là nội dung hỗ trợ trình bày, không nằm trong bản in mặc định. Chất lượng và latency đều được lấy từ một lượt đã kiểm chứng, không dùng số giả định.</p></aside>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <nav id="controls" aria-label="Điều khiển trình chiếu">
+    <div class="control-left"><button id="overview-button" type="button" aria-label="Xem tất cả slide (O)" title="Tổng quan · O"><span aria-hidden="true">▦</span><span class="control-label">Tổng quan</span></button><button id="notes-button" type="button" aria-label="Mở ghi chú (N)" title="Ghi chú · N" aria-pressed="false"><span aria-hidden="true">≡</span><span class="control-label">Ghi chú</span></button></div>
+    <div class="control-center"><button id="prev-button" type="button" aria-label="Slide trước" title="Trang trước · ←">←</button><span id="counter" aria-live="polite">01 / 17</span><button id="next-button" type="button" aria-label="Slide sau" title="Trang sau · →">→</button></div>
+    <div class="control-right"><button id="print-button" type="button" title="In hoặc lưu PDF" aria-label="In hoặc lưu PDF">PDF</button><button id="fullscreen-button" type="button" title="Toàn màn hình · F" aria-label="Bật toàn màn hình (F)">⛶</button><button id="help-button" type="button" title="Phím tắt · ?" aria-label="Xem phím tắt">?</button></div>
+    <div id="progress-track" aria-hidden="true"><div id="progress"></div></div>
+  </nav>
+
+  <aside id="notes-panel" aria-label="Ghi chú thuyết trình" hidden><header><h2 id="notes-title">Ghi chú</h2><button id="close-notes" type="button" aria-label="Đóng ghi chú">×</button></header><div id="notes-content"></div></aside>
+  <dialog id="overview"><header><h2>Tổng quan bài trình bày</h2><button id="close-overview" type="button" aria-label="Đóng tổng quan">×</button></header><div id="overview-grid"></div></dialog>
+  <dialog id="help"><header><h2>Điều khiển trình chiếu</h2><button id="close-help" type="button" aria-label="Đóng hướng dẫn">×</button></header><dl><dt>← / → / Space</dt><dd>Chuyển trang</dd><dt>Home / End</dt><dd>Trang đầu / trang cuối</dd><dt>F</dt><dd>Bật hoặc tắt toàn màn hình</dd><dt>O</dt><dd>Tổng quan tất cả slide</dd><dt>N</dt><dd>Ghi chú của trang hiện tại</dd><dt>Esc</dt><dd>Đóng cửa sổ hoặc ghi chú</dd></dl><p>Trên điện thoại, vuốt ngang để chuyển trang. Chọn PDF để in toàn bộ bài trình bày.</p></dialog>
+  <p id="status" class="visually-hidden" role="status" aria-live="polite"></p>
+  <noscript><p class="noscript-notice">Hãy bật JavaScript để chuyển slide. Bạn vẫn có thể in toàn bộ nội dung bằng chức năng in của trình duyệt.</p></noscript>
+  <script src="deck.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124 230" role="img" aria-labelledby="title desc">
+  <title id="title">Học Ridge offline và dự đoán gain online</title>
+  <desc id="desc">Offline dùng đặc trưng truy vấn, BM25 và nhãn gain Hybrid để huấn luyện Ridge. Online chỉ dùng đặc trưng trước Dense để dự đoán gain rồi so với ngưỡng đã chọn trên validation.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10" fill="#004aad"/></marker></defs>
+  <g font-family="Arial, sans-serif">
+    <text x="0" y="26" font-size="22" fill="#004aad" font-weight="700">HỌC OFFLINE</text>
+    <text x="0" y="139" font-size="22" fill="#347a1c" font-weight="700">QUYẾT ĐỊNH TRƯỚC DENSE</text>
+    <g stroke="#d2dbe5" stroke-width="1.5" fill="white"><rect x="0" y="43" width="367" height="63"/><rect x="434" y="43" width="247" height="63"/><rect x="749" y="43" width="372" height="63"/><rect x="0" y="155" width="367" height="63"/><rect x="434" y="155" width="247" height="63"/><rect x="749" y="155" width="372" height="63"/></g>
+    <g fill="none" stroke="#004aad" stroke-width="2" marker-end="url(#arrow)"><path d="M369 74H431"/><path d="M683 74H746"/><path d="M369 186H431"/><path d="M683 186H746"/></g>
+    <g text-anchor="middle" font-size="24" fill="#161616">
+      <text x="184" y="83">Đặc trưng + nhãn ΔU trên train</text><text x="557" y="83">Huấn luyện Ridge</text><text x="936" y="83">Mô hình + ngưỡng từ validation</text>
+      <text x="184" y="181" font-size="22">21 đặc trưng từ query,</text><text x="184" y="207" font-size="22">từ vựng và điểm BM25</text><text x="557" y="195">Dự đoán ΔU</text><text x="936" y="195">So ngưỡng: BM25 / Hybrid</text>
+    </g>
+  </g>
+</svg>

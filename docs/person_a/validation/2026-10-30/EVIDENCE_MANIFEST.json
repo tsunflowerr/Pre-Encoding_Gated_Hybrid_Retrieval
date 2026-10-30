@@ -1,0 +1,112 @@
+{
+  "schema_version": "a_evidence_v1",
+  "experiment_freeze": "b22092218033d7b8d50ca866c1a0af205f2ed77de74d274b2fc31bfcca42cbd0",
+  "handoff_source_snapshot_hash": "e13b0d2af231536cacd36671120d42ba38efbe2746d21165dbd6e2d20981b795",
+  "files": [
+    {
+      "path": "docs/person_a/validation/2026-10-30/comparison.json",
+      "sha256": "e337088e17e64bc0c1cc50acb2c5f46a268359965ba544dd4141cc131019585e"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/freeze.json",
+      "sha256": "97459d3fd69c71c4c2f9a0ddcc7cbb5781d24b878f756656f24298f4b6c5d89e"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/full-tests.xml",
+      "sha256": "4175256b6a7427dd402e2a5982f8aea3c7c5b09366c3eada17df3cfcd6d287d3"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/gate-facts.json",
+      "sha256": "27f627b98f5e4938fde658adc30b1fcff96f9d2aeb765f962a9d8ab78772ca3b"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/HANDOFF_AUDIT.json",
+      "sha256": "71439a8cda43da34f3b2de8b6440e5ddb29213fb692bf935785e0dce918f7bc5"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/pipeline-status.json",
+      "sha256": "cd7958e5df4c9d007ea32dc9234bfecd019c052655603f50503917307d1c16ef"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/provider-programmers.json",
+      "sha256": "0b7e8d5efb215fce606a212a7e7f27903422948df03003a5a1b284df970fa9ef"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/provider-unix.json",
+      "sha256": "75ccb511b2c89f3da2c4161932b0bf35a23b1b5212bd60974276c2b670b43895"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/quality-controls.csv",
+      "sha256": "d6c30939fe3d8076e03b8b48bc50597bad0acfdaabe357f1235db3233106101f"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/quality-controls.json",
+      "sha256": "a35d3316aa213af98fe9fe47e753297b735badb0f4fda03c1f24112e660b1037"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/quality-primary.json",
+      "sha256": "9c3277f0a2d66d4bb4f937a1727565ef1382f6888c1a0bcecc5ed5e61830ad8b"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/quality-recheck.json",
+      "sha256": "a35d3316aa213af98fe9fe47e753297b735badb0f4fda03c1f24112e660b1037"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/random30-oracle.json",
+      "sha256": "e334085dad3812d4597497290680da6326f30e7a6f980c9aab049fd96e5b6059"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/README.md",
+      "sha256": "ef16e783ef4eb3851539e657b1ee836a2d137262434cbca4b8b091fc60b0977d"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/release.json",
+      "sha256": "57e5d8ee821ae81ca325c58d193ff1cf7e74db4bfa41a0e239ff84228aa41fa6"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/reproduction-identity.json",
+      "sha256": "59626b47e4c3b949009630935a34ed61b3b6398bcbc938707e9451ec42f132f6"
+    },
+    {
+      "path": "docs/person_a/validation/2026-10-30/utility.csv",
+      "sha256": "91b14a07ce7228fc2da936f521f433d53718b2abe96fd0d9667ae60576a5158e"
+    },
+    {
+      "path": "paper/figures/final-a/FAILURE_ANALYSIS.md",
+      "sha256": "2099e126df9bf983eff47cf167f296004c5e8c920dfe30e55eb9afadfca8ab18"
+    },
+    {
+      "path": "paper/figures/final-a/fold-stability.png",
+      "sha256": "66813354b94f24ee88ad33af1653d0c09b74995e833b9e527999dfc82796e063"
+    },
+    {
+      "path": "paper/figures/final-a/gate-cases.csv",
+      "sha256": "4a7ff06432a6d081ae080ea72de5270564a8f398ede7629a36554c43ae699934"
+    },
+    {
+      "path": "paper/figures/final-a/gate-cases.jsonl",
+      "sha256": "8f6090f097ea0a5858115c33aa4ef2c583608073c52c405fd5264bca795e66c8"
+    },
+    {
+      "path": "paper/figures/final-a/gate-outcomes.csv",
+      "sha256": "fb1365fe20d57401e56c7a95c941b794e6040d414a509e79122b1b025b184484"
+    },
+    {
+      "path": "paper/figures/final-a/quality-final.csv",
+      "sha256": "d57ef1599799ecfefa83366fc77c82021a164ee638556c8f72a353157c2c5a52"
+    },
+    {
+      "path": "paper/figures/final-a/quality-ndcg10.png",
+      "sha256": "0d4f0854917d8703bf5c27de9eb7b23fb76c79d502551e84c37f7f25d7bf9468"
+    },
+    {
+      "path": "paper/figures/final-a/quality-noninferiority.png",
+      "sha256": "aadf3a4fced314e9d89cf9fe1cdbbdbb7b51950f6874823a82aa3417baa06de1"
+    },
+    {
+      "path": "paper/figures/final-a/report.json",
+      "sha256": "acde8946a2a51a8c3de7c3d40dcdeb6a166a92df9137d42e4492637cc0e85113"
+    }
+  ],
+  "manifest_hash": "639899b6d56ed0878ab8197a8b162cae3d7e1e1b33f6061ade2fd4b2ac11c8a5"
+}

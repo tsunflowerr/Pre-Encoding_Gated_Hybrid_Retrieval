@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124 350" role="img" aria-labelledby="title desc">
+  <title id="title">Kiến trúc online PE-GH</title>
+  <desc id="desc">Truy vấn chạy BM25 một lần rồi tính đặc trưng và Gate Ridge. Nếu score không vượt ngưỡng, trả BM25. Nếu vượt ngưỡng, mã hóa truy vấn bằng MiniLM, tìm FAISS, fusion với BM25 và trả Hybrid.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10" fill="#004aad"/></marker><marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10" fill="#347a1c"/></marker></defs>
+  <g fill="none" stroke="#004aad" stroke-width="2.5" marker-end="url(#arrow)"><path d="M180 64H235"/><path d="M415 64H489"/><path d="M710 64H867"/></g>
+  <g fill="none" stroke="#347a1c" stroke-width="2.5" marker-end="url(#green)"><path d="M600 123V179H120V229"/><path d="M240 278H398"/><path d="M640 278H798"/></g>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="1" y="12" width="179" height="104" rx="3" fill="white" stroke="#004aad" stroke-width="2"/>
+    <text x="90" y="54" fill="#004aad" font-size="27" font-weight="700">Truy vấn</text><text x="90" y="87" fill="#161616" font-size="20">Câu hỏi tiếng Anh</text>
+    <rect x="237" y="12" width="178" height="104" rx="3" fill="white" stroke="#004aad" stroke-width="2"/>
+    <text x="326" y="54" fill="#004aad" font-size="27" font-weight="700">BM25</text><text x="326" y="87" fill="#161616" font-size="20">Top-100, thống kê</text>
+    <rect x="491" y="2" width="219" height="121" rx="3" fill="#004aad"/>
+    <text x="600" y="38" fill="white" font-size="28" font-weight="700">Gate</text><text x="600" y="71" fill="white" font-size="21">Đặc trưng + Ridge</text><text x="600" y="102" fill="white" font-size="20">So score với ngưỡng τ</text>
+    <text x="790" y="42" fill="#004aad" font-size="21">score ≤ τ</text>
+    <rect x="870" y="12" width="252" height="104" rx="3" fill="#f0f5fc" stroke="#004aad" stroke-width="2"/>
+    <text x="996" y="54" fill="#004aad" font-size="27" font-weight="700">Trả BM25</text><text x="996" y="87" fill="#161616" font-size="21">Bỏ qua Dense</text>
+    <text x="385" y="163" fill="#347a1c" font-size="21">score &gt; τ</text>
+    <rect x="1" y="232" width="239" height="97" rx="3" fill="white" stroke="#347a1c" stroke-width="2"/>
+    <text x="120" y="270" fill="#347a1c" font-size="26" font-weight="700">MiniLM</text><text x="120" y="303" fill="#161616" font-size="21">Mã hóa query</text>
+    <rect x="400" y="232" width="240" height="97" rx="3" fill="white" stroke="#347a1c" stroke-width="2"/>
+    <text x="520" y="270" fill="#347a1c" font-size="26" font-weight="700">FAISS</text><text x="520" y="303" fill="#161616" font-size="21">Tìm vector</text>
+    <rect x="800" y="222" width="322" height="119" rx="3" fill="#347a1c"/>
+    <text x="961" y="257" fill="white" font-size="26" font-weight="700">Fusion</text><text x="961" y="289" fill="white" font-size="21">BM25 + Dense</text><text x="961" y="321" fill="white" font-size="23" font-weight="700">Trả Hybrid</text>
+  </g>
+</svg>

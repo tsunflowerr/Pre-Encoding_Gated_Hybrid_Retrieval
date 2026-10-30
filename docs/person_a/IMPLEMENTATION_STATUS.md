@@ -1,12 +1,14 @@
 # Trạng thái triển khai phần A
 
-## Cập nhật tích hợp 26/10/2026
+## Nghiệm thu cuối ngày 30/10/2026
 
 Các lỗi kiểm chứng phát hiện trong [review A](../person_b/REVIEW_A_2026-10-25.md) đã được sửa: canonical query coverage, split/group integrity, sidecar/retriever identity, utility split/fold, provider score parity và SQLite manifest integrity. Backend NumPy mới khớp SQLite đến từng score trên 1.948 query. Đã có đủ run C và OOF chính/14 đối chứng trong lượt end-to-end mới; xem [báo cáo tích hợp](../integration/2026-10-26/README.md) và [cách tái lập](../INTEGRATION_V2.md).
 
-Phần dưới là bản ghi ngày 22/10, bao gồm các phụ thuộc và khẳng định kiểm tra tại thời điểm đó; không dùng mục “Phụ thuộc chưa có” làm trạng thái hiện tại.
+**A hoàn thành triển khai, tích hợp chất lượng và báo cáo cuối.** Blocker nhận run C đã đóng.
+Biên bản 22/10 được giữ ở [snapshot lịch sử](validation/2026-10-22/IMPLEMENTATION_STATUS.md).
 
-Ngày kiểm tra: 22/10/2026.
+Lượt thực nghiệm đầy đủ 30/10 có freeze `b2209221…42cbd0`, source
+`bec368c6…fa13`, đủ 29.220 request online và quality khớp lượt 26/10.
 
 ## Đã hoàn thành và chạy trên dữ liệu thật
 
@@ -20,9 +22,17 @@ Ngày kiểm tra: 22/10/2026.
 - Đối chiếu `ir-measures`: sai khác aggregate tối đa `2.3e-16`.
 - Final OOF runner kiểm dataset/split hash, sidecar, exact query-set, metadata, corpus và
   retriever provenance; có domain/macro/micro aggregation, utility và paired group bootstrap.
-- Sinh bảng BM25/Dense thật, hai figure và failure audit 80 query.
-- `uv lock`, dependency check, ruff, format, compileall và full non-network CI đều pass.
-- Thành viên độc lập clean-rerun và mutation-audit; các provenance attack đều bị từ chối.
+- Nhận đủ H*/S*/PE-GH từ C; strict OOF chính và 14 method đều đủ 1.948 query.
+- Sinh utility `U_H-U_B`, `U_PE-U_S*`, bảng final và CI 10.000 bootstrap samples.
+- Ba figure cuối bao gồm BM25/Dense/H*/S*/PE-GH, ổn định theo fold và noninferiority.
+- Audit toàn bộ quyết định gate, chọn 40 case theo bốn nhóm đã đăng ký. Mỗi case có
+  features, score/threshold, utility, top IDs, qrels và timing thật.
+- Tách output BM25 release khỏi output lịch sử; có opt-in tái sử dụng đúng byte/sidecar,
+  preflight năm fold và regression tests cho file bị sửa hoặc thiếu sidecar.
+- `uv lock`, dependency check, ruff, format và compileall đều pass; clone local cộng patch
+  A đạt 131 test, gồm model CPU thật. [JUnit](validation/2026-10-30/full-tests.xml).
+- Audit độc lập ngày 22/10 và mutation tests được giữ trong snapshot lịch sử; lượt chốt
+  30/10 do agent chính chạy. Không coi đây là một người review độc lập mới.
 
 ## Kết quả baseline thật
 
@@ -34,17 +44,22 @@ Ngày kiểm tra: 22/10/2026.
 | Dense | programmers | 0.248497 | 0.245899 | 0.333510 | 0.555559 |
 | Dense | unix | 0.222105 | 0.214061 | 0.287706 | 0.480007 |
 | Dense | macro-2 | 0.235301 | 0.229980 | 0.310608 | 0.517783 |
+| H*/S* | macro-2 | 0.314625 | 0.315820 | 0.391686 | 0.589594 |
+| PE-GH | macro-2 | 0.312163 | 0.315880 | 0.381008 | 0.576145 |
 
 Dense được ghi rõ là rebuilt artifact: config/model/corpus/ID order khớp manifest B và
 verifier pass, nhưng byte hash FAISS/run không trùng artifact B cũ.
 
-## Phụ thuộc chưa có
+## Bằng chứng và giới hạn
 
-- Repository không có ranking-v1 của C cho H*, S* hoặc PE-GH.
-- Chưa thể sinh utility H*/S*, bảng final PE-GH hoặc CI claim chính một cách trung thực.
-  `configs/evaluation/oof_final.example.json` xác định 30 run và 30 sidecar cần nhận
-  (3 method × 2 miền × 5 fold).
-- Clean-rerun hiện là independent rerun của working tree, chưa phải fresh clone từ commit vì
-  thay đổi A chưa được chủ repository commit.
-
-Không được đổi số fixture, số latency hoặc placeholder thành kết quả chất lượng cuối.
+- [Bảng/hình/failure analysis trong paper](../../paper/05a_quality_results.md).
+- [Release, freeze, utility và CI](validation/2026-10-30/).
+- [Clean rerun và phạm vi kiểm chứng](validation/CLEAN_RERUN.md).
+- Macro PE-GH − S* `-0.002462`, cận dưới một phía 95% `-0.006009`, đạt biên `-0.01`.
+  Programmers `-0.005502`, Unix `-0.009601`; Unix sát biên.
+- Dense ratio `57.75%`; 921 query gọi dense nhưng gain nDCG@10 không dương, 96 query
+  bị skip dù H* có gain dương. Đây là phân tích mô tả, không đổi threshold theo test.
+- Timing baseline margin/LiteGator-style và các operating point bổ sung vẫn thuộc
+  nghiệm thu toàn dự án B/C. Không suy latency của các method này từ dense ratio.
+- Các thay đổi bàn giao A hiện chưa commit. Kiểm tra checkout tách biệt dùng HEAD cộng
+  patch hiện tại; không gọi đó là hosted CI hay tái lập độc lập bởi một người khác.

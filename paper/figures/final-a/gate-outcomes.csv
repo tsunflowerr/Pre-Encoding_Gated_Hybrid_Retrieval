@@ -1,0 +1,9 @@
+domain,category,query_count,selected_count
+programmers,missed_benefit,29,5
+programmers,wasted_dense,508,5
+programmers,useful_dense,146,5
+programmers,safe_skip,193,5
+unix,missed_benefit,67,5
+unix,wasted_dense,413,5
+unix,useful_dense,58,5
+unix,safe_skip,534,5

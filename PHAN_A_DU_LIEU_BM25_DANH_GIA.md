@@ -4,11 +4,12 @@ Tài liệu này chuyển gói A trong kế hoạch nhóm thành một backlog t
 tự, đầu ra và điều kiện nghiệm thu cụ thể. Phần A dùng contracts chung hiện có và
 không định nghĩa lại `Document`, `Query`, `Ranking` hoặc chính sách ID/text.
 
-> **Cập nhật thực thi 22/10/2026:** A1–A7 đã chạy trên dữ liệu thật cho phần độc lập
-> với C: revision/checksum, manifests, năm fold, hai BM25 index, 1.948 top-100 run,
-> BM25S/ir-measures parity, strict OOF runner, bảng/figure/failure audit và CI. Kết quả
-> BM25 macro nDCG@10 là 0,289906. Phần utility H*/S* và bảng PE-GH cuối còn chờ 30
-> ranking-v1 test-fold từ C; không có số placeholder nào được đổi thành kết quả thật.
+> **Nghiệm thu A ngày 30/10/2026:** đã hoàn thành dữ liệu/BM25/provider parity,
+> nhận đủ run C, strict OOF 14 phương pháp, utility H*/S*, CI, ba hình cuối và 40 routing
+> cases. PE-GH macro nDCG@10 0,312163, S* 0,314625; cận dưới một phía 95%
+> -0,006009 > -0,01. Rerun trong clone local cộng patch A đạt 131 test gồm model thật.
+> Xem [biên bản đóng A](docs/person_a/EXECUTION_SUMMARY.md) và
+> [paper chất lượng](paper/05a_quality_results.md).
 
 ## 1. Mục tiêu và ranh giới
 
@@ -25,18 +26,18 @@ C. A nhận ranking v1 từ B/C và chấm qua cùng evaluator.
 
 | ID | Giờ | Việc | Đầu ra | Trạng thái code |
 |---|---:|---|---|---|
-| A0 | 6 | Review contracts, ID, text, fixture và protocol | shared contract được tái sử dụng | Có |
+| A0 | 6 | Review contracts, ID, text, fixture và protocol | shared contract được tái sử dụng | Hoàn thành |
 | A1 | 8 | Audit nguồn, qrels và coverage | dataset manifest/checksum | Hoàn thành dữ liệu thật |
-| A2 | 14 | Loader qrels, validation, grouping và five-fold split | `fold_0..4.json`, split manifest | Có |
-| A3 | 10 | BM25 index/search/save-load và query stats | SQLite index, top-100 ranking v1 | Có |
-| A4 | 12 | nDCG/MRR/Recall, utility, aggregation và bootstrap | per-query/summary/CI | Có |
-| A5 | 10 | CLI build/run/evaluate/utility | scripts tái lập | Có |
+| A2 | 14 | Loader qrels, validation, grouping và five-fold split | `fold_0..4.json`, split manifest | Hoàn thành dữ liệu thật |
+| A3 | 10 | BM25 index/search/save-load và query stats | SQLite index, top-100 ranking v1 | Hoàn thành dữ liệu thật |
+| A4 | 12 | nDCG/MRR/Recall, utility, aggregation và bootstrap | per-query/summary/CI | Hoàn thành OOF cuối |
+| A5 | 10 | CLI build/run/evaluate/utility | scripts tái lập | Hoàn thành và kiểm rerun |
 | A6 | 8 | Đối chiếu provider chuẩn và failure/coverage audit | validation report | Hoàn thành BM25 thật |
-| A7 | 8 | Bảng/hình chất lượng, paper và clean rerun | report release | BM25 xong; chờ run C |
-| A8 | 4 | Dự phòng sửa integration/data | issue log | Khi tích hợp |
+| A7 | 8 | Bảng/hình chất lượng, paper và clean rerun | report release | Hoàn thành final và 40 routing cases |
+| A8 | 4 | Dự phòng sửa integration/data | issue log | Đã sửa rerun output cũ, có regression tests |
 
-"Có" nghĩa là implementation và fixture tests đã tồn tại; không có nghĩa là đã
-chạy benchmark CQADupStack thật. Không điền số nghiên cứu từ fixture.
+Trạng thái trên dựa vào artifact dữ liệu/thực nghiệm thật và receipt kiểm tra ngày
+30/10. Fixture vẫn dùng để bắt lỗi hợp đồng; số nghiên cứu lấy từ OOF thật.
 
 ## 3. Thứ tự thực hiện
 
@@ -118,11 +119,15 @@ python -m pytest tests/shared tests/a -q
 - Utility join từ đúng query/domain/corpus-compatible runs.
 - Một người khác chạy lại từ config và tạo cùng artifacts trong sai số đã định.
 
-## 6. Việc còn phụ thuộc bên ngoài
+## 6. Tích hợp và giới hạn bàn giao
 
 - Dữ liệu/qrels raw và artifact lớn không commit vào Git; revision, checksum, manifests và
   split được lưu để tái tạo.
 - `uv` 0.13.3, lockfile, ruff và CI đã được kiểm tra trong môi trường hiện tại.
 - BM25S 0.3.14 và `ir-measures` 0.4.3 đã đối chiếu trên toàn bộ dữ liệu thật và đạt tolerance.
-- Chưa có 30 output test-fold của C nên chưa thể chấm H*/S*/PE-GH, sinh gain labels cuối
-  hoặc CI non-inferiority. Contract nhận run nằm tại `docs/person_a/RUNS_REQUIRED_FROM_C.md`.
+- Đã nhận đủ 30 C output test-fold cùng sidecar; H*/S*/PE-GH, utility và CI đã chốt.
+  Contract cho lượt mới nằm tại `docs/person_a/RUNS_REQUIRED_FROM_C.md`.
+- Đo thêm online các baseline margin/LiteGator-style và ghép toàn bộ paper thuộc phần
+  tích hợp B/C của dự án; đây không còn là blocker đầu vào của A.
+- Patch bàn giao hiện chưa commit. Clean rerun local dùng clone có `.git`, exact source
+  overlay và môi trường/cache đã khóa; xem `docs/person_a/validation/CLEAN_RERUN.md`.

@@ -1,0 +1,41 @@
+category,selection_reason,domain,fold,query_id,query,use_dense,gate_score,threshold,u_b,u_h,u_s,u_pe,delta_u
+missed_benefit,largest_gain,programmers,0,programmers:175309,Code maintenance: To add comments in code or to just leave it to the version control?,False,0.005199563818297538,0.013797002694597242,0.0,0.6309297535714575,0.6309297535714575,0.0,0.6309297535714575
+missed_benefit,largest_gain,programmers,0,programmers:253267,Equal or less than 15 lines per method(function) principle?,False,-0.01570240749284308,0.013797002694597242,0.0,0.6309297535714575,0.6309297535714575,0.0,0.6309297535714575
+missed_benefit,largest_gain,programmers,1,programmers:216301,Are there any formalized/mathematical theories of software testing?,False,0.004696093366592234,0.01970476283009924,0.38685280723454163,1.0,1.0,0.38685280723454163,0.6131471927654584
+missed_benefit,largest_gain,programmers,2,programmers:86656,"Are ""TDD Tests"" different to Unit Tests?",False,0.00455725545041602,0.020524949199227684,0.3065735963827292,0.8772153153380493,0.8772153153380493,0.3065735963827292,0.5706417189553201
+missed_benefit,largest_gain,programmers,1,programmers:250953,Referencing StackOverflow questions in comments,False,0.019509163794749394,0.01970476283009924,0.0,0.5,0.5,0.0,0.5
+safe_skip,fixed_hash_sample,programmers,4,programmers:94024,Does unit test increase productivity?,False,0.02402620375651878,0.026760921491400302,0.0,0.0,0.0,0.0,0.0
+safe_skip,fixed_hash_sample,programmers,2,programmers:133330,What's wrong with mutability and can it be desirable?,False,0.010419862815413284,0.020524949199227684,0.0,0.0,0.0,0.0,0.0
+safe_skip,fixed_hash_sample,programmers,0,programmers:230604,What exactly is procedural programming? How exactly is it different from OOP? Is it the same as functional programming?,False,-0.00423472777807405,0.013797002694597242,0.0,0.0,0.0,0.0,0.0
+safe_skip,fixed_hash_sample,programmers,4,programmers:196546,What is a good analogy to explain how software development is different than building a bridge?,False,0.016586779847363186,0.026760921491400302,0.0,0.0,0.0,0.0,0.0
+safe_skip,fixed_hash_sample,programmers,2,programmers:32617,"Would you see any use of a Trilean (True, False, ??)",False,0.018606598423684964,0.020524949199227684,1.0,1.0,1.0,1.0,0.0
+useful_dense,largest_gain,programmers,1,programmers:201041,Programming against a protocol in Objective-C,True,0.057246345661742415,0.01970476283009924,0.0,1.0,1.0,1.0,1.0
+useful_dense,largest_gain,programmers,3,programmers:211319,Excessive use “this” keyword in Java,True,0.05678662420715738,-0.008782425319934561,0.0,1.0,1.0,1.0,1.0
+useful_dense,largest_gain,programmers,4,programmers:220890,When did current source control management emerge?,True,0.04379414092301063,0.026760921491400302,0.0,1.0,1.0,1.0,1.0
+useful_dense,largest_gain,programmers,0,programmers:103471,How should I handle invalid user input?,True,0.0756745147880733,0.013797002694597242,0.31546487678572877,1.0,1.0,1.0,0.6845351232142712
+useful_dense,median_gain,programmers,3,programmers:76182,How to get a job with no experience?,True,0.04030144142056188,-0.008782425319934561,0.0,0.31546487678572877,0.31546487678572877,0.31546487678572877,0.31546487678572877
+wasted_dense,largest_harm,programmers,4,programmers:136908,Why Use !boolean_variable Over boolean_variable == false,True,0.12994296316440423,0.026760921491400302,1.0,0.3333333333333333,0.3333333333333333,0.3333333333333333,-0.6666666666666667
+wasted_dense,largest_harm,programmers,3,programmers:14645,What are effective interview questions?,True,0.04300390778590033,-0.008782425319934561,0.6309297535714575,0.0,0.0,0.0,-0.6309297535714575
+wasted_dense,largest_harm,programmers,1,programmers:164599,Verification of requirements question,True,0.0715472156175539,0.01970476283009924,1.0,0.38685280723454163,0.38685280723454163,0.38685280723454163,-0.6131471927654584
+wasted_dense,largest_harm,programmers,3,programmers:242610,what's the point of method overloading?,True,0.04775640634666065,-0.008782425319934561,0.8065735963827293,0.2640681225725909,0.2640681225725909,0.2640681225725909,-0.5425054738101385
+wasted_dense,largest_harm,programmers,1,programmers:111633,What does SVN do better than Git?,True,0.03145582498729324,0.01970476283009924,0.5,0.0,0.0,0.0,-0.5
+missed_benefit,largest_gain,unix,1,unix:144007,Symbolic link permission changes,False,-0.038851410060928265,0.01970476283009924,0.0,0.6309297535714575,0.6309297535714575,0.0,0.6309297535714575
+missed_benefit,largest_gain,unix,2,unix:23163,Newlines in filenames,False,0.002203017580510289,0.020524949199227684,0.0,0.6309297535714575,0.6309297535714575,0.0,0.6309297535714575
+missed_benefit,largest_gain,unix,2,unix:50150,"Can I map a key (caps lock) so it does one thing pressed alone, and another when pressed with a second key?",False,0.016948649139772672,0.020524949199227684,0.0,0.6309297535714575,0.6309297535714575,0.0,0.6309297535714575
+missed_benefit,largest_gain,unix,2,unix:132115,How to find reason a notebook wakes up?,False,0.020392312855786906,0.020524949199227684,0.0,0.5,0.5,0.0,0.5
+missed_benefit,largest_gain,unix,4,unix:137634,"""including"" files in fstab",False,0.003988389062471444,0.026760921491400302,0.0,0.5,0.5,0.0,0.5
+safe_skip,fixed_hash_sample,unix,4,unix:118219,Free disk space from a JBoss log file which is still being written to,False,0.009202363524277384,0.026760921491400302,0.0,0.0,0.0,0.0,0.0
+safe_skip,fixed_hash_sample,unix,4,unix:126393,I get low disk space warning after my last upgrade,False,0.001786729027064794,0.026760921491400302,0.0,0.0,0.0,0.0,0.0
+safe_skip,fixed_hash_sample,unix,3,unix:101797,How to report time and other information on all bash commands?,False,-0.01300993815731466,-0.008782425319934561,0.21840743681816419,0.19342640361727081,0.19342640361727081,0.21840743681816419,-0.02498103320089337
+safe_skip,fixed_hash_sample,unix,2,unix:143964,How to slice a text file into several files of 100 lines each?,False,-0.01657295656926435,0.020524949199227684,0.0,0.0,0.0,0.0,0.0
+safe_skip,fixed_hash_sample,unix,4,unix:104125,How do I delete files with spaces in them in bash script?,False,0.016165142245201283,0.026760921491400302,0.0,0.0,0.0,0.0,0.0
+useful_dense,largest_gain,unix,2,unix:44040,"A standard tool to convert a byte-count into human KiB MiB etc; like du, ls1",True,0.061916566388922664,0.020524949199227684,0.0,1.0,1.0,1.0,1.0
+useful_dense,largest_gain,unix,2,unix:126914,How does sudo really work?,True,0.02931199036927291,0.020524949199227684,0.3333333333333333,1.0,1.0,1.0,0.6666666666666667
+useful_dense,largest_gain,unix,1,unix:62109,How can I see a process' thread count?,True,0.026832216829405377,0.01970476283009924,0.0,0.6309297535714575,0.6309297535714575,0.6309297535714575,0.6309297535714575
+useful_dense,largest_gain,unix,3,unix:83491,Wrapper for package managers,True,0.015595943040285908,-0.008782425319934561,0.0,0.6309297535714575,0.6309297535714575,0.6309297535714575,0.6309297535714575
+useful_dense,median_gain,unix,2,unix:71176,Howto find duplicate files on disk,True,0.030611630312391006,0.020524949199227684,0.0,0.3562071871080222,0.3562071871080222,0.3562071871080222,0.3562071871080222
+wasted_dense,largest_harm,unix,3,unix:131168,renaming multiple files increment order,True,0.03622156309999463,-0.008782425319934561,1.0,0.43067655807339306,0.43067655807339306,0.43067655807339306,-0.5693234419266069
+wasted_dense,largest_harm,unix,3,unix:18684,Access history of a file,True,0.024587611426504175,-0.008782425319934561,1.0,0.43067655807339306,0.43067655807339306,0.43067655807339306,-0.5693234419266069
+wasted_dense,largest_harm,unix,2,unix:49785,Distribution for eldery people,True,0.05256506333665362,0.020524949199227684,0.43067655807339306,0.0,0.0,0.0,-0.43067655807339306
+wasted_dense,largest_harm,unix,3,unix:31379,install firefox in ubuntu-server edition,True,-0.004419995270137987,-0.008782425319934561,1.0,0.6309297535714575,0.6309297535714575,0.6309297535714575,-0.36907024642854247
+wasted_dense,largest_harm,unix,0,unix:47941,What's wrong with these two cron job's?,True,0.023923975788461945,0.013797002694597242,1.0,0.6309297535714575,0.6309297535714575,0.6309297535714575,-0.36907024642854247

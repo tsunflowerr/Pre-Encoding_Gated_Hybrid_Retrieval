@@ -43,6 +43,21 @@ Các stage có thể chạy lần lượt với cùng tham số:
 
 Mỗi test query chỉ thuộc một outer fold. Tổng lượt đo online chính là 1.948 × 3 × 5 = 29.220 request. Query warmup lấy từ validation, tách test. Pilot dùng validation với warmup từ train. Phần chọn execution không dùng test qrels.
 
+### Output A khi chạy quality
+
+Driver hiện materialize BM25 vào `results/oof_runs/release_bm25/<domain>/`, tách khỏi
+`results/oof_runs/bm25/` của các lượt A trước. Registry cuối vẫn dùng method `bm25`.
+CLI dùng `--reuse-identical`: run và sidecar cũ chỉ được tái sử dụng khi đúng byte và
+toàn bộ metadata yêu cầu. Cả năm fold được preflight trước khi ghi. Nếu có output khác
+hoặc sidecar thiếu, dùng results/checkout mới hoặc archive thủ công sau khi kiểm đường dẫn;
+không ghi đè hoặc sửa checksum để vượt kiểm tra.
+
+Lượt 30/10 đã có freeze/report riêng trong `docs/person_a/validation/2026-10-30/`.
+Thay đổi script A sau lượt đó làm source snapshot mới; freeze/receipt 30/10 tiếp tục là
+bằng chứng của source cũ. Không dùng `reproduce.py` để resume freeze cũ sau khi sửa code.
+`scripts_a/finalize_report.py` phân tích lại artifact đã lưu và kiểm provenance gốc mà
+không đổi source identity của thí nghiệm.
+
 Runtime `windows-physical4-local.yaml` chỉ dùng cho máy đã xác minh cặp SMT tương ứng. Trên máy khác dùng `cpu4.yaml` hoặc cấu hình affinity đã kiểm tra; không sao chép mù CPU ID.
 
 ## Tiếp tục sau gián đoạn

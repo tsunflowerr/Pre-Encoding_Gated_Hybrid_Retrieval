@@ -421,7 +421,13 @@ def quality_registry(root: Path, methods: list[str]) -> Path:
             "qrels": str(root / f"data/raw/{domain}/qrels.tsv"),
             "runs": {
                 method: {
-                    str(fold): str(root / f"results/oof_runs/{method}/{domain}/fold_{fold}.jsonl")
+                    str(fold): str(
+                        root
+                        / "results/oof_runs"
+                        / ("release_bm25" if method == "bm25" else method)
+                        / domain
+                        / f"fold_{fold}.jsonl"
+                    )
                     for fold in range(5)
                 }
                 for method in methods
@@ -460,12 +466,13 @@ def quality(root: Path, args) -> None:
                 "--method",
                 "bm25",
                 "--output",
-                f"results/oof_runs/bm25/{domain}",
+                f"results/oof_runs/release_bm25/{domain}",
                 "--run-id-prefix",
                 f"release-bm25-{domain}",
+                "--reuse-identical",
             ],
             [
-                root / f"results/oof_runs/bm25/{domain}/fold_{fold}.jsonl.meta.json"
+                root / f"results/oof_runs/release_bm25/{domain}/fold_{fold}.jsonl.meta.json"
                 for fold in range(5)
             ],
         )

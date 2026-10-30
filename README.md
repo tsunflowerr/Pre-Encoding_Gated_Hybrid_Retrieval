@@ -2,6 +2,7 @@
 
 Reproducible implementation for a three-person pre-encoding gated hybrid retrieval study.
 
+- [Nghiệm thu phần A và bảng/hình cuối 30/10/2026](docs/person_a/EXECUTION_SUMMARY.md)
 - [Sửa gate inference và kết quả đối chiếu 26/10/2026](docs/refinement/inference-2026-10-26/README.md)
 - [Chẩn đoán gate và thử nghiệm threshold đã loại](docs/GATE_REFINEMENT_V2.md)
 - [Kết quả tích hợp đã kiểm chứng 26/10/2026](docs/integration/2026-10-26/README.md)

@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-30",
+  "baseline_commit": "c3b4b9cf3817445db5bd8afd47659297f4b9d96c",
+  "checkout_kind": "local clone, detached HEAD, current A source/test overlay; no commit created",
+  "checkout_path": "G:\\CVDHD\\.tmp-a-close-20261030-8qlcug\\git-checkout",
+  "shared_environment": "G:\\CVDHD\\Pre-Encoding_Gated_Hybrid_Retrieval\\.venv",
+  "source_snapshot_hash": "e13b0d2af231536cacd36671120d42ba38efbe2746d21165dbd6e2d20981b795",
+  "tests": {
+    "passed": 131,
+    "failed": 0,
+    "skipped": 0,
+    "real_model": true,
+    "junit_sha256": "4175256b6a7427dd402e2a5982f8aea3c7c5b09366c3eada17df3cfcd6d287d3"
+  },
+  "oof_recheck": {
+    "methods": 14,
+    "queries_per_method": 1948,
+    "bootstrap_samples": 10000,
+    "summary_values_exact": true,
+    "per_query_csv_bytes_exact": true,
+    "utility_csv_bytes_exact": true,
+    "comparison_json_bytes_exact": true
+  },
+  "materialization": {
+    "programmers": {
+      "first": {
+        "written": 5,
+        "reused": 0
+      },
+      "second": {
+        "written": 0,
+        "reused": 5
+      },
+      "original_bytes_match": true
+    },
+    "unix": {
+      "first": {
+        "written": 5,
+        "reused": 0
+      },
+      "second": {
+        "written": 0,
+        "reused": 5
+      },
+      "original_bytes_match": true
+    }
+  },
+  "analysis": {
+    "query_count": 1948,
+    "online_ranking_matches": 29220,
+    "selected_cases": 40,
+    "manifest_sha256": "acde8946a2a51a8c3de7c3d40dcdeb6a166a92df9137d42e4492637cc0e85113",
+    "isolated_rebuild_bytes_exact": true,
+    "baseline_reporting_cli_cases": 80
+  },
+  "utility_rows": 3896,
+  "scope": "local same-agent handoff verification; existing pinned packages and model cache; online timings not rerun after analysis-only changes",
+  "initial_export_attempt": {
+    "tests_passed": 130,
+    "failed": 1,
+    "reason": "git metadata regression requires .git; corrected with actual local clone"
+  },
+  "audit_hash": "01b7fc42661d01131022e3f23a4c4da249a3c979aed96bd6a63a1564b6eb2fb4"
+}

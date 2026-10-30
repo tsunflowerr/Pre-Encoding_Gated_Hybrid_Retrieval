@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-30",
+  "browser": "Microsoft Edge headless",
+  "html_sha256": "5ec58004cb2ad87db687ddc2c55d74e65d3b3492d693499e0d6d03f20cfba8bc",
+  "layout_and_interaction_checks": {
+    "desktop": {
+      "passed": true,
+      "slide_count": 17,
+      "image_count": 6,
+      "errors": [],
+      "viewport_verified": [
+        1600,
+        1000
+      ],
+      "all_controls_visible": true,
+      "body_within_frame": true,
+      "max_top_bottom_gap_difference_px": 0
+    },
+    "laptop": {
+      "passed": true,
+      "slide_count": 17,
+      "image_count": 6,
+      "errors": [],
+      "viewport_verified": [
+        1366,
+        768
+      ],
+      "all_controls_visible": true,
+      "body_within_frame": true,
+      "max_top_bottom_gap_difference_px": 0
+    },
+    "mobile": {
+      "passed": true,
+      "slide_count": 17,
+      "image_count": 6,
+      "errors": [],
+      "viewport_verified": [
+        390,
+        844
+      ],
+      "all_controls_visible": true,
+      "body_within_frame": true,
+      "max_top_bottom_gap_difference_px": 0
+    }
+  },
+  "pdf_pages": 17,
+  "pdf_page_size_points": [
+    960,
+    540
+  ],
+  "template_match": "rebuilt from the two UET/VNU screenshots supplied by the user; visually reviewed all 17 slides",
+  "template_difference": "Original UET lockup has a small Since 2004 line; reference screenshot omits it",
+  "source": "GIOI_THIEU_DE_TAI_PE_GH.md",
+  "offline_assets_embedded": true,
+  "bottom_text_strips": 0,
+  "new_visuals": [
+    "technical-retrieval.png",
+    "retrieval-methods.svg",
+    "pegh-architecture.svg",
+    "gate-learning.svg"
+  ],
+  "body_area": {
+    "top": 150,
+    "bottom": 624,
+    "height": 474,
+    "balanced_non_cover_slides": 16
+  },
+  "cover_members": {
+    "columns": [
+      "Họ và tên",
+      "MSSV"
+    ],
+    "row_count": 3,
+    "mapping_verified": true
+  },
+  "secondary_explanation_blocks": 0,
+  "cover_summary_removed": true
+}

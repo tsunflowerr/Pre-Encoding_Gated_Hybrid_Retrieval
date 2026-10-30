@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 445" role="img" aria-labelledby="title desc">
+  <title id="title">BM25, Dense và Hybrid</title>
+  <desc id="desc">Một truy vấn đi qua tìm kiếm từ khóa BM25 và tìm kiếm ngữ nghĩa Dense. Hybrid kết hợp hai bảng xếp hạng. Các từ chỉ là ví dụ minh họa.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#5c6f86"/></marker></defs>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="40" y="9" width="560" height="68" rx="3" fill="#f0f5fc" stroke="#004aad" stroke-width="2"/>
+    <text x="320" y="36" font-size="18" fill="#004aad">TRUY VẤN MINH HỌA</text>
+    <text x="320" y="62" font-size="25" fill="#161616">change file permissions</text>
+    <g fill="none" stroke="#5c6f86" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M320 77V98H170V120"/><path d="M320 77V98H470V120"/>
+      <path d="M170 194V227"/><path d="M470 194V227"/>
+      <path d="M170 300V325H320V349"/><path d="M470 300V325H320" marker-end="none"/>
+    </g>
+    <rect x="40" y="122" width="260" height="72" rx="3" fill="white" stroke="#004aad" stroke-width="2"/>
+    <text x="170" y="152" font-size="27" font-weight="700" fill="#004aad">BM25</text>
+    <text x="170" y="180" font-size="22" fill="#161616">Khớp từ khóa</text>
+    <rect x="340" y="122" width="260" height="72" rx="3" fill="white" stroke="#347a1c" stroke-width="2"/>
+    <text x="470" y="152" font-size="27" font-weight="700" fill="#347a1c">Dense</text>
+    <text x="470" y="180" font-size="22" fill="#161616">So vector ngữ nghĩa</text>
+    <rect x="40" y="230" width="260" height="70" fill="#f4f7fb"/>
+    <text x="170" y="256" font-size="19" fill="#4b5563">Tín hiệu trùng từ</text>
+    <text x="170" y="283" font-size="23" fill="#004aad">file · permissions</text>
+    <rect x="340" y="230" width="260" height="70" fill="#eef5e9"/>
+    <text x="470" y="256" font-size="19" fill="#4b5563">Có thể gần nghĩa với</text>
+    <text x="470" y="283" font-size="23" fill="#347a1c">chmod · access rights</text>
+    <rect x="110" y="351" width="420" height="76" rx="3" fill="#004aad"/>
+    <text x="320" y="382" font-size="27" font-weight="700" fill="white">Hybrid</text>
+    <text x="320" y="410" font-size="22" fill="white">Kết hợp hai bảng xếp hạng</text>
+  </g>
+</svg>

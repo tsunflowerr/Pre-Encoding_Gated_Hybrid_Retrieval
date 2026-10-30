@@ -1,45 +1,52 @@
-# Independent clean-rerun report
+# Part A handoff verification — 30 October 2026
 
-Date: 22 October 2026. Executor: independent read-only audit agent; no repository files
-were edited by the auditor.
+The 22 October independent audit is preserved in
+[the historical snapshot](2026-10-22/CLEAN_RERUN.md). This report records the current
+handoff verification by the primary agent; no new independent human audit is claimed.
 
-## Final focused rerun
+## Isolated checkout
+
+A local clone with independent Git objects was created, detached at
+`c3b4b9cf3817445db5bd8afd47659297f4b9d96c`. The exact current A source/test changes
+were copied into that checkout. It shares the existing pinned Python environment and
+model cache, but imports were explicitly checked to resolve to the isolated checkout.
+No commit, branch update or push was made.
+
+The source snapshots of the handoff tree and isolated clone match:
+`e13b0d2af231536cacd36671120d42ba38efbe2746d21165dbd6e2d20981b795`.
+The full checkout path, XML digest and scope are in [HANDOFF_AUDIT.json](2026-10-30/HANDOFF_AUDIT.json).
+An initial Git-archive export lacked `.git` and failed one Git-metadata test after 130
+passes. That setup was replaced by a real local clone, and the complete suite passed.
 
 | Check | Result |
 |---|---|
 | `uv lock --check` | Passed, 64 packages |
-| Ruff lint | Passed |
-| Ruff format | Passed, 71 files |
-| Shared + A + B tests excluding network model test (initial independent run) | Passed, 82 tests; 1 deselected |
-| Part A tests after strictness fixes (independent focused rerun) | Passed, 15 tests |
-| Compileall | Passed |
-| `git diff --check` | Passed |
-| Strict BM25 OOF registry | Passed, 1,948 query rows |
+| `uv pip check` | Passed, 58 installed packages compatible |
+| CI-scope Ruff lint and format | Passed, 112 Python files formatted |
+| Shared + A + B + C, including pinned real CPU model | **131 passed**, no skip/failure |
+| Compileall and `git diff --check` | Passed |
+| Six new materialization/failure-selection regression tests | Passed |
+| Real materialization, two domains, two invocations | 10 folds written, then 10 reused; original run/sidecar bytes identical |
+| Strict 14-method OOF from isolated source | 1,948 queries/method, 10,000 bootstrap samples; all saved statistics identical |
+| OOF per-query, utility, comparison and quality CSV/JSON | Byte-identical to saved results |
+| Final analysis on preserved online artifacts | All 29,220 rankings verified; 40 cases, 3 plots, 14-method table |
+| Final report rebuilt from isolated source | Tables, cases, three PNGs and analysis manifest byte-identical |
+| Historical baseline reporting CLI after refactor | Passed, 80 baseline failure cases retained |
+| Provider parity | BM25S/ir-measures passed on both complete domains |
 
-The independently recomputed macro results were nDCG@10 `0.2899056486375368`, MRR@10
-`0.29261130830004145`, Recall@10 `0.35638490954447977`, and Recall@100
-`0.5477127409095295`, exactly matching the saved result.
+The clean full-suite [JUnit XML](2026-10-30/full-tests.xml) and
+[OOF recheck summary](2026-10-30/quality-recheck.json) are tracked. The original 30 October
+experiment source remains `bec368c6…fa13`; analysis/materialization changes create a new
+source identity and do not rewrite the old freeze or timing receipts.
 
-## Mutation audit
+## Remaining release scope
 
-The auditor first demonstrated that an earlier runner revision accepted missing run metadata,
-a consistent bogus corpus hash, and a forged split hash. After the fixes, the auditor
-repeated those attacks in a temporary directory. All three were rejected:
+This is a local clone plus an uncommitted patch, not hosted CI of a new committed revision.
+Dependencies were checked from the existing locked installation; they were not installed
+again into a fresh environment. The real model test used the pinned local cache offline.
+The full online benchmark was completed before these reporting/materialization edits;
+its timing results are preserved and were not benchmarked again after the edits.
 
-- missing `method`/`split`/`fold`/`run_id`: rejected;
-- noncanonical corpus hash: rejected;
-- forged/stale split hash: rejected.
-
-The final runner additionally verifies the dataset-manifest binding, run sidecar SHA and
-query-set hashes, exact fold query membership, per-file retriever consistency, and top-100
-limit.
-
-After adding the two strictness regression tests, the primary agent's final complete suite
-passed 84 tests with one network-model test deselected.
-
-## Scope caveat
-
-This is an independent rerun of the current working tree, not a fresh clone of a commit,
-because Part A changes are not committed in the user-owned workspace. A literal fresh-clone
-rerun remains a release step after the owner commits the work. The missing C artifacts are
-an input blocker, not a test failure.
+No C-input blocker remains for A. A new end-to-end experiment after source changes must
+use a fresh results directory/checkout and create a new freeze. Existing raw artifacts
+can still be evaluated and reported after their original identity/checksums are verified.
