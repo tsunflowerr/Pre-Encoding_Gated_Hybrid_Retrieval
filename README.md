@@ -2,6 +2,7 @@
 
 Reproducible implementation for a three-person pre-encoding gated hybrid retrieval study.
 
+- [PE-GH v2 (vòng v4): gate "BM25 thất bại", arctic-embed-xs, xác nhận đăng ký trước trên 6 subforum mới, online và demo (30/10/2026)](docs/v4/README.md)
 - [Vòng v3: chấm lại ứng viên BM25, xác nhận đăng ký trước trên 4 domain mới (28/10/2026)](docs/v3/README.md)
 - [Sửa gate inference và kết quả đối chiếu 26/10/2026](docs/refinement/inference-2026-10-26/README.md)
 - [Chẩn đoán gate và thử nghiệm threshold đã loại](docs/GATE_REFINEMENT_V2.md)
