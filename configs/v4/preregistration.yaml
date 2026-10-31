@@ -1,0 +1,81 @@
+# Confirmation protocol for PE-GH v2 (v4 round), fixed BEFORE any file of the six new
+# subforums is downloaded. Everything below was chosen on the six seen domains
+# (programmers, unix, android, gis, mathematica, webmasters) with leave-one-domain-out
+# development (results/develop.json); none of the new subforums has ever been read.
+schema_version: v4_preregistration_1
+registered_on: "2026-10-30"
+new_domains: [english, gaming, physics, stats, tex, wordpress]
+dataset: {id: BeIR/cqadupstack, revision: e84b7220ce5a4e6c49aeb568983b0ec5a7584c2c}
+qrels: {id: BeIR/cqadupstack-qrels, revision: 13595a9f221256a9a21e91c8b0fed3563382b6a7}
+splits: v1 grouping/bucketing recipe, seed 42, five folds, validation=(test+1) mod 5
+
+encoder: arctic_xs_q
+encoder_model:
+  model: Snowflake/snowflake-arctic-embed-xs
+  revision: d8c86521100d3556476a063fc2342036d45c106f
+  query_prefix: "Represent this sentence for searching relevant passages: "
+  documents: no prefix, CLS pooling, normalized, max_length 256 (configs/v4/dense_arctic_xs.yaml)
+  chosen_by: >-
+    rule fixed before running (results/encoder_comparison.json): highest OOF H* on
+    programmers/unix, cheaper encoder wins within 0.005; arctic_xs_q H* 0.4133 at 8.7 ms
+    median encode vs bge_small_q 0.4018 at 15.9 ms and MiniLM 0.3146 at 8.8 ms
+
+gate:
+  file: configs/v4/gate_v2.json
+  spec: fail_v1+qpp_domain   # logistic regression, label = BM25 nDCG@10 == 0
+  features: 21 v1 BM25/query features + 7 QPP features, all computed from the BM25 list
+  normalization: >-
+    each domain standardized by the mean/std of its own query features (no labels);
+    on a new domain these statistics come from all of its queries
+  trained_on: the six seen domains pooled; weights fixed, never refitted on a new domain
+gate_sha256: 009e639dae7778a1e36988db9c177572d40855708559036ec592f499dac95a94
+
+tiers:   # fixed from the seen domains, no label of a new domain is used
+  cheap_p_star: proxy_cc_0.3   # BM25 top-100 re-scored by the static arctic token proxy, CC alpha 0.3
+  expensive_h_star: cc_alpha_0.7   # encode query, exact FAISS top-100, CC fusion with BM25 top-100, dense weight 0.7
+  forced_to_h_star: queries with no BM25 token or only OOV tokens
+routing:
+  operating_budget_rule: >-
+    smallest budget >= 0.3 whose LODO development macro is within 0.005 of H*
+    (dev: 0.8 -> 0.4043 vs H* 0.4088)
+  thresholds: >-
+    per fold and domain, the gate-score quantile of that fold's train+validation queries
+    (unlabeled) that encodes the operating budget; test queries above it go to H*, others to P*
+  matched_budget_rule: >-
+    every scorer (gate v2, BM25-margin, random) routes exactly the same number of test
+    queries per fold (forced queries plus top scores, ties by query ID)
+matched_budget: 0.5
+operating_budget: 0.8
+
+baseline_pe_gh_v1: >-
+  PE-GH v1 unchanged: MiniLM (sentence-transformers/msmarco-MiniLM-L6-cos-v5,
+  14ca9be4bbcf1402eac0f43a2e2ccb6e0f994ba3), 21 v1 features, v1_ridge gate on the hybrid
+  gain, H*/S* and the C6 threshold selected per fold on the new domain's own labeled
+  train/validation rows (v1 sees in-domain labels; v2 does not)
+
+analysis:
+  metric: nDCG@10 per query, equal-weight macro over the six new subforums
+  bootstrap: 10000 group resamples within domain, seed 20261019
+  multiplicity: Holm step-down over K1-K4 at family-wise alpha 0.05 (one-sided bootstrap p-values)
+hypothesis_tests:
+  K1_gate_v2_beats_bm25_margin_matched: >-
+    at 50% encode budget, P*->H* routing by gate v2 beats routing by the BM25-margin rule
+    (dev LODO +0.0105, 95% CI [0.0061, 0.0148])
+  K2_pe_gh_v2_noninferior_to_h_star: >-
+    PE-GH v2 at the operating budget (80%) is non-inferior to always-encode H*, margin 0.01
+    (dev LODO -0.0045)
+  K3_pe_gh_v2_superior_to_pe_gh_v1: >-
+    PE-GH v2 at the operating budget beats PE-GH v1; this is the whole-system upgrade
+    (encoder + tiers + gate) and is driven mostly by the encoder, not by the gate
+  K4_gate_v2_beats_random_matched: >-
+    at 50% budget gate v2 beats the 30-seed random router (dev LODO +0.0195)
+secondary_reported_without_claims:
+  - full budget curves 0.1-0.9 for gate v2, BM25-margin, random and the per-query oracle
+  - realized encode ratio of the quantile thresholds; per-domain results
+  - ROC AUC of gate v2 and of BM25-margin for predicting BM25 failure
+  - static BM25, dense, P*, H* (arctic) and MiniLM dense/H* per domain; PE-GH v1 dense ratio
+  - online latency of PE-GH v2 vs H*, R*, P*, PE-GH v1 and BM25-margin on programmers/unix
+    with gates trained without the measured domain (seen domains, not part of this test)
+negative_results_policy: >-
+  every hypothesis is reported whatever the outcome; no gate, feature, encoder, tier,
+  threshold, budget or margin change after any new-subforum file is read
