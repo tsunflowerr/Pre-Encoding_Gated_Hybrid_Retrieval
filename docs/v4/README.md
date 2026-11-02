@@ -1,4 +1,4 @@
-# PE-GH v2 (vòng v4) — 30/10/2026
+# PE-GH v2 (vòng v4) — cập nhật 01/11/2026
 
 **Tóm tắt.** PE-GH v2 giữ nguyên ý tưởng của PE-GH: chạy BM25 trước, gate rẻ quyết định, chỉ encode khi cần. Bốn thay đổi:
 
@@ -28,6 +28,8 @@ Kiểm chứng được đăng ký trước trên **6 subforum CQADupStack chưa
 | PE-GH v1 | 14,4 ms | 0,312 | — |
 
 **Cùng độ trễ với PE-GH v1, PE-GH v2 (50%) cao hơn +0,062 nDCG@10.**
+
+**So sánh thăm dò với hai bài báo liên quan (§7):** trên sáu chủ đề chưa thấy, ở 50% encode CI chưa phân biệt được v2 với bản LiteGator mặc định hoặc BERT; ở 80%, BERT cao hơn v2 +0,0068 [0,0044; 0,0094]. Trong phiên online cùng harness và LODO lồng nhau, độ trễ TB ở ngân sách 50% là v2 **14,30 ms**, LiteGator chọn cấu hình **14,43 ms**, BERT **162,57 ms**; bảng mới giữ cả p95, CPU, RSS, tỷ lệ encode thực tế và chất lượng OOF.
 
 **Giới hạn:**
 
@@ -248,7 +250,143 @@ Gate v2 dự đoán BM25 thất bại tốt hơn margin ở **cả 6 domain**: A
 - **R\* là mốc đáng lưu ý.** Ở cùng ≈ 14,7 ms, R\* (0,3811) hơn PE-GH v2 50% (0,3745): encode mọi query nhưng không tìm FAISS. R\* chưa được kiểm định trên domain mới, nên đây là quan sát trên dev.
 - H\* v2 chậm hơn H\* v1 7,5%, đổi lại chất lượng cao hơn +0,10.
 
-## 7. Demo
+## 7. So sánh với hai bài báo liên quan (thăm dò)
+
+**Phân tích này được bổ sung sau đánh giá K1–K4, không đăng ký trước.** Mục tiêu là so sánh quyết định định tuyến của gate v2 đã đóng băng với các bản triển khai điều chỉnh từ [Arabzadeh và cộng sự, CIKM 2021 [1]](https://arxiv.org/abs/2109.10739) và [LiteGator, iCAST-ES 2025 [2]](https://doi.org/10.2991/978-94-6463-926-1_77). Đây là so sánh trên hạ tầng PE-GH, không tái lập các con số của hai bài báo trên dữ liệu gốc.
+
+### 7.1 Cách triển khai và điều chỉnh
+
+Trong so sánh offline ở §7.2–7.4, tất cả router dùng cùng P\* = proxy CC 0,3, H\* = BM25 ⊕ arctic CC 0,7 và quy tắc buộc encode cho query không có token BM25 hoặc toàn OOV. Các router mới chỉ học trên **4.842 query của sáu chủ đề đã thấy**; đánh giá trên cùng **8.303 query của sáu chủ đề mới** ở §5. Không điều chỉnh tham số theo nhãn của sáu chủ đề đánh giá.
+
+V2 và ablation có chuẩn hóa theo chủ đề dùng thống kê đặc trưng của toàn bộ query trong chủ đề đó, không dùng nhãn, đúng cách triển khai của gate đã đóng băng.
+
+- **Arabzadeh [1], biến thể sparse-vs-hybrid:** BERT-base-uncased nhận cặp query và văn bản tài liệu BM25 hạng 1 (title + body), dự đoán BM25 có tìm được tài liệu liên quan trong top T hay không. Giữ một epoch và batch 8 như bài gốc; ở đây dùng **T = 10** thay cho 50 vì đánh giá nDCG@10 thay cho recall@1000, giới hạn cặp đầu vào ở **256 token**, learning rate 2×10⁻⁵. Dùng trọng số BERT cố định theo revision trong [facts/prior_bert.json](facts/prior_bert.json). Seed 42 áp dụng cho thứ tự mẫu và dropout; khởi tạo lớp phân loại chưa được đặt seed, nên huấn luyện lại từ đầu có thể cho số khác. Model và điểm đã lưu được dùng lại khi chạy tiếp.
+- **LiteGator [2]:** StandardScaler + SVM tuyến tính (`LinearSVC`, C = 1), tám đặc trưng gồm entropy query; IDF min/mean/std; điểm BM25 hạng 1; chênh điểm hạng 1–2; mean/std điểm top-10. Dùng tokenizer và IDF của PE-GH. Nhãn ở đây là **nDCG@10(H\*) > nDCG@10(P\*)**; bài gốc mô tả lợi ích dense so với sparse. Huấn luyện trên toàn bộ 4.842 query đã thấy, thay cho 1.000 query Natural Questions của bài gốc; không cân bằng lại lớp hay tinh chỉnh trên chủ đề đánh giá.
+- **Hai ablation:** (i) giữ tám đặc trưng và SVM của bản LiteGator, chỉ đổi sang nhãn BM25 thất bại; (ii) dùng cách học của gate v2 (logistic + chuẩn hóa theo chủ đề + nhãn thất bại), nhưng chỉ giữ tám đặc trưng đó. BM25-margin và ngẫu nhiên 30 seed là các mốc bổ sung.
+
+Ở ngân sách 30/50/80%, mỗi router chọn **cùng số query được encode trong từng test fold của từng chủ đề**, theo điểm giảm dần; query buộc encode được tính vào ngân sách, hòa điểm xử lý bằng query ID. Đây là quy tắc so cùng ngân sách của K1, không chọn ngưỡng bằng nhãn test. Chất lượng là macro nDCG@10, mỗi chủ đề có trọng số bằng nhau. CI hai phía 95% dùng 10.000 lần bootstrap nhóm trong từng chủ đề, seed 20261019; các khoảng thăm dò không hiệu chỉnh cho nhiều so sánh và không phải bằng chứng xác nhận mới.
+
+### 7.2 Chất lượng ở cùng ngân sách encode
+
+| Router | 30% | 50% | 80% |
+|---|---|---|---|
+| **PE-GH v2 (28 đặc trưng)** | 0,3698 | 0,3933 | 0,4156 |
+| LiteGator [2], bản điều chỉnh | 0,3671 | 0,3904 | 0,4172 |
+| Arabzadeh [1], BERT, bản điều chỉnh | 0,3697 | 0,3924 | 0,4224 |
+| BM25-margin | 0,3648 | 0,3892 | 0,4172 |
+| 8 đặc trưng + SVM + nhãn thất bại | 0,3709 | 0,3928 | 0,4161 |
+| 8 đặc trưng + cách học v2 | 0,3712 | 0,3931 | 0,4161 |
+| Ngẫu nhiên (30 seed) | 0,3556 | 0,3744 | 0,4029 |
+
+Mốc 80% ở đây dùng số lượt encode chính xác trong từng test fold; kết quả v2 0,4156 khác mốc vận hành 0,4159 ở §5.2, vốn dùng ngưỡng phân vị từ query train+validation không nhãn.
+
+Chênh lệch dưới đây đều lấy **v2 trừ router đối chiếu**; giá trị âm nghĩa là router đối chiếu cao hơn.
+
+| v2 − router [CI 95%] | 30% | 50% | 80% |
+|---|---|---|---|
+| LiteGator [2], bản điều chỉnh | +0,0026 [−0,0015; +0,0067] | +0,0029 [−0,0008; +0,0067] | −0,0017 [−0,0035; +0,0002] |
+| Arabzadeh [1], BERT, bản điều chỉnh | +0,0000 [−0,0041; +0,0042] | +0,0010 [−0,0030; +0,0051] | −0,0068 [−0,0094; −0,0044] |
+| BM25-margin | +0,0050 [+0,0009; +0,0091] | +0,0042 [+0,0003; +0,0081] | −0,0016 [−0,0039; +0,0007] |
+| 8 đặc trưng + SVM + nhãn thất bại | −0,0012 [−0,0037; +0,0014] | +0,0005 [−0,0017; +0,0028] | −0,0005 [−0,0019; +0,0009] |
+| 8 đặc trưng + cách học v2 | −0,0015 [−0,0042; +0,0012] | +0,0002 [−0,0019; +0,0024] | −0,0005 [−0,0020; +0,0010] |
+| Ngẫu nhiên (30 seed) | +0,0141 [+0,0106; +0,0177] | +0,0190 [+0,0155; +0,0225] | +0,0126 [+0,0104; +0,0149] |
+
+Ở 30% và 50%, CI của v2 so với cả LiteGator lẫn BERT đều chứa 0; chưa có bằng chứng rõ rằng v2 cao hơn hai bản điều chỉnh này. **Ở 80%, BERT đạt 0,4224 so với 0,4156 của v2: cao hơn +0,0068 [0,0044; 0,0094], CI loại trừ 0 trong phân tích thăm dò.** Với LiteGator ở 80%, giá trị trung bình của v2 cũng thấp hơn, nhưng CI vẫn chứa 0. Không thể kết luận v2 thắng hai router từ bài báo về chất lượng.
+
+#### 7.2.1 LiteGator được chọn cấu hình bằng LODO
+
+Để cho LiteGator cơ hội chọn mô hình như gate v2, thử **C ∈ {0,1; 1; 10} × class_weight ∈ {None; balanced}**, chọn bằng trung bình macro nDCG@10 qua ngân sách 20–80% khi LODO trên sáu chủ đề đã thấy; hòa điểm giữ ứng viên đầu theo thứ tự C rồi class_weight. Cấu hình được chọn là **C = 0.1, class_weight = balanced**, sau đó fit trên cả 4.842 query đã thấy; sáu chủ đề đánh giá không tham gia chọn cấu hình.
+
+| Ngân sách | V2 | LG mặc định | LG chọn LODO | v2 − LG mặc định [CI 95%] | v2 − LG chọn LODO [CI 95%] |
+|---|---|---|---|---|---|
+| 30% | 0,3698 | 0,3671 | 0,3678 | +0,0026 [−0,0015; +0,0067] | +0,0020 [−0,0020; +0,0061] |
+| 50% | 0,3933 | 0,3904 | 0,3913 | +0,0029 [−0,0008; +0,0067] | +0,0020 [−0,0016; +0,0057] |
+| 80% | 0,4156 | 0,4172 | 0,4169 | −0,0017 [−0,0035; +0,0002] | −0,0013 [−0,0031; +0,0006] |
+
+Đây là bổ sung thăm dò, cùng P*/H*, số lượt encode từng test fold và bootstrap nhóm như §7.2. Giữ cả bản mặc định và bản được chọn cấu hình, không chọn bản nào theo kết quả sáu chủ đề đánh giá. Chi tiết lưới và điểm LODO ở [facts/prior_litegator_tuning.json](facts/prior_litegator_tuning.json), kết quả chưa thấy ở [facts/prior_litegator_tuned.json](facts/prior_litegator_tuned.json).
+
+### 7.3 Quy tắc quyết định riêng của từng router
+
+| Quy tắc quyết định | Encode (macro) | nDCG@10 | v2 cùng số lượt encode | v2 − router [CI 95%] |
+|---|---|---|---|---|
+| LiteGator: điểm SVM > 0 | 0,049% | 0,3272 | 0,3272 | +0,000006 [−0,000014; +0,000028] |
+| BERT: p(thất bại) > 0,5 | 72,104% | 0,4132 | 0,4119 | −0,0012 [−0,0043; +0,0019] |
+
+V2 trong bảng chọn đúng số lượt H\* của router tương ứng **trên từng chủ đề**; ngân sách này khác bảng 30/50/80%. Các quy tắc đều gồm ngoại lệ buộc encode cho query không có token BM25 hoặc toàn OOV. Mốc p > 0,5 là điểm vận hành bổ sung của bản BERT ở đây; bài [1] khảo sát nhiều ngưỡng xác suất. Với lần fit này, ngưỡng SVM gần như luôn chọn P\*, nên chất lượng gần P\* (0,3270); chỉ nhìn kết quả ở ngưỡng mặc định sẽ trộn chất lượng sắp thứ tự với mức ngân sách. Nhãn H\* > P\* chiếm 31,83% mẫu huấn luyện; chưa có ablation cân bằng lớp để quy nguyên nhân cho mất cân bằng nhãn. Đây là hành vi của bản điều chỉnh trên PE-GH, không phải kết luận về LiteGator trên dữ liệu gốc.
+
+### 7.4 Khả năng dự đoán và ablation nhãn
+
+AUC dưới đây là trung bình không trọng số của sáu AUC theo chủ đề, không gộp tất cả query thành một tập.
+
+| Router | AUC: BM25 thất bại | AUC: H* tốt hơn P* |
+|---|---|---|
+| **PE-GH v2 (28 đặc trưng)** | 0,764 | 0,570 |
+| LiteGator [2], bản điều chỉnh | 0,706 | 0,587 |
+| Arabzadeh [1], BERT, bản điều chỉnh | 0,759 | 0,582 |
+| BM25-margin | 0,670 | 0,592 |
+| 8 đặc trưng + SVM + nhãn thất bại | 0,762 | 0,566 |
+| 8 đặc trưng + cách học v2 | 0,760 | 0,569 |
+
+BERT hoàn thành 606 bước; loss trung bình 50 bước cuối **0,5282**, tỷ lệ nhãn thất bại **57,50%**. AUC thất bại trên sáu chủ đề đánh giá là **0,759**. Lần fine-tune này có tín hiệu học; không lựa chọn lại epoch hay siêu tham số theo các kết quả đánh giá.
+
+Đổi riêng nhãn của SVM tám đặc trưng sang **BM25 thất bại** đưa AUC thất bại từ 0,706 lên 0,762, gần v2 (0,764). Ở 30/50%, chất lượng định tuyến của hai bản tám đặc trưng dùng nhãn thất bại cũng gần v2, với CI của chênh lệch đều chứa 0. Kết quả phù hợp với cách giải thích rằng **đổi nhãn đã đủ để đưa bản tám đặc trưng đến mức gần v2**, chưa cho thấy 28 đặc trưng mang lại lợi ích rõ. Bản v2 cũng chưa cao hơn LiteGator rõ ràng về nDCG@10 ở các ngân sách này; không quy toàn bộ khác biệt giữa hai bài báo cho một yếu tố.
+
+### 7.5 Hiệu năng online đo cùng harness (thăm dò)
+
+**Đây là phép đo đầu-cuối thật**, không cộng thời gian v2 với micro-benchmark BERT. Cả 13 phương án được đo lại bằng cùng harness, cùng code và kế hoạch đã đóng băng, nhưng **chia hai đoạn** vì máy phải tạm dừng giữa hai chủ đề: programmers **12:36–14:44 ngày 01/11/2026**, unix **14:47 02/11/2026–16:55 02/11/2026 (UTC+7)**. Chỉ dừng ở ranh giới giữa hai chủ đề; trong mỗi fold, cả 13 phương án vẫn được đo xen kẽ trong một lượt, nên so sánh giữa các phương án không bị lệch bởi lần dừng; không đo lại lượt nào đã xong; lượt unix vừa khởi động lúc dừng được giữ lại nguyên trạng và không dùng. Con số gộp hai chủ đề trộn hai đoạn đo như nhau cho mọi phương án. Thứ tự phương án được harness xáo trộn ở mỗi lần lặp, seed 42; không tái sử dụng độ trễ v2 ở §6. Kế hoạch [configs/v4/prior_online_plan.yaml](../../configs/v4/prior_online_plan.yaml) được đóng băng trước khi đo, SHA-256 `b263ff94efc3c72e1d5d3f0445628135d07e2a0be37d92d8b7cd75afafb8c5c1`, thời điểm UTC `2026-11-01T05:30:08.017878+00:00`; đây vẫn là thăm dò sau K1–K4.
+
+**Cách giữ công bằng:** cùng programmers/unix, BM25 index, encoder arctic có prefix, FAISS, P*/H* được chọn từ năm chủ đề còn lại và quy tắc buộc encode. Mỗi ngưỡng lấy từ phân vị điểm riêng của router trên train+validation không nhãn của fold. Tất cả dùng batch 1, concurrency 1, 50 query khởi động, 5 lần lặp, 5 fold, lõi [0, 2, 4, 6]; BERT và encoder đều bốn torch thread. Weights, tokenizer, index và văn bản tài liệu hạng 1 được tải trước đồng hồ đo; BERT dùng lại ranking BM25 đã chạy, tokenize + forward trong request, không cache điểm.
+
+Để không lọt nhãn qua **chọn mô hình**, v2 và LiteGator đều chọn cấu hình bằng LODO bên trong năm chủ đề còn lại trước khi fit năm chủ đề đó. V2 chọn tám ứng viên theo cùng luật diện tích 20–80%: **programmers: `fail_v1+qpp_domain`; unix: `fail_v1_domain`**; khác recipe 28 đặc trưng cố định ở unix của phiên cũ, nên đây là phép đo v2 với chọn mô hình lồng nhau, không thay trọng số đóng băng dùng cho bảng chưa thấy. LiteGator online chọn **programmers: C = 0.1, class_weight = balanced; unix: C = 0.1, class_weight = balanced**; chỉ bản chọn cấu hình này chạy online, không gán độ trễ của nó cho bản mặc định. Hai BERT LODO được huấn luyện riêng, seed 42 đặt **trước `from_pretrained`** để khởi tạo head xác định; model BERT học cả sáu chủ đề ở §7.2 không bị thay. **BERT giữ recipe một epoch, batch 8 do chi phí, chưa được hưởng tìm siêu tham số như hai router tuyến tính; đây là giới hạn so sánh.**
+
+Smoke 156 request kiểm tra parity trước lượt đầy đủ. Lượt đầy đủ giữ **126.620 request**, **0 sai lệch ranking hoặc route**; không loại request chậm, không chạy lại để chọn số đẹp. Cột parity đếm số request sai so với kế hoạch; mọi sai lệch, nếu có, nằm trong `mismatch_details` của facts. nDCG@10 lấy từ **ranking thực tế ghi sau đồng hồ đo**, trung bình năm lần lặp từng query rồi macro hai chủ đề; CPU là thời gian CPU của tiến trình, RSS là đỉnh bộ nhớ quan sát cả tải model và chạy. Query IDs xếp hạng được ghi ngoài vùng đo cho mọi phương án.
+
+| Phương án | Ngân sách | TB ms | p50 | p95 | CPU ms | RSS MiB | Encode | Sai parity | OOF nDCG@10 |
+|---|---|---|---|---|---|---|---|---|---|
+| BM25 | 0% | 2,23 | 2,12 | 3,96 | 2,21 | 285,6 | 0,0% | 0/9.740 | 0,2899 |
+| P* | 0% | 3,75 | 3,61 | 5,80 | 3,72 | 620,6 | 0,0% | 0/9.740 | 0,2952 |
+| H* v2 | 100% | 23,11 | 22,80 | 28,19 | 87,29 | 724,9 | 100,0% | 0/9.740 | 0,4142 |
+| R* v2 | 100% | 13,51 | 13,39 | 16,11 | 53,58 | 654,3 | 100,0% | 0/9.740 | 0,3811 |
+| PE-GH v2 | 30% | 10,54 | 5,35 | 26,43 | 39,56 | 766,8 | 30,1% | 0/9.740 | 0,3423 |
+| PE-GH v2 | 50% | 14,30 | 15,22 | 26,98 | 53,55 | 767,4 | 50,0% | 0/9.740 | 0,3736 |
+| PE-GH v2 | 80% | 20,31 | 23,14 | 28,04 | 76,73 | 769,7 | 80,1% | 0/9.740 | 0,4096 |
+| LiteGator tuned | 30% | 10,58 | 5,08 | 27,14 | 39,80 | 767,1 | 30,2% | 0/9.740 | 0,3348 |
+| LiteGator tuned | 50% | 14,43 | 18,49 | 27,56 | 54,21 | 768,7 | 50,2% | 0/9.740 | 0,3674 |
+| LiteGator tuned | 80% | 20,20 | 23,03 | 27,93 | 76,30 | 770,0 | 80,2% | 0/9.740 | 0,4096 |
+| BERT LODO | 30% | 150,61 | 146,69 | 233,30 | 594,37 | 1230,9 | 29,9% | 0/9.740 | 0,3395 |
+| BERT LODO | 50% | 162,57 | 159,24 | 264,86 | 638,98 | 1232,7 | 50,3% | 0/9.740 | 0,3692 |
+| BERT LODO | 80% | 162,24 | 158,65 | 253,17 | 635,41 | 1235,4 | 80,1% | 0/9.740 | 0,4103 |
+
+Các tỷ lệ encode đếm lượt encoder arctic ở nhánh H*, không đếm forward của router BERT vốn vẫn nằm trong thời gian request; tỷ lệ thực tế của ngưỡng phân vị có thể lệch ngân sách mục tiêu trên test. OOF trên programmers/unix phục vụ đối chiếu của phiên đo; bảng §7.2 và §7.2.1 trên sáu chủ đề mới vẫn là so sánh chất lượng chưa thấy.
+
+**So sánh cùng ngân sách mục tiêu** (v2 trừ router; âm về độ trễ nghĩa là v2 nhanh hơn):
+
+| v2 − router | nDCG@10 [CI 95%] | Độ trễ TB ms [CI 95%] |
+|---|---|---|
+| LiteGator 30% | +0,0075 [−0,0000; +0,0148] | −0,04 [−0,48; +0,40] |
+| LiteGator 50% | +0,0061 [−0,0003; +0,0127] | −0,13 [−0,55; +0,27] |
+| LiteGator 80% | +0,0000 [−0,0029; +0,0030] | +0,11 [−0,13; +0,34] |
+| BERT 30% | +0,0028 [−0,0051; +0,0108] | −140,06 [−142,28; −137,82] |
+| BERT 50% | +0,0043 [−0,0039; +0,0125] | −148,27 [−150,65; −145,86] |
+| BERT 80% | −0,0007 [−0,0045; +0,0031] | −141,93 [−144,17; −139,66] |
+
+CI chất lượng dùng 10.000 bootstrap nhóm trong từng chủ đề, seed 20261019. CI độ trễ dùng 10.000 bootstrap theo query, giữ các lần lặp của cùng query đi cùng nhau, seed 42, như harness ở §6; không loại đuôi chậm. Đây là CI thăm dò, không hiệu chỉnh nhiều so sánh và không lượng hóa biến động giữa các máy hoặc các phiên đo. Facts còn có CI tỷ lệ giảm độ trễ so với H* được đo lại trong chính phiên này.
+
+![Chất lượng và độ trễ online của các router](figures/v4_prior_online.png)
+
+Trục độ trễ dùng thang log, nhãn ghi thời gian đo thật. Micro-benchmark Phase 1 chỉ là thông tin phụ: gate v2 ≈ 0,715 ms (TB), quyết định BERT 126,73 ms (trung vị), encode arctic 8,72 ms (trung vị); các số đó không được dùng để suy ra bảng online mới.
+
+Kết quả đầy đủ: [facts/prior_online_report.json](facts/prior_online_report.json), [biên nhận kế hoạch](facts/prior_online_plan_receipt.json), [hai model BERT LODO](facts/prior_lodo_bert.json), [chọn recipe v2 không có chủ đề đang đo](facts/prior_v2_selection_audit.json). Toàn bộ phép đo là thăm dò; không thay các kết luận K1–K4 hay hồ sơ online cũ.
+
+### 7.6 Đường cong và giới hạn diễn giải
+
+![So sánh router từ hai bài báo liên quan](figures/v4_prior_curves.png)
+
+Hình dùng ngân sách chính xác trên toàn bộ query của từng chủ đề; bảng §7.2 làm tròn số lượt encode trong từng test fold, nên số ở cùng ngân sách có thể lệch nhẹ. Đường cong là thống kê mô tả, không lựa chọn lại ngân sách vận hành. Các CI giữ sáu chủ đề cố định và lấy lại mẫu nhóm bên trong từng chủ đề, không lượng hóa độ bất định khi chuyển sang một chủ đề hoàn toàn mới.
+
+Các con số đầy đủ nằm ở [facts/prior_comparison.json](facts/prior_comparison.json) và [facts/prior_bert.json](facts/prior_bert.json). [1] N. Arabzadeh, X. Yan, C. L. A. Clarke, *Predicting Efficiency/Effectiveness Trade-offs for Dense vs. Sparse Retrieval Strategy Selection*, CIKM 2021, tr. 2862–2866, [DOI](https://doi.org/10.1145/3459637.3482159). [2] *LiteGator: A Lightweight and Budget-Aware Retriever Routing Framework for Low-Resource Question Answering*, iCAST-ES 2025, Advances in Engineering Research 283, tr. 687–695, [DOI](https://doi.org/10.2991/978-94-6463-926-1_77).
+
+## 8. Demo
 
 ```powershell
 python scripts_shared/demo_v4.py --domain unix --port 8765   # mở http://127.0.0.1:8765
@@ -262,7 +400,7 @@ Gõ một câu hỏi tiếng Anh. Trang hiển thị:
 
 Demo dùng đúng gate đã đóng băng; ngưỡng là phân vị ngân sách vận hành trên query của domain đó. `--budget 0.5` để xem gate ở ngân sách khác. Domain chọn được: 6 domain đã thấy.
 
-## 8. Kết luận và giới hạn
+## 9. Kết luận và giới hạn
 
 **Được hỗ trợ trên dữ liệu chưa từng dùng, bằng giao thức đăng ký trước:**
 
@@ -280,6 +418,8 @@ Demo dùng đúng gate đã đóng băng; ngưỡng là phân vị ngân sách v
 3. Ở ≈ 15 ms, R\* cho chất lượng cao hơn PE-GH v2 50% (trên dev). Định tuyến không phải cách duy nhất để giảm chi phí.
 4. Gate không giảm p95.
 5. Oracle ở 50% đạt 0,449, gate đạt 0,393: vẫn còn khoảng cách lớn.
+
+**So sánh thăm dò (§7):** giữ kết quả BERT hơn v2 ở 80% chất lượng trên sáu chủ đề mới; ablation nhãn chưa cho thấy lợi ích rõ của tăng từ tám lên 28 đặc trưng. Phiên online đo trực tiếp toàn bộ phương án, chọn mô hình không có chủ đề đang đo, cho TB ở 50% là v2 14,30 ms, LiteGator 14,43 ms, BERT 162,57 ms, với 0 sai lệch trên 126.620 request; BERT chưa được tìm siêu tham số do chi phí nên không diễn giải lựa chọn recipe này như một ưu thế của v2.
 
 **Cách trình bày đóng góp.** Có thể nói PE-GH v2 là *gate học đầu tiên trong đề tài thắng heuristic không học trên dữ liệu mới*, với điều kiện nêu rõ ba điểm:
 
@@ -305,7 +445,7 @@ Demo dùng đúng gate đã đóng băng; ngưỡng là phân vị ngân sách v
 2. Ba tầng BM25 → R\* → H\*: gate quyết định có encode hay không, rồi có tìm FAISS hay không. Mục tiêu là vượt R\* ở cùng độ trễ.
 3. HNSW cho nhánh H\* để giảm p95 (v3: tìm nhanh hơn 2–10 lần, chất lượng giữ trong 0,001).
 
-## 9. Cách chạy lại
+## 10. Cách chạy lại
 
 Mặc định `--root ~/.cache/pegh/v4`. Các domain đã thấy được đọc chỉ-đọc từ v3 và v1. Không sửa mã trong lúc chạy `online`.
 
@@ -330,5 +470,16 @@ foreach ($st in "proxy","features","tiers") { & $py $s $st --encoders $E --domai
 & $py $s evaluate
 # Tuần 3: online trên programmers/unix (gate train không có domain được đo)
 & $py $s online-plan; & $py $s online; & $py $s online --detailed; & $py $s online-report
+# Thăm dò sau K1–K4: router từ hai bài báo liên quan, không tinh chỉnh trên chủ đề đánh giá
+& $py $s prior-bert --threads 6     # dùng lại model/điểm đã lưu nếu có
+& $py $s prior
+# Phase 2: đo online thật; hoàn tất train/chọn mô hình/test trước khi đóng băng
+& $py $s prior-lodo-bert --threads 6
+& $py $s prior-tune; & $py $s prior-v2-audit
+& $py $s prior-online-plan
+& $py $s prior-online-freeze          # biên nhận bất biến trước đo
+& $py $s prior-online-smoke
+& $py $s prior-online                # không sửa mã trong suốt lượt đo
+& $py $s prior-online-report
 & $py $s report                      # sao chép facts + vẽ hình vào docs/v4
 ```
