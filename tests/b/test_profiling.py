@@ -42,16 +42,36 @@ def settings(**overrides):
     )
 
 
-def test_isolated_benchmark_and_report(built_index, tmp_path):
+@pytest.mark.parametrize("record_ranked_ids", [False, True])
+def test_isolated_benchmark_and_report(built_index, tmp_path, record_ranked_ids):
+    from pegh.data.artifacts import object_hash
+
     queries, warmup = inputs()
     output = tmp_path / "benchmark"
     manifest = run_benchmark(
-        registry(built_index), queries, warmup, output, settings(), split="fixture"
+        registry(built_index),
+        queries,
+        warmup,
+        output,
+        settings(),
+        split="fixture",
+        record_ranked_ids=record_ranked_ids,
     )
     assert manifest["status"] == "complete"
     receipts = [read_json(output / w["directory"] / "worker.json") for w in manifest["workers"]]
     assert len({r["runtime"]["pid"] for r in receipts}) == 2
     assert all(len(r["runtime"]["resources"]["effective_affinity"]) <= 4 for r in receipts)
+    for worker in manifest["workers"]:
+        request = json.loads(
+            (output / worker["directory"] / "requests.jsonl")
+            .read_text(encoding="utf-8")
+            .splitlines()[0]
+        )
+        if record_ranked_ids:
+            assert object_hash(request["ranked_doc_ids"]) == request["ranking_hash"]
+            assert len(request["ranked_doc_ids"]) == request["hits_returned"]
+        else:
+            assert "ranked_doc_ids" not in request
     summary = summarize_run(output, bootstrap_samples=20)["summaries"][0]
     assert summary["unique_queries"] == 5 and summary["timing_samples"] == 10
     assert summary["dense_call_ratio"] == 1.0

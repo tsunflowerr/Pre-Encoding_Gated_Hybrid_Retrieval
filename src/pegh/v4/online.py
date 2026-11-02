@@ -28,7 +28,7 @@ from pegh.v3.rescore import candidate_fusion, rescore_identity, rescored_ranking
 from pegh.v4.gate import LinearGate
 
 ROUTES = ("bm25", "p_star", "r_star", "h_star", "gated")
-SCORERS = ("gate_v2", "bm25_margin")
+SCORERS = ("gate_v2", "bm25_margin", "litegator", "arabzadeh_bert")
 MARGIN_COLUMN = 16  # bm25_rel_gap12 in the v1 feature vector
 
 
@@ -51,7 +51,18 @@ class V2SearchMethod:
         self.h_star = parts.get("h_star")
         self.r_alpha = parts.get("r_alpha")
         self.prefix = parts.get("prefix", "")
-        for name in ("proxy", "encoder", "dense", "vectors", "rows", "extractor", "gate", "stats"):
+        for name in (
+            "proxy",
+            "encoder",
+            "dense",
+            "vectors",
+            "rows",
+            "extractor",
+            "gate",
+            "stats",
+            "bert",
+            "documents",
+        ):
             setattr(self, name, parts.get(name))
         self.scorer, self.threshold = parts.get("scorer"), parts.get("threshold")
         self.identities = parts.get("identities", {})
@@ -98,6 +109,10 @@ class V2SearchMethod:
             return fuse_high(sparse, dense, self.h_star)
 
     def gate_score(self, query: Query, sparse: Ranking, stats) -> float:
+        if self.scorer == "arabzadeh_bert":
+            with self.trace.stage("gate"):
+                document = self.documents.get(sparse.hits[0].doc_id, "") if sparse.hits else ""
+                return float(self.bert.score([(query.text, document)], batch=1)[0])
         with self.trace.stage("features"):
             values = np.asarray(
                 self.extractor.transform(query, sparse, stats).values, dtype=np.float64
@@ -105,6 +120,8 @@ class V2SearchMethod:
         with self.trace.stage("gate"):
             if self.scorer == "bm25_margin":
                 return float(-values[MARGIN_COLUMN])
+            if self.scorer == "litegator":
+                return float(self.gate.score(values[None, :])[0])
             return float(self.gate.score(values[None, :], self.stats)[0])
 
     def search(self, query: Query, k: int = 100) -> SearchResponse:
@@ -156,6 +173,11 @@ def create_v2_method(
     protocol_path: str | None = None,
     cache_folder: str | None = None,
     torch_threads: int | None = None,
+    bert_dir: str | None = None,
+    expected_bert_sha256: str | None = None,
+    corpus_path: str | None = None,
+    expected_corpus_sha256: str | None = None,
+    bert_receipt_path: str | None = None,
 ) -> V2SearchMethod:
     from pegh.dense.retriever import FaissDenseRetriever
     from pegh.v3.online import load_vectors
@@ -240,6 +262,54 @@ def create_v2_method(
                 extractor=ExtendedFeatureExtractor(base, sparse, gate.spec.groups),
             )
             provenance.update(gate_sha256=expected_gate_sha256, gate=gate.spec.name)
+        elif scorer == "litegator":
+            from pegh.v4.prior import LinearSVM
+
+            if file_hash(gate_path) != expected_gate_sha256:
+                raise ValueError("LiteGator file checksum differs")
+            payload = json.loads(Path(gate_path).read_text(encoding="utf-8"))
+            if payload["domain"] != domain or domain in payload["trained_on"]:
+                raise ValueError("LiteGator training leaks measured domain")
+            gate = LinearSVM.from_json(payload["gate"])
+            if gate.sha256 != payload["gate_sha256"]:
+                raise ValueError("LiteGator JSON score checksum differs")
+            parts.update(gate=gate, extractor=ExtendedFeatureExtractor(base, sparse, ("v1",)))
+            provenance.update(
+                gate_sha256=expected_gate_sha256,
+                model_sha256=gate.sha256,
+                trained_on=payload["trained_on"],
+                hyperparameters=payload["hyperparameters"],
+            )
+        elif scorer == "arabzadeh_bert":
+            from contracts.io import iter_corpus
+            from pegh.v4.prior import BertRouter
+
+            receipt = json.loads(Path(bert_receipt_path).read_text(encoding="utf-8"))
+            if (
+                receipt["recipe"]["held_out"] != domain
+                or domain in receipt["recipe"]["trained_on"]
+                or receipt["model_sha256"] != expected_bert_sha256
+            ):
+                raise ValueError("BERT receipt leaks domain or differs from registered model")
+            if file_hash(Path(bert_dir) / "model.safetensors") != expected_bert_sha256:
+                raise ValueError("BERT weights checksum differs")
+            if file_hash(corpus_path) != expected_corpus_sha256:
+                raise ValueError("BERT document corpus checksum differs")
+            parts.update(
+                bert=BertRouter(bert_dir, torch_threads or config["torch_threads"]),
+                documents={
+                    d.doc_id: f"{d.title} {d.body}".strip()
+                    for d in iter_corpus(corpus_path, domain)
+                },
+            )
+            provenance.update(
+                model_sha256=expected_bert_sha256,
+                trained_on=receipt["recipe"]["trained_on"],
+                corpus_text_sha256=expected_corpus_sha256,
+                routing_score_cache=False,
+                bert_max_length=256,
+                bert_batch_size=1,
+            )
         else:
             parts["extractor"] = ExtendedFeatureExtractor(base, sparse, ("v1",))
         parts.update(scorer=scorer, threshold=float(threshold))

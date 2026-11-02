@@ -1241,6 +1241,352 @@ def _online_quality(ws: Workspace) -> dict:
     return result
 
 
+def prior_bert(ws: Workspace, args) -> None:
+    """Arabzadeh-style sparse-vs-hybrid router (exploratory, added after the registered test).
+
+    Fine-tunes BERT on the six seen subforums (label: BM25 has no relevant result in the
+    top 10), scores the six new ones, and times one decision on the pinned four cores.
+    Resumable: a saved model or score file is reused.
+    """
+    import numpy as np
+    import psutil
+
+    from pegh.data.artifacts import atomic_json
+    from pegh.v4 import prior as p
+
+    os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+    key = json.loads((ws.repo / "configs/v4/gate_v2.json").read_text(encoding="utf-8"))["encoder"]
+    model_dir = ws.root / "artifacts/prior/bert_router"
+    score_path = ws.results("prior", "bert_scores.npz")
+    report_path = ws.results("prior_bert.json")
+    report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else {}
+    report.update(
+        model=p.BERT_ID,
+        revision=p.BERT_REVISION,
+        max_length=p.BERT_MAX_LENGTH,
+        label="BM25 has no relevant result in the top T",
+        label_top_t=p.ARABZADEH_T,
+        input="query [SEP] title + body of the top BM25 document",
+        epochs=1,
+        batch=8,
+        learning_rate=2e-5,
+        seed=42,
+        seed_scope="training shuffle and dropout; classifier initialization is unseeded",
+        trained_on=list(SEEN_DOMAINS),
+    )
+    if not (model_dir / "config.json").exists():
+        pairs, labels = [], []
+        for d in _load_group(ws, SEEN_DOMAINS, key, with_tiers=False):
+            pairs += p.top_document_pairs(ws, d.domain, d.ids)
+            labels += (d.utilities["bm25"] == 0).astype(int).tolist()
+        router = p.BertRouter(p.bert_path(ws.models), args.threads)
+        training = router.train(pairs, labels, log=lambda **f: log(stage="prior-bert", **f))
+        report["training"] = {
+            **training,
+            "queries": len(pairs),
+            "positive_rate": float(np.mean(labels)),
+        }
+        model_dir.mkdir(parents=True, exist_ok=True)
+        router.model.save_pretrained(model_dir)
+        router.tokenizer.save_pretrained(model_dir)
+        atomic_json(report_path, report)
+        log(stage="prior-bert", training=report["training"])
+    router = p.BertRouter(model_dir, args.threads)
+    if not score_path.exists():
+        started, arrays = time.perf_counter(), {}
+        for d in _load_group(ws, NEW_DOMAINS, key, with_tiers=False):
+            arrays[f"{d.domain}__ids"] = np.array(d.ids)
+            arrays[f"{d.domain}__score"] = router.score(p.top_document_pairs(ws, d.domain, d.ids))
+            log(stage="prior-bert", scored=d.domain, queries=len(d.ids))
+        score_path.parent.mkdir(parents=True, exist_ok=True)
+        partial = score_path.with_name("bert_scores.partial.npz")
+        np.savez(partial, **arrays)
+        partial.replace(score_path)
+        report["scoring_seconds"] = round(time.perf_counter() - started, 1)
+    psutil.Process().cpu_affinity(AFFINITY)
+    router.torch.set_num_threads(4)
+    sample = _load_group(ws, ("programmers",), key, with_tiers=False)[0]
+    pairs = p.top_document_pairs(ws, "programmers", sample.ids[:300])
+    report["latency"] = {**router.latency(pairs), "affinity": AFFINITY, "torch_threads": 4}
+    atomic_json(report_path, report)
+    log(stage="prior-bert", latency=report["latency"])
+
+
+def prior_lodo_bert(ws: Workspace, args) -> None:
+    from pegh.v4.prior_online import train_bert
+
+    train_bert(ws, args)
+
+
+def prior_tune(ws: Workspace, args) -> None:
+    from pegh.v4.prior_online import tune_litegator
+
+    tune_litegator(ws, args)
+
+
+def prior_online_plan(ws: Workspace, args) -> None:
+    from pegh.v4.prior_online import online_plan
+
+    online_plan(ws, args)
+
+
+def prior_v2_audit(ws: Workspace, args) -> None:
+    from pegh.v4.prior_online import audit_v2_selection
+
+    audit_v2_selection(ws, args)
+
+
+def prior_online_freeze(ws: Workspace, args) -> None:
+    from pegh.v4.prior_online import freeze_plan
+
+    freeze_plan(ws, args)
+
+
+def prior_online_smoke(ws: Workspace, args) -> None:
+    from pegh.v4.prior_online import run_online
+
+    run_online(ws, args, smoke=True)
+
+
+def prior_online(ws: Workspace, args) -> None:
+    from pegh.v4.prior_online import run_online
+
+    run_online(ws, args)
+
+
+def prior_online_report(ws: Workspace, args) -> None:
+    from pegh.v4.prior_online import report_online
+
+    report_online(ws, args)
+
+
+PRIOR_BUDGETS = (0.3, 0.5, 0.8)
+PRIOR_ROUTERS = (
+    "pe_gh_v2",
+    "litegator",
+    "arabzadeh_bert",
+    "bm25_margin",
+    "litegator_fail_label",
+    "pe_gh_v2_8_features",
+)
+
+
+def prior(ws: Workspace, args) -> None:
+    """PE-GH v2 gate vs re-implemented prior routers on the six new subforums.
+
+    Exploratory, added after the registered test, so none of it is a registered claim. Every
+    router is trained on the six seen subforums only and routes P* -> H* with the frozen
+    tiers; at a matched budget each router sends the same number of test queries to H* per
+    fold. Two ablations separate the label from the features: LiteGator's eight features with
+    the BM25-failure label, and gate v2's recipe restricted to those eight features.
+    """
+    import numpy as np
+    from sklearn.metrics import roc_auc_score
+
+    from pegh.data.artifacts import atomic_json
+    from pegh.v3.pipeline import RANDOM_SEEDS, _fit_scores, _random_score, bootstrap, macro
+    from pegh.v4 import gate as g
+
+    frozen = json.loads((ws.repo / "configs/v4/gate_v2.json").read_text(encoding="utf-8"))
+    key, tiers_ = frozen["encoder"], frozen["tiers"]
+    t_p, t_h = tiers_["p_star"], tiers_["h_star"]
+    gate = g.LinearGate.from_json(frozen["gate"])
+    seen, new = _load_group(ws, SEEN_DOMAINS, key), _load_group(ws, NEW_DOMAINS, key)
+    groups = {d.domain: d.groups for d in new}
+
+    def gain(d):
+        return (d.utilities[t_h] > d.utilities[t_p]).astype(int)
+
+    def fail(d):
+        return (d.utilities["bm25"] == 0).astype(int)
+
+    def per_domain(x):
+        return (x - x.mean(axis=0)) / (x.std(axis=0) + 1e-9)
+
+    def pooled(family, xs_train, ys, xs_eval):
+        flat = _fit_scores(family, np.vstack(xs_train), np.concatenate(ys), np.vstack(xs_eval))
+        return np.split(flat, np.cumsum([len(x) for x in xs_eval])[:-1])
+
+    eight_seen = [d.matrix(("general",)) for d in seen]
+    eight_new = [d.matrix(("general",)) for d in new]
+    fitted = {
+        "litegator": pooled("svc", eight_seen, [gain(d) for d in seen], eight_new),
+        "litegator_fail_label": pooled("svc", eight_seen, [fail(d) for d in seen], eight_new),
+        "pe_gh_v2_8_features": pooled(
+            "logistic",
+            [per_domain(x) for x in eight_seen],
+            [fail(d) for d in seen],
+            [per_domain(x) for x in eight_new],
+        ),
+    }
+    bert = np.load(ws.results("prior", "bert_scores.npz"))
+    scores = {name: {} for name in PRIOR_ROUTERS}
+    for i, d in enumerate(new):
+        if list(bert[f"{d.domain}__ids"]) != d.ids:
+            raise ValueError(f"{d.domain}: BERT scores are not aligned with the query set")
+        x = d.matrix(gate.spec.groups)
+        scores["pe_gh_v2"][d.domain] = gate.score(x, g.domain_stats(x))
+        scores["arabzadeh_bert"][d.domain] = bert[f"{d.domain}__score"]
+        scores["bm25_margin"][d.domain] = -d.features["v1"][:, 16]
+        for name, values in fitted.items():
+            scores[name][d.domain] = values[i]
+
+    def route(d, score, budget):
+        u_p, u_h, out = d.utilities[t_p], d.utilities[t_h], np.zeros(len(d.ids))
+        for fold in range(5):
+            test = d.folds[fold]["test"]
+            ids = [d.ids[i] for i in test]
+            out[test] = _routed(score[test], d.forced[test], ids, u_p[test], u_h[test], budget)
+        return out
+
+    random = {
+        d.domain: [np.array([_random_score(s, q) for q in d.ids]) for s in RANDOM_SEEDS]
+        for d in new
+    }
+    matched, comparisons = {}, {}
+    for budget in PRIOR_BUDGETS:
+        tag = f"{budget:.1f}"
+        values = {
+            name: {d.domain: route(d, scores[name][d.domain], budget) for d in new}
+            for name in PRIOR_ROUTERS
+        }
+        values["random30"] = {
+            d.domain: np.mean([route(d, r, budget) for r in random[d.domain]], axis=0) for d in new
+        }
+        matched[tag] = {name: macro(v) for name, v in values.items()}
+        for other in values:
+            if other == "pe_gh_v2":
+                continue
+            diff = {dom: values["pe_gh_v2"][dom] - values[other][dom] for dom in groups}
+            stats = bootstrap(diff, groups)
+            comparisons.setdefault(other, {})[tag] = {
+                "estimate": stats["mean_difference"],
+                "two_sided_95": stats["two_sided_95"],
+                "p_superiority": stats["p_superiority"],
+            }
+        log(stage="prior", budget=budget, **{k: round(v, 4) for k, v in matched[tag].items()})
+
+    # Each router at its own decision rule, against gate v2 at the same per-domain H* count.
+    rules = {
+        "litegator": lambda s: s > 0,  # SVM decision boundary
+        "arabzadeh_bert": lambda s: s > 0.5,  # classifier probability
+    }
+    native = {}
+    for name, rule in rules.items():
+        own, v2_same, rates = {}, {}, {}
+        for d in new:
+            u_p, u_h = d.utilities[t_p], d.utilities[t_h]
+            chosen = d.forced | rule(scores[name][d.domain])
+            own[d.domain] = np.where(chosen, u_h, u_p)
+            rates[d.domain] = float(chosen.mean())
+            v2_same[d.domain] = _routed(
+                scores["pe_gh_v2"][d.domain], d.forced, d.ids, u_p, u_h, rates[d.domain]
+            )
+        diff = {dom: v2_same[dom] - own[dom] for dom in groups}
+        stats = bootstrap(diff, groups)
+        native[name] = {
+            "encode_ratio_macro": float(np.mean(list(rates.values()))),
+            "encode_ratio_domains": rates,
+            "macro": macro(own),
+            "pe_gh_v2_same_budget_macro": macro(v2_same),
+            "pe_gh_v2_minus": {
+                "estimate": stats["mean_difference"],
+                "two_sided_95": stats["two_sided_95"],
+                "p_superiority": stats["p_superiority"],
+            },
+        }
+        log(
+            stage="prior-native",
+            router=name,
+            **{
+                k: native[name][k]
+                for k in ("encode_ratio_macro", "macro", "pe_gh_v2_same_budget_macro")
+            },
+        )
+
+    auc = {
+        name: {
+            target: float(np.mean([roc_auc_score(label(d), scores[name][d.domain]) for d in new]))
+            for target, label in (("bm25_failure", fail), ("dense_helps", gain))
+        }
+        for name in PRIOR_ROUTERS
+    }
+    curves = {}
+    for name in ("pe_gh_v2", "litegator", "arabzadeh_bert", "bm25_margin"):
+        curves[name] = [
+            float(
+                np.mean(
+                    [
+                        _routed(
+                            scores[name][d.domain],
+                            d.forced,
+                            d.ids,
+                            d.utilities[t_p],
+                            d.utilities[t_h],
+                            b,
+                        ).mean()
+                        for d in new
+                    ]
+                )
+            )
+            for b in DEV_BUDGETS
+        ]
+    stages = json.loads(ws.results("online_report.json").read_text(encoding="utf-8"))[
+        "stage_sample_fold0_one_repeat"
+    ]
+    bert_report = json.loads(ws.results("prior_bert.json").read_text(encoding="utf-8"))
+    encode = json.loads(ws.results("encode_cost.json").read_text(encoding="utf-8"))["encoders"]
+
+    def overhead(method):
+        s = stages[method]["skip"]
+        return round(s["stats"] + s["features"] + s["gate"], 3)
+
+    report = {
+        "schema_version": "v4_prior_comparison_1",
+        "status": "exploratory: added after the registered test; not a registered claim",
+        "domains": list(NEW_DOMAINS),
+        "trained_on": list(SEEN_DOMAINS),
+        "training_queries": sum(len(d.ids) for d in seen),
+        "training_positive_rates": {
+            "bm25_failure": float(np.concatenate([fail(d) for d in seen]).mean()),
+            "dense_helps": float(np.concatenate([gain(d) for d in seen]).mean()),
+        },
+        "matched_budget_protocol": "same exact H* count per test fold and domain; forced queries included; ties by query ID",
+        "curve_protocol": "exact H* budget over all queries of each domain, without fold rounding",
+        "bootstrap": {"samples": 10_000, "seed": 20_261_019, "unit": "group within domain"},
+        "tiers": tiers_,
+        "routers": {
+            "pe_gh_v2": "frozen gate v2 (logistic, 28 features, per-domain normalization, label BM25 failure)",
+            "litegator": "LiteGator [2] adaptation: StandardScaler + LinearSVC C=1 on its 8 features, label H* > P*",
+            "arabzadeh_bert": "Arabzadeh et al. [1] sparse-vs-hybrid adaptation: BERT-base on query + top BM25 document, label BM25 failure at top 10",
+            "bm25_margin": "unlearned rule: negative relative BM25 top-1/top-2 gap",
+            "litegator_fail_label": "ablation: LiteGator features and SVM, BM25-failure label",
+            "pe_gh_v2_8_features": "ablation: gate v2 recipe (logistic, per-domain normalization, BM25-failure label) on LiteGator's 8 features",
+        },
+        "h_star_macro": macro({d.domain: d.utilities[t_h] for d in new}),
+        "p_star_macro": macro({d.domain: d.utilities[t_p] for d in new}),
+        "matched_budgets": matched,
+        "pe_gh_v2_minus": comparisons,
+        "native_rules": native,
+        "auc": auc,
+        "budgets": list(DEV_BUDGETS),
+        "curves": curves,
+        "decision_cost_ms": {
+            "pe_gh_v2_gate": overhead("pe_gh_v2_b50"),
+            "v1_feature_gate (superset of LiteGator's features)": overhead("margin_op"),
+            "arabzadeh_bert_median": bert_report["latency"]["median_ms"],
+            "arabzadeh_bert_p95": bert_report["latency"]["p95_ms"],
+            "arctic_query_encode_median": encode[key]["median_ms"],
+        },
+    }
+    atomic_json(ws.results("prior_comparison.json"), report)
+    log(
+        stage="prior",
+        auc={k: {t: round(v, 3) for t, v in a.items()} for k, a in auc.items()},
+        cost=report["decision_cost_ms"],
+    )
+
+
 FACT_FILES = (
     "encoder_comparison.json",
     "encode_cost.json",
@@ -1249,6 +1595,14 @@ FACT_FILES = (
     "evaluation_new.json",
     "online_report.json",
     "proxy_fidelity.json",
+    "prior_bert.json",
+    "prior_comparison.json",
+    "prior_litegator_tuning.json",
+    "prior_litegator_tuned.json",
+    "prior_lodo_bert.json",
+    "prior_v2_selection_audit.json",
+    "prior_online_plan_receipt.json",
+    "prior_online_report.json",
 )
 ONLINE_LABELS = {
     "bm25": ("BM25", "v1"),
@@ -1365,6 +1719,58 @@ def report(ws: Workspace, args) -> None:
             "Chất lượng và độ trễ (programmers + unix, đo online)",
         )
         drawn.append("v4_pareto_online.png")
+    prior_path = ws.results("prior_comparison.json")
+    if prior_path.exists():
+        prior_ = json.loads(prior_path.read_text(encoding="utf-8"))
+        figures.budget_curves(
+            [
+                {
+                    "title": "6 chủ đề đánh giá: so sánh thăm dò các router",
+                    "budgets": prior_["budgets"],
+                    "series": {
+                        "PE-GH v2": prior_["curves"]["pe_gh_v2"],
+                        "LiteGator [2] (điều chỉnh)": prior_["curves"]["litegator"],
+                        "Arabzadeh [1], BERT (điều chỉnh)": prior_["curves"]["arabzadeh_bert"],
+                        "BM25-margin": prior_["curves"]["bm25_margin"],
+                    },
+                    "references": {
+                        "H* (luôn encode)": prior_["h_star_macro"],
+                        "P* (không encode)": prior_["p_star_macro"],
+                    },
+                }
+            ],
+            docs / "figures/v4_prior_curves.png",
+        )
+        drawn.append("v4_prior_curves.png")
+    prior_online_path = ws.results("prior_online_report.json")
+    if prior_online_path.exists():
+        po = json.loads(prior_online_path.read_text(encoding="utf-8"))
+        names = {
+            "bm25": "BM25",
+            "p_star": "P*",
+            "h_star_v2": "H*",
+            "r_star_v2": "R*",
+        }
+        points = []
+        for method, s in po["summary"].items():
+            if method.startswith("pe_gh_v2_b"):
+                label, family = "V2 " + method.rsplit("b", 1)[1] + "%", "v2"
+            elif method.startswith("litegator_b"):
+                label, family = "LiteGator " + method.rsplit("b", 1)[1] + "%", "litegator"
+            elif method.startswith("bert_b"):
+                label, family = "BERT " + method.rsplit("b", 1)[1] + "%", "bert"
+            else:
+                label, family = names[method], "static"
+            points.append(
+                {
+                    "name": label,
+                    "family": family,
+                    "latency_ms": s["all"]["mean_ms"],
+                    "ndcg": po["quality_oof"][method],
+                }
+            )
+        figures.prior_pareto(points, docs / "figures/v4_prior_online.png")
+        drawn.append("v4_prior_online.png")
     log(stage="report", copied=copied, figures=drawn)
 
 
@@ -1385,6 +1791,16 @@ STAGES = {
     "freeze": freeze,
     "preregister": preregister,
     "fetch": fetch,
+    "prior-bert": prior_bert,
+    "prior-lodo-bert": prior_lodo_bert,
+    "prior-tune": prior_tune,
+    "prior-online-plan": prior_online_plan,
+    "prior-v2-audit": prior_v2_audit,
+    "prior-online-freeze": prior_online_freeze,
+    "prior-online-smoke": prior_online_smoke,
+    "prior-online": prior_online,
+    "prior-online-report": prior_online_report,
+    "prior": prior,
 }
 
 

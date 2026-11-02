@@ -6,7 +6,7 @@ from pathlib import Path
 
 from pegh.v3.figures import GRID, INK, MARKERS, MUTED, SERIES, SURFACE, _axes, plt
 
-__all__ = ["budget_curves", "forest", "pareto"]
+__all__ = ["budget_curves", "forest", "pareto", "prior_pareto"]
 
 
 def budget_curves(panels: list[dict], output: Path) -> None:
@@ -47,11 +47,17 @@ def budget_curves(panels: list[dict], output: Path) -> None:
     plt.close(fig)
 
 
-def pareto(points: list[dict], output: Path, title: str) -> None:
+def pareto(
+    points: list[dict], output: Path, title: str, *, families=None, log_latency=False
+) -> None:
     """points: name, latency_ms, ndcg, family ('v1'/'v2'), optional offset and ha."""
     fig, ax = plt.subplots(figsize=(8.6, 5.4), facecolor=SURFACE)
     _axes(ax, title, "Độ trễ trung bình mỗi query (ms)", "Macro nDCG@10 (OOF)")
-    for slot, family, label in ((0, "v1", "PE-GH v1 và mốc cũ"), (1, "v2", "PE-GH v2 và mốc mới")):
+    if log_latency:
+        ax.set_xscale("log")
+        ax.set_xlabel("Độ trễ trung bình mỗi query (ms, trục log)", color=INK)
+    groups = families or ((0, "v1", "PE-GH v1 và mốc cũ"), (1, "v2", "PE-GH v2 và mốc mới"))
+    for slot, family, label in groups:
         chosen = [p for p in points if p["family"] == family]
         ax.scatter(
             [p["latency_ms"] for p in chosen],
@@ -78,6 +84,39 @@ def pareto(points: list[dict], output: Path, title: str) -> None:
     fig.tight_layout()
     fig.savefig(output, dpi=180, facecolor=SURFACE)
     plt.close(fig)
+
+
+def prior_pareto(points: list[dict], output: Path) -> None:
+    offsets = {
+        "V2 30%": (-8, 7),
+        "V2 50%": (-8, -12),
+        "V2 80%": (-8, -12),
+        "LiteGator 30%": (7, -12),
+        "LiteGator 50%": (7, 7),
+        "LiteGator 80%": (7, -12),
+        "H*": (6, 9),
+        "R*": (-8, 10),
+        "P*": (6, 7),
+        "BM25": (-6, -12),
+        "BERT 30%": (7, -12),
+        "BERT 50%": (7, -8),
+        "BERT 80%": (-8, 8),
+    }
+    for p in points:
+        offset = offsets.get(p["name"], (7, 5))
+        p.update(offset=offset, ha="right" if offset[0] < 0 else "left")
+    pareto(
+        points,
+        output,
+        "Router LODO: chất lượng và độ trễ đo cùng phiên (thăm dò)",
+        families=(
+            (0, "v2", "PE-GH v2"),
+            (1, "litegator", "LiteGator, tuned LODO"),
+            (2, "bert", "BERT, LODO"),
+            (3, "static", "Các tầng cố định"),
+        ),
+        log_latency=True,
+    )
 
 
 def forest(rows: list[dict], output: Path, title: str) -> None:

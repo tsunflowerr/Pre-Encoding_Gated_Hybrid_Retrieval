@@ -25,6 +25,7 @@ def run_benchmark(
     fold: int | None = None,
     k: int = 100,
     stop_file: str | Path | None = None,
+    record_ranked_ids: bool = False,
 ) -> dict:
     """Launch isolated workers; change method order per repeat, preserve query order."""
     if not registry or not queries or k < 1:
@@ -63,6 +64,7 @@ def run_benchmark(
         "workers": [],
         "quality_cache_used": False,
         "source_snapshot": source_snapshot(),
+        "record_ranked_ids": record_ranked_ids,
         "started_at_unix": time.time(),
     }
     manifest_path = output / "manifest.json"
@@ -100,6 +102,7 @@ def run_benchmark(
                     "k": k,
                     "stop_file": str(stop_file) if stop_file is not None else None,
                     "expected_source_hash": manifest["source_snapshot"]["combined_sha256"],
+                    "record_ranked_ids": record_ranked_ids,
                 }
                 request_path = output / f"{name}.input.json"
                 atomic_json(request_path, payload)
