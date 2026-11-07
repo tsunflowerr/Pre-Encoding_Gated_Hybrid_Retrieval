@@ -1,0 +1,7 @@
+sparse:
+  implementation: sqlite_bm25_v1
+  k1: 1.2
+  b: 0.75
+  lowercase: true
+  token_pattern: '(?u)--?[\w-]+|[\w]+(?:[./:+#-][\w]+)*'
+  output_k: 100

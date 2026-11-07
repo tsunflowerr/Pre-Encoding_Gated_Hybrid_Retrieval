@@ -1,0 +1,87 @@
+schema_version: v4_prior_online_plan_1
+status: exploratory_after_K1_K4
+domains: [programmers, unix]
+folds: [0, 1, 2, 3, 4]
+methods:
+  - bm25
+  - p_star
+  - h_star_v2
+  - r_star_v2
+  - pe_gh_v2_b30
+  - pe_gh_v2_b50
+  - pe_gh_v2_b80
+  - litegator_b30
+  - litegator_b50
+  - litegator_b80
+  - bert_b30
+  - bert_b50
+  - bert_b80
+budgets: [0.3, 0.5, 0.8]
+runtime_profile: configs/runtime/windows-physical4-local.yaml
+runtime:
+  affinity_cpus: [0, 2, 4, 6]
+  torch_threads: 4
+  online_batch_size: 1
+  concurrency: 1
+  warmup_queries: 50
+  repetitions: 5
+  seed: 42
+  detailed_stages: false
+  method_order: harness_shuffle_per_repetition_seed_42_plus_10000_plus_repetition
+training:
+  gate_v2:
+    candidates: same_eight_specs_as_original_develop_stage
+    selection: nested_LODO_on_other_five_topics_area_0.2_to_0.8
+    fitting: other_five_topics_only
+    frozen_six_topic_model_and_phase1_receipts: read_only
+  litegator:
+    grid_C: [0.1, 1.0, 10.0]
+    grid_class_weight: [null, balanced]
+    default: {C: 1.0, class_weight: null}
+    selection: highest_LODO_macro_ndcg_area_over_budgets_0.2_to_0.8
+    tie_rule: first_candidate_in_C_then_class_weight_order
+    unseen_evaluation: select_on_six_seen_then_fit_all_six
+    online: nested_LODO_select_and_fit_only_on_other_five_topics
+    online_variant: tuned
+  bert:
+    model: google-bert/bert-base-uncased
+    revision: 86b5e0934494bd15c9632b12f734a8a67f723594
+    epochs: 1
+    batch: 8
+    learning_rate: 0.00002
+    seed: 42
+    seed_head_before_from_pretrained: true
+    max_length: 256
+    label: BM25_ndcg_at_10_equals_zero
+    tuning: none_cost_limitation_not_evidence_for_v2
+    online: fit_other_five_topics_only
+fairness:
+  identical_corpus_indexes_encoder_proxy_and_LODO_tiers: true
+  thresholds: own_score_quantile_on_fold_train_plus_validation_without_labels
+  forced_encode: no_BM25_tokens_or_all_OOV
+  weights_tokenizer_and_document_text_preloaded_before_timing: true
+  reuse_existing_BM25_ranking: true
+  bert_expected_scores: batch_1_four_threads_same_request_path_no_score_cache_online
+  old_online_receipts: read_only
+  all_six_BERT_model: read_only
+  source_changes_during_full_run: forbidden
+  discard_slow_requests: false
+  select_better_rerun: false
+metrics:
+  - wall_mean_ms
+  - wall_p50_ms
+  - wall_p95_ms
+  - process_cpu_mean_ms
+  - peak_rss_mib
+  - realized_encode_ratio
+  - ranking_and_route_mismatches
+  - OOF_macro_ndcg_at_10
+comparisons:
+  quality: v2_minus_each_prior_router_at_each_budget
+  quality_bootstrap: {unit: group_within_domain, samples: 10000, seed: 20261019}
+  latency: v2_minus_each_prior_router_at_each_budget
+  latency_bootstrap: {unit: paired_query_sums_over_repetitions, samples: 10000, seed: 42}
+  latency_reduction_reference: h_star_v2_remeasured_in_this_session
+  unseen_quality: keep_phase1_six_topic_table_and_add_default_vs_tuned_LiteGator
+smoke: {fold: 0, queries_per_domain: 6, repetitions: 1}
+failure_policy: retain_and_report_every_completed_request_and_every_parity_mismatch

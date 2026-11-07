@@ -1,0 +1,56 @@
+schema_version: '1.0'
+track: supervised_internal_five_fold
+domains: [programmers, unix]
+split_manifest: data/splits/manifest.json
+seed: 42
+
+fusion:
+  cc_alpha_dense: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+  rrf_k: 60
+  h_star_metric: ndcg_at_10
+  tie_epsilon: 0.000001
+  tie_preference: rrf
+  cc_remaining_tie_preference: lower_alpha
+  s_star_tie_preference: candidate_order
+  s_star_candidates: [bm25, dense, h_star]
+
+features:
+  full_schema: full_v1_21
+  general_indices_one_based: [4, 10, 11, 12, 15, 16, 19, 20]
+  tokenizer_hash: dcf142354e5beb4d72720ba36b0a574d43852b83ca13dcc7c51e4b6453036f61
+  unicode_character_count: code_points
+  token_entropy_log_base: e
+  identifier_token_source: sparse_pattern_preserving_raw_case
+  flat_range_epsilon: 0.00000001
+  code_punctuation: '+#./\:_-()[]{}=<>&|!'
+  error_identifier_pattern: '0x[0-9a-fA-F]+|\b[A-Za-z_$][\w.$]*(?:Exception|Error)\b|\bHTTP\s+[45]\d{2}\b|\b(?:EACCES|ENOENT|ECONNREFUSED|ETIMEDOUT|ERESOLVE|EADDRINUSE|ENOSPC|EPIPE)\b'
+  path_or_flag_pattern: '(?i)(?:[A-Z]:[\\/][^\s]+|(?:^|\s)(?:~?/|\.{1,2}/)[^\s]+|(?:^|\s)--?[A-Za-z][A-Za-z0-9-]*)'
+  identifier_token_pattern: '(?:[A-Za-z][a-z0-9]*[A-Z][A-Za-z0-9]*|[A-Za-z]\w*_[A-Za-z0-9_]+|[A-Za-z]\w*(?:(?:::|\.)[A-Za-z]\w*)+)'
+  schema_hashes:
+    full: 2a9acfd8245c202ba000ff1a546337a1dc3695d44a05cf79ababd697e756dd81
+    general: d0ec0e92e16648dbecf698a12464c0eeb70f2017cfc263305b2262fbcfa83426
+
+training:
+  target: h_star_ndcg_at_10_minus_bm25_ndcg_at_10
+  primary_model: ridge
+  ridge_alpha: 1.0
+  logistic_c: 1.0
+  linear_svc_c: 1.0
+  scaler: standard_train_only
+  pooled_domain_weighting: equal_domain_total
+
+selection:
+  desired_dense_budgets: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+  gate_rule: score_strictly_greater_than_threshold
+  tied_score_policy: skip
+  validation_macro_loss_tolerance: 0.005
+  validation_domain_loss_tolerance: 0.01
+  preference: lowest_actual_dense_ratio_then_highest_quality
+  no_feasible_point: always_h_star_with_failure_flag
+  nonempty_sparse_oov: force_dense_counted_in_ratio
+
+test:
+  comparison_baseline: s_star
+  comparison_candidate: pe_gh
+  metric: ndcg_at_10
+  noninferiority_margin: 0.01

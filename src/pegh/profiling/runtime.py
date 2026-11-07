@@ -14,6 +14,7 @@ import psutil
 import yaml
 
 from pegh.dense.index import package_versions
+from pegh.profiling.provenance import source_root
 
 _WINDOWS_JOB_HANDLES: list[int] = []
 
@@ -172,7 +173,9 @@ def configure_resources(settings: RuntimeSettings) -> dict:
 
 def runtime_manifest(settings: RuntimeSettings, resources: dict) -> dict:
     def git(*arguments: str) -> str | None:
-        result = subprocess.run(["git", *arguments], capture_output=True, text=True, check=False)
+        result = subprocess.run(
+            ["git", *arguments], cwd=source_root(), capture_output=True, text=True, check=False
+        )
         return result.stdout.strip() if result.returncode == 0 else None
 
     processor_name = platform.processor()
@@ -204,6 +207,7 @@ def runtime_manifest(settings: RuntimeSettings, resources: dict) -> dict:
         "git_status": git("status", "--porcelain"),
         "pid": os.getpid(),
         "cwd": str(Path.cwd()),
+        "source_root": str(source_root()),
         "thread_environment": {
             key: os.environ.get(key)
             for key in (

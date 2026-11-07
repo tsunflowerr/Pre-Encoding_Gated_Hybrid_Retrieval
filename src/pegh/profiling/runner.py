@@ -25,6 +25,7 @@ def run_benchmark(
     fold: int | None = None,
     k: int = 100,
     stop_file: str | Path | None = None,
+    record_ranked_ids: bool = False,
 ) -> dict:
     """Launch isolated workers; change method order per repeat, preserve query order."""
     if not registry or not queries or k < 1:
@@ -35,6 +36,9 @@ def run_benchmark(
         raise ValueError("method IDs must be safe filename components")
     if len({q.query_id for q in queries}) != len(queries):
         raise ValueError("measured query IDs must be unique")
+    domains = {q.domain for q in queries}
+    if len(domains) != 1 or any(q.domain not in domains for q in warmup_queries):
+        raise ValueError("run one domain at a time, with warmup queries from that same domain")
     if {q.query_id for q in queries} & {q.query_id for q in warmup_queries}:
         raise ValueError("warmup queries overlap measured queries")
     if settings.warmup_queries and not warmup_queries:
@@ -48,9 +52,11 @@ def run_benchmark(
         "registry": registry,
         "registry_hash": object_hash(registry),
         "query_ids_hash": object_hash([q.query_id for q in queries]),
+        "query_id_set_hash": object_hash(sorted(q.query_id for q in queries)),
         "queries_hash": object_hash([asdict(q) for q in queries]),
         "warmup_hash": object_hash([asdict(q) for q in warmup_queries]),
         "query_count": len(queries),
+        "domain": queries[0].domain,
         "settings": asdict(settings),
         "split": split,
         "fold": fold,
@@ -58,6 +64,7 @@ def run_benchmark(
         "workers": [],
         "quality_cache_used": False,
         "source_snapshot": source_snapshot(),
+        "record_ranked_ids": record_ranked_ids,
         "started_at_unix": time.time(),
     }
     manifest_path = output / "manifest.json"
@@ -95,6 +102,7 @@ def run_benchmark(
                     "k": k,
                     "stop_file": str(stop_file) if stop_file is not None else None,
                     "expected_source_hash": manifest["source_snapshot"]["combined_sha256"],
+                    "record_ranked_ids": record_ranked_ids,
                 }
                 request_path = output / f"{name}.input.json"
                 atomic_json(request_path, payload)

@@ -9,7 +9,7 @@ import numpy as np
 from contracts.types import Hit, Query, Ranking, SearchResponse
 from pegh.dense.artifacts import checked_child, object_hash
 from pegh.dense.encoder import TextEncoder, checked_vectors, implementation_fingerprint
-from pegh.dense.index import verify_index
+from pegh.dense.index import package_versions, verify_index
 from pegh.profiling.trace import NullTraceSink, TraceSink
 
 
@@ -23,6 +23,8 @@ class FaissDenseRetriever:
     ):
         self.directory = Path(directory)
         self.manifest, self.doc_ids = verify_index(directory)
+        if self.manifest["package_versions"] != package_versions():
+            raise ValueError("query/index package versions differ; use the frozen environment")
         if self.manifest["embedding_fingerprint"] != encoder.config.embedding_fingerprint:
             raise ValueError("query encoder and corpus embeddings are incompatible")
         if self.manifest["encoder_implementation_hash"] != implementation_fingerprint(encoder):
