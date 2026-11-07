@@ -1,0 +1,4468 @@
+{
+  "schema_version": "v4_prior_online_report_1",
+  "status": "exploratory",
+  "smoke": false,
+  "plan_receipt_sha256": "cb659380448688155f9497f0b05ae18207dffbbbce7cd9aef73354dc2a04cfe8",
+  "protocol_sha256": "b263ff94efc3c72e1d5d3f0445628135d07e2a0be37d92d8b7cd75afafb8c5c1",
+  "session": {
+    "status": "complete",
+    "exploratory": true,
+    "smoke": false,
+    "started_at_utc": "2026-11-01T05:36:56.925123+00:00",
+    "plan_receipt_sha256": "cb659380448688155f9497f0b05ae18207dffbbbce7cd9aef73354dc2a04cfe8",
+    "runs": [
+      {
+        "run": "programmers_fold_0",
+        "manifest_sha256": "21a55fe8cd987ccbdc09c17650c267917ef72acc858c607790f95ded616f2456",
+        "status": "complete"
+      },
+      {
+        "run": "programmers_fold_1",
+        "manifest_sha256": "3ed3c5967be7d9a76d398a621b2c2c6cc49c80ee13198e3ab268dd911aa632c4",
+        "status": "complete"
+      },
+      {
+        "run": "programmers_fold_2",
+        "manifest_sha256": "723a4b98dffcfdbf65d2759d879b674821110207ec48852a689b0a90c60fddcd",
+        "status": "complete"
+      },
+      {
+        "run": "programmers_fold_3",
+        "manifest_sha256": "e57da258af8864bbe1ab510452a170d31b03ca285dae2c61ef7e27c7d52786a3",
+        "status": "complete"
+      },
+      {
+        "run": "programmers_fold_4",
+        "manifest_sha256": "4ebb342c7848de6b29ea58c79e8af194f5cbc7426b1941253c45afa8ec6eea28",
+        "status": "complete"
+      },
+      {
+        "run": "unix_fold_0",
+        "manifest_sha256": "f1e0973ac9615e97ebb1286f3fad0faf47c2b45ddcf82244f0a08aaa6597baf8",
+        "status": "complete"
+      },
+      {
+        "run": "unix_fold_1",
+        "manifest_sha256": "588e6548a32357c204aa9bb7dd4ebc2d406ab168e8c033c44ef18d78766b6d7b",
+        "status": "complete"
+      },
+      {
+        "run": "unix_fold_2",
+        "manifest_sha256": "e9ae1388cf0a28f17d8a6ba732bcaa84fb5417306d4c34a08f666e1102cf70d8",
+        "status": "complete"
+      },
+      {
+        "run": "unix_fold_3",
+        "manifest_sha256": "ed6b71aa714dd6f76dd64650724b771573268efcad12ecb349c130f2c35b0221",
+        "status": "complete"
+      },
+      {
+        "run": "unix_fold_4",
+        "manifest_sha256": "faf206bb778209021c8da00f3e6c83b6cf9cf72cc5a726738ef450bfd76c41c3",
+        "status": "complete"
+      }
+    ],
+    "pauses": [
+      {
+        "reason": "user needed the machine; paused at the programmers/unix boundary",
+        "paused_at_utc": "2026-11-01T07:44:43.031703+00:00",
+        "resumed_at_utc": "2026-11-02T07:47:51.346060+00:00",
+        "completed_before_pause": [
+          "programmers_fold_0",
+          "programmers_fold_1",
+          "programmers_fold_2",
+          "programmers_fold_3",
+          "programmers_fold_4"
+        ],
+        "partial_runs_retained_not_used": [
+          "unix_fold_0.interrupted.1793605671"
+        ]
+      }
+    ],
+    "ended_at_utc": "2026-11-02T09:55:51.571960+00:00"
+  },
+  "session_sha256": "9cdafad9cc7bd828f63361c520e4eeb512639557379d280318b6be04e3e5c4bc",
+  "requests_checked": 126620,
+  "ranking_or_route_mismatches": {},
+  "parity": {
+    "bm25": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "p_star": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "h_star_v2": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "r_star_v2": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "pe_gh_v2_b30": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "pe_gh_v2_b50": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "pe_gh_v2_b80": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "litegator_b30": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "litegator_b50": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "litegator_b80": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "bert_b30": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "bert_b50": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    },
+    "bert_b80": {
+      "ranking": 0,
+      "route": 0,
+      "either": 0
+    }
+  },
+  "mismatch_details": [],
+  "summary": {
+    "bm25": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 2.2062987214611876,
+        "p50_ms": 2.05375,
+        "p95_ms": 4.10158,
+        "cpu_mean_ms": 2.1796518264840183,
+        "peak_rss_mib": 219.83203125,
+        "encode_ratio": 0.0
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 2.244276194029851,
+        "p50_ms": 2.1895499999999997,
+        "p95_ms": 3.8760850000000002,
+        "cpu_mean_ms": 2.241721082089552,
+        "peak_rss_mib": 285.57421875,
+        "encode_ratio": 0.0
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 2.227198028747433,
+        "p50_ms": 2.1242,
+        "p95_ms": 3.963474999999999,
+        "cpu_mean_ms": 2.2138090349075976,
+        "peak_rss_mib": 285.57421875,
+        "encode_ratio": 0.0
+      }
+    },
+    "p_star": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 3.852704817351598,
+        "p50_ms": 3.59265,
+        "p95_ms": 6.317365000000001,
+        "cpu_mean_ms": 3.767123287671233,
+        "peak_rss_mib": 543.98828125,
+        "encode_ratio": 0.0
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 3.672921212686567,
+        "p50_ms": 3.6225,
+        "p95_ms": 5.36405,
+        "cpu_mean_ms": 3.6730410447761193,
+        "peak_rss_mib": 620.62109375,
+        "encode_ratio": 0.0
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 3.7537684599589323,
+        "p50_ms": 3.6117,
+        "p95_ms": 5.8023799999999985,
+        "cpu_mean_ms": 3.715349075975359,
+        "peak_rss_mib": 620.62109375,
+        "encode_ratio": 0.0
+      }
+    },
+    "h_star_v2": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 21.8141802283105,
+        "p50_ms": 21.49975,
+        "p95_ms": 26.023275,
+        "cpu_mean_ms": 82.74472031963471,
+        "peak_rss_mib": 624.796875,
+        "encode_ratio": 1.0
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 24.16642901119403,
+        "p50_ms": 23.902749999999997,
+        "p95_ms": 29.197760000000002,
+        "cpu_mean_ms": 91.00396455223881,
+        "peak_rss_mib": 724.94921875,
+        "encode_ratio": 1.0
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 23.10864157084189,
+        "p50_ms": 22.8002,
+        "p95_ms": 28.188134999999996,
+        "cpu_mean_ms": 87.28984856262834,
+        "peak_rss_mib": 724.94921875,
+        "encode_ratio": 1.0
+      }
+    },
+    "r_star_v2": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 13.57253091324201,
+        "p50_ms": 13.4315,
+        "p95_ms": 16.133090000000003,
+        "cpu_mean_ms": 53.74215182648402,
+        "peak_rss_mib": 575.8671875,
+        "encode_ratio": 1.0
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 13.460515615671643,
+        "p50_ms": 13.34825,
+        "p95_ms": 16.093955,
+        "cpu_mean_ms": 53.44274720149254,
+        "peak_rss_mib": 654.34765625,
+        "encode_ratio": 1.0
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 13.510887997946613,
+        "p50_ms": 13.3919,
+        "p95_ms": 16.113105,
+        "cpu_mean_ms": 53.57738706365503,
+        "peak_rss_mib": 654.34765625,
+        "encode_ratio": 1.0
+      }
+    },
+    "pe_gh_v2_b30": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 10.09001805936073,
+        "p50_ms": 5.2082,
+        "p95_ms": 24.40437,
+        "cpu_mean_ms": 37.96018835616438,
+        "peak_rss_mib": 665.6875,
+        "encode_ratio": 0.3013698630136986
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 10.912011623134328,
+        "p50_ms": 5.47095,
+        "p95_ms": 27.368555,
+        "cpu_mean_ms": 40.86112406716418,
+        "peak_rss_mib": 766.84375,
+        "encode_ratio": 0.30130597014925375
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 10.542367700205338,
+        "p50_ms": 5.34955,
+        "p95_ms": 26.426235000000002,
+        "cpu_mean_ms": 39.556596509240244,
+        "peak_rss_mib": 766.84375,
+        "encode_ratio": 0.3013347022587269
+      }
+    },
+    "pe_gh_v2_b50": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 13.700710776255708,
+        "p50_ms": 17.697400000000002,
+        "p95_ms": 25.540825,
+        "cpu_mean_ms": 51.355593607305934,
+        "peak_rss_mib": 668.3671875,
+        "encode_ratio": 0.5011415525114156
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 14.783794085820896,
+        "p50_ms": 9.939,
+        "p95_ms": 27.548064999999998,
+        "cpu_mean_ms": 55.337569962686565,
+        "peak_rss_mib": 767.390625,
+        "encode_ratio": 0.49906716417910446
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 14.296740195071866,
+        "p50_ms": 15.21575,
+        "p95_ms": 26.980874999999997,
+        "cpu_mean_ms": 53.54690708418891,
+        "peak_rss_mib": 767.390625,
+        "encode_ratio": 0.5
+      }
+    },
+    "pe_gh_v2_b80": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 19.215115251141555,
+        "p50_ms": 21.778750000000002,
+        "p95_ms": 26.450125,
+        "cpu_mean_ms": 72.4957191780822,
+        "peak_rss_mib": 668.8359375,
+        "encode_ratio": 0.7990867579908676
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 21.195678003731345,
+        "p50_ms": 24.3007,
+        "p95_ms": 28.777839999999998,
+        "cpu_mean_ms": 80.19764458955224,
+        "peak_rss_mib": 769.66796875,
+        "encode_ratio": 0.8022388059701493
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 20.30503479466119,
+        "p50_ms": 23.144199999999998,
+        "p95_ms": 28.036494999999995,
+        "cpu_mean_ms": 76.73415041067761,
+        "peak_rss_mib": 769.66796875,
+        "encode_ratio": 0.8008213552361396
+      }
+    },
+    "litegator_b30": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 9.80033406392694,
+        "p50_ms": 4.64545,
+        "p95_ms": 24.26544,
+        "cpu_mean_ms": 36.47260273972603,
+        "peak_rss_mib": 666.66015625,
+        "encode_ratio": 0.3036529680365297
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 11.223984421641791,
+        "p50_ms": 5.38655,
+        "p95_ms": 28.12203,
+        "cpu_mean_ms": 42.513992537313435,
+        "peak_rss_mib": 767.14453125,
+        "encode_ratio": 0.3003731343283582
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 10.583780256673512,
+        "p50_ms": 5.07595,
+        "p95_ms": 27.144804999999998,
+        "cpu_mean_ms": 39.79722792607803,
+        "peak_rss_mib": 767.14453125,
+        "encode_ratio": 0.30184804928131415
+      }
+    },
+    "litegator_b50": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 13.407367945205479,
+        "p50_ms": 7.2917000000000005,
+        "p95_ms": 25.185620000000004,
+        "cpu_mean_ms": 49.971461187214615,
+        "peak_rss_mib": 666.71484375,
+        "encode_ratio": 0.4988584474885845
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 15.265954402985074,
+        "p50_ms": 21.4387,
+        "p95_ms": 28.469380000000005,
+        "cpu_mean_ms": 57.666744402985074,
+        "peak_rss_mib": 768.66796875,
+        "encode_ratio": 0.5046641791044776
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 14.430162956878853,
+        "p50_ms": 18.4909,
+        "p95_ms": 27.560929999999995,
+        "cpu_mean_ms": 54.206237166324435,
+        "peak_rss_mib": 768.66796875,
+        "encode_ratio": 0.502053388090349
+      }
+    },
+    "litegator_b80": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 18.968729817351598,
+        "p50_ms": 21.65025,
+        "p95_ms": 26.05361,
+        "cpu_mean_ms": 71.6181506849315,
+        "peak_rss_mib": 668.76953125,
+        "encode_ratio": 0.8002283105022832
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 21.20580348880597,
+        "p50_ms": 24.38865,
+        "p95_ms": 28.552855,
+        "cpu_mean_ms": 80.11893656716418,
+        "peak_rss_mib": 770.03125,
+        "encode_ratio": 0.8041044776119403
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 20.199809373716633,
+        "p50_ms": 23.02735,
+        "p95_ms": 27.92778,
+        "cpu_mean_ms": 76.29620123203286,
+        "peak_rss_mib": 770.03125,
+        "encode_ratio": 0.8023613963039015
+      }
+    },
+    "bert_b30": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 159.14213584474885,
+        "p50_ms": 155.9128,
+        "p95_ms": 259.785855,
+        "cpu_mean_ms": 629.1630993150685,
+        "peak_rss_mib": 1111.32421875,
+        "encode_ratio": 0.2990867579908676
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 143.6315119216418,
+        "p50_ms": 138.06439999999998,
+        "p95_ms": 216.509625,
+        "cpu_mean_ms": 565.9310867537314,
+        "peak_rss_mib": 1230.87890625,
+        "encode_ratio": 0.2994402985074627
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 150.60651528747434,
+        "p50_ms": 146.69475,
+        "p95_ms": 233.30288499999995,
+        "cpu_mean_ms": 594.3660164271047,
+        "peak_rss_mib": 1230.87890625,
+        "encode_ratio": 0.29928131416837783
+      }
+    },
+    "bert_b50": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 177.69073947488587,
+        "p50_ms": 175.00130000000001,
+        "p95_ms": 278.01468,
+        "cpu_mean_ms": 698.9155251141552,
+        "peak_rss_mib": 1114.3359375,
+        "encode_ratio": 0.5045662100456622
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 150.207066380597,
+        "p50_ms": 145.22809999999998,
+        "p95_ms": 227.02722,
+        "cpu_mean_ms": 590.009911380597,
+        "peak_rss_mib": 1232.69140625,
+        "encode_ratio": 0.5018656716417911
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 162.56625407597537,
+        "p50_ms": 159.2425,
+        "p95_ms": 264.855505,
+        "cpu_mean_ms": 638.9838937371663,
+        "peak_rss_mib": 1232.69140625,
+        "encode_ratio": 0.5030800821355236
+      }
+    },
+    "bert_b80": {
+      "programmers": {
+        "requests": 4380,
+        "mean_ms": 171.33858315068488,
+        "p50_ms": 168.8552,
+        "p95_ms": 274.15949,
+        "cpu_mean_ms": 672.410102739726,
+        "peak_rss_mib": 1115.90625,
+        "encode_ratio": 0.7990867579908676
+      },
+      "unix": {
+        "requests": 5360,
+        "mean_ms": 154.80387166044778,
+        "p50_ms": 150.2234,
+        "p95_ms": 228.334785,
+        "cpu_mean_ms": 605.1743236940298,
+        "peak_rss_mib": 1235.3671875,
+        "encode_ratio": 0.8022388059701493
+      },
+      "all": {
+        "requests": 9740,
+        "mean_ms": 162.23939900410676,
+        "p50_ms": 158.65015,
+        "p95_ms": 253.16551999999993,
+        "cpu_mean_ms": 635.4097150924025,
+        "peak_rss_mib": 1235.3671875,
+        "encode_ratio": 0.8008213552361396
+      }
+    }
+  },
+  "quality_oof": {
+    "bm25": 0.2899056486375368,
+    "p_star": 0.29519820227249205,
+    "h_star_v2": 0.4141829051018998,
+    "r_star_v2": 0.3810811932985342,
+    "pe_gh_v2_b30": 0.34231104940793433,
+    "pe_gh_v2_b50": 0.37355596780267714,
+    "pe_gh_v2_b80": 0.4096089380421618,
+    "litegator_b30": 0.3348475959733503,
+    "litegator_b50": 0.36741434796033307,
+    "litegator_b80": 0.4095972612127342,
+    "bert_b30": 0.33950132363247837,
+    "bert_b50": 0.3692114138120623,
+    "bert_b80": 0.4103039841990487
+  },
+  "quality_source": "actual recorded online ranked document IDs, averaged over repetitions then macro topics",
+  "comparisons": {
+    "litegator_b30": {
+      "quality_v2_minus_router": {
+        "p_superiority": 0.0251,
+        "p_noninferiority_0_01": 0.0,
+        "mean_difference": 0.007463453434583999,
+        "one_sided_lower_95": 0.0012731788061596725,
+        "one_sided_upper_95": 0.013482926585400472,
+        "two_sided_95": [
+          -1.4591090363738754e-06,
+          0.014767564026591268
+        ],
+        "samples": 10000,
+        "seed": 20261019
+      },
+      "latency_v2_minus_router": {
+        "mean_difference_ms": -0.041412556468172414,
+        "two_sided_95_ms": [
+          -0.48019286216632434,
+          0.400027304158111
+        ],
+        "mean_reduction_right_relative_to_left": -0.003928202624479349,
+        "reduction_ci95": [
+          -0.046498171483008756,
+          0.03722163720644115
+        ],
+        "bootstrap_samples": 10000,
+        "seed": 42,
+        "unit": "query with all repetitions paired"
+      }
+    },
+    "litegator_b50": {
+      "quality_v2_minus_router": {
+        "p_superiority": 0.0306,
+        "p_noninferiority_0_01": 0.0,
+        "mean_difference": 0.006141619842344054,
+        "one_sided_lower_95": 0.0006208225526536025,
+        "one_sided_upper_95": 0.011543780875091206,
+        "two_sided_95": [
+          -0.00032873778531460686,
+          0.012694389234368263
+        ],
+        "samples": 10000,
+        "seed": 20261019
+      },
+      "latency_v2_minus_router": {
+        "mean_difference_ms": -0.13342276180698154,
+        "two_sided_95_ms": [
+          -0.5482718041581108,
+          0.2724928305954824
+        ],
+        "mean_reduction_right_relative_to_left": -0.009332390460097484,
+        "reduction_ci95": [
+          -0.0389884341833917,
+          0.01884404738634135
+        ],
+        "bootstrap_samples": 10000,
+        "seed": 42,
+        "unit": "query with all repetitions paired"
+      }
+    },
+    "litegator_b80": {
+      "quality_v2_minus_router": {
+        "p_superiority": 0.4937,
+        "p_noninferiority_0_01": 0.0,
+        "mean_difference": 1.1676829427590915e-05,
+        "one_sided_lower_95": -0.0024616977496305058,
+        "one_sided_upper_95": 0.0025023096231871697,
+        "two_sided_95": [
+          -0.0029143305033130225,
+          0.00300299925248911
+        ],
+        "samples": 10000,
+        "seed": 20261019
+      },
+      "latency_v2_minus_router": {
+        "mean_difference_ms": 0.1052254209445586,
+        "two_sided_95_ms": [
+          -0.1349477430698151,
+          0.3443702697638604
+        ],
+        "mean_reduction_right_relative_to_left": 0.005182232978602319,
+        "reduction_ci95": [
+          -0.006684827977429353,
+          0.016891588104023875
+        ],
+        "bootstrap_samples": 10000,
+        "seed": 42,
+        "unit": "query with all repetitions paired"
+      }
+    },
+    "bert_b30": {
+      "quality_v2_minus_router": {
+        "p_superiority": 0.2448,
+        "p_noninferiority_0_01": 0.0008,
+        "mean_difference": 0.0028097257754559246,
+        "one_sided_lower_95": -0.003937347250971065,
+        "one_sided_upper_95": 0.00938815760313801,
+        "two_sided_95": [
+          -0.00511130239095227,
+          0.01077898247093962
+        ],
+        "samples": 10000,
+        "seed": 20261019
+      },
+      "latency_v2_minus_router": {
+        "mean_difference_ms": -140.064147587269,
+        "two_sided_95_ms": [
+          -142.2843865020534,
+          -137.819614962269
+        ],
+        "mean_reduction_right_relative_to_left": -13.285834033709609,
+        "reduction_ci95": [
+          -13.862332608407964,
+          -12.745012159763792
+        ],
+        "bootstrap_samples": 10000,
+        "seed": 42,
+        "unit": "query with all repetitions paired"
+      }
+    },
+    "bert_b50": {
+      "quality_v2_minus_router": {
+        "p_superiority": 0.1462,
+        "p_noninferiority_0_01": 0.0005,
+        "mean_difference": 0.004344553990614819,
+        "one_sided_lower_95": -0.00255931272730812,
+        "one_sided_upper_95": 0.011185724967853083,
+        "two_sided_95": [
+          -0.003945978689841503,
+          0.012519398496332124
+        ],
+        "samples": 10000,
+        "seed": 20261019
+      },
+      "latency_v2_minus_router": {
+        "mean_difference_ms": -148.26951388090347,
+        "two_sided_95_ms": [
+          -150.65395192068792,
+          -145.8597797656571
+        ],
+        "mean_reduction_right_relative_to_left": -10.37086159906665,
+        "reduction_ci95": [
+          -10.744072015677785,
+          -10.016746847991387
+        ],
+        "bootstrap_samples": 10000,
+        "seed": 42,
+        "unit": "query with all repetitions paired"
+      }
+    },
+    "bert_b80": {
+      "quality_v2_minus_router": {
+        "p_superiority": 0.6448,
+        "p_noninferiority_0_01": 0.0,
+        "mean_difference": -0.0006950461568867936,
+        "one_sided_lower_95": -0.003880272839825155,
+        "one_sided_upper_95": 0.002537164973742471,
+        "two_sided_95": [
+          -0.0044574801906416975,
+          0.0031347520678364515
+        ],
+        "samples": 10000,
+        "seed": 20261019
+      },
+      "latency_v2_minus_router": {
+        "mean_difference_ms": -141.9343642094456,
+        "two_sided_95_ms": [
+          -144.1664166917351,
+          -139.66434749460984
+        ],
+        "mean_reduction_right_relative_to_left": -6.9901069190368705,
+        "reduction_ci95": [
+          -7.155583503436088,
+          -6.830345487188061
+        ],
+        "bootstrap_samples": 10000,
+        "seed": 42,
+        "unit": "query with all repetitions paired"
+      }
+    }
+  },
+  "mean_reduction_vs_h_star_v2": {
+    "bm25": {
+      "mean_difference_ms": 20.881443542094456,
+      "two_sided_95_ms": [
+        20.812219977669404,
+        20.952793359086243
+      ],
+      "mean_reduction_right_relative_to_left": 0.903620555889461,
+      "reduction_ci95": [
+        0.9021354193007055,
+        0.9051074680498215
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "p_star": {
+      "mean_difference_ms": 19.35487311088296,
+      "two_sided_95_ms": [
+        19.281705429158112,
+        19.42972726411704
+      ],
+      "mean_reduction_right_relative_to_left": 0.8375599687047214,
+      "reduction_ci95": [
+        0.836083753138176,
+        0.8390576099730211
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "r_star_v2": {
+      "mean_difference_ms": 9.597753572895277,
+      "two_sided_95_ms": [
+        9.531845570071868,
+        9.664289540297741
+      ],
+      "mean_reduction_right_relative_to_left": 0.41533179453549385,
+      "reduction_ci95": [
+        0.4133470046314937,
+        0.4172921329944775
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "pe_gh_v2_b30": {
+      "mean_difference_ms": 12.56627387063655,
+      "two_sided_95_ms": [
+        12.177968308264887,
+        12.951664819558522
+      ],
+      "mean_reduction_right_relative_to_left": 0.5437911108757025,
+      "reduction_ci95": [
+        0.5268994181425032,
+        0.5606140588235816
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "pe_gh_v2_b50": {
+      "mean_difference_ms": 8.81190137577002,
+      "two_sided_95_ms": [
+        8.394059105492813,
+        9.238058851899384
+      ],
+      "mean_reduction_right_relative_to_left": 0.38132494066153744,
+      "reduction_ci95": [
+        0.3633605991614601,
+        0.3995611248897591
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "pe_gh_v2_b80": {
+      "mean_difference_ms": 2.8036067761806978,
+      "two_sided_95_ms": [
+        2.458141410677618,
+        3.157903571098562
+      ],
+      "mean_reduction_right_relative_to_left": 0.12132287255336727,
+      "reduction_ci95": [
+        0.1063516084420445,
+        0.13666255682533948
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "litegator_b30": {
+      "mean_difference_ms": 12.524861314168376,
+      "two_sided_95_ms": [
+        12.128965619609856,
+        12.922896012320328
+      ],
+      "mean_reduction_right_relative_to_left": 0.5419990299201336,
+      "reduction_ci95": [
+        0.5245554302155426,
+        0.5596225295138192
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "litegator_b50": {
+      "mean_difference_ms": 8.678478613963039,
+      "two_sided_95_ms": [
+        8.243294991786447,
+        9.108672362679672
+      ],
+      "mean_reduction_right_relative_to_left": 0.3755512234398669,
+      "reduction_ci95": [
+        0.3566880281538359,
+        0.3942365360834919
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "litegator_b80": {
+      "mean_difference_ms": 2.9088321971252564,
+      "two_sided_95_ms": [
+        2.5660623431724847,
+        3.2698262587268996
+      ],
+      "mean_reduction_right_relative_to_left": 0.1258763821407647,
+      "reduction_ci95": [
+        0.11117912468873092,
+        0.14141987380113843
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "bert_b30": {
+      "mean_difference_ms": -127.49787371663244,
+      "two_sided_95_ms": [
+        -129.74049644122175,
+        -125.23041751668379
+      ],
+      "mean_reduction_right_relative_to_left": -5.517324474732742,
+      "reduction_ci95": [
+        -5.617055850700003,
+        -5.415725462572982
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "bert_b50": {
+      "mean_difference_ms": -139.45761250513348,
+      "two_sided_95_ms": [
+        -141.87180816042095,
+        -137.0129577112423
+      ],
+      "mean_reduction_right_relative_to_left": -6.034868474532005,
+      "reduction_ci95": [
+        -6.143533504708,
+        -5.925436137902099
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    },
+    "bert_b80": {
+      "mean_difference_ms": -139.1307574332649,
+      "two_sided_95_ms": [
+        -141.39072312756673,
+        -136.83698242120124
+      ],
+      "mean_reduction_right_relative_to_left": -6.020724195610782,
+      "reduction_ci95": [
+        -6.121592371408769,
+        -5.918717076640026
+      ],
+      "bootstrap_samples": 10000,
+      "seed": 42,
+      "unit": "query with all repetitions paired"
+    }
+  },
+  "runtime_samples": [
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6368403456,
+      "system_cpu_percent_before_load": 10.6,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 21916,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6375542784,
+      "system_cpu_percent_before_load": 0.7,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 10472,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6768271360,
+      "system_cpu_percent_before_load": 1.3,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 8620,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6443290624,
+      "system_cpu_percent_before_load": 22.8,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 6028,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6363017216,
+      "system_cpu_percent_before_load": 8.6,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 24344,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6794121216,
+      "system_cpu_percent_before_load": 8.9,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 23560,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6858559488,
+      "system_cpu_percent_before_load": 0.0,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 26212,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6729265152,
+      "system_cpu_percent_before_load": 1.3,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 21540,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6672367616,
+      "system_cpu_percent_before_load": 17.5,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 11888,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6578434048,
+      "system_cpu_percent_before_load": 8.1,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 25648,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6430748672,
+      "system_cpu_percent_before_load": 16.2,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 14004,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6283059200,
+      "system_cpu_percent_before_load": 7.7,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 9708,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6822064128,
+      "system_cpu_percent_before_load": 3.5,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 13400,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6572318720,
+      "system_cpu_percent_before_load": 8.3,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 16880,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6453829632,
+      "system_cpu_percent_before_load": 7.4,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 10716,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6698659840,
+      "system_cpu_percent_before_load": 8.9,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 11912,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6664019968,
+      "system_cpu_percent_before_load": 5.6,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 14396,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6542409728,
+      "system_cpu_percent_before_load": 8.7,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 9020,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6710366208,
+      "system_cpu_percent_before_load": 15.6,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 2908,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6754840576,
+      "system_cpu_percent_before_load": 9.3,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 5880,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6582087680,
+      "system_cpu_percent_before_load": 25.5,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 25876,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6819172352,
+      "system_cpu_percent_before_load": 18.0,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 11984,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6770167808,
+      "system_cpu_percent_before_load": 2.6,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 25824,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6838571008,
+      "system_cpu_percent_before_load": 22.3,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 27104,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 6765662208,
+      "system_cpu_percent_before_load": 9.9,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 14424,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8645849088,
+      "system_cpu_percent_before_load": 8.3,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 15600,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8676724736,
+      "system_cpu_percent_before_load": 9.0,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 9168,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8535056384,
+      "system_cpu_percent_before_load": 2.0,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 21812,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8597860352,
+      "system_cpu_percent_before_load": 9.9,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 17848,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8880660480,
+      "system_cpu_percent_before_load": 11.5,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 7352,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8639430656,
+      "system_cpu_percent_before_load": 9.5,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 13208,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8517632000,
+      "system_cpu_percent_before_load": 6.5,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 14272,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8991498240,
+      "system_cpu_percent_before_load": 6.8,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 19952,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8750739456,
+      "system_cpu_percent_before_load": 9.5,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 2312,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8714485760,
+      "system_cpu_percent_before_load": 8.3,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 3516,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8821977088,
+      "system_cpu_percent_before_load": 8.7,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 16100,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8725016576,
+      "system_cpu_percent_before_load": 1.3,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 14004,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8591732736,
+      "system_cpu_percent_before_load": 1.4,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 12984,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8577269760,
+      "system_cpu_percent_before_load": 8.6,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 6588,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8818454528,
+      "system_cpu_percent_before_load": 17.9,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 19252,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8891711488,
+      "system_cpu_percent_before_load": 10.8,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 16904,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8811905024,
+      "system_cpu_percent_before_load": 2.7,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 13608,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8678211584,
+      "system_cpu_percent_before_load": 2.6,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 7560,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 9099333632,
+      "system_cpu_percent_before_load": 10.1,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 15740,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8981712896,
+      "system_cpu_percent_before_load": 10.2,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 8504,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8923869184,
+      "system_cpu_percent_before_load": 7.5,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 6280,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8804081664,
+      "system_cpu_percent_before_load": 9.4,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 14764,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8675147776,
+      "system_cpu_percent_before_load": 6.0,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 12372,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8370757632,
+      "system_cpu_percent_before_load": 8.3,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 23692,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    },
+    {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\quang\\.cache\\pegh\\review-a-20261025\\.venv\\Scripts\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel(R) Core(TM) i7-9850H CPU @ 2.60GHz",
+      "logical_cpus_host": 12,
+      "physical_cores_host": 6,
+      "host_ram_bytes": 16884793344,
+      "available_ram_before_load_bytes": 8235274240,
+      "system_cpu_percent_before_load": 16.0,
+      "settings": {
+        "logical_cpus": 4,
+        "affinity_cpus": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "enforce_memory_limit": true,
+        "online_batch_size": 1,
+        "concurrency": 1,
+        "warmup_queries": 50,
+        "repetitions": 5,
+        "seed": 42,
+        "detailed_stages": false,
+        "memory_sample_seconds": 0.02,
+        "worker_timeout_seconds": 3600.0
+      },
+      "resources": {
+        "requested_logical_cpus": 4,
+        "requested_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "effective_affinity": [
+          0,
+          2,
+          4,
+          6
+        ],
+        "memory_limit_bytes": 8000000000,
+        "memory_limit_kind": "windows_job_process_commit_limit",
+        "memory_semantics_note": "Windows cap applies to process committed memory; Linux fallback caps address space. RSS is measured separately; neither is described as an external container/cgroup cap."
+      },
+      "package_versions": {
+        "numpy": "2.5.4",
+        "faiss-cpu": "1.15.1",
+        "torch": "2.14.1+cpu",
+        "sentence-transformers": "5.7.0",
+        "transformers": "4.57.6"
+      },
+      "git_commit": "09fdcad8f4e96ddd713891a14f4bebe89911815e",
+      "git_branch": "thanh",
+      "git_status": "M docs/v4/README.md\n M scripts_shared/experiment_v4.py\n M src/pegh/profiling/runner.py\n M src/pegh/profiling/worker.py\n M src/pegh/v4/figures.py\n M src/pegh/v4/online.py\n M tests/b/test_profiling.py\n?? CODEX_HANDOFF_PRIOR.md\n?? configs/v4/prior_online_plan.yaml\n?? docs/v4/facts/prior_bert.json\n?? docs/v4/facts/prior_comparison.json\n?? docs/v4/figures/v4_prior_curves.png\n?? output/presentations/PE_GH_Gioi_Thieu.pdf\n?? output/presentations/PE_GH_Gioi_Thieu.pptx\n?? src/pegh/v4/prior.py\n?? src/pegh/v4/prior_online.py\n?? tests/v4/test_prior_online.py",
+      "pid": 19940,
+      "cwd": "C:\\Users\\quang\\pegh-work",
+      "source_root": "C:\\Users\\quang\\OneDrive\\Tài liệu\\ChatGPT\\PE-GH",
+      "thread_environment": {
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "1",
+        "TOKENIZERS_PARALLELISM": "false"
+      },
+      "backend_threads_after_factory": {
+        "torch": 4,
+        "faiss": 6
+      }
+    }
+  ],
+  "no_requests_discarded": true,
+  "bert_recipe_limitation": "BERT kept at paper recipe for cost; no equal hyperparameter search budget"
+}

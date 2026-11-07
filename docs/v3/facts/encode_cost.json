@@ -1,0 +1,22 @@
+{
+  "affinity": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "torch_threads": 4,
+  "queries": 300,
+  "encoders": {
+    "minilm": {
+      "median_ms": 7.64545,
+      "mean_ms": 7.849636,
+      "p95_ms": 8.4807
+    },
+    "bge_small": {
+      "median_ms": 13.84235,
+      "mean_ms": 14.057223666666665,
+      "p95_ms": 16.1286
+    }
+  }
+}

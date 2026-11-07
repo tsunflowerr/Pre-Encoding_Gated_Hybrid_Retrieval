@@ -78,6 +78,17 @@ The historical baseline failure audit contains the bottom 20 queries per method 
 rows): 23 code/CLI, 53 natural-language, and 4 short queries under lexical heuristic labels.
 These labels are descriptive, not causal diagnoses.
 
+## Integration history and OOF validation
+
+The earlier hybrid and gated results are documented in
+[gate analysis](05c_gate_analysis.md) and the
+[26 October integration report](../docs/integration/2026-10-26/README.md).
+The final quality and noninferiority results above were verified on 30 October;
+the separate runtime measurements are retained with their own machine provenance.
+H*, S*, PE-GH and the controls have strict five-fold OOF runs. The OOF runner
+rejects missing metadata, forged provenance, wrong fold membership, missing sidecars,
+mixed retrievers, and rankings longer than top-100.
+
 ## Routing failure analysis
 
 All 1,948 frozen decisions were classified using `delta_U = U_H - U_B`:

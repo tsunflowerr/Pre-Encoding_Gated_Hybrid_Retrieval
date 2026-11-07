@@ -134,6 +134,11 @@ def execute(config_path: str | Path) -> int:
                     "process_cpu_ns": cpu_ns,
                     "hits_returned": len(response.ranking.hits),
                     "ranking_hash": object_hash([hit.doc_id for hit in response.ranking.hits]),
+                    **(
+                        {"ranked_doc_ids": [hit.doc_id for hit in hits]}
+                        if payload.get("record_ranked_ids", False)
+                        else {}
+                    ),
                     **measurement,
                 }
             )

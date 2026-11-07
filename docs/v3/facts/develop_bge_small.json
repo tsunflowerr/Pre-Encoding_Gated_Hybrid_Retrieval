@@ -1,0 +1,133 @@
+{
+  "schema_version": "v3_development_selection_2",
+  "selection_scope": "development_validation_only",
+  "test_labels_used": false,
+  "encoder": "bge_small",
+  "criterion": "mean exact-budget validation nDCG@10 over budgets 0.1..0.9, macro, 5 folds",
+  "tie_rule": "within 0.0005: fewer feature groups, then ridge, then name",
+  "modes": {
+    "v1": {
+      "validation_area": {
+        "v1_ridge": 0.35811461442390996,
+        "v1_logistic": 0.3590438473169256,
+        "v1_sparse_success": 0.3595787271792431,
+        "v1_ridge_general": 0.3564847828623311,
+        "litegator_svc": 0.35670833599965107,
+        "v3_ridge_qpp": 0.3560015634267222,
+        "v3_ridge_proxy": 0.35816731355565307,
+        "v3_ridge_all": 0.3562737579047323,
+        "v3_logistic_qpp": 0.3574500230366114,
+        "v3_logistic_proxy": 0.3578318682878087,
+        "v3_logistic_all": 0.35790223489176975,
+        "bm25_margin": 0.3556599598148588,
+        "oracle": 0.41547868375481656,
+        "random30": 0.3454864329586181
+      },
+      "chosen": "v3_ridge_proxy"
+    },
+    "cascade": {
+      "validation_area": {
+        "v1_ridge": 0.3460801200760126,
+        "v1_logistic": 0.34628258634996767,
+        "v1_sparse_success": 0.3481530462688278,
+        "v1_ridge_general": 0.3474472180608844,
+        "litegator_svc": 0.3468251784399964,
+        "v3_ridge_qpp": 0.34645889406580493,
+        "v3_ridge_proxy": 0.34556458407705554,
+        "v3_ridge_all": 0.34516863966216027,
+        "v3_logistic_qpp": 0.3462604538212931,
+        "v3_logistic_proxy": 0.3446753633254645,
+        "v3_logistic_all": 0.34457701262867274,
+        "bm25_margin": 0.3464179471771337,
+        "oracle": 0.3894121344617208,
+        "random30": 0.3408925988904832
+      },
+      "chosen": "v1_ridge"
+    }
+  },
+  "static_validation_macro": {
+    "bm25": 0.28991514702296317,
+    "h_star": 0.40061291658561116,
+    "p_star": 0.30712505326342565,
+    "r_star": 0.373892899688587,
+    "s_star": 0.40061291658561116,
+    "s_star_all": 0.40061291658561116
+  },
+  "fold_choices": {
+    "programmers": [
+      {
+        "h_star": "cc_alpha_0.6",
+        "s_star": "cc_alpha_0.6",
+        "p_star": "proxy_cc_0.2",
+        "r_star": "rescore_cc_0.7",
+        "s_star_all": "cc_alpha_0.6"
+      },
+      {
+        "h_star": "cc_alpha_0.6",
+        "s_star": "cc_alpha_0.6",
+        "p_star": "proxy_cc_0.5",
+        "r_star": "rescore_cc_0.8",
+        "s_star_all": "cc_alpha_0.6"
+      },
+      {
+        "h_star": "cc_alpha_0.7",
+        "s_star": "cc_alpha_0.7",
+        "p_star": "proxy_cc_0.6",
+        "r_star": "rescore_cc_0.9",
+        "s_star_all": "cc_alpha_0.7"
+      },
+      {
+        "h_star": "cc_alpha_0.6",
+        "s_star": "cc_alpha_0.6",
+        "p_star": "proxy_cc_0.3",
+        "r_star": "rescore_cc_0.8",
+        "s_star_all": "cc_alpha_0.6"
+      },
+      {
+        "h_star": "cc_alpha_0.6",
+        "s_star": "cc_alpha_0.6",
+        "p_star": "proxy_cc_0.6",
+        "r_star": "rescore_cc_0.9",
+        "s_star_all": "cc_alpha_0.6"
+      }
+    ],
+    "unix": [
+      {
+        "h_star": "cc_alpha_0.7",
+        "s_star": "cc_alpha_0.7",
+        "p_star": "proxy_cc_0.4",
+        "r_star": "rescore_cc_0.9",
+        "s_star_all": "cc_alpha_0.7"
+      },
+      {
+        "h_star": "cc_alpha_0.6",
+        "s_star": "cc_alpha_0.6",
+        "p_star": "proxy_cc_0.4",
+        "r_star": "rescore_cc_0.8",
+        "s_star_all": "cc_alpha_0.6"
+      },
+      {
+        "h_star": "cc_alpha_0.7",
+        "s_star": "cc_alpha_0.7",
+        "p_star": "proxy_cc_0.6",
+        "r_star": "rescore_cc_0.9",
+        "s_star_all": "cc_alpha_0.7"
+      },
+      {
+        "h_star": "cc_alpha_0.6",
+        "s_star": "cc_alpha_0.6",
+        "p_star": "proxy_cc_0.5",
+        "r_star": "rescore_cc_0.8",
+        "s_star_all": "cc_alpha_0.6"
+      },
+      {
+        "h_star": "cc_alpha_0.6",
+        "s_star": "cc_alpha_0.6",
+        "p_star": "proxy_cc_0.6",
+        "r_star": "rescore_cc_0.8",
+        "s_star_all": "cc_alpha_0.6"
+      }
+    ]
+  },
+  "report_hash": "4e26ca4a57590254c0c373322db08b17f69b87efbec331072216f3a9f998fa1c"
+}
