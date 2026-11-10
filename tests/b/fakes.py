@@ -117,3 +117,15 @@ def create_fixture_gated(*, trace, index_dir: str):
             return SearchResponse(sparse, False, None, 0, None)
 
     return FixtureGate()
+
+
+def create_repeated_sparse(*, trace, index_dir: str):
+    delegate = create_fixture_gated(trace=trace, index_dir=index_dir)
+
+    class RepeatedSparse:
+        def search(self, query, k=100):
+            with trace.stage("sparse"):
+                pass  # Simulate a second sparse execution in an orchestration layer.
+            return delegate.search(query, k=k)
+
+    return RepeatedSparse()

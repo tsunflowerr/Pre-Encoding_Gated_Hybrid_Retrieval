@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pegh-research"
 version = "0.1.0"
-description = "CPU dense retrieval and reproducible profiling for PE-GH"
-readme = "docs/person_b/README.md"
+description = "Reproducible sparse/dense retrieval and evaluation for PE-GH"
+readme = "README.md"
 requires-python = ">=3.11,<3.14"
 dependencies = [
   "numpy>=1.26,<3",
@@ -15,9 +15,12 @@ dependencies = [
   "sentence-transformers>=5.1,<6",
   "transformers>=4.56,<5",
   "psutil>=7,<8",
+  "scikit-learn>=1.9,<2",
   "PyYAML>=6,<7",
   "pyarrow>=19,<24",
   "matplotlib>=3.9,<4",
+  "bm25s>=0.2,<1",
+  "ir-measures>=0.4,<1",
 ]
 
 [project.optional-dependencies]
@@ -25,14 +28,27 @@ dev = ["pytest>=8,<10", "ruff>=0.12,<1", "jsonschema>=4.23,<5"]
 
 [tool.setuptools]
 include-package-data = false
-packages = ["contracts", "pegh", "pegh.dense", "pegh.profiling"]
+packages = [
+  "contracts",
+  "pegh",
+  "pegh.data",
+  "pegh.fusion",
+  "pegh.gating",
+  "pegh.app",
+  "pegh.sparse",
+  "pegh.evaluation",
+  "pegh.dense",
+  "pegh.profiling",
+  "pegh.v3",
+  "pegh.v4",
+]
 package-dir = {"" = "src", "contracts" = "contracts"}
 
 [tool.setuptools.package-data]
 contracts = ["schemas/*.json", "resources/*.json"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests/shared", "tests/b"]
+testpaths = ["tests"]
 markers = ["model: needs the pinned real model and network/local model cache"]
 addopts = "-ra"
 

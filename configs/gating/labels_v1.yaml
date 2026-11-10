@@ -1,0 +1,28 @@
+schema_version: '1.0'
+track: supervised_internal_five_fold
+split_manifest: data/splits/manifest.json
+features_manifest: results/features/schema_v1.json
+fusion_selection: results/fusion/selection_v1.json
+
+targets:
+  utility_metric: ndcg_at_10
+  gain: h_star_minus_bm25
+  gain_binary: delta_u_strictly_greater_than_zero
+  sparse_success: 0_if_bm25_top10_has_positive_qrel_else_1
+  remove_self_qrel: true
+  retain_zero_utility_queries: true
+
+controls:
+  identifier_margin:
+    dense_score: max(identifier_present, -bm25_rel_gap12)
+    identifier_present: has_error_identifier_or_path_or_flag_or_identifier_token
+    decision: dense_if_score_strictly_greater_than_validation_threshold
+  bm25_margin:
+    dense_score: -bm25_rel_gap12
+    decision: dense_if_score_strictly_greater_than_validation_threshold
+  random:
+    seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+    hash: sha256(seed_utf8 + NUL + canonical_query_id_utf8), first_64_bits_big_endian
+    dense_score: 1_minus_first_64_hash_bits_divided_by_2_pow_64
+    decision: dense_if_score_strictly_greater_than_validation_threshold
+  threshold_source: validation_only

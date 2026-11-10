@@ -1,14 +1,15 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict
 from pathlib import Path
 
 from contracts.io import load_queries
 from contracts.ranking import ranking_to_record
-from pegh.dense.artifacts import atomic_json, file_hash, read_json, write_jsonl
+from pegh.dense.artifacts import atomic_json, file_hash, object_hash, read_json, write_jsonl
 from pegh.dense.config import DenseConfig
 from pegh.dense.encoder import CPUEncoder
-from pegh.dense.retriever import FaissDenseRetriever
+from pegh.dense.retriever import DenseOnlyMethod, FaissDenseRetriever
 from pegh.profiling.provenance import source_snapshot
 from pegh.profiling.runtime import RuntimeSettings, configure_resources, runtime_manifest
 
@@ -51,6 +52,8 @@ def main() -> None:
             "quality_cache": True,
             "latency_benchmark": False,
             "queries_sha256": file_hash(args.queries),
+            "queries_hash": object_hash([asdict(query) for query in queries]),
+            "method_provenance_hash": object_hash(DenseOnlyMethod(retriever).provenance),
             "query_count": len(queries),
             "retriever_hash": retriever.retriever_hash,
             "model_revision": encoder.config.revision,
