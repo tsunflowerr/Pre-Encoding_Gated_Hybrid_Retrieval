@@ -1,0 +1,40 @@
+% Bìa báo cáo nhóm dựa trên khung đôi và logo trong template thesis UET.
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[overlay,remember picture]
+ \draw[line width=3pt]
+  ($(current page.north west)+(25mm,-25mm)$)
+  rectangle ($(current page.south east)+(-15mm,25mm)$);
+ \draw[line width=1pt]
+  ($(current page.north west)+(26.5mm,-26.5mm)$)
+  rectangle ($(current page.south east)+(-16.5mm,26.5mm)$);
+\end{tikzpicture}
+\begin{center}
+\vspace*{3mm}
+{\fontsize{13}{17}\selectfont\bfseries
+ ĐẠI HỌC QUỐC GIA HÀ NỘI\\
+ TRƯỜNG ĐẠI HỌC CÔNG NGHỆ\par}
+\vspace{10mm}
+\includegraphics[width=30mm]{figures/uet.jpg}\par
+\vspace{9mm}
+{\fontsize{16}{20}\selectfont\bfseries BÁO CÁO ĐỀ TÀI\par}
+\vspace{13mm}
+{\fontsize{21}{28}\selectfont\bfseries
+ PE-GH: TRUY XUẤT LAI\par
+ CÓ CHỌN LỌC TRƯỚC BƯỚC\par
+ MÃ HÓA TRUY VẤN\par}
+\vspace{7mm}
+{\fontsize{13}{17}\selectfont\ReportSubtitle\par}
+\vspace{17mm}
+{\bfseries Nhóm thực hiện\par}
+\vspace{4mm}
+\begin{tabular}{ll}
+ \textbf{Họ và tên} & \textbf{Mã số sinh viên}\\[3mm]
+ \ReportStudentRows
+\end{tabular}
+\vfill
+{\bfseries\MakeUppercase{\ReportPlace}, \ReportYear\par}
+\vspace{8mm}
+\end{center}
+\end{titlepage}
+

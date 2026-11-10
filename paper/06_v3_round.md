@@ -1,5 +1,7 @@
 # Second round: re-scoring tiers and a preregistered confirmation
 
+Scope: **historical experimental round v3**, which informed PE-GH v2 in round v4. Statements below about the v1/v3 gate apply to those rounds. The later BM25-failure gate has separate evidence in the [v4 report](../docs/v4/README.md); see the [version guide](../docs/VERSIONS.md).
+
 The first round left two open questions. At matched dense budgets, the Ridge gate was not distinguishable from a BM25-margin rule or a LiteGator-style SVM, and its test split had been observed during development. The second round therefore (i) tried new pre-encoding signals, (ii) redesigned what the cheap and the expensive routes compute, and (iii) confirmed the resulting claims on four CQADupStack domains that no earlier step had touched. Full receipts: [v3 report](../docs/v3/README.md).
 
 ## Design

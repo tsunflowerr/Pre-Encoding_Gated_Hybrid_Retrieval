@@ -1,0 +1,69 @@
+% !TeX root = ../thesis.tex
+\chapter{Cơ sở lý thuyết và nghiên cứu liên quan}
+\label{chap:background}
+
+\section{Các khái niệm cần thiết cho bài toán}
+Trong báo cáo, truy xuất theo từ khóa được đại diện bởi BM25 \cite{bm25_2009}. Phương pháp này sử dụng sự xuất hiện và mức độ đặc trưng của từ ngữ để xếp hạng tài liệu. Vai trò của BM25 trong PE-GH có hai mặt: cung cấp một danh sách kết quả có chi phí thấp và tạo ra thông tin ban đầu cho quyết định có sử dụng Dense hay không. Vì vậy, bộ quyết định hoạt động trên bằng chứng của một lần truy xuất đã diễn ra, thay vì chỉ đọc câu hỏi mà chưa biết kho dữ liệu phản hồi thế nào.
+
+Truy xuất Dense chuyển truy vấn và tài liệu thành các biểu diễn ngữ nghĩa để tìm những tài liệu có nội dung gần với truy vấn. Sentence-BERT và DPR là những nghiên cứu tiêu biểu về biểu diễn văn bản phục vụ truy xuất \cite{sbert2019,dpr2020}, còn nghiên cứu về tìm kiếm tương đồng cung cấp cơ sở cho việc tìm các biểu diễn gần nhau trong kho tài liệu \cite{faiss2021}. Thông tin ngữ nghĩa của tài liệu có thể được chuẩn bị trước, nhưng truy vấn mới vẫn cần được mã hóa khi phục vụ. Sự khác biệt về thời điểm phát sinh chi phí này là cơ sở để đặt quyết định trước encoder.
+
+Hybrid kết hợp kết quả từ khóa và Dense để tận dụng hai nguồn bằng chứng. Việc kết hợp có thể dựa trên điểm hoặc thứ hạng, nhưng chất lượng của danh sách cuối còn phụ thuộc encoder, cách kết hợp và dữ liệu. Trong phạm vi PE-GH, nhánh Hybrid là một hành động truy xuất đã được xác định trước. Bộ quyết định lựa chọn có thực hiện hành động đó cho truy vấn đang xét, thay vì đồng thời thay đổi toàn bộ cấu hình Hybrid ở mỗi yêu cầu.
+
+\section{Dự báo chất lượng và lựa chọn chiến lược truy xuất}
+Dự báo chất lượng truy xuất, thường được gọi là QPP, tìm cách ước lượng mức hiệu quả của hệ thống khi chưa có nhãn liên quan cho truy vấn đang phục vụ. Các đặc trưng có thể phản ánh bản thân truy vấn trước khi tìm kiếm hoặc danh sách kết quả sau khi truy xuất, tương ứng với hai nhóm dự báo trước và sau truy xuất \cite{preqpp2008,clarity2002}. Faggioli và cộng sự cho thấy việc chuyển các tín hiệu dự báo từ hệ thống từ khóa sang truy xuất ngữ nghĩa gặp những hạn chế đáng kể \cite{qpp2023}. Kết quả này là lời nhắc rằng tín hiệu từ BM25 không mặc nhiên cho biết chính xác lợi ích của một encoder khác.
+
+WIG và nghiên cứu về sự thay đổi mức phù hợp của danh sách kết quả cung cấp những hướng dự báo từ thông tin sau truy xuất \cite{wig2007,querydrift2012}. Các công trình này là cơ sở để xem xét tín hiệu BM25, nhưng chưa tự chứng minh tín hiệu đó đủ để quyết định truy vấn nào hưởng lợi từ Dense.
+
+PE-GH sử dụng dự báo để ra quyết định, nên cần phân biệt chất lượng của đại lượng được dự đoán với chất lượng của hành động sau quyết định. Nếu mô hình nhận biết tốt BM25 thất bại, nó vẫn có thể chuyển một truy vấn sang Dense mà không thu được tài liệu liên quan. Nguyên nhân có thể là nhánh Dense cũng không phù hợp với truy vấn đó. Ngược lại, việc dự báo BM25 chưa hoàn hảo không có nghĩa mọi quyết định tương ứng đều làm mất chất lượng, bởi hai nhánh đôi khi cho cùng chất lượng.
+
+Sự phân biệt này dẫn đến hai tầng đánh giá. AUC cho biết khả năng nhận biết rủi ro BM25, còn \ndcg{} phản ánh chất lượng danh sách cuối đối với người dùng. Báo cáo giữ chất lượng truy xuất làm tiêu chí chính, bởi dự báo tốt hơn chưa đủ để kết luận lựa chọn nhánh hữu ích hơn.
+
+Thời điểm quyết định xác định phần chi phí có thể tránh được. Lựa chọn trước encoder cho phép bỏ qua truy xuất ngữ nghĩa đối với một số truy vấn, nhưng phải chấp nhận chưa biết nhánh này sẽ mang lại kết quả gì. PE-GH xem xét sự đánh đổi đó bằng chất lượng cuối cùng và chi phí thực tế khi các phương pháp được sử dụng cùng ngân sách.
+
+\section{Các nghiên cứu liên quan trực tiếp}
+\subsection{Lựa chọn chiến lược bằng mô hình học}
+Arabzadeh, Yan và Clarke nghiên cứu lựa chọn từ khóa, Dense hoặc Hybrid theo từng truy vấn nhằm điều chỉnh quan hệ hiệu quả và chi phí. Công trình khảo sát bộ phân loại trên MS MARCO và sử dụng dự báo khả năng thành công của truy xuất từ khóa làm một cơ sở lựa chọn \cite{arabzadeh2021}. Vì vậy, ý tưởng quyết định có dùng Dense trước khi chạy nhánh đó đã có tiền lệ trực tiếp.
+
+Đối với PE-GH, bài học cần kế thừa là đánh giá toàn bộ điểm vận hành, trong đó chất lượng và chi phí cùng phụ thuộc chính sách. Câu hỏi của nhóm không dừng ở việc mô hình có phân loại được truy vấn hay không. Bộ quyết định phải đủ rẻ để phần chi phí của chính nó không làm mất ý nghĩa của lựa chọn. Đây là lý do báo cáo xem chi phí đầu cuối và các đối chứng đơn giản là thành phần cần thiết của bằng chứng, thay vì chỉ sử dụng một chỉ số dự báo.
+
+LiteGator nghiên cứu lựa chọn phương pháp truy xuất trong điều kiện tài nguyên hạn chế. Công trình nhấn mạnh một bộ quyết định có chi phí thấp và có thể sử dụng cùng các phương pháp truy xuất đã có \cite{litegator2025}. Hướng tiếp cận này gần PE-GH về mục tiêu tiết kiệm, nên cần được đối chiếu để xem cách lựa chọn của nhóm đem lại giá trị bổ sung đến đâu.
+
+Khi so các bộ quyết định trên hạ tầng của nhóm, điều được quan sát là tác động của một phiên bản điều chỉnh cho cùng bài toán và cùng nhánh truy xuất. Kết quả đó không đồng nghĩa đã tái lập toàn bộ thiết lập của công trình gốc. Khác biệt về dữ liệu, mục tiêu nhãn hoặc cách sử dụng ngân sách cần được công bố, vì những yếu tố này có thể ảnh hưởng chất lượng và chi phí. Chương~\ref{chap:experiment} làm rõ cách đối chiếu cụ thể, còn Chương~\ref{chap:results} trình bày cả kết quả thuận lợi và giới hạn của phép so sánh.
+
+ANCE và Contriever tập trung cải thiện khả năng tìm tài liệu liên quan của mô hình truy xuất ngữ nghĩa \cite{ance2021,contriever2022}. Những hướng nghiên cứu này bổ sung cho câu hỏi của PE-GH: một bên nâng chất lượng của phương pháp truy xuất, còn đề tài xác định truy vấn nào cần sử dụng phương pháp đã được lựa chọn.
+
+\subsection{Kết hợp kết quả và lựa chọn nhánh}
+Các nghiên cứu về kết hợp kết quả xem xét cách tận dụng đồng thời nhiều nguồn truy xuất. Cormack và cộng sự giới thiệu RRF như một phương pháp hợp nhất danh sách đơn giản \cite{rrf2009}, còn Bruch và cộng sự phân tích các lựa chọn kết hợp trong truy xuất lai \cite{bruch2023}. Những công trình này cho thấy bản thân cách tạo danh sách Hybrid cũng cần được đánh giá. Chúng cung cấp cơ sở để lựa chọn một đối chứng phù hợp, không chứng minh một cách kết hợp luôn tốt hơn trên mọi dữ liệu.
+
+ColBERT, ColBERTv2 và SPLADE là những hướng nghiên cứu nâng hiệu quả truy xuất bằng mô hình học \cite{colbert2020,colbertv2_2022,splade2021}. Báo cáo nhắc đến các hướng này để làm rõ bối cảnh phát triển của truy xuất, nhưng không đánh giá chúng như đối chứng. Phạm vi của PE-GH là quyết định khi nào sử dụng thêm nhánh ngữ nghĩa đã chọn.
+
+Chọn nhánh và chọn cách kết hợp giải quyết hai quyết định khác nhau. Khi cả hai danh sách đã có, việc kết hợp có thể thay đổi thứ tự tài liệu để tận dụng thông tin bổ sung. Bộ quyết định của PE-GH lại xem xét có cần tạo thêm danh sách Dense cho truy vấn hiện tại hay không. Sự khác biệt này có ý nghĩa đối với chi phí: cải thiện thứ tự sau khi đã chạy Dense chưa trực tiếp cho biết liệu có thể bỏ qua phần truy xuất đó mà vẫn giữ chất lượng trong giới hạn cho phép.
+
+Chất lượng của nhánh Hybrid còn đặt giới hạn cho việc đánh giá bộ quyết định. Nếu Dense không mang lại lợi ích trên tập dữ liệu, một chính sách gần như luôn dùng BM25 có thể tiết kiệm nhiều nhưng không chứng minh được khả năng lựa chọn tinh tế. Nếu Hybrid cải thiện đáng kể, giữ chất lượng của nó sẽ đòi hỏi sử dụng nhánh đắt thường xuyên hơn. Vì vậy, báo cáo giữ cả BM25, Dense và luôn chạy Hybrid để cho người đọc thấy mức khó thực tế của bài toán lựa chọn.
+
+\subsection{Đánh giá đa miền và điều kiện suy rộng}
+BEIR đặt trọng tâm vào đánh giá truy xuất trên các bộ dữ liệu không đồng nhất, qua đó nhấn mạnh giới hạn của kết quả trong một môi trường hẹp \cite{beir2021}. CQADupStack cung cấp nhiều cộng đồng với đặc điểm từ ngữ và quan hệ câu hỏi khác nhau \cite{cqadupstack2015}. Hai nguồn này tạo cơ sở cho việc đánh giá theo miền, đồng thời không biến mười hai chủ đề trong cùng một bộ dữ liệu thành bằng chứng thay thế cho kiểm chứng ngoài bộ dữ liệu đó. Công trình tài nguyên BEIR của Kamalloo và cộng sự nhấn mạnh nhu cầu có baseline tái lập được và phân tích khác biệt giữa các tập dữ liệu khi diễn giải điểm tổng hợp \cite{beir_resources2024}.
+
+Trong PE-GH, sự phân chia giữa miền phát triển và miền xác nhận có ý nghĩa phương pháp rõ ràng. Nếu bộ quyết định chỉ được đánh giá trên miền đã tham gia chọn mô hình, kết quả có thể phản ánh mức thích nghi với các lựa chọn nghiên cứu trước đó. Giữ lại những miền chưa tham gia lựa chọn tại thời điểm đóng băng giúp kiểm tra liệu cấu hình đã chọn có tiếp tục hữu ích trong phạm vi mới. Tuy nhiên, mọi miền cuối cùng vẫn thuộc CQADupStack và dùng cùng một loại nhiệm vụ, nên phạm vi suy rộng còn hữu hạn.
+
+\section{Định vị hướng tiếp cận của nhóm}
+\begin{table}[htbp]
+\centering\small
+\caption{Vai trò của các hướng nghiên cứu đối với câu hỏi của PE-GH.}
+\label{tab:related}
+\begin{tabularx}{\textwidth}{@{}p{31mm}YY@{}}
+\hline
+\textbf{Hướng} & \textbf{Vấn đề được giải quyết} & \textbf{Điều cần kiểm chứng trong PE-GH}\\\hline
+Lựa chọn chiến lược & Chọn từ khóa, Dense hoặc Hybrid cho từng truy vấn. & Bộ quyết định nhẹ có hơn quy tắc đơn giản khi cùng ngân sách hay không.\\
+QPP & Dự báo hiệu quả truy xuất khi chưa có nhãn tại thời điểm phục vụ. & Tín hiệu dự báo BM25 có chuyển thành chất lượng của quyết định dùng Dense hay không.\\
+Kết hợp kết quả & Kết hợp hai danh sách để cải thiện thứ hạng. & Mốc Hybrid có đủ mạnh, và bỏ qua nó làm mất bao nhiêu chất lượng.\\
+Đánh giá đa miền & Xem xét sự thay đổi hiệu quả theo dữ liệu. & Mô hình đóng băng có tiếp tục hữu ích trên các miền xác nhận hay không.\\
+\hline
+\end{tabularx}
+\end{table}
+
+Từ đối chiếu trên, vị trí của đề tài nằm ở một cấu hình lựa chọn có ràng buộc rõ. BM25 được chạy trước; bộ quyết định chỉ sử dụng thông tin có sẵn ở thời điểm đó; nhánh Dense dùng encoder cố định; hiệu quả được đánh giá bằng chất lượng và chi phí đo thật. Việc giữ ràng buộc này làm giảm không gian thiết kế, nhưng giúp xác định bằng chứng nào thực sự hỗ trợ mục tiêu tiết kiệm chi phí trước encoder.
+
+Tính mới cần được hiểu trong phạm vi những gì nhóm đã xây dựng và kiểm chứng. Báo cáo không khẳng định định tuyến từ khóa và ngữ nghĩa là ý tưởng mới. Giá trị nghiên cứu nằm ở việc đặt nhãn học phù hợp với thông tin quan sát được, kiểm tra một bộ quyết định nhẹ bằng đối chứng cùng ngân sách và xác nhận cấu hình đã đóng băng trên các miền chưa dùng để lựa chọn. Độ lớn của hiệu ứng, chi phí của bộ quyết định và các kết quả không đạt kỳ vọng đều phải được giữ trong kết luận.
+
+Phần tiếp theo trình bày cách PE-GH giải quyết yêu cầu lựa chọn trước khi phát sinh chi phí ngữ nghĩa. Nội dung tập trung vào vai trò của thông tin BM25, mục tiêu dự báo và ngân sách sử dụng Dense. Ba yếu tố này nối vấn đề chất lượng và chi phí với những phép kiểm chứng được trình bày ở các chương sau.

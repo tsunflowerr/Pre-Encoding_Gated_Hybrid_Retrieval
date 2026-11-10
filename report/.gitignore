@@ -1,0 +1,11 @@
+build/
+__pycache__/
+*.synctex.gz
+*.aux
+*.log
+*.toc
+*.lof
+*.lot
+*.out
+*.bbl
+*.blg

@@ -1,7 +1,7 @@
 {
-  "date": "2026-10-30",
+  "date": "2026-11-07",
   "browser": "Microsoft Edge headless",
-  "html_sha256": "5ec58004cb2ad87db687ddc2c55d74e65d3b3492d693499e0d6d03f20cfba8bc",
+  "html_sha256": "f9698ddda7906cd45e4fb74234254d62a4d32cd8e5806855596bdbdcf2dfb2f5",
   "layout_and_interaction_checks": {
     "desktop": {
       "passed": true,
@@ -27,7 +27,7 @@
       ],
       "all_controls_visible": true,
       "body_within_frame": true,
-      "max_top_bottom_gap_difference_px": 0
+      "max_top_bottom_gap_difference_px": 1
     },
     "mobile": {
       "passed": true,
@@ -40,7 +40,7 @@
       ],
       "all_controls_visible": true,
       "body_within_frame": true,
-      "max_top_bottom_gap_difference_px": 0
+      "max_top_bottom_gap_difference_px": 1
     }
   },
   "pdf_pages": 17,
@@ -50,7 +50,7 @@
   ],
   "template_match": "rebuilt from the two UET/VNU screenshots supplied by the user; visually reviewed all 17 slides",
   "template_difference": "Original UET lockup has a small Since 2004 line; reference screenshot omits it",
-  "source": "GIOI_THIEU_DE_TAI_PE_GH.md",
+  "source": "GIOI_THIEU_DE_TAI_PE_GH_v1.md",
   "offline_assets_embedded": true,
   "bottom_text_strips": 0,
   "new_visuals": [
@@ -74,5 +74,121 @@
     "mapping_verified": true
   },
   "secondary_explanation_blocks": 0,
-  "cover_summary_removed": true
+  "cover_summary_removed": true,
+  "source_sha256": "e424c4747f3b79fcd63d9ee4242cbb923451945650feba7f28698655236e5611",
+  "content_review": {
+    "primary_reference": "GIOI_THIEU_DE_TAI_PE_GH_v1.md",
+    "all_six_sections_covered": true,
+    "coverage": [
+      {
+        "v1_section": 1,
+        "slides": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "v1_section": 2,
+        "slides": [
+          8
+        ]
+      },
+      {
+        "v1_section": 3,
+        "slides": [
+          4,
+          10
+        ]
+      },
+      {
+        "v1_section": 4,
+        "slides": [
+          5,
+          6,
+          10,
+          11
+        ]
+      },
+      {
+        "v1_section": 5,
+        "slides": [
+          7,
+          9,
+          15,
+          16
+        ]
+      },
+      {
+        "v1_section": 6,
+        "slides": [
+          12,
+          13,
+          14
+        ]
+      }
+    ],
+    "clarified_main_content": [
+      "question ranking scope",
+      "existing components and group contribution",
+      "title and description retrieval",
+      "precomputed corpus vectors",
+      "Ridge training target and feature examples",
+      "four retrieval methods and Gate comparator",
+      "evaluation axes and limits of generalization"
+    ],
+    "supplementary_content_not_in_v1": [
+      "top-100",
+      "21 features",
+      "H*/S* selection",
+      "quantitative targets",
+      "OOF quality results",
+      "CPU latency measurements",
+      "failure counts"
+    ],
+    "supplementary_sources": [
+      "GIOI_THIEU_DE_TAI_PE_GH.md",
+      "configs/gating/protocol_v1.yaml",
+      "paper/03_method.md",
+      "paper/04_experimental_setup.md",
+      "paper/05a_quality_results.md",
+      "paper/figures/final-a/quality-final.csv",
+      "docs/person_a/validation/2026-10-30/comparison.json",
+      "docs/person_a/validation/2026-10-30/release.json",
+      "docs/v4/README.md"
+    ],
+    "quality_table_matches_csv": true,
+    "quality_comparison_matches_receipt": true,
+    "online_runtime_methods_shown": [
+      "h_star",
+      "s_star",
+      "pe_gh"
+    ],
+    "cpu_time_is_evaluation_criterion_not_additional_reported_measurement": true,
+    "local_source_links_exist": true,
+    "generic_topic_titles": {
+      "7": "Phiên bản và phạm vi trình bày",
+      "9": "Mục tiêu nghiên cứu",
+      "10": "Quy trình xử lý truy vấn",
+      "11": "Mô hình dự đoán lợi ích",
+      "12": "Thiết kế thực nghiệm",
+      "13": "Chất lượng truy xuất",
+      "14": "Hiệu quả xử lý trên CPU",
+      "15": "Phạm vi và hạn chế",
+      "16": "Tổng kết đề tài",
+      "17": "Tài liệu tham khảo"
+    },
+    "pdf_titles_match_html": true,
+    "all_17_slides_visually_reviewed": true,
+    "deck_scope": "PE-GH v1, with a v1/v2 comparison on slide 7",
+    "version_guide": "docs/VERSIONS.md",
+    "main_version_comparison_slide": 7,
+    "cover_version_label": "PE-GH v1",
+    "unchanged_slide_content_pixel_comparison": 15,
+    "changed_slides_visually_reviewed": [
+      1,
+      7
+    ]
+  }
 }

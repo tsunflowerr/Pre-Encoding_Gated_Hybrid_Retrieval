@@ -1,0 +1,26 @@
+% !TeX root = ../thesis.tex
+\chapter{Kết luận và hướng phát triển}
+\label{chap:conclusion}
+
+\section{Trả lời các câu hỏi nghiên cứu}
+Báo cáo nghiên cứu việc lựa chọn truy vấn cần truy xuất ngữ nghĩa trước bước mã hóa. Xuất phát từ sự khác nhau giữa nhu cầu của từng truy vấn, PE-GH sử dụng thông tin BM25 để phân bổ phần chi phí Dense thay vì luôn thực hiện Hybrid. Hệ thống cuối được xây dựng theo ràng buộc bộ quyết định nhẹ và được đánh giá bằng chất lượng, tỷ lệ Dense cùng chi phí đầu cuối.
+
+Câu hỏi về khả năng lựa chọn được trả lời bằng K1 và K4. Trên sáu miền xác nhận, PE-GH v2 hơn BM25-margin khoảng 0,0042 và hơn ngẫu nhiên khoảng 0,0190 \ndcg{} ở cùng ngân sách 50\%, với các giả thuyết đạt tiêu chí sau hiệu chỉnh Holm. Bằng chứng hỗ trợ giá trị riêng của bộ quyết định học trong phạm vi đó. Tuy nhiên, lợi ích trước margin nhỏ, không xuất hiện ở mọi miền và không duy trì ưu thế trên toàn bộ ngân sách.
+
+Câu hỏi về giảm Dense trong biên chất lượng được trả lời tích cực ở điểm vận hành 80\%. PE-GH đạt 0,4159 so với 0,4223 của luôn chạy Hybrid trên sáu miền xác nhận. Mức giảm khoảng 0,0064 nằm trong biên không kém 0,01 theo kiểm định đã đăng ký. Kết luận này chấp nhận mất mát có giới hạn ở mức macro, không khẳng định giữ nguyên chất lượng hoặc bảo đảm cùng biên cho mọi miền.
+
+Câu hỏi về lợi ích online được hỗ trợ bởi phiên đo trên Programmers và Unix. Tại ngân sách 50\%, độ trễ trung bình giảm từ 24,31 ms của Hybrid xuống 14,76 ms, tương ứng khoảng 39,3\% trong cùng phiên. Ở 80\%, mức giảm độ trễ trung bình khoảng 13,7\%. CPU cũng giảm, trong khi p95 và bộ nhớ không cải thiện đồng đều. Vì vậy, lợi ích vận hành được xác định theo từng điểm chất lượng và đại lượng cụ thể.
+
+Cuối cùng, v2 tốt hơn v1 trong so sánh toàn hệ thống, nhưng encoder và nhiều thành phần cùng thay đổi. Đối chiếu thăm dò với BERT và LiteGator làm rõ thêm giới hạn: PE-GH có chi phí thấp hơn BERT trong phép đo CPU, song BERT có chất lượng cao hơn ở 80\% trên sáu miền xác nhận; trước LiteGator, các CI chưa cho bằng chứng rõ về ưu thế chất lượng hoặc tốc độ của PE-GH. Những kết quả này ngăn việc mở rộng kết luận thành ưu thế trước mọi phương pháp liên quan.
+
+\section{Đóng góp và mức độ giải quyết}
+Đóng góp phương pháp của đề tài là cách lựa chọn truy vấn trước bước mã hóa, dựa trên thông tin có sẵn từ BM25. Bộ quyết định nhận biết nguy cơ BM25 thất bại và sử dụng ngân sách để điều chỉnh mức dùng Dense, với chi phí lựa chọn đủ thấp để có thể tạo ra lợi ích đầu cuối. Ý tưởng lựa chọn chiến lược truy xuất đã có trong tài liệu; đóng góp được giới hạn ở cách tiếp cận cụ thể và bằng chứng của đề tài.
+
+Đóng góp thực nghiệm là kết nối các phép so cùng ngân sách, kiểm định chất lượng và đo online có đối chiếu kết quả. Quy trình giữ riêng phát triển, xác nhận và thăm dò, đồng thời công bố hiệu ứng nhỏ, trường hợp bất lợi và những đại lượng không cải thiện. Điều này giúp người đọc đánh giá mức độ giải quyết bài toán mà không phải suy luận từ một chỉ số đơn lẻ.
+
+Phạm vi đã giải quyết là CQADupStack với hệ thống và điều kiện CPU được chốt. Báo cáo chưa chứng minh hiệu quả ngoài bộ dữ liệu, trên tải đồng thời hoặc trên phần cứng khác. Phân tích từng truy vấn v2 và độ bền trước thay đổi phân phối cũng còn cần được bổ sung. Những giới hạn này là cơ sở để xác định bước nghiên cứu tiếp theo.
+
+\section{Hướng phát triển}
+Hướng gần nhất là đánh giá phương án trả trực tiếp kết quả BM25 ở nhánh chi phí thấp, bởi phần xếp hạng bổ sung của \Pstar{} đem lại lợi ích nhỏ trên sáu miền xác nhận. Cần kiểm tra cả chất lượng và độ trễ trong cùng điều kiện trước khi kết luận đơn giản hóa có lợi. Một hướng khác là xem xét các phương pháp tìm kiếm ngữ nghĩa có chi phí thấp hơn \cite{hnsw2020}, nhằm cải thiện cả những truy vấn vẫn phải sử dụng Dense. Hướng này xuất phát từ việc thời gian của nhóm yêu cầu chậm nhất chưa giảm nhất quán khi chỉ lựa chọn bớt truy vấn.
+
+Để mở rộng mức bằng chứng, hệ thống cần được kiểm tra trên bộ dữ liệu chưa tham gia lựa chọn và trên môi trường phần cứng khác. Phân tích nội dung từng truy vấn, nhánh được chọn và chất lượng kết quả sẽ hỗ trợ tìm hiểu vì sao nhận biết BM25 thất bại chưa luôn dẫn đến lựa chọn hữu ích. Mọi thay đổi được chọn từ kết quả hiện tại cần có giao thức và tập xác nhận mới. Các hướng này tiếp tục câu hỏi của đề tài bằng những phép kiểm chứng cụ thể, thay vì xem những giới hạn đang có là kết quả đã được giải quyết.

@@ -1,5 +1,7 @@
 # Method: pre-encoding gated hybrid retrieval
 
+Scope: **PE-GH v1**. This frozen Ridge/MiniLM method remains the v1 reference. PE-GH v2 uses a logistic BM25-failure gate and arctic; see the [version guide](../docs/VERSIONS.md) and [v4 method and evidence](../docs/v4/README.md).
+
 ## Retrieval branches
 
 For query `q`, the sparse backend returns the top-100 BM25 ranking `B(q)` and lexical statistics. If the gate selects the dense branch, a pinned MiniLM query encoder runs once, FAISS returns dense top-100 `D(q)`, and the selected fusion engine constructs `H_f(q) = F_f(B(q), D(q))`. Both branches use the same canonical corpus and document IDs; self-hits are removed and score ties break by document ID. BM25's ranking is reused in fusion, so each request performs at most one sparse search.

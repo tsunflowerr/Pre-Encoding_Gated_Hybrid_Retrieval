@@ -2,6 +2,10 @@
 
 Reproducible implementation for a three-person pre-encoding gated hybrid retrieval study.
 
+Hệ hiện hành là **PE-GH v2 (vòng thực nghiệm v4)**. Các tài liệu A/B/C, Ridge/MiniLM
+và slide HTML theo bản giới thiệu v1 được giữ với phạm vi v1.
+Xem [hướng dẫn phiên bản và thay đổi cache/ngân sách](docs/VERSIONS.md) trước khi chạy lại.
+
 - [Kết quả tổng hợp PE-GH: K1–K4, online, so sánh với Arabzadeh (BERT) và LiteGator đo thật (02/11/2026)](docs/KET_QUA_TONG_HOP_PE_GH.md)
 - [PE-GH v2 (vòng v4): gate "BM25 thất bại", arctic-embed-xs, xác nhận đăng ký trước trên 6 subforum mới, online và demo (30/10/2026)](docs/v4/README.md)
 - [Nghiệm thu phần A và bảng/hình cuối 30/10/2026](docs/person_a/EXECUTION_SUMMARY.md)

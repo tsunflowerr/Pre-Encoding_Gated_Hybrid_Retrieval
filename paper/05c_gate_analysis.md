@@ -1,5 +1,7 @@
 # Gate analysis and C-side results
 
+Scope: **PE-GH v1 and its historical C-side measurements**. The current logistic/arctic system is PE-GH v2; see the [version guide](../docs/VERSIONS.md) and [v4 results](../docs/v4/README.md).
+
 All quality numbers in this section come from the strict five-fold OOF evaluator, with one test prediction for each of 1,948 queries across Programmers and Unix. The primary frozen comparison is S* versus PE-GH; H* and S* happen to coincide in every fold/domain. The tracked [C7 facts](../docs/person_c/validation/C7_FACTS.json) record method scores, input hashes, freeze identity, and figure hashes; full raw receipts remain under the ignored `results/` directory. Timing evidence is reported separately below.
 
 ## Quality at the selected operating points

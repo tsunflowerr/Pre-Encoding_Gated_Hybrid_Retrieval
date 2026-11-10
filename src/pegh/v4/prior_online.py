@@ -36,19 +36,29 @@ def log(**fields):
 
 
 def load_group(ws, domains, encoder, *, with_tiers=True):
+    from pegh.v3.cache import load_npz_cache
     from pegh.v3.pipeline import load_domain
 
     group = []
     for domain in domains:
+        feature_key = encoder
         feature_path = ws.features(encoder, domain)
         if not feature_path.exists():
+            feature_key = "minilm"
             feature_path = ws.features("minilm", domain)
-        with np.load(feature_path) as stored:
-            features = {k: stored[k] for k in stored.files}
+        features = load_npz_cache(ws, feature_key, domain, "features", feature_path)
         tiers = None
         if with_tiers and ws.tiers(encoder, domain).exists():
-            with np.load(ws.tiers(encoder, domain)) as stored:
-                tiers = {k: stored[k] for k in stored.files}
+            from pegh.v4.workspace import query_prefix
+
+            tiers = load_npz_cache(
+                ws,
+                encoder,
+                domain,
+                "tiers",
+                ws.tiers(encoder, domain),
+                prefix=query_prefix(encoder),
+            )
         group.append(load_domain(ws, domain, encoder, features, tiers))
     return group
 
@@ -463,26 +473,38 @@ def online_plan(ws, args):
             f = data.folds[fold]
             reference = np.concatenate([f["train"], f["validation"]])
             thresholds = {}
+            policies = {}
             for budget in BUDGETS:
                 name = f"pe_gh_v2_b{int(budget * 100)}"
-                thresholds[name] = float(
-                    g.quantile_threshold(v2_scores[reference], data.forced[reference], budget)
+                policies[name] = g.calibrate_budget(
+                    v2_scores[reference],
+                    data.forced[reference],
+                    [data.ids[i] for i in reference],
+                    budget,
                 )
+                thresholds[name] = policies[name].threshold
                 base_entries[name]["kwargs"].update(
                     gate_path=str(v2_gate_path),
                     expected_gate_sha256=file_hash(v2_gate_path),
                     threshold=thresholds[name],
+                    budget_policy=policies[name].to_json(),
                 )
             for prefix, scores in (("litegator", lite_scores), ("bert", bert_scores)):
                 for budget in BUDGETS:
                     name = f"{prefix}_b{int(budget * 100)}"
-                    threshold = float(
-                        g.quantile_threshold(scores[reference], data.forced[reference], budget)
+                    policies[name] = g.calibrate_budget(
+                        scores[reference],
+                        data.forced[reference],
+                        [data.ids[i] for i in reference],
+                        budget,
                     )
+                    threshold = policies[name].threshold
                     entry = copy.deepcopy(base_entries["pe_gh_v2_b30"])
                     entry["id"] = name
                     kwargs = entry["kwargs"]
-                    kwargs.update(threshold=threshold, torch_threads=4)
+                    kwargs.update(
+                        threshold=threshold, budget_policy=policies[name].to_json(), torch_threads=4
+                    )
                     kwargs.pop("gate_path", None)
                     kwargs.pop("expected_gate_sha256", None)
                     if prefix == "litegator":
@@ -511,13 +533,13 @@ def online_plan(ws, args):
                 row = row_of[qid]
                 record = {k: old["expected"][qid][k] for k in METHODS[:7]}
                 for name in METHODS[4:7]:
-                    dense = bool(data.forced[row] or v2_scores[row] > thresholds[name])
+                    dense = policies[name].use_dense(v2_scores[row], qid, bool(data.forced[row]))
                     record[f"{name}_dense"] = dense
                     record[name] = record["h_star_v2"] if dense else record["p_star"]
                 for prefix, scores in (("litegator", lite_scores), ("bert", bert_scores)):
                     for budget in BUDGETS:
                         name = f"{prefix}_b{int(budget * 100)}"
-                        dense = bool(data.forced[row] or scores[row] > thresholds[name])
+                        dense = policies[name].use_dense(scores[row], qid, bool(data.forced[row]))
                         record[f"{name}_dense"] = dense
                         record[name] = record["h_star_v2"] if dense else record["p_star"]
                 # Keep both tier utilities to report actual online quality even if parity fails.

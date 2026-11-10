@@ -1,0 +1,1153 @@
+{
+  "verified_client_date": "2026-11-10",
+  "papers": [
+    {
+      "key": "cqadupstack2015",
+      "kind": "inproceedings",
+      "title": "CQADupStack: A Benchmark Data Set for Community Question-Answering Research",
+      "authors": [
+        {
+          "family": "Hoogeveen",
+          "given": "Doris"
+        },
+        {
+          "family": "Verspoor",
+          "given": "Karin M."
+        },
+        {
+          "family": "Baldwin",
+          "given": "Timothy"
+        }
+      ],
+      "venue_abbreviated": "Proc. ADCS",
+      "venue_full": "Proceedings of the 20th Australasian Document Computing Symposium",
+      "year": "2015",
+      "doi": "10.1145/2838931.2838934",
+      "primary_url": "https://doi.org/10.1145/2838931.2838934",
+      "metadata_url": "https://api.crossref.org/works/10.1145/2838931.2838934",
+      "pages": "1-8",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Dataset and duplicate-question retrieval",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 1,
+      "cited_in": [
+        "chapters/01_gioi_thieu.tex",
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "beir2021",
+      "kind": "inproceedings",
+      "title": "BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      "authors": [
+        {
+          "given": "Nandan",
+          "family": "Thakur"
+        },
+        {
+          "given": "Nils",
+          "family": "Reimers"
+        },
+        {
+          "given": "Andreas",
+          "family": "Rücklé"
+        },
+        {
+          "given": "Abhishek",
+          "family": "Srivastava"
+        },
+        {
+          "given": "Iryna",
+          "family": "Gurevych"
+        }
+      ],
+      "venue_abbreviated": "Proc. NeurIPS Datasets Benchmarks",
+      "venue_full": "Proceedings of the Neural Information Processing Systems Track on Datasets and Benchmarks",
+      "year": "2021",
+      "primary_url": "https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/65b9eea6e1cc6bb9f0cd2a47751a186f-Abstract-round2.html",
+      "metadata_url": "https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/65b9eea6e1cc6bb9f0cd2a47751a186f-Abstract-round2.html",
+      "verification": "Conference or journal publication confirmed by official proceedings or original journal record",
+      "volume": "1",
+      "topic": "Cross-domain evaluation and strong retrieval baselines",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 2,
+      "cited_in": [
+        "chapters/01_gioi_thieu.tex",
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "querydifficulty2006",
+      "kind": "inproceedings",
+      "title": "What makes a query difficult?",
+      "authors": [
+        {
+          "family": "Carmel",
+          "given": "David"
+        },
+        {
+          "family": "Yom-Tov",
+          "given": "Elad"
+        },
+        {
+          "family": "Darlow",
+          "given": "Adam"
+        },
+        {
+          "family": "Pelleg",
+          "given": "Dan"
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM SIGIR",
+      "venue_full": "Proceedings of the 29th annual international ACM SIGIR conference on Research and development in information retrieval",
+      "year": "2006",
+      "doi": "10.1145/1148170.1148238",
+      "primary_url": "https://doi.org/10.1145/1148170.1148238",
+      "metadata_url": "https://api.crossref.org/works/10.1145/1148170.1148238",
+      "pages": "390-397",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Query difficulty varies across information needs",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 3,
+      "cited_in": [
+        "chapters/01_gioi_thieu.tex"
+      ]
+    },
+    {
+      "key": "arabzadeh2021",
+      "kind": "inproceedings",
+      "title": "Predicting Efficiency/Effectiveness Trade-offs for Dense vs. Sparse Retrieval Strategy Selection",
+      "authors": [
+        {
+          "family": "Arabzadeh",
+          "given": "Negar"
+        },
+        {
+          "family": "Yan",
+          "given": "Xinyi"
+        },
+        {
+          "family": "Clarke",
+          "given": "Charles L. A."
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM CIKM",
+      "venue_full": "Proceedings of the 30th ACM International Conference on Information &amp; Knowledge Management",
+      "year": "2021",
+      "doi": "10.1145/3459637.3482159",
+      "primary_url": "https://doi.org/10.1145/3459637.3482159",
+      "metadata_url": "https://api.crossref.org/works/10.1145/3459637.3482159",
+      "pages": "2862-2866",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Per-query sparse/dense/hybrid strategy selection",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 4,
+      "cited_in": [
+        "chapters/01_gioi_thieu.tex",
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "bm25_2009",
+      "kind": "article",
+      "title": "The Probabilistic Relevance Framework: BM25 and Beyond",
+      "authors": [
+        {
+          "family": "Robertson",
+          "given": "Stephen"
+        },
+        {
+          "family": "Zaragoza",
+          "given": "Hugo"
+        }
+      ],
+      "venue_abbreviated": "Found. Trends Inf. Retr.",
+      "venue_full": "Foundations and Trends® in Information Retrieval",
+      "year": "2009",
+      "doi": "10.1561/1500000019",
+      "primary_url": "https://www.nowpublishers.com/article/Details/INR-019",
+      "metadata_url": "https://api.crossref.org/works/10.1561/1500000019",
+      "pages": "333-389",
+      "volume": "3",
+      "number": "4",
+      "verification": "Original journal PDF confirms vol. 3, no. 4, pp. 333-389; overrides inconsistent migrated Crossref fields",
+      "additional_source": "https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf",
+      "topic": "Probabilistic lexical retrieval and BM25",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 5,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "sbert2019",
+      "kind": "inproceedings",
+      "title": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
+      "authors": [
+        {
+          "family": "Reimers",
+          "given": "Nils"
+        },
+        {
+          "family": "Gurevych",
+          "given": "Iryna"
+        }
+      ],
+      "venue_abbreviated": "Proc. EMNLP-IJCNLP",
+      "venue_full": "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+      "year": "2019",
+      "doi": "10.18653/v1/d19-1410",
+      "primary_url": "https://doi.org/10.18653/v1/d19-1410",
+      "metadata_url": "https://api.crossref.org/works/10.18653/v1/D19-1410",
+      "pages": "3980-3990",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Independent sentence encoding for semantic similarity",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 6,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "dpr2020",
+      "kind": "inproceedings",
+      "title": "Dense Passage Retrieval for Open-Domain Question Answering",
+      "authors": [
+        {
+          "family": "Karpukhin",
+          "given": "Vladimir"
+        },
+        {
+          "family": "Oguz",
+          "given": "Barlas"
+        },
+        {
+          "family": "Min",
+          "given": "Sewon"
+        },
+        {
+          "family": "Lewis",
+          "given": "Patrick"
+        },
+        {
+          "family": "Wu",
+          "given": "Ledell"
+        },
+        {
+          "family": "Edunov",
+          "given": "Sergey"
+        },
+        {
+          "family": "Chen",
+          "given": "Danqi"
+        },
+        {
+          "family": "Yih",
+          "given": "Wen-tau"
+        }
+      ],
+      "venue_abbreviated": "Proc. EMNLP",
+      "venue_full": "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+      "year": "2020",
+      "doi": "10.18653/v1/2020.emnlp-main.550",
+      "primary_url": "https://doi.org/10.18653/v1/2020.emnlp-main.550",
+      "metadata_url": "https://api.crossref.org/works/10.18653/v1/2020.emnlp-main.550",
+      "pages": "6769-6781",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Bi-encoder dense passage retrieval",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 7,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "faiss2021",
+      "kind": "article",
+      "title": "Billion-Scale Similarity Search with GPUs",
+      "authors": [
+        {
+          "family": "Johnson",
+          "given": "Jeff"
+        },
+        {
+          "family": "Douze",
+          "given": "Matthijs"
+        },
+        {
+          "given": "Hervé",
+          "family": "Jégou"
+        }
+      ],
+      "venue_abbreviated": "IEEE Trans. Big Data",
+      "venue_full": "IEEE Transactions on Big Data",
+      "year": "2021",
+      "doi": "10.1109/tbdata.2019.2921572",
+      "primary_url": "https://doi.org/10.1109/tbdata.2019.2921572",
+      "metadata_url": "https://api.crossref.org/works/10.1109/TBDATA.2019.2921572",
+      "pages": "535-547",
+      "volume": "7",
+      "number": "3",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref; journal issue is July 2021, online publication was June 2019",
+      "topic": "Vector similarity search infrastructure",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 8,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "preqpp2008",
+      "kind": "inproceedings",
+      "title": "A survey of pre-retrieval query performance predictors",
+      "authors": [
+        {
+          "family": "Hauff",
+          "given": "Claudia"
+        },
+        {
+          "family": "Hiemstra",
+          "given": "Djoerd"
+        },
+        {
+          "family": "de Jong",
+          "given": "Franciska"
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM CIKM",
+      "venue_full": "Proceedings of the 17th ACM conference on Information and knowledge management",
+      "year": "2008",
+      "doi": "10.1145/1458082.1458311",
+      "primary_url": "https://doi.org/10.1145/1458082.1458311",
+      "metadata_url": "https://api.crossref.org/works/10.1145/1458082.1458311",
+      "pages": "1419-1420",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Pre-retrieval query performance predictors",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 9,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "clarity2002",
+      "kind": "inproceedings",
+      "title": "Predicting query performance",
+      "authors": [
+        {
+          "family": "Cronen-Townsend",
+          "given": "Steve"
+        },
+        {
+          "family": "Zhou",
+          "given": "Yun"
+        },
+        {
+          "family": "Croft",
+          "given": "W. Bruce"
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM SIGIR",
+      "venue_full": "Proceedings of the 25th annual international ACM SIGIR conference on Research and development in information retrieval",
+      "year": "2002",
+      "doi": "10.1145/564376.564429",
+      "primary_url": "https://doi.org/10.1145/564376.564429",
+      "metadata_url": "https://api.crossref.org/works/10.1145/564376.564429",
+      "pages": "299-306",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Post-retrieval query performance prediction",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 10,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "qpp2023",
+      "kind": "inproceedings",
+      "title": "Query Performance Prediction for Neural IR: Are We There Yet?",
+      "authors": [
+        {
+          "family": "Faggioli",
+          "given": "Guglielmo"
+        },
+        {
+          "family": "Formal",
+          "given": "Thibault"
+        },
+        {
+          "family": "Marchesin",
+          "given": "Stefano"
+        },
+        {
+          "family": "Clinchant",
+          "given": "Stéphane"
+        },
+        {
+          "family": "Ferro",
+          "given": "Nicola"
+        },
+        {
+          "family": "Piwowarski",
+          "given": "Benjamin"
+        }
+      ],
+      "venue_abbreviated": "Proc. ECIR",
+      "venue_full": "Lecture Notes in Computer Science / Advances in Information Retrieval",
+      "year": "2023",
+      "doi": "10.1007/978-3-031-28244-7_15",
+      "primary_url": "https://doi.org/10.1007/978-3-031-28244-7_15",
+      "metadata_url": "https://api.crossref.org/works/10.1007/978-3-031-28244-7_15",
+      "pages": "232-248",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "additional_source": "https://link.springer.com/chapter/10.1007/978-3-031-28244-7_15",
+      "topic": "Limits of query performance prediction for neural retrieval",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 11,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "wig2007",
+      "kind": "inproceedings",
+      "title": "Query performance prediction in web search environments",
+      "authors": [
+        {
+          "family": "Zhou",
+          "given": "Yun"
+        },
+        {
+          "family": "Croft",
+          "given": "W. Bruce"
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM SIGIR",
+      "venue_full": "Proceedings of the 30th annual international ACM SIGIR conference on Research and development in information retrieval",
+      "year": "2007",
+      "doi": "10.1145/1277741.1277835",
+      "primary_url": "https://doi.org/10.1145/1277741.1277835",
+      "metadata_url": "https://api.crossref.org/works/10.1145/1277741.1277835",
+      "pages": "543-550",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Weighted information gain and web query prediction",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 12,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "querydrift2012",
+      "kind": "article",
+      "title": "Predicting Query Performance by Query-Drift Estimation",
+      "authors": [
+        {
+          "family": "Shtok",
+          "given": "Anna"
+        },
+        {
+          "family": "Kurland",
+          "given": "Oren"
+        },
+        {
+          "family": "Carmel",
+          "given": "David"
+        },
+        {
+          "family": "Raiber",
+          "given": "Fiana"
+        },
+        {
+          "family": "Markovits",
+          "given": "Gad"
+        }
+      ],
+      "venue_abbreviated": "ACM Trans. Inf. Syst.",
+      "venue_full": "ACM Transactions on Information Systems",
+      "year": "2012",
+      "doi": "10.1145/2180868.2180873",
+      "primary_url": "https://doi.org/10.1145/2180868.2180873",
+      "metadata_url": "https://api.crossref.org/works/10.1145/2180868.2180873",
+      "pages": "1-35",
+      "volume": "30",
+      "number": "2",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Score dispersion and query-drift prediction",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 13,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "litegator2025",
+      "kind": "inproceedings",
+      "title": "LiteGator: A Lightweight and Budget-Aware Retriever Routing Framework for Low-Resource Question Answering",
+      "authors": [
+        {
+          "family": "Darmanto",
+          "given": "Ar-Razy Muhammad"
+        },
+        {
+          "family": "Atimi",
+          "given": "Rizqia Lestika"
+        }
+      ],
+      "venue_abbreviated": "Proc. iCAST-ES",
+      "venue_full": "Advances in Engineering Research / Proceedings of the International Conference on Applied Science and Technology on Engineering Science 2025 (iCAST-ES 2025)",
+      "year": "2025",
+      "doi": "10.2991/978-94-6463-926-1_77",
+      "primary_url": "https://doi.org/10.2991/978-94-6463-926-1_77",
+      "metadata_url": "https://api.crossref.org/works/10.2991/978-94-6463-926-1_77",
+      "pages": "687-695",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "additional_source": "https://www.atlantis-press.com/proceedings/icast-es-25/126020510",
+      "topic": "Low-cost linear retriever routing",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 14,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "ance2021",
+      "kind": "inproceedings",
+      "title": "Approximate Nearest Neighbor Negative Contrastive Learning for Dense Text Retrieval",
+      "authors": [
+        {
+          "given": "Lee",
+          "family": "Xiong"
+        },
+        {
+          "given": "Chenyan",
+          "family": "Xiong"
+        },
+        {
+          "given": "Ye",
+          "family": "Li"
+        },
+        {
+          "given": "Kwok-Fung",
+          "family": "Tang"
+        },
+        {
+          "given": "Jialin",
+          "family": "Liu"
+        },
+        {
+          "given": "Paul",
+          "family": "Bennett"
+        },
+        {
+          "given": "Junaid",
+          "family": "Ahmed"
+        },
+        {
+          "given": "Arnold",
+          "family": "Overwijk"
+        }
+      ],
+      "venue_abbreviated": "Proc. ICLR",
+      "venue_full": "International Conference on Learning Representations",
+      "year": "2021",
+      "primary_url": "https://openreview.net/forum?id=zeFrfgyZln",
+      "metadata_url": "https://openreview.net/forum?id=zeFrfgyZln",
+      "verification": "ICLR 2021 venue and author list confirmed on the authors organization publication page (Microsoft Research); official OpenReview record identified.",
+      "additional_source": "https://www.microsoft.com/en-us/research/publication/approximate-nearest-neighbor-negative-contrastive-learning-for-dense-text-retrieval/",
+      "topic": "Training dense retrieval with hard negatives",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 15,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "contriever2022",
+      "kind": "article",
+      "title": "Unsupervised Dense Information Retrieval with Contrastive Learning",
+      "authors": [
+        {
+          "given": "Gautier",
+          "family": "Izacard"
+        },
+        {
+          "given": "Mathilde",
+          "family": "Caron"
+        },
+        {
+          "given": "Lucas",
+          "family": "Hosseini"
+        },
+        {
+          "given": "Sebastian",
+          "family": "Riedel"
+        },
+        {
+          "given": "Piotr",
+          "family": "Bojanowski"
+        },
+        {
+          "given": "Armand",
+          "family": "Joulin"
+        },
+        {
+          "given": "Edouard",
+          "family": "Grave"
+        }
+      ],
+      "venue_abbreviated": "Trans. Mach. Learn. Res.",
+      "venue_full": "Transactions on Machine Learning Research",
+      "year": "2022",
+      "primary_url": "https://openreview.net/forum?id=jKN1pXi7b0",
+      "metadata_url": "https://openreview.net/forum?id=jKN1pXi7b0",
+      "verification": "TMLR 2022 journal identity and author list cross-checked in ML Anthology; official OpenReview permalink identified, but publisher browser verification prevented direct page reading.",
+      "additional_source": "https://mlanthology.org/tmlr/2022/izacard2022tmlr-unsupervised/",
+      "topic": "Contrastive retrieval without labeled target-domain training",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 16,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "rrf2009",
+      "kind": "inproceedings",
+      "title": "Reciprocal rank fusion outperforms condorcet and individual rank learning methods",
+      "authors": [
+        {
+          "family": "Cormack",
+          "given": "Gordon V."
+        },
+        {
+          "family": "Clarke",
+          "given": "Charles L A"
+        },
+        {
+          "given": "Stefan",
+          "family": "Büttcher"
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM SIGIR",
+      "venue_full": "Proceedings of the 32nd international ACM SIGIR conference on Research and development in information retrieval",
+      "year": "2009",
+      "doi": "10.1145/1571941.1572114",
+      "primary_url": "https://doi.org/10.1145/1571941.1572114",
+      "metadata_url": "https://api.crossref.org/works/10.1145/1571941.1572114",
+      "pages": "758-759",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Rank-based fusion",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 17,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "bruch2023",
+      "kind": "article",
+      "title": "An Analysis of Fusion Functions for Hybrid Retrieval",
+      "authors": [
+        {
+          "family": "Bruch",
+          "given": "Sebastian"
+        },
+        {
+          "family": "Gai",
+          "given": "Siyu"
+        },
+        {
+          "family": "Ingber",
+          "given": "Amir"
+        }
+      ],
+      "venue_abbreviated": "ACM Trans. Inf. Syst.",
+      "venue_full": "ACM Transactions on Information Systems",
+      "year": "2024",
+      "doi": "10.1145/3596512",
+      "primary_url": "https://doi.org/10.1145/3596512",
+      "metadata_url": "https://api.crossref.org/works/10.1145/3596512",
+      "pages": "1-35",
+      "volume": "42",
+      "number": "1",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref; journal issue is Jan. 2024, online publication was Aug. 2023",
+      "topic": "Convex combination and reciprocal-rank fusion",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 18,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "colbert2020",
+      "kind": "inproceedings",
+      "title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT",
+      "authors": [
+        {
+          "family": "Khattab",
+          "given": "Omar"
+        },
+        {
+          "family": "Zaharia",
+          "given": "Matei"
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM SIGIR",
+      "venue_full": "Proceedings of the 43rd International ACM SIGIR Conference on Research and Development in Information Retrieval",
+      "year": "2020",
+      "doi": "10.1145/3397271.3401075",
+      "primary_url": "https://doi.org/10.1145/3397271.3401075",
+      "metadata_url": "https://api.crossref.org/works/10.1145/3397271.3401075",
+      "pages": "39-48",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Late interaction as an alternative retrieval design",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 19,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "colbertv2_2022",
+      "kind": "inproceedings",
+      "title": "ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction",
+      "authors": [
+        {
+          "family": "Santhanam",
+          "given": "Keshav"
+        },
+        {
+          "family": "Khattab",
+          "given": "Omar"
+        },
+        {
+          "family": "Saad-Falcon",
+          "given": "Jon"
+        },
+        {
+          "family": "Potts",
+          "given": "Christopher"
+        },
+        {
+          "family": "Zaharia",
+          "given": "Matei"
+        }
+      ],
+      "venue_abbreviated": "Proc. NAACL-HLT",
+      "venue_full": "Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+      "year": "2022",
+      "doi": "10.18653/v1/2022.naacl-main.272",
+      "primary_url": "https://doi.org/10.18653/v1/2022.naacl-main.272",
+      "metadata_url": "https://api.crossref.org/works/10.18653/v1/2022.naacl-main.272",
+      "pages": "3715-3734",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Efficient late interaction and representation compression",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 20,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "splade2021",
+      "kind": "inproceedings",
+      "title": "SPLADE: Sparse Lexical and Expansion Model for First Stage Ranking",
+      "authors": [
+        {
+          "family": "Formal",
+          "given": "Thibault"
+        },
+        {
+          "family": "Piwowarski",
+          "given": "Benjamin"
+        },
+        {
+          "family": "Clinchant",
+          "given": "Stéphane"
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM SIGIR",
+      "venue_full": "Proceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+      "year": "2021",
+      "doi": "10.1145/3404835.3463098",
+      "primary_url": "https://doi.org/10.1145/3404835.3463098",
+      "metadata_url": "https://api.crossref.org/works/10.1145/3404835.3463098",
+      "pages": "2288-2292",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Learned sparse retrieval as an alternative to BM25",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 21,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "beir_resources2024",
+      "kind": "inproceedings",
+      "title": "Resources for Brewing BEIR: Reproducible Reference Models and Statistical Analyses",
+      "authors": [
+        {
+          "family": "Kamalloo",
+          "given": "Ehsan"
+        },
+        {
+          "family": "Thakur",
+          "given": "Nandan"
+        },
+        {
+          "family": "Lassance",
+          "given": "Carlos"
+        },
+        {
+          "family": "Ma",
+          "given": "Xueguang"
+        },
+        {
+          "family": "Yang",
+          "given": "Jheng-Hong"
+        },
+        {
+          "family": "Lin",
+          "given": "Jimmy"
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM SIGIR",
+      "venue_full": "Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval",
+      "year": "2024",
+      "doi": "10.1145/3626772.3657862",
+      "primary_url": "https://doi.org/10.1145/3626772.3657862",
+      "metadata_url": "https://api.crossref.org/works/10.1145/3626772.3657862",
+      "pages": "1431-1440",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Reproducible baselines and interpretation across datasets",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 22,
+      "cited_in": [
+        "chapters/02_co_so_va_nghien_cuu_lien_quan.tex"
+      ]
+    },
+    {
+      "key": "bm25_variants2020",
+      "kind": "inproceedings",
+      "title": "Which BM25 Do You Mean? A Large-Scale Reproducibility Study of Scoring Variants",
+      "authors": [
+        {
+          "family": "Kamphuis",
+          "given": "Chris"
+        },
+        {
+          "family": "de Vries",
+          "given": "Arjen P."
+        },
+        {
+          "family": "Boytsov",
+          "given": "Leonid"
+        },
+        {
+          "family": "Lin",
+          "given": "Jimmy"
+        }
+      ],
+      "venue_abbreviated": "Proc. ECIR",
+      "venue_full": "Lecture Notes in Computer Science / Advances in Information Retrieval",
+      "year": "2020",
+      "doi": "10.1007/978-3-030-45442-5_4",
+      "primary_url": "https://doi.org/10.1007/978-3-030-45442-5_4",
+      "metadata_url": "https://api.crossref.org/works/10.1007/978-3-030-45442-5_4",
+      "pages": "28-34",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Baseline implementation reproducibility",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 23,
+      "cited_in": [
+        "chapters/04_thiet_ke_thuc_nghiem.tex"
+      ]
+    },
+    {
+      "key": "minilm2020",
+      "kind": "inproceedings",
+      "title": "MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers",
+      "authors": [
+        {
+          "given": "Wenhui",
+          "family": "Wang"
+        },
+        {
+          "given": "Furu",
+          "family": "Wei"
+        },
+        {
+          "given": "Li",
+          "family": "Dong"
+        },
+        {
+          "given": "Hangbo",
+          "family": "Bao"
+        },
+        {
+          "given": "Nan",
+          "family": "Yang"
+        },
+        {
+          "given": "Ming",
+          "family": "Zhou"
+        }
+      ],
+      "venue_abbreviated": "Adv. Neural Inf. Process. Syst. (NeurIPS)",
+      "venue_full": "Advances in Neural Information Processing Systems",
+      "year": "2020",
+      "primary_url": "https://proceedings.neurips.cc/paper/2020/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html",
+      "metadata_url": "https://proceedings.neurips.cc/paper/2020/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html",
+      "verification": "Conference or journal publication confirmed by official proceedings or original journal record",
+      "volume": "33",
+      "pages": "5776-5788",
+      "topic": "Compact pretrained transformer models",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 24,
+      "cited_in": [
+        "chapters/04_thiet_ke_thuc_nghiem.tex"
+      ]
+    },
+    {
+      "key": "bert2019",
+      "kind": "inproceedings",
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "authors": [
+        {
+          "family": "Devlin",
+          "given": "Jacob"
+        },
+        {
+          "family": "Chang",
+          "given": "Ming-Wei"
+        },
+        {
+          "family": "Lee",
+          "given": "Kenton"
+        },
+        {
+          "family": "Toutanova",
+          "given": "Kristina"
+        }
+      ],
+      "venue_abbreviated": "Proc. NAACL-HLT",
+      "venue_full": "Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)",
+      "year": "2019",
+      "doi": "10.18653/v1/n19-1423",
+      "primary_url": "https://doi.org/10.18653/v1/n19-1423",
+      "metadata_url": "https://api.crossref.org/works/10.18653/v1/N19-1423",
+      "pages": "4171-4186",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Pretrained transformer basis of the BERT router",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 25,
+      "cited_in": [
+        "chapters/04_thiet_ke_thuc_nghiem.tex"
+      ]
+    },
+    {
+      "key": "ndcg2002",
+      "kind": "article",
+      "title": "Cumulated gain-based evaluation of IR techniques",
+      "authors": [
+        {
+          "family": "Järvelin",
+          "given": "Kalervo"
+        },
+        {
+          "family": "Kekäläinen",
+          "given": "Jaana"
+        }
+      ],
+      "venue_abbreviated": "ACM Trans. Inf. Syst.",
+      "venue_full": "ACM Transactions on Information Systems",
+      "year": "2002",
+      "doi": "10.1145/582415.582418",
+      "primary_url": "https://doi.org/10.1145/582415.582418",
+      "metadata_url": "https://api.crossref.org/works/10.1145/582415.582418",
+      "pages": "422-446",
+      "volume": "20",
+      "number": "4",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Gain-based ranking evaluation",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 26,
+      "cited_in": [
+        "chapters/04_thiet_ke_thuc_nghiem.tex"
+      ]
+    },
+    {
+      "key": "smucker2007",
+      "kind": "inproceedings",
+      "title": "A comparison of statistical significance tests for information retrieval evaluation",
+      "authors": [
+        {
+          "family": "Smucker",
+          "given": "Mark D."
+        },
+        {
+          "family": "Allan",
+          "given": "James"
+        },
+        {
+          "family": "Carterette",
+          "given": "Ben"
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM CIKM",
+      "venue_full": "Proceedings of the sixteenth ACM conference on Conference on information and knowledge management",
+      "year": "2007",
+      "doi": "10.1145/1321440.1321528",
+      "primary_url": "https://doi.org/10.1145/1321440.1321528",
+      "metadata_url": "https://api.crossref.org/works/10.1145/1321440.1321528",
+      "pages": "623-632",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Paired statistical tests in retrieval evaluation",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 27,
+      "cited_in": [
+        "chapters/04_thiet_ke_thuc_nghiem.tex"
+      ]
+    },
+    {
+      "key": "urbano2019",
+      "kind": "inproceedings",
+      "title": "Statistical Significance Testing in Information Retrieval: An Empirical Analysis of Type I, Type II and Type III Errors",
+      "authors": [
+        {
+          "family": "Urbano",
+          "given": "Julián"
+        },
+        {
+          "family": "Lima",
+          "given": "Harlley"
+        },
+        {
+          "family": "Hanjalic",
+          "given": "Alan"
+        }
+      ],
+      "venue_abbreviated": "Proc. ACM SIGIR",
+      "venue_full": "Proceedings of the 42nd International ACM SIGIR Conference on Research and Development in Information Retrieval",
+      "year": "2019",
+      "doi": "10.1145/3331184.3331259",
+      "primary_url": "https://doi.org/10.1145/3331184.3331259",
+      "metadata_url": "https://api.crossref.org/works/10.1145/3331184.3331259",
+      "pages": "505-514",
+      "volume": "",
+      "number": "",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Reliability and errors of significance testing in IR",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 28,
+      "cited_in": [
+        "chapters/04_thiet_ke_thuc_nghiem.tex"
+      ]
+    },
+    {
+      "key": "holm1979",
+      "kind": "article",
+      "title": "A Simple Sequentially Rejective Multiple Test Procedure",
+      "authors": [
+        {
+          "given": "Sture",
+          "family": "Holm"
+        }
+      ],
+      "venue_abbreviated": "Scand. J. Stat.",
+      "venue_full": "Scandinavian Journal of Statistics",
+      "year": "1979",
+      "primary_url": "https://www.jstor.org/stable/4615733",
+      "metadata_url": "https://www.jstor.org/stable/4615733",
+      "verification": "Original Wiley/JSTOR journal cover indexed from a university-hosted scan confirms vol. 6, no. 2, pp. 65-70 and the JSTOR stable record.",
+      "volume": "6",
+      "number": "2",
+      "pages": "65-70",
+      "additional_source": "https://www.ime.usp.br/~abe/lista/pdf4R8xPVzCnX.pdf",
+      "topic": "Family-wise error control for K1-K4",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 29,
+      "cited_in": [
+        "chapters/04_thiet_ke_thuc_nghiem.tex"
+      ]
+    },
+    {
+      "key": "hnsw2020",
+      "kind": "article",
+      "title": "Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs",
+      "authors": [
+        {
+          "family": "Malkov",
+          "given": "Yu A."
+        },
+        {
+          "family": "Yashunin",
+          "given": "D. A."
+        }
+      ],
+      "venue_abbreviated": "IEEE Trans. Pattern Anal. Mach. Intell.",
+      "venue_full": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+      "year": "2020",
+      "doi": "10.1109/tpami.2018.2889473",
+      "primary_url": "https://doi.org/10.1109/tpami.2018.2889473",
+      "metadata_url": "https://api.crossref.org/works/10.1109/TPAMI.2018.2889473",
+      "pages": "824-836",
+      "volume": "42",
+      "number": "4",
+      "verification": "Publisher-deposited DOI metadata checked through Crossref",
+      "topic": "Approximate vector search as future work",
+      "verified_client_date": "2026-11-10",
+      "citation_number": 30,
+      "cited_in": [
+        "chapters/06_ket_luan.tex"
+      ]
+    }
+  ],
+  "removed_entries": {
+    "pegh2026": "Internal project record, not an external publication",
+    "arctic2024": "Model card, not a conference/journal paper"
+  },
+  "bibliography_style": {
+    "name": "IEEEtran",
+    "version": "1.14",
+    "source": "https://mirrors.ctan.org/macros/latex/contrib/IEEEtran/bibtex/IEEEtran.bst",
+    "sha256": "314f0ece704568faf827011bac498650691b2b5ee06320720830e782416d5a5f"
+  },
+  "notes": "Only bibliographic metadata is archived; no article text or abstract is reproduced. The numeric experiment evidence remains separate from the literature bibliography."
+}

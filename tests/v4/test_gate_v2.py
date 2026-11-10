@@ -54,6 +54,90 @@ def test_budget_routing_is_exact_and_threshold_matches_quantile():
     assert (forced | (score > t)).sum() == 3
 
 
+@pytest.mark.parametrize("budget", [0.0, 0.25, 0.5, 0.8, 1.0])
+@pytest.mark.parametrize("scores", [[1.0, 1.0, 1.0, 1.0], [2.0, 1.0, 1.0, 0.0]])
+def test_serialized_budget_policy_matches_exact_routing_including_ties(budget, scores):
+    import json
+
+    score = np.asarray(scores)
+    forced = np.array([False, True, False, False])
+    ids = ["unix:q4", "unix:q3", "unix:q2", "unix:q1"]
+    policy = g.BudgetPolicy.from_json(
+        json.loads(
+            json.dumps(g.calibrate_budget(score, forced, ids, budget).to_json(), allow_nan=False)
+        )
+    )
+    observed = [policy.use_dense(s, q, bool(f)) for s, q, f in zip(score, ids, forced, strict=True)]
+    np.testing.assert_array_equal(observed, g.route_top(score, forced, ids, budget))
+    assert policy.forced_count == 1 and policy.calibration_count == 4
+
+
+def test_scalar_threshold_rejects_boundary_ties_and_policy_does_not_skip_everything():
+    score, forced, ids = np.ones(4), np.zeros(4, dtype=bool), ["q4", "q2", "q3", "q1"]
+    with pytest.raises(ValueError, match="boundary scores tie"):
+        g.quantile_threshold(score, forced, 0.5)
+    policy = g.calibrate_budget(score, forced, ids, 0.5)
+    assert [q for q in ids if policy.use_dense(1.0, q)] == ["q2", "q1"]
+
+
+@pytest.mark.parametrize("budget", [-0.1, 1.1, np.nan, np.inf, True])
+def test_invalid_budgets_fail_before_routing(budget):
+    scores, forced, ids = np.ones(4), np.zeros(4, dtype=bool), ["q1", "q2", "q3", "q4"]
+    for call in (
+        lambda: g.route_top(scores, forced, ids, budget),
+        lambda: g.quantile_threshold(scores, forced, budget),
+        lambda: g.calibrate_budget(scores, forced, ids, budget),
+    ):
+        with pytest.raises(ValueError, match="budget"):
+            call()
+
+
+def test_forced_queries_define_a_floor_above_requested_budget():
+    forced = np.array([True, True, True, False])
+    policy = g.calibrate_budget(np.ones(4), forced, ["q1", "q2", "q3", "q4"], 0.5)
+    assert sum(policy.use_dense(1.0, f"q{i + 1}", bool(f)) for i, f in enumerate(forced)) == 3
+    assert policy.forced_count / policy.calibration_count > policy.budget
+
+
+def test_online_search_uses_the_same_tie_policy():
+    from types import SimpleNamespace
+
+    from contracts.types import FeatureVector, Hit, Query, Ranking
+    from pegh.v4.online import V2SearchMethod
+
+    ids = ["unix:q1", "unix:q2", "unix:q3", "unix:q4"]
+    policy = g.calibrate_budget(np.ones(4), np.zeros(4, dtype=bool), ids, 0.5)
+
+    def ranking(q):
+        return Ranking(q.query_id, "unix", (Hit("unix:d1", 1.0, 1),), "c", "r")
+
+    sparse = SimpleNamespace(
+        manifest={"domain": "unix"},
+        search=lambda q, k: ranking(q),
+        query_stats=lambda q: SimpleNamespace(token_count=2, oov_ratio=0.0),
+    )
+    method = V2SearchMethod(
+        "gated",
+        sparse,
+        trace=None,
+        provenance={},
+        scorer="gate_v2",
+        threshold=policy.threshold,
+        budget_policy=policy.to_json(),
+        stats=None,
+        gate=SimpleNamespace(score=lambda *args: np.ones(1)),
+        extractor=SimpleNamespace(transform=lambda *args: FeatureVector((1.0,), "s")),
+    )
+    method.full = lambda q, r: r
+    method.cheap = lambda q, r: r
+    assert [method.search(Query(q, "unix", "test query")).use_dense for q in ids] == [
+        True,
+        True,
+        False,
+        False,
+    ]
+
+
 def test_fixed_tiers_prefers_earliest_on_ties():
     u = {"cc_alpha_0.1": np.ones(3), "rrf": np.ones(3), "bm25": np.zeros(3)}
     for a in range(2, 10):

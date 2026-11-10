@@ -1,5 +1,7 @@
 # PE-GH v2 (vòng v4) — cập nhật 01/11/2026
 
+Biên nhận và số liệu trong tài liệu này thuộc các lượt thực nghiệm đã đóng băng. Mã cập nhật 07/11/2026 bổ sung xác minh cache và chính sách phá hòa ngân sách; xem [hướng dẫn phiên bản và chạy lại](../VERSIONS.md). Không gán số liệu lịch sử cho bản mã mới khi chưa đo lại.
+
 **Tóm tắt.** PE-GH v2 giữ nguyên ý tưởng của PE-GH: chạy BM25 trước, gate rẻ quyết định, chỉ encode khi cần. Bốn thay đổi:
 
 - gate học dự đoán **"BM25 có thất bại không"**, trên nhiều domain cùng lúc;
@@ -409,7 +411,7 @@ Demo dùng đúng gate đã đóng băng; ngưỡng là phân vị ngân sách v
    - Rõ hơn ở mức dự đoán: AUC 0,76 so với 0,67.
 2. **PE-GH v2 giữ chất lượng của H\* trong biên 0,01 mà bỏ 20% lượt encode** (K2). Có một mất mát nhỏ, đo được: −0,006.
 3. **PE-GH v2 hơn PE-GH v1 +0,069** (K3), chủ yếu nhờ chọn encoder đúng với cùng chi phí. Online: cùng độ trễ, cao hơn 0,062.
-4. **Ngân sách encode là núm chỉnh tin được.** Ngưỡng phân vị lấy trên query không nhãn cho đúng tỷ lệ encode trên domain mới (79,9–80,2%) và online (30,1 / 50,1 / 79,9%).
+4. **Ngân sách encode là mục tiêu hiệu chỉnh.** Tỷ lệ quan sát trong receipt là 79,9–80,2% trên domain mới và 30,1 / 50,1 / 79,9% online. Ngưỡng trên query không nhãn không bảo đảm tỷ lệ này cho mọi phân phối query tương lai; forced encode đặt ra một mức tối thiểu.
 
 **Không được hỗ trợ hoặc cần nói rõ:**
 

@@ -1,5 +1,7 @@
 # Giới thiệu đề tài PE-GH
 
+Phạm vi tài liệu: **PE-GH v1**, Gate Ridge và encoder MiniLM trên hai miền. Hệ PE-GH v2 hiện hành dùng logistic/arctic; xem [hướng dẫn phiên bản](VERSIONS.md).
+
 ## 1. Giới thiệu bài toán
 
 Trong quá trình học và làm việc với lập trình, phần mềm hay hệ điều hành, nhiều người gặp những vấn đề đã từng được hỏi trước đó. Tuy nhiên, cùng một vấn đề có thể được diễn đạt theo nhiều cách khác nhau, nên việc tìm lại câu hỏi phù hợp không phải lúc nào cũng dễ.

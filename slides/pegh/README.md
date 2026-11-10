@@ -4,10 +4,35 @@ Mở **PE_GH_SLIDES.html** trong Edge, Chrome hoặc Firefox để trình chiế
 toàn bộ CSS, JavaScript, logo, hình minh họa và sơ đồ, chạy offline, không cần cài
 thư viện hay tải font.
 
-Bộ slide gồm **17 trang**, tỷ lệ **16:9**, dùng nội dung từ
-`GIOI_THIEU_DE_TAI_PE_GH.md` mới nhất. Bản `_v1.md` là lịch sử, không phải nguồn chính.
+Bộ slide gồm **17 trang**, tỷ lệ **16:9**, dùng
+`GIOI_THIEU_DE_TAI_PE_GH_v1.md` làm nguồn đối chiếu chính cho phần giới thiệu.
+`GIOI_THIEU_DE_TAI_PE_GH.md`, protocol, paper và receipt của dự án cung cấp các
+chi tiết triển khai, ngưỡng định lượng và số liệu thực nghiệm bổ sung.
+Trang bìa ghi **PE-GH v1**. Slide 7 đối chiếu v1 với hệ **PE-GH v2 (vòng v4)**;
+các trang phương pháp và kết quả phía sau giữ phạm vi v1. Hướng dẫn toàn repo nằm ở
+[`docs/VERSIONS.md`](../../docs/VERSIONS.md). Số liệu cũ không được gán cho model v2.
 Mạch trình bày: bài toán → giả thuyết → đề xuất và đóng góp → phạm vi, tiêu chí →
-phương pháp → đánh giá → kết quả → giới hạn → kết luận và tài liệu.
+phương pháp → thiết kế thực nghiệm → chất lượng và hiệu quả xử lý → phạm vi và tổng kết.
+
+## Đối chiếu nội dung với bản v1
+
+| Mục trong v1 | Slide bao quát |
+|---|---|
+| 1. Bài toán, đầu vào/đầu ra, CPU và phạm vi truy xuất câu hỏi | 3–6 |
+| 2. CQADupStack, hai miền, tiêu đề/mô tả và số lượng dữ liệu | 8 |
+| 3. BM25, Dense, Hybrid và chi phí xử lý | 4, 10 |
+| 4. Gate, đặc trưng, hai nhánh, Ridge học lợi ích từ train | 5–6, 10–11 |
+| 5. Mục tiêu, thành phần có sẵn, đóng góp và phạm vi áp dụng | 7, 9, 15–16 |
+| 6. Bốn phương pháp, chất lượng/độ trễ/chi phí và Gate đối chứng | 12–14 |
+
+**Phần bổ sung ngoài v1:** top-100, 21 đặc trưng, H*/S*, các ngưỡng đăng ký,
+kết quả OOF, đo latency và phân tích lỗi. Những chi tiết này có nguồn ở paper,
+protocol và receipt; không coi chúng là các kết quả đã được viết trong v1.
+Mục thời gian CPU thực tế ở slide 12 là tiêu chí trong thiết kế đánh giá; các số đo
+runtime đang trình bày ở slide 14 chỉ gồm H*, S* và PE-GH trong cùng lượt máy.
+
+Các tiêu đề cuối dùng tên chủ đề: **Thiết kế thực nghiệm**, **Chất lượng truy xuất**,
+**Hiệu quả xử lý trên CPU**, **Phạm vi và hạn chế**, **Tổng kết đề tài**.
 
 ## Mẫu thiết kế
 
@@ -72,6 +97,8 @@ Chỉ dùng lượt runtime **30/10/2026**, Ryzen 7 8745H, Windows 11, bốn log
 năm repetitions. Không trộn với số i3/i7 cũ. Mean latency giảm **33,80% so H*** cho
 tập gộp; riêng Programmers **19,73%** và p95 hơi cao hơn H*/S*.
 Quality là noninferiority trong biên −0,01, không khẳng định bằng hệt hoặc vượt S*.
+Bảng chất lượng trình bày đủ BM25, Dense, Hybrid H*/S* và PE-GH, lấy từ
+`paper/figures/final-a/quality-final.csv`; H*/S* được gộp vì trùng bảng xếp hạng.
 Các gate đối chứng chưa có full online cùng lượt. Qrels xác định câu hỏi trùng lặp.
 Câu tiếng Anh trên **slide 3** chỉ minh họa bài toán, không phải kết quả benchmark.
 

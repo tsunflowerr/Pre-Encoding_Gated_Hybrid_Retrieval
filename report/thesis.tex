@@ -1,0 +1,36 @@
+% !TeX program = xelatex
+% File chính của báo cáo, điều chỉnh từ template thesis UET do nhóm cung cấp.
+\documentclass[a4paper,12pt,oneside]{report}
+% Lớp report không hỗ trợ tùy chọn 13pt; cỡ chữ 13 được đặt trong preamble.
+\input{metadata}
+\input{preamble}
+\title{\ReportTitle}
+\author{\ReportAuthors}
+\date{\ReportYear}
+
+\begin{document}
+\input{cover}
+\pagenumbering{roman}
+\setcounter{page}{2}
+\input{frontmatter/abstract}
+\clearpage
+\input{frontmatter/abstract_en}
+\clearpage
+\tableofcontents
+\clearpage
+\input{frontmatter/abbreviations}
+\clearpage
+\input{frontmatter/lists}
+\clearpage
+\pagenumbering{arabic}
+\input{chapters/01_gioi_thieu}
+\input{chapters/02_co_so_va_nghien_cuu_lien_quan}
+\input{chapters/03_phuong_phap_pegh}
+\input{chapters/04_thiet_ke_thuc_nghiem}
+\input{chapters/05_ket_qua_va_thao_luan}
+\input{chapters/06_ket_luan}
+\clearpage
+\addcontentsline{toc}{chapter}{Tài liệu tham khảo}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}

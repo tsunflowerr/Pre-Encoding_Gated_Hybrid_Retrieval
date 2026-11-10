@@ -1,5 +1,7 @@
 # Introduction
 
+This chapter describes **PE-GH v1 (Ridge/MiniLM, two domains)**. The current system is PE-GH v2 in experimental round v4. See the [version guide](../docs/VERSIONS.md) and the [v2 report](../docs/v4/README.md).
+
 Sparse and dense retrieval have different strengths at the query level. A lexical matcher can recover exact technical terms without a neural query encoder, while a dense retriever can help when wording differs from relevant documents. Running both for every query pays the dense cost even when the sparse ranking is already adequate. Prior work has studied selecting sparse, dense, or hybrid strategies from query features under an efficiency budget [Arabzadeh et al., 2021](https://arxiv.org/abs/2109.10739). The [BEIR benchmark](https://arxiv.org/abs/2104.08663) also motivates evaluating retrieval choices across different domains and against a strong BM25 baseline.
 
 We study **pre-encoding gated hybrid retrieval (PE-GH)** on the Programmers and Unix domains of CQADupStack. PE-GH first retrieves BM25 top-100 and computes inexpensive lexical, query-text, and BM25-ranking features. A fold-specific Ridge model estimates the change in nDCG@10 from replacing BM25 with a fixed sparse–dense fusion. Only when its score exceeds a validation-selected threshold does the system encode the query, search the dense index, and fuse the two rankings. Queries with no sparse vocabulary match take the dense branch; empty queries return an empty ranking. The gate never uses a query embedding, test relevance label, or quality cache at online inference.

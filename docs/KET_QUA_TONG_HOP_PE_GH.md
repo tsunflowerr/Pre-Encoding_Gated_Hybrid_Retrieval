@@ -12,8 +12,8 @@ File này gom toàn bộ kết quả của hệ thống cuối (PE-GH v2) vào m
    - Hơn hẳn PE-GH v1.
 2. **Online:** ở 50% chạy Dense, PE-GH v2 nhanh hơn luôn-chạy-Hybrid khoảng 39% (14,8 ms so với 24,3 ms). Ở cùng độ trễ với PE-GH v1, PE-GH v2 có nDCG@10 cao hơn +0,062.
 3. **So với hai bài báo liên quan (thăm dò, đo thật):**
-   - So với router BERT của Arabzadeh: chất lượng ngang nhau, nhưng **PE-GH v2 nhanh hơn 8–14 lần**.
-   - So với LiteGator: tốc độ như nhau; chất lượng ngang hoặc nhỉnh hơn nhẹ nhưng chưa có ý nghĩa thống kê.
+   - So với router BERT của Arabzadeh trên programmers/unix: chưa phát hiện chênh lệch chất lượng có ý nghĩa thống kê; **PE-GH v2 nhanh hơn 8–14 lần** trong lượt đo này.
+   - So với LiteGator: chưa phát hiện chênh lệch tốc độ hoặc chất lượng có ý nghĩa thống kê; điểm chất lượng quan sát của v2 nhỉnh hơn nhẹ ở 30/50%.
    - **Phải nói rõ:** trên 6 chủ đề mới, ở 80% chạy Dense, BERT cao hơn PE-GH v2 +0,0068, và khác biệt này có ý nghĩa.
 4. **Giới hạn chính:**
    - Hiệu ứng của gate nhỏ (+0,004).
@@ -26,14 +26,14 @@ File này gom toàn bộ kết quả của hệ thống cuối (PE-GH v2) vào m
 |---|---|
 | BM25 | Tìm kiếm theo từ khóa. Rất nhanh (≈ 2 ms) nhưng trượt khi câu hỏi dùng từ khác tài liệu. |
 | Dense | Tìm kiếm theo nghĩa: encoder biến câu hỏi thành vector rồi tìm vector gần nhất (FAISS). Tốn thêm ≈ 20 ms. |
-| H\* (luôn chạy Hybrid) | Luôn chạy cả BM25 và Dense rồi trộn điểm. Chất lượng cao nhất, chậm nhất. |
+| H\* (luôn chạy Hybrid) | Chạy cả BM25 và Dense cho mọi câu hỏi rồi trộn điểm. Dùng làm mốc đối chiếu chất lượng và độ trễ. |
 | P\* | Nhánh rẻ: chỉ dùng BM25, sắp xếp lại bằng proxy tĩnh, không chạy encoder. Trên chủ đề mới thực chất ≈ BM25. |
 | R\* | Encode câu hỏi nhưng chỉ chấm lại 100 kết quả BM25, không tìm FAISS. Là mốc đối chiếu, không phải hệ thống cuối. |
 | Gate | Bộ quyết định rất rẻ (≈ 0,7 ms): nhìn câu hỏi và kết quả BM25, đoán BM25 có trượt không, rồi chọn chạy P\* hay H\*. |
 | Ngân sách / tỷ lệ chạy Dense | Phần trăm câu hỏi được cho chạy Dense (ví dụ 50%). Đây là ngưỡng điều chỉnh do người vận hành chọn. |
 | nDCG@10 | Điểm chất lượng của 10 kết quả đầu (0–1, càng cao càng tốt). Mọi bảng dùng trung bình macro theo chủ đề. |
 | TB, p50, p95 | Thời gian trung bình, trung vị và mức mà 95% câu hỏi nhanh hơn, tính cho mỗi câu hỏi. |
-| CI 95% | Khoảng tin cậy. Nếu khoảng không chứa 0 thì khác biệt được xem là có thật. |
+| CI 95% | Khoảng tin cậy của chênh lệch. CI loại trừ 0 cho bằng chứng về khác biệt theo phép kiểm định đang dùng. CI chứa 0 chưa chứng minh tương đương. |
 | LODO | Huấn luyện bỏ hẳn một chủ đề rồi kiểm tra trên chính chủ đề đó, để mô phỏng chủ đề mới. |
 | OOF | Chất lượng đo trên phần dữ liệu không dùng để huấn luyện. |
 
@@ -47,7 +47,7 @@ Câu hỏi → BM25 top-100 → Gate v2 ──(BM25 có vẻ ổn)──→ P* (
 - **Gate v2:** hồi quy logistic, 28 đặc trưng (21 đặc trưng v1 + 7 đặc trưng QPP), chuẩn hóa theo chủ đề bằng thống kê không nhãn. Nhãn học là "BM25 thất bại" (nDCG@10 của BM25 = 0). Huấn luyện trên 6 chủ đề đã thấy, rồi đóng băng ở [configs/v4/gate_v2.json](../configs/v4/gate_v2.json).
 - **Encoder:** Snowflake arctic-embed-xs có prefix cho câu hỏi. Encode mất ≈ 8,7 ms, ngang MiniLM của v1.
 - **Trộn điểm:** H\* dùng CC alpha 0,7; P\* dùng proxy CC 0,3. Cả hai cố định từ các chủ đề huấn luyện.
-- **Ngưỡng:** là phân vị điểm gate trên các câu hỏi không nhãn, nên tỷ lệ chạy Dense luôn bằng ngân sách đã chọn. Ngân sách vận hành là 80%. Câu hỏi không có từ nào BM25 nhận ra thì luôn được encode.
+- **Ngưỡng:** hiệu chỉnh từ điểm gate trên các câu hỏi không nhãn để hướng tới ngân sách vận hành 80%. Tỷ lệ trên query mới có thể lệch mục tiêu. Query không có token BM25 hoặc toàn OOV luôn được encode, tạo ra tỷ lệ tối thiểu. Mã cập nhật lưu thêm query ID phá hòa khi cutoff có điểm bằng nhau; các receipt lịch sử giữ quy tắc đã đóng băng của chúng.
 
 ## 3. Dữ liệu
 
@@ -181,8 +181,8 @@ Mốc tham chiếu đo cùng phiên: BM25 2,23 ms (0,2899); P\* 3,75 ms (0,2952)
 Số âm ở cột thời gian nghĩa là PE-GH v2 nhanh hơn.
 
 **Cách hiểu:**
-- **So với BERT:** chất lượng ngang nhau, CI đều chứa 0. PE-GH v2 nhanh hơn khoảng 140–148 ms mỗi câu, tức 8–14 lần. Riêng phần ra quyết định của BERT đã chậm hơn cả việc luôn chạy Hybrid (23 ms).
-- **So với LiteGator:** tốc độ như nhau. Ở 30% và 50%, chất lượng PE-GH v2 nhỉnh hơn khoảng +0,007, nhưng CI chạm 0 nên chưa đủ chắc. Ở 80% thì bằng nhau.
+- **So với BERT trên programmers/unix:** chưa phát hiện chênh lệch chất lượng có ý nghĩa thống kê; CI chứa 0 chưa chứng minh tương đương hoặc không kém hơn trong một biên. PE-GH v2 nhanh hơn khoảng 140–148 ms mỗi câu, tức 8–14 lần trong lượt đo này. Riêng phần ra quyết định của BERT đã chậm hơn cả việc luôn chạy Hybrid (23 ms).
+- **So với LiteGator:** chưa phát hiện chênh lệch tốc độ có ý nghĩa thống kê. Ở 30% và 50%, điểm chất lượng PE-GH v2 nhỉnh hơn khoảng +0,007 nhưng CI chứa 0. Ở 80%, chênh lệch trung bình làm tròn bằng 0; chưa kết luận tương đương.
 - **Chưa kết luận PE-GH v2 có chất lượng tốt hơn.** Đặt cạnh kết quả §6.1, BERT vẫn hơn PE-GH v2 ở 80% trên 6 chủ đề mới.
 
 ## 7. Các vòng trước (để kể quá trình)
@@ -212,7 +212,7 @@ Chi tiết: [INTEGRATION_V2.md](INTEGRATION_V2.md) cho v1, [v3/README.md](v3/REA
 
 - "PE-GH v2 là gate học đầu tiên trong đề tài thắng quy tắc BM25-margin trên dữ liệu chưa từng dùng, theo giao thức đăng ký trước. Mức thắng nhỏ (+0,004) và nằm ở vùng ngân sách 10–70%."
 - "Bỏ 20% lượt chạy Dense mà chất lượng chỉ giảm 0,006, nằm trong biên 0,01."
-- "So với router BERT của Arabzadeh: chất lượng ngang nhau, nhanh hơn 8–14 lần và chạy thuần CPU. So với LiteGator: tốc độ như nhau, chất lượng ngang hoặc nhỉnh hơn nhẹ (chưa có ý nghĩa thống kê)."
+- "Trên programmers/unix, chưa phát hiện chênh lệch chất lượng có ý nghĩa thống kê so với router BERT của Arabzadeh; PE-GH v2 nhanh hơn 8–14 lần trong lượt đo CPU. Với LiteGator, chưa phát hiện chênh lệch tốc độ hoặc chất lượng có ý nghĩa thống kê. Các phép so sánh này chưa chứng minh tương đương."
 - Khi nêu điểm khác so với tài liệu, ghi rõ: ý tưởng định tuyến trước khi encode dựa trên dự báo chất lượng BM25 đã có ở [1]. Điểm riêng của PE-GH nằm ở:
   - gate tuyến tính 28 đặc trưng, ≈ 0,7 ms;
   - so sánh ở cùng ngân sách, có CI;

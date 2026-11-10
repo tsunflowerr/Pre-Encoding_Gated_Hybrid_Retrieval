@@ -1,0 +1,8 @@
+\chapter*{Abstract}
+Keyword and semantic retrieval can provide complementary evidence for question search. However, running both methods for every query incurs query encoding and vector search costs even when keyword retrieval already produces useful results. This report studies whether queries can be selected for semantic retrieval before query encoding, with the objective of reducing processing costs under a predefined quality loss tolerance.
+
+PE-GH first runs BM25 and then uses a lightweight gate to choose between a low-cost branch and a hybrid retrieval branch. The final system, PE-GH v2, uses the query and the BM25 results to identify queries at risk of having no relevant document among the top ten results. A retrieval budget controls the proportion of queries assigned to the Dense branch. The gate is trained on six CQADupStack domains and remains fixed during confirmation on six other domains.
+
+On 8,303 confirmation queries, PE-GH v2 improves macro nDCG@10 by 0.0042 over the BM25-margin rule at a matched 50\% budget. At the 80\% operating budget, it obtains 0.4159 compared with 0.4223 for always-hybrid retrieval, satisfying the preregistered noninferiority margin of 0.01. In a separate online experiment on Programmers and Unix, the 50\% operating point achieves a mean latency of 14.76 ms compared with 24.31 ms for the hybrid baseline measured in the same session. These results support selective retrieval within the evaluated setting, while showing a small gate-specific effect, limited improvement in tail latency, and the importance of the underlying encoder.
+
+\textbf{Keywords:} hybrid retrieval, query routing, query performance prediction, encoding budget, CQADupStack.

@@ -25,7 +25,7 @@ from pegh.sparse.fast import open_backend
 from pegh.v3.features import ExtendedFeatureExtractor
 from pegh.v3.proxy import StaticProxy
 from pegh.v3.rescore import candidate_fusion, rescore_identity, rescored_ranking
-from pegh.v4.gate import LinearGate
+from pegh.v4.gate import BudgetPolicy, LinearGate
 
 ROUTES = ("bm25", "p_star", "r_star", "h_star", "gated")
 SCORERS = ("gate_v2", "bm25_margin", "litegator", "arabzadeh_bert")
@@ -65,6 +65,8 @@ class V2SearchMethod:
         ):
             setattr(self, name, parts.get(name))
         self.scorer, self.threshold = parts.get("scorer"), parts.get("threshold")
+        payload = parts.get("budget_policy")
+        self.budget_policy = BudgetPolicy.from_json(payload) if payload is not None else None
         self.identities = parts.get("identities", {})
 
     def _empty(self, query: Query) -> SearchResponse:
@@ -142,7 +144,13 @@ class V2SearchMethod:
             return SearchResponse(self.full(query, sparse), True, None, 1, None)
         stats = self.sparse.query_stats(query)
         score = self.gate_score(query, sparse, stats)
-        if stats.token_count == 0 or stats.oov_ratio == 1.0 or score > self.threshold:
+        forced = stats.token_count == 0 or stats.oov_ratio == 1.0
+        use_dense = (
+            self.budget_policy.use_dense(score, query.query_id, forced)
+            if self.budget_policy is not None
+            else forced or score > self.threshold
+        )
+        if use_dense:
             return SearchResponse(self.full(query, sparse), True, score, 1, None)
         return SearchResponse(self.cheap(query, sparse), False, score, 0, None)
 
@@ -170,6 +178,7 @@ def create_v2_method(
     gate_path: str | None = None,
     expected_gate_sha256: str | None = None,
     threshold: float | None = None,
+    budget_policy: dict | None = None,
     protocol_path: str | None = None,
     cache_folder: str | None = None,
     torch_threads: int | None = None,
@@ -314,6 +323,12 @@ def create_v2_method(
             parts["extractor"] = ExtendedFeatureExtractor(base, sparse, ("v1",))
         parts.update(scorer=scorer, threshold=float(threshold))
         provenance.update(scorer=scorer, threshold=float(threshold))
+        if budget_policy is not None:
+            policy = BudgetPolicy.from_json(budget_policy)
+            if policy.threshold != float(threshold):
+                raise ValueError("budget policy and scalar threshold differ")
+            parts["budget_policy"] = policy.to_json()
+            provenance["budget_policy"] = policy.to_json()
     parts["identities"] = identities
     json.dumps(provenance, allow_nan=False)
     return V2SearchMethod(route, sparse, trace=trace, provenance=provenance, **parts)

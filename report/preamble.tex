@@ -1,0 +1,114 @@
+% Trình bày điều chỉnh từ template thesis UET cho báo cáo nhóm.
+% Giữ lề, cỡ chữ 13, bìa khung đôi, tiêu đề chương và đoạn không thụt đầu dòng.
+\usepackage{fontspec}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Latin Modern Roman}}
+\usepackage{graphicx}
+\usepackage{array,tabularx,longtable}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\definecolor{uetblue}{HTML}{17477D}
+\IfFileExists{kvsetkeys.sty}{%
+ \usepackage{hyperref}
+ \hypersetup{unicode=true,colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black,
+  pdftitle={\ReportTitle},pdfauthor={\ReportAuthors}}
+}{\usepackage{url}}
+
+% Lề của template: trái 3 cm, phải 2 cm, trên 2,5 cm, dưới 3 cm.
+\setlength{\oddsidemargin}{\dimexpr30mm-1in\relax}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\textwidth}{160mm}
+\setlength{\topmargin}{\dimexpr25mm-1in\relax}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\textheight}{242mm}
+\setlength{\footskip}{12mm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5.2pt}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.18}
+\renewcommand{\chaptername}{Chương}
+\renewcommand{\contentsname}{Mục lục}
+\renewcommand{\listfigurename}{Danh mục hình}
+\renewcommand{\listtablename}{Danh mục bảng}
+\renewcommand{\figurename}{Hình}
+\renewcommand{\tablename}{Bảng}
+\renewcommand{\bibname}{Tài liệu tham khảo}
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{2}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\Pstar}{\ensuremath{P^{*}}}
+\newcommand{\Hstar}{\ensuremath{H^{*}}}
+\newcommand{\Rstar}{\ensuremath{R^{*}}}
+\newcommand{\ndcg}{\textnormal{nDCG@10}}
+\newcommand{\source}[1]{\par\vspace{2pt}{\footnotesize\textit{Nguồn: #1.}}\par}
+\graphicspath{{figures/}}
+\raggedbottom
+\widowpenalty=10000
+\clubpenalty=10000
+\pagestyle{plain}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.7}
+\renewcommand{\textfraction}{0.12}
+\renewcommand{\floatpagefraction}{0.8}
+
+\makeatletter
+% Giãn dòng của báo cáo được gọn hơn khóa luận; không thêm trang trắng hai mặt.
+\renewcommand{\normalsize}{%
+ \@setfontsize\normalsize{13pt}{17pt}%
+ \abovedisplayskip10pt plus2pt minus5pt
+ \belowdisplayskip\abovedisplayskip
+ \abovedisplayshortskip0pt plus3pt
+ \belowdisplayshortskip6pt plus3pt minus3pt}
+\DeclareMathSizes{13}{12}{9}{7}
+\AtBeginDocument{\normalsize}
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{12pt}
+\setlength{\@fpbot}{0pt plus1fil}
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
+ {-2.6ex plus-1ex minus-.2ex}{1.2ex plus.2ex}%
+ {\normalfont\fontsize{15}{19}\selectfont\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+ {-2.1ex plus-.8ex minus-.2ex}{.9ex plus.2ex}%
+ {\normalfont\fontsize{13}{17}\selectfont\bfseries}}
+\def\@makechapterhead#1{%
+ {\parindent\z@\raggedright\normalfont
+ \ifnum\c@secnumdepth>\m@ne
+  {\fontsize{20}{24}\selectfont\bfseries\@chapapp\space\thechapter\par}%
+  \nobreak\vskip2pt
+ \fi
+ {\fontsize{18}{23}\selectfont\bfseries #1\par}\nobreak\vskip18pt}}
+\def\@makeschapterhead#1{%
+ {\parindent\z@\raggedright\normalfont
+ {\fontsize{18}{23}\selectfont\bfseries #1\par}\nobreak\vskip18pt}}
+\renewcommand{\tableofcontents}{%
+ \chapter*{\contentsname}%
+ \begingroup\small\linespread{1.05}\selectfont
+ \setlength{\parskip}{0pt}\@starttoc{toc}\endgroup}
+% Cách gọi "Chương" trước số chương trong mục lục theo mẫu thesis.
+\renewcommand*{\l@chapter}[2]{%
+ \ifnum\c@tocdepth>\m@ne
+  \addpenalty{-\@highpenalty}\vskip5pt
+  \begingroup\parindent\z@\rightskip\@pnumwidth
+   \parfillskip-\@pnumwidth\bfseries
+   \def\numberline##1{\hb@xt@5.8em{Chương\space##1\hfil}}%
+   \leavevmode #1\nobreak\hfil
+   \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+  \endgroup
+ \fi}
+\long\def\@makecaption#1#2{%
+ \vskip\abovecaptionskip
+ \begingroup\small\linespread{1.1}\selectfont
+  \sbox\@tempboxa{#1: #2}%
+  \ifdim\wd\@tempboxa>\hsize #1: #2\par
+  \else\global\@minipagefalse\hb@xt@\hsize{\hfil\box\@tempboxa\hfil}\fi
+ \endgroup\vskip\belowcaptionskip}
+\let\reportbibliography\thebibliography
+\let\endreportbibliography\endthebibliography
+\renewenvironment{thebibliography}[1]
+ {\reportbibliography{#1}\small\linespread{1.08}\selectfont
+  \setlength{\itemsep}{2pt}\setlength{\parsep}{0pt}\setlength{\parskip}{0pt}
+  \interlinepenalty=10000}
+ {\endreportbibliography}
+\makeatother

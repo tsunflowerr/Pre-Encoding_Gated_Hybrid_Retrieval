@@ -1,0 +1,41 @@
+{
+  "description": "Snapshots used to prepare the first report draft; not a new experiment run",
+  "sources": {
+    "evaluation_new.json": {
+      "source": "docs/v4/facts/evaluation_new.json",
+      "sha256": "48563840a6337628457b239a5d684932ab1a96683ee45c7af386c04b44605e23"
+    },
+    "online_report.json": {
+      "source": "docs/v4/facts/online_report.json",
+      "sha256": "bbdd6dcfcd6c2e9228353fa6ceed401a48e17ae8351c9f1f161bf195ff6b7286"
+    },
+    "prior_comparison.json": {
+      "source": "docs/v4/facts/prior_comparison.json",
+      "sha256": "3e99f9e056864716d3c2ad2f47138d15e5eabee85c6ed9c03c36fbb3337c4e85"
+    },
+    "prior_online_report.json": {
+      "source": "docs/v4/facts/prior_online_report.json",
+      "sha256": "1aafff7934d9898daf2de208462f7df0daa2dd729079c69ba356c418d7fe3466"
+    },
+    "encoder_comparison.json": {
+      "source": "docs/v4/facts/encoder_comparison.json",
+      "sha256": "b4362927a2dd4a49cf0013e820554208d680fa308572ff74e92ac3ec189a2a74"
+    },
+    "prior_litegator_tuned.json": {
+      "source": "docs/v4/facts/prior_litegator_tuned.json",
+      "sha256": "c0bbcb053d6372530bd38e4fccc4541f3454b20036c746fe64b30ddd64cbfba5"
+    },
+    "preregistration.json": {
+      "source": "docs/v4/facts/preregistration.json",
+      "sha256": "91460160f9746c13d832e70720079b1a557a6dee24b53c878f562a5ea85d6180"
+    },
+    "develop.json": {
+      "source": "docs/v4/facts/develop.json",
+      "sha256": "e3eec42c7f818c2f6cfae0e61cf8283a2795e862cb2e81a94cecceb2b6a1c0a2"
+    },
+    "prior_v2_selection_audit.json": {
+      "source": "docs/v4/facts/prior_v2_selection_audit.json",
+      "sha256": "1748358c00a1c12b5b0058d9c5e474fae22bf5b58b0814234d7421598564af68"
+    }
+  }
+}

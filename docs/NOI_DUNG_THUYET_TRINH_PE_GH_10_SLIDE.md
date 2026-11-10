@@ -1,5 +1,7 @@
 # Tăng tốc tìm kiếm câu hỏi kỹ thuật bằng cách kết hợp từ khóa và ngữ nghĩa
 
+Phạm vi: **nội dung giới thiệu PE-GH v1**. Đây là mô tả Ridge/MiniLM, không phải phương pháp logistic/arctic của PE-GH v2. Xem [hướng dẫn phiên bản](VERSIONS.md) và [kết quả v2](KET_QUA_TONG_HOP_PE_GH.md).
+
 **Tên hệ thống:** PE-GH  
 **Phạm vi tài liệu:** Giới thiệu đề tài và hướng giải quyết cho người chưa biết dự án. Không trình bày tiến độ nhóm.
 

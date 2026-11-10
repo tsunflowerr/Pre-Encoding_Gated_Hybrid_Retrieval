@@ -1,5 +1,7 @@
 # PE-GH v3 — vòng phát triển thứ hai, 28/10/2026
 
+Đây là hồ sơ vòng thực nghiệm v3, được giữ để truy vết. Mã hiện tại kiểm tra provenance trước khi dùng lại cache; xem [hướng dẫn phiên bản và chạy lại](../VERSIONS.md), đặc biệt khi NPZ cũ chưa có sidecar.
+
 **Tóm tắt.** Vòng v3 thử cải thiện PE-GH theo ba hướng: tín hiệu gate mới, thiết kế lại hai nhánh rẻ/đắt, và encoder mạnh hơn. Mọi kết luận được kiểm chứng trên bốn subforum CQADupStack chưa dùng, bằng hai giao thức đăng ký trước (MiniLM, rồi bge-small).
 
 - **Gate học không đứng được như một đóng góp.**

@@ -1,0 +1,89 @@
+{
+  "schema_version": "pegh_repo_fixes_1",
+  "date": "2026-11-07",
+  "base_commit": "692f5100cdc2ac9a77a035206014313128614c20",
+  "delivery_state": "working tree changes, not committed or pushed",
+  "resolved_items": [
+    "CI discovers v3/v4 tests",
+    "wheel includes v3/v4 and isolated artifact smoke test",
+    "cache input/checksum/schema validation",
+    "serialized deterministic tie policy shared by offline and online",
+    "statistical wording corrected",
+    "v1/v2 scope documented in paper, introductions and HTML slides"
+  ],
+  "checks": {
+    "pytest": {
+      "command": "pytest -m 'not model' -q",
+      "passed": 203,
+      "deselected": 1,
+      "errors": 0,
+      "failures": 0,
+      "by_group": {
+        "tests.a": 31,
+        "tests.b": 52,
+        "tests.c": 13,
+        "tests.shared": 35,
+        "tests.v3": 15,
+        "tests.v4": 57
+      }
+    },
+    "ruff": {
+      "issues": 0,
+      "formatted_python_files": 144
+    },
+    "uv_lock_offline": "passed",
+    "uv_pip_check": "58 packages compatible",
+    "compileall": "passed",
+    "wheel": {
+      "build": "passed",
+      "isolated_imports_from_wheel": "passed",
+      "v3_v4_present": true,
+      "contracts_resource_present": true,
+      "sha256": "09518cdcfc4ad356d6ecb55ca079b20109cee38b0a0d0f068f90a33ab69d3a67"
+    },
+    "slides": {
+      "count": 17,
+      "image_count": 6,
+      "changed_slides_visually_checked": [
+        1,
+        7
+      ],
+      "other_slide_content_pixel_comparison": "unchanged",
+      "viewport_checks": [
+        "desktop",
+        "laptop",
+        "mobile"
+      ],
+      "pdf_pages": 17,
+      "html_sha256": "f9698ddda7906cd45e4fb74234254d62a4d32cd8e5806855596bdbdcf2dfb2f5"
+    },
+    "frozen_config_facts_figures_unchanged": true
+  },
+  "operational_notes": [
+    "Legacy NPZ without provenance is rejected; regenerate in a new workspace rather than stamp old artifacts",
+    "Historical plans without budget_policy retain their scalar-threshold behavior",
+    "Budget is exact on calibration inputs subject to forced-call floor, not guaranteed on future query distributions"
+  ],
+  "not_run": [
+    "real-model benchmarks",
+    "GitHub-hosted Linux/Python3.11 and Windows/Python3.12 matrix"
+  ],
+  "source_files_sha256": {
+    "pyproject.toml": "5f3532d437762c610a0ded5747bc69ddf04ca6eaf18432eeb1d07a016a1b12de",
+    ".github/workflows/ci.yml": "2bfae407ccee7451bcbc010f5a95fd68aeb76f922bca43ebb0d86403053e94f0",
+    "scripts_shared/check_wheel.py": "b7d74b82e02636528ae09c4a98fdbc4fb5ad4fbe21369b7a63363f921ed095c6",
+    "src/pegh/v3/cache.py": "0e33eb19d54e569c10d62d500dd194a2a29c26131912700832eac169dea8449f",
+    "src/pegh/v3/build.py": "2727fe5b779ad7f7a194f6fcbc6cb92d3392116566559b82c2b61da372c54e19",
+    "src/pegh/v3/pipeline.py": "dd3fe77e7f86318f401714e309454d9e0cdf27e194626887e698eec22f99a563",
+    "src/pegh/v4/build.py": "05af7073bfa72dc1a4d7444a15f67766512089477f1263f895d2bc4470476f52",
+    "src/pegh/v4/gate.py": "fe2fb076099169eec02cf6a28344b4146f6110131e4830d02e221a9408360731",
+    "src/pegh/v4/online.py": "54ab10cf9663eedb90c25cea6ec4d39fd14094a47a128a0056ab232dc1d26924",
+    "src/pegh/v4/prior_online.py": "f14e5987fc4016ce5a44e7a161196011db8934f3e80aeb3650fd51363b25349b",
+    "scripts_shared/experiment_v3.py": "d6afd27ec358e1edb604ba0ccd1e595c80b4fe6b0035d194897d05d6c20fefa9",
+    "scripts_shared/experiment_v4.py": "452b1312692bdf4535e3a57694ad4810eb3a463ebb92c74b79364ff814c19f11",
+    "scripts_shared/demo_v4.py": "96a6a8b2eb84839b1a63b7b064e83e59328272693d062293ca074092cd7bf073",
+    "tests/v4/test_gate_v2.py": "bb3898416f7deb02141ba43da9c07feac8d7a743ccf0dddb1b555dcdd19d4ec8",
+    "tests/v4/test_cache_resume.py": "c18688c0b59a6bdbab8acbd1b2f10aa5adbc9b60512dc250db26621fe5da2ed8"
+  },
+  "receipt_sha256": "138600bbe59b5e7092f661a0f979e249eb2f5889c8b5f91beb550abf933e5b22"
+}

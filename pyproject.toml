@@ -39,6 +39,8 @@ packages = [
   "pegh.evaluation",
   "pegh.dense",
   "pegh.profiling",
+  "pegh.v3",
+  "pegh.v4",
 ]
 package-dir = {"" = "src", "contracts" = "contracts"}
 
@@ -46,7 +48,7 @@ package-dir = {"" = "src", "contracts" = "contracts"}
 contracts = ["schemas/*.json", "resources/*.json"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests/shared", "tests/a", "tests/b", "tests/c"]
+testpaths = ["tests"]
 markers = ["model: needs the pinned real model and network/local model cache"]
 addopts = "-ra"
 

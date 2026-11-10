@@ -13,7 +13,7 @@ import os
 import time
 from pathlib import Path
 
-from pegh.v4.workspace import NEW_DOMAINS, SEEN_DOMAINS, Workspace, vector_key
+from pegh.v4.workspace import NEW_DOMAINS, SEEN_DOMAINS, Workspace, query_prefix, vector_key
 
 DEFAULT_ROOT = Path.home() / ".cache/pegh/v4"
 DEFAULT_V3_ROOT = Path.home() / ".cache/pegh/v3"
@@ -114,21 +114,27 @@ def _load_group(
     features_from: str | None = None,
 ):
     """DomainData for one dense retriever; v1/QPP features are encoder-independent."""
-    import numpy as np
-
+    from pegh.v3.cache import load_npz_cache
     from pegh.v3.pipeline import load_domain
 
     group = []
     for domain in domains:
+        feature_key = features_from or encoder
         feature_path = ws.features(features_from or encoder, domain)
         if not feature_path.exists():
+            feature_key = "minilm"
             feature_path = ws.features("minilm", domain)  # comparison only: v1/QPP columns
-        with np.load(feature_path) as stored:
-            features = {k: stored[k] for k in stored.files}
+        features = load_npz_cache(ws, feature_key, domain, "features", feature_path)
         tier_values = None
         if with_tiers and ws.tiers(encoder, domain).exists():
-            with np.load(ws.tiers(encoder, domain)) as stored:
-                tier_values = {k: stored[k] for k in stored.files}
+            tier_values = load_npz_cache(
+                ws,
+                encoder,
+                domain,
+                "tiers",
+                ws.tiers(encoder, domain),
+                prefix=query_prefix(encoder),
+            )
         group.append(load_domain(ws, domain, encoder, features, tier_values))
     return group
 
@@ -272,6 +278,7 @@ def features(ws: Workspace, args) -> None:
     from pegh.gating.features import QueryFeatureExtractor
     from pegh.sparse.fast import open_backend
     from pegh.v3.build import load_dense_vectors
+    from pegh.v3.cache import npz_inputs, npz_ready, seal_npz
     from pegh.v3.features import QPP_NAMES, ExtendedFeatureExtractor
     from pegh.v3.pipeline import save_npz
     from pegh.v3.proxy import StaticProxy
@@ -286,7 +293,8 @@ def features(ws: Workspace, args) -> None:
         tokenizer = b.encoder(ws, vector_key(key), 1).model.tokenizer
         for domain in domains:
             output = ws.features(key, domain)
-            if output.exists():
+            inputs = npz_inputs(ws, key, domain, "features")
+            if npz_ready(output, inputs):
                 continue
             backend = open_backend(ws.sparse(domain), execution="numpy")
             vectors_, rows, _ = load_dense_vectors(ws.dense(key, domain))
@@ -327,6 +335,7 @@ def features(ws: Workspace, args) -> None:
                 qpp=x[:, 21 : 21 + len(QPP_NAMES)],
                 proxy=x[:, 21 + len(QPP_NAMES) :],
             )
+            seal_npz(output, inputs)
             log(
                 stage="features",
                 encoder=key,
@@ -345,6 +354,7 @@ def tiers(ws: Workspace, args) -> None:
     from pegh.evaluation.metrics import query_metrics
     from pegh.evaluation.runs import load_rankings
     from pegh.v3.build import load_dense_vectors
+    from pegh.v3.cache import npz_inputs, npz_ready, seal_npz
     from pegh.v3.pipeline import ALPHAS, save_npz
     from pegh.v3.proxy import StaticProxy
     from pegh.v3.rescore import candidate_fusion, rescore_identity, rescored_ranking
@@ -356,7 +366,8 @@ def tiers(ws: Workspace, args) -> None:
         model = b.prefixed(ws, key, args.threads)
         for domain in domains:
             output = ws.tiers(key, domain)
-            if output.exists():
+            inputs = npz_inputs(ws, key, domain, "tiers", prefix=query_prefix(key))
+            if npz_ready(output, inputs):
                 continue
             queries = sorted(
                 load_queries(ws.raw(domain) / "queries.jsonl", domain), key=lambda q: q.query_id
@@ -390,6 +401,7 @@ def tiers(ws: Workspace, args) -> None:
                 ids=np.array([q.query_id for q in queries]),
                 **{k: np.array(v) for k, v in arrays.items()},
             )
+            seal_npz(output, inputs)
             log(
                 stage="tiers",
                 encoder=key,
@@ -681,8 +693,10 @@ def evaluate(ws: Workspace, args) -> None:
         for fold in range(5):
             test = d.folds[fold]["test"]
             reference = np.concatenate([d.folds[fold]["train"], d.folds[fold]["validation"]])
-            threshold = g.quantile_threshold(score[reference], d.forced[reference], b_op)
-            route[test] = d.forced[test] | (score[test] > threshold)
+            policy = g.calibrate_budget(
+                score[reference], d.forced[reference], [d.ids[i] for i in reference], b_op
+            )
+            route[test] = [policy.use_dense(score[i], d.ids[i], bool(d.forced[i])) for i in test]
             operating[test] = np.where(route[test], u_h[test], u_p[test])
             ids, f, lo, hi = [d.ids[i] for i in test], d.forced[test], u_p[test], u_h[test]
             matched[test] = _routed(score[test], f, ids, lo, hi, b_match)
@@ -922,15 +936,19 @@ def online_plan(ws: Workspace, args) -> None:
         for fold in range(5):
             f = data.folds[fold]
             reference = np.concatenate([f["train"], f["validation"]])
-            thresholds = {
-                f"pe_gh_v2_b{int(round(bb * 100))}": float(
-                    g.quantile_threshold(score[reference], data.forced[reference], bb)
+            policies = {
+                f"pe_gh_v2_b{int(round(bb * 100))}": g.calibrate_budget(
+                    score[reference], data.forced[reference], [data.ids[i] for i in reference], bb
                 )
                 for bb in budgets
             }
-            thresholds["margin_op"] = float(
-                g.quantile_threshold(margin[reference], data.forced[reference], operating)
+            policies["margin_op"] = g.calibrate_budget(
+                margin[reference],
+                data.forced[reference],
+                [data.ids[i] for i in reference],
+                operating,
             )
+            thresholds = {name: policy.threshold for name, policy in policies.items()}
             registry = []
             v1_path = (
                 ws.repo / f"docs/integration/2026-10-26/online-manifests/{domain}_fold_{fold}.json"
@@ -970,6 +988,7 @@ def online_plan(ws: Workspace, args) -> None:
                     "h_star": tiers_["h_star"],
                     "scorer": scorer,
                     "threshold": threshold,
+                    "budget_policy": policies[method].to_json(),
                     "protocol_path": str(protocol_path),
                 }
                 if scorer == "gate_v2":
@@ -994,9 +1013,9 @@ def online_plan(ws: Workspace, args) -> None:
                     "r_star_v2": rescore[qid],
                     "h_star_v2": full[qid],
                 }
-                for method, threshold in thresholds.items():
+                for method in thresholds:
                     s = margin[row] if method == "margin_op" else score[row]
-                    use_dense = bool(data.forced[row] or s > threshold)
+                    use_dense = policies[method].use_dense(s, qid, bool(data.forced[row]))
                     record[method] = full[qid] if use_dense else cheap[qid]
                     record[f"{method}_dense"] = use_dense
                 expected[qid] = record

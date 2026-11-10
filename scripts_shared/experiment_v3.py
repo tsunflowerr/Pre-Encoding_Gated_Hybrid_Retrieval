@@ -147,6 +147,7 @@ def features(ws: Workspace, args) -> None:
     from pegh.gating.features import QueryFeatureExtractor
     from pegh.sparse.fast import open_backend
     from pegh.v3 import build as b
+    from pegh.v3.cache import npz_inputs, npz_ready, seal_npz
     from pegh.v3.features import PROXY_NAMES, QPP_NAMES, ExtendedFeatureExtractor
     from pegh.v3.pipeline import save_npz
     from pegh.v3.proxy import StaticProxy
@@ -160,6 +161,9 @@ def features(ws: Workspace, args) -> None:
         domains = _domains(ws, encoder)
         for domain in (d for d in domains if not args.domains or d in args.domains):
             output = ws.results("features", encoder, f"{domain}.npz")
+            inputs = npz_inputs(ws, encoder, domain, "features")
+            if npz_ready(output, inputs):
+                continue
             backend = open_backend(ws.sparse(domain), execution="numpy")
             base = QueryFeatureExtractor(protocol["features"], backend.tokenizer)
             vectors, rows, _ = b.load_dense_vectors(ws.dense(encoder, domain))
@@ -186,6 +190,7 @@ def features(ws: Workspace, args) -> None:
             ids = np.array([q.query_id for q in queries])
             v1, qpp = x[:, :21], x[:, 21 : 21 + len(QPP_NAMES)]
             save_npz(output, ids=ids, v1=v1, qpp=qpp, proxy=x[:, 21 + len(QPP_NAMES) :])
+            seal_npz(output, inputs)
             if ws.is_dev(domain):
                 frozen = {}
                 for line in (
@@ -224,6 +229,7 @@ def tiers(ws: Workspace, args) -> None:
     from pegh.evaluation.metrics import query_metrics
     from pegh.evaluation.runs import load_rankings
     from pegh.v3 import build as b
+    from pegh.v3.cache import npz_inputs, npz_ready, seal_npz
     from pegh.v3.pipeline import ALPHAS, save_npz
     from pegh.v3.proxy import StaticProxy
     from pegh.v3.rescore import candidate_fusion, rescore_identity, rescored_ranking
@@ -233,7 +239,8 @@ def tiers(ws: Workspace, args) -> None:
         domains = _domains(ws, encoder)
         for domain in (d for d in domains if not args.domains or d in args.domains):
             output = ws.results("tiers", encoder, f"{domain}.npz")
-            if output.exists():
+            inputs = npz_inputs(ws, encoder, domain, "tiers")
+            if npz_ready(output, inputs):
                 continue
             queries = sorted(
                 load_queries(ws.raw(domain) / "queries.jsonl", domain), key=lambda q: q.query_id
@@ -270,6 +277,7 @@ def tiers(ws: Workspace, args) -> None:
                 ids=np.array([q.query_id for q in queries]),
                 **{k: np.array(v) for k, v in arrays.items()},
             )
+            seal_npz(output, inputs)
             log(
                 stage="tiers",
                 encoder=encoder,
@@ -284,19 +292,18 @@ def tiers(ws: Workspace, args) -> None:
 
 
 def _load_group(ws: Workspace, domains, encoder: str):
-    import numpy as np
-
+    from pegh.v3.cache import load_npz_cache
     from pegh.v3.pipeline import load_domain
 
     group = []
     for domain in domains:
-        with np.load(ws.results("features", encoder, f"{domain}.npz")) as stored:
-            features = {k: stored[k] for k in stored.files}
+        features = load_npz_cache(
+            ws, encoder, domain, "features", ws.results("features", encoder, f"{domain}.npz")
+        )
         tier_path = ws.results("tiers", encoder, f"{domain}.npz")
         tier_values = None
         if tier_path.exists():
-            with np.load(tier_path) as stored:
-                tier_values = {k: stored[k] for k in stored.files}
+            tier_values = load_npz_cache(ws, encoder, domain, "tiers", tier_path)
         group.append(load_domain(ws, domain, encoder, features, tier_values))
     return group
 

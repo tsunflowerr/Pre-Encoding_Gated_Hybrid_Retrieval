@@ -1,0 +1,24 @@
+\chapter*{Thuật ngữ và chữ viết tắt}
+\begin{tabularx}{\textwidth}{@{}lY@{}}
+\hline
+\textbf{Thuật ngữ} & \textbf{Ý nghĩa trong báo cáo}\\\hline
+BM25 & Phương pháp truy xuất theo mức độ khớp từ khóa.\\
+Dense & Truy xuất sử dụng vector biểu diễn ngữ nghĩa.\\
+Hybrid & Truy xuất kết hợp kết quả từ khóa và ngữ nghĩa.\\
+Gate & Bộ quyết định có sử dụng nhánh Dense cho một truy vấn hay không.\\
+Encoder & Mô hình chuyển văn bản thành vector biểu diễn.\\
+QPP & Dự báo chất lượng truy xuất khi chưa biết nhãn liên quan của truy vấn đang phục vụ.\\
+\Pstar & Nhánh chi phí thấp, sử dụng kết quả BM25 và thông tin ngữ nghĩa đã chuẩn bị trước.\\
+\Hstar & Nhánh luôn chạy Hybrid, kết hợp BM25 và Dense.\\
+\Rstar & Đối chứng sử dụng ngữ nghĩa để đánh giá lại các câu hỏi do BM25 tìm được.\\
+\ndcg & Thước đo chất lượng xếp hạng tại mười kết quả đầu.\\
+Macro & Trung bình có trọng số bằng nhau cho mỗi miền dữ liệu.\\
+AUC & Chỉ số đánh giá khả năng sắp thứ tự mức rủi ro BM25 không tìm được kết quả liên quan.\\
+CI & Khoảng tin cậy của đại lượng được ước lượng.\\
+RSS & Dung lượng bộ nhớ mà chương trình đang sử dụng trong phép đo.\\
+p95 & Phân vị 95\% của độ trễ yêu cầu truy xuất.\\
+\hline
+\end{tabularx}
+\vspace{7mm}
+
+Trong báo cáo, PE-GH v1 và PE-GH v2 là hai phiên bản hệ thống. Ký hiệu v3 và v4 trong hồ sơ dự án chỉ các vòng thực nghiệm. Hệ thống cuối được trình bày là PE-GH v2, được xác nhận trong vòng v4. Từ ``miền'' chỉ một chủ đề con của CQADupStack.

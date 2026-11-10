@@ -1,5 +1,7 @@
 # Experimental setup
 
+Scope: **PE-GH v1**, Programmers/Unix and MiniLM. The six-seen/six-new-domain design for PE-GH v2 is documented separately in the [version guide](../docs/VERSIONS.md) and [v4 report](../docs/v4/README.md).
+
 ## Data and splits
 
 We use the `programmers` and `unix` domains of CQADupStack. Corpus and query data are

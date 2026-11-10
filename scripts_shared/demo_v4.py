@@ -22,6 +22,7 @@ import numpy as np
 from contracts.io import iter_corpus, load_queries
 from contracts.types import Query
 from pegh.data.artifacts import file_hash
+from pegh.v3.cache import load_npz_cache
 from pegh.v4 import gate as g
 from pegh.v4.online import create_v2_method
 from pegh.v4.workspace import SEEN_DOMAINS, Workspace
@@ -55,13 +56,15 @@ class Engine:
         frozen = json.loads((ws.repo / "configs/v4/gate_v2.json").read_text(encoding="utf-8"))
         self.domain, key, tiers = domain, frozen["encoder"], frozen["tiers"]
         gate = g.LinearGate.from_json(frozen["gate"])
-        with np.load(ws.features(key, domain)) as stored:
-            x = np.hstack([stored[group] for group in gate.spec.groups])
-            forced = (stored["v1"][:, 1] == 0) | (stored["v1"][:, 12] == 1)
+        stored = load_npz_cache(ws, key, domain, "features", ws.features(key, domain))
+        x = np.hstack([stored[group] for group in gate.spec.groups])
+        forced = (stored["v1"][:, 1] == 0) | (stored["v1"][:, 12] == 1)
         stats = g.domain_stats(x) if gate.spec.norm == "domain" else None
         self.budget = budget if budget is not None else frozen["operating_budget"]
         scores = gate.score(x, stats)
-        self.threshold = g.quantile_threshold(scores, forced, self.budget)
+        ids = [str(q) for q in stored["ids"]]
+        self.policy = g.calibrate_budget(scores, forced, ids, self.budget)
+        self.threshold = self.policy.threshold
         gate_path = ws.root / "artifacts/gates/demo" / f"{domain}.json"
         gate_path.parent.mkdir(parents=True, exist_ok=True)
         gate_path.write_text(
@@ -92,6 +95,7 @@ class Engine:
             gate_path=str(gate_path),
             expected_gate_sha256=file_hash(gate_path),
             threshold=self.threshold,
+            budget_policy=self.policy.to_json(),
             protocol_path=str(ws.repo / "configs/gating/protocol_v1.yaml"),
             **common,
         )

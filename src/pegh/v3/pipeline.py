@@ -80,6 +80,22 @@ def _ndcg(domain: str, ids: list[str], qrels: dict, rankings: dict) -> np.ndarra
 def load_domain(
     ws: Workspace, domain: str, encoder: str, features: dict, tiers: dict | None = None
 ) -> DomainData:
+    from pegh.dense.config import DenseConfig
+    from pegh.v3.cache import checked_quality
+    from pegh.v4.workspace import ENCODERS, query_prefix
+
+    config = DenseConfig.from_yaml(ws.repo / ENCODERS[encoder][0])
+    prefix = query_prefix(encoder) if hasattr(ws, "v3_root") else None
+    for retriever in ("bm25", encoder):
+        if not checked_quality(
+            ws.quality(retriever, domain),
+            ws,
+            retriever,
+            domain,
+            config=config if retriever != "bm25" else None,
+            prefix=prefix if retriever != "bm25" else None,
+        ):
+            raise FileNotFoundError(f"{domain}: missing quality cache for {retriever}")
     queries = load_queries(ws.raw(domain) / "queries.jsonl", domain)
     qrels = load_qrels(ws.raw(domain) / "qrels.tsv", domain)
     sparse, _ = load_rankings(ws.quality("bm25", domain), domain=domain)

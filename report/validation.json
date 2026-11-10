@@ -1,0 +1,80 @@
+{
+  "document": "PE_GH_REPORT.pdf",
+  "updated_client_date": "2026-11-10",
+  "pages": 40,
+  "chapters": 6,
+  "bibliography_entries": 30,
+  "figures": 7,
+  "tables": 11,
+  "template": "User-provided UET thesis template, adapted for the PE-GH group report",
+  "primary_entry": "thesis.tex",
+  "compatible_entry": "main.tex",
+  "both_entries_built": true,
+  "entry_pdf_text_parity": true,
+  "layout": {
+    "body_font": "Times New Roman",
+    "body_font_pt": 13,
+    "baseline_pt": 17,
+    "margins_cm": {
+      "left": 3,
+      "right": 2,
+      "top": 2.5,
+      "bottom": 3
+    },
+    "cover": "Double frame, UET logo and three-member table",
+    "abstracts": [
+      "Vietnamese",
+      "English"
+    ]
+  },
+  "frozen_sources_verified": 9,
+  "numeric_source_records_verified": 114,
+  "active_tex_files_verified": 21,
+  "undefined_references": false,
+  "overfull_boxes": false,
+  "missing_glyphs": false,
+  "text_out_of_bounds": false,
+  "visual_review": {
+    "status": "passed",
+    "all_pages_rendered": 40,
+    "all_pages_reviewed_via_contact_sheets": true,
+    "full_page_targets_reviewed": [17, 21, 38, 39, 40],
+    "findings": "No clipped, overlapping or out-of-bounds text. Method table, updated protocol figure, conclusion and both bibliography pages reviewed at full-page scale."
+  },
+  "pdf_sha256": "266b95753b45923cbe9b3efffdde92f6493277ba8ad134bf3c6f4ee1240f78a7",
+  "scope": "Full editorial review of active report content; implementation details removed while research rationale, evidence and limitations are retained; no new model benchmark run",
+  "remaining": [
+    "Query-level v2 failure examples with full route/ranking/qrels evidence",
+    "Team content review before submission"
+  ],
+  "bibliography_style": "IEEEtran v1.14",
+  "bibliography_pages": [
+    39,
+    40
+  ],
+  "journal_articles": 8,
+  "conference_papers": 22,
+  "cited_papers": 30,
+  "uncited_papers": 0,
+  "internal_bibliography_entries": 0,
+  "model_card_entries": 0,
+  "editorial_review": {
+    "status": "passed",
+    "coverage": "Six active chapters, front matter, captions, tables, figure labels and citations",
+    "implementation_details_removed": [
+      "Feature counts and exact feature specifications",
+      "Library and index configuration",
+      "Fusion weights and vector dimensions",
+      "Fold arithmetic, random seeds and runtime parameters",
+      "Algorithm internals and auxiliary parameter comparisons"
+    ],
+    "preserved": [
+      "Problem, hypotheses and objectives",
+      "Method rationale and high-level principle",
+      "Evaluation conditions and study scope",
+      "Experimental results and statistical interpretation",
+      "All 30 published references and citations"
+    ],
+    "numeric_tables_unchanged": true
+  }
+}

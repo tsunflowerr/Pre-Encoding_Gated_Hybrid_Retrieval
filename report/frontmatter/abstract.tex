@@ -1,0 +1,8 @@
+\chapter*{Tóm tắt}
+Trong tìm kiếm câu hỏi, truy xuất theo từ khóa và truy xuất ngữ nghĩa có thể bổ sung cho nhau, nhưng việc sử dụng cả hai cho mọi truy vấn làm phát sinh chi phí mã hóa và tìm kiếm vector ngay cả khi kết quả từ khóa đã đáp ứng nhu cầu. Báo cáo nghiên cứu khả năng lựa chọn truy vấn cần truy xuất ngữ nghĩa trước khi thực hiện bước mã hóa truy vấn. Mục tiêu là giảm chi phí xử lý trong một giới hạn suy giảm chất lượng được xác định trước.
+
+Phương pháp PE-GH thực hiện BM25 trước, sau đó sử dụng bộ quyết định nhẹ để lựa chọn giữa nhánh chi phí thấp và nhánh truy xuất lai. Hệ thống cuối PE-GH v2 dựa vào truy vấn và kết quả BM25 để nhận biết những trường hợp có nguy cơ không tìm được tài liệu liên quan trong mười vị trí đầu. Ngân sách truy xuất xác định tỷ lệ truy vấn được ưu tiên sử dụng thêm Dense. Bộ quyết định được học trên sáu miền CQADupStack và giữ cố định khi xác nhận trên sáu miền khác.
+
+Trên 8.303 truy vấn thuộc sáu miền xác nhận, bộ quyết định đạt mức cải thiện trung bình macro \ndcg{} là 0,0042 so với quy tắc BM25-margin ở cùng ngân sách 50\%. Với ngân sách vận hành 80\%, PE-GH v2 đạt 0,4159 so với 0,4223 của phương pháp luôn chạy Hybrid; chênh lệch nằm trong biên không kém 0,01 đã đăng ký. Trong phép đo riêng trên Programmers và Unix, mức ngân sách 50\% cho độ trễ trung bình 14,76 ms so với 24,31 ms của Hybrid cùng phiên. Kết quả cho thấy lựa chọn truy vấn có giá trị trong phạm vi đã đánh giá, nhưng lợi ích của bộ quyết định còn nhỏ, không cải thiện nhất quán độ trễ đuôi và không thay thế ưu thế của việc lựa chọn mô hình ngữ nghĩa phù hợp.
+
+\noindent\textbf{Từ khóa:} truy xuất lai, lựa chọn truy vấn, dự báo chất lượng truy xuất, ngân sách mã hóa, CQADupStack.

@@ -1,5 +1,7 @@
 # Quality results
 
+Scope: **PE-GH v1**. These results retain their original freeze and runtime provenance. For PE-GH v2, see the [version guide](../docs/VERSIONS.md) and [v2 results](../docs/KET_QUA_TONG_HOP_PE_GH.md).
+
 ## Final five-fold OOF results, verified 30 October 2026
 
 The table is generated from pinned real data and the exact five-fold OOF test-query

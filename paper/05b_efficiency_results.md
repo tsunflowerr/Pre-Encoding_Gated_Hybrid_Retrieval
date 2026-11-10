@@ -1,5 +1,7 @@
 # Kết quả hiệu năng phần B
 
+Phạm vi: **dense-only của giai đoạn v1**. Kết quả hệ PE-GH v2 hiện hành nằm ở [báo cáo v4](../docs/v4/README.md). Xem [hướng dẫn phiên bản](../docs/VERSIONS.md) để phân biệt các lượt đo.
+
 Lượt PE-GH tích hợp đầy đủ ngày 26/10/2026 nằm ở [báo cáo mới](../docs/integration/2026-10-26/README.md). Phần dưới là nghiệm thu **dense-only B ngày 20/10**, được giữ nguyên để truy vết; các phát biểu “chưa có A/C/gate” chỉ áp dụng cho lượt lịch sử này.
 
 **Đã chạy và audit ngày 20/10/2026.** Dense backend đã build đủ hai corpus, xuất

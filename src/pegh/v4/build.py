@@ -11,6 +11,7 @@ from contracts.io import load_queries
 from contracts.ranking import ranking_to_record
 from contracts.types import Query
 from pegh.data.artifacts import atomic_json, file_hash, object_hash, write_jsonl
+from pegh.v3.cache import checked_dense, checked_quality, retrieval_identity
 from pegh.v4.workspace import ENCODERS, NEW_DOMAINS, Workspace, query_prefix, vector_key
 
 
@@ -47,6 +48,14 @@ def build_dense(ws: Workspace, key: str, domain: str, threads: int):
     output = ws.dense(key, domain)
     manifest_path = output / "manifest.json"
     if manifest_path.exists() and json.loads(manifest_path.read_text())["status"] == "complete":
+        from pegh.dense.config import DenseConfig
+
+        checked_dense(
+            output,
+            ws.raw(domain) / "corpus.jsonl",
+            domain,
+            DenseConfig.from_yaml(ws.repo / ENCODERS[key][0]),
+        )
         return output
     model = encoder(ws, vector_key(key), threads)
     started = time.perf_counter()
@@ -74,8 +83,15 @@ def quality_cache(ws: Workspace, retriever: str, domain: str, threads: int = 4):
     """Top-100 for every query (offline quality/label work only), prefix-aware."""
     output = ws.quality(retriever, domain)
     sidecar = output.with_suffix(output.suffix + ".meta.json")
-    if output.exists() and sidecar.exists():
+    from pegh.dense.config import DenseConfig
+
+    config = (
+        None if retriever == "bm25" else DenseConfig.from_yaml(ws.repo / ENCODERS[retriever][0])
+    )
+    expected_prefix = "" if retriever == "bm25" else query_prefix(retriever)
+    if checked_quality(output, ws, retriever, domain, config=config, prefix=expected_prefix):
         return output
+    retrieval_identity(ws, retriever, domain, config, expected_prefix)
     queries = load_queries(ws.raw(domain) / "queries.jsonl", domain)
     if retriever == "bm25":
         from pegh.sparse.fast import open_backend

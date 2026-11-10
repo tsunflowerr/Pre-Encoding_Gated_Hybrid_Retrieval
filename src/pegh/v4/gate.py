@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from dataclasses import asdict, dataclass
 
 import numpy as np
@@ -132,6 +133,7 @@ def fit(spec: GateSpec, xs: list[np.ndarray], bm25: list[np.ndarray]) -> LinearG
 
 def route_top(score: np.ndarray, forced: np.ndarray, ids: list[str], budget: float) -> np.ndarray:
     """Exact budget: forced queries plus the highest-scored rest (ties by query ID)."""
+    _check_budget_inputs(score, forced, budget, ids)
     chosen = forced.copy()
     rest = int(round(budget * len(score))) - int(forced.sum())
     if rest > 0:
@@ -143,14 +145,99 @@ def route_top(score: np.ndarray, forced: np.ndarray, ids: list[str], budget: flo
 
 
 def quantile_threshold(score: np.ndarray, forced: np.ndarray, budget: float) -> float:
-    """Threshold that encodes `budget` of these (unlabeled) queries, forced ones included."""
+    """Legacy scalar cutoff. Boundary ties require the serialized budget policy below."""
+    _check_budget_inputs(score, forced, budget)
     eligible = np.sort(score[~forced])[::-1]
     target = min(max(round(budget * len(score)) - int(forced.sum()), 0), len(eligible))
     if target == 0:
         return float(np.nextafter(eligible[0], np.inf)) if len(eligible) else 0.0
     if target == len(eligible):
         return float(np.nextafter(eligible[-1], -np.inf))
+    if eligible[target - 1] == eligible[target]:
+        raise ValueError("boundary scores tie; use calibrate_budget with query IDs")
     return float(eligible[target])
+
+
+def _check_budget_inputs(score, forced, budget, ids=None) -> None:
+    if isinstance(budget, bool) or not math.isfinite(budget) or not 0 <= budget <= 1:
+        raise ValueError("budget must be finite and between 0 and 1")
+    if score.ndim != 1 or forced.shape != score.shape or forced.dtype != np.bool_:
+        raise ValueError("scores and boolean forced mask must be aligned vectors")
+    if not np.isfinite(score).all():
+        raise ValueError("gate scores must be finite")
+    if ids is not None and (
+        len(ids) != len(score)
+        or len(set(ids)) != len(ids)
+        or any(not isinstance(q, str) or not q for q in ids)
+    ):
+        raise ValueError("calibration query IDs must be unique nonempty strings")
+
+
+@dataclass(frozen=True)
+class BudgetPolicy:
+    """A calibration cutoff with the same score/query-ID order as exact-budget routing.
+
+    Exact counts apply to the calibration set only. Forced queries take precedence;
+    their ratio is a lower bound, and future query distributions may change route rates.
+    """
+
+    threshold: float
+    tie_query_id: str | None
+    nonforced: bool | None
+    budget: float
+    calibration_count: int
+    forced_count: int
+
+    def use_dense(self, score: float, query_id: str, forced: bool = False) -> bool:
+        if not math.isfinite(score):
+            raise ValueError("gate score must be finite")
+        if forced:
+            return True
+        if self.nonforced is not None:
+            return self.nonforced
+        return bool(
+            score > self.threshold
+            or (
+                score == self.threshold
+                and self.tie_query_id is not None
+                and query_id <= self.tie_query_id
+            )
+        )
+
+    def to_json(self) -> dict:
+        return {"schema_version": "pegh_budget_policy_1", **asdict(self)}
+
+    @classmethod
+    def from_json(cls, payload: dict) -> BudgetPolicy:
+        if payload.get("schema_version") != "pegh_budget_policy_1":
+            raise ValueError("unsupported budget policy schema")
+        policy = cls(**{k: payload[k] for k in cls.__dataclass_fields__})
+        if not math.isfinite(policy.threshold) or not 0 <= policy.budget <= 1:
+            raise ValueError("invalid budget policy cutoff/budget")
+        if policy.nonforced is not None and type(policy.nonforced) is not bool:
+            raise ValueError("invalid budget policy nonforced decision")
+        if policy.tie_query_id is not None and not isinstance(policy.tie_query_id, str):
+            raise ValueError("invalid budget policy tie cutoff")
+        if not 0 <= policy.forced_count <= policy.calibration_count:
+            raise ValueError("invalid budget policy calibration counts")
+        return policy
+
+
+def calibrate_budget(score: np.ndarray, forced: np.ndarray, ids: list[str], budget: float):
+    _check_budget_inputs(score, forced, budget, ids)
+    order = sorted(
+        (i for i in range(len(score)) if not forced[i]), key=lambda i: (-score[i], ids[i])
+    )
+    target = min(max(round(budget * len(score)) - int(forced.sum()), 0), len(order))
+    nonforced, tie = None, None
+    if target == 0 or target == len(order):
+        nonforced = target > 0
+        threshold = float(score[order[0]]) if order else 0.0
+    elif score[order[target - 1]] == score[order[target]]:
+        threshold, tie = float(score[order[target - 1]]), ids[order[target - 1]]
+    else:
+        threshold = float(score[order[target]])
+    return BudgetPolicy(threshold, tie, nonforced, float(budget), len(score), int(forced.sum()))
 
 
 def best_static(utilities: list[dict], options) -> str:
