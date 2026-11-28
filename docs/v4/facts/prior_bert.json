@@ -1,0 +1,43 @@
+{
+  "model": "google-bert/bert-base-uncased",
+  "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+  "max_length": 256,
+  "label": "BM25 has no relevant result in the top T",
+  "label_top_t": 10,
+  "input": "query [SEP] title + body of the top BM25 document",
+  "epochs": 1,
+  "batch": 8,
+  "learning_rate": 2e-05,
+  "seed": 42,
+  "trained_on": [
+    "programmers",
+    "unix",
+    "android",
+    "gis",
+    "mathematica",
+    "webmasters"
+  ],
+  "training": {
+    "steps": 606,
+    "mean_loss": 0.5814406317797037,
+    "last_50_loss": 0.5281684452295303,
+    "seconds": 5327.1,
+    "queries": 4842,
+    "positive_rate": 0.5749690210656754
+  },
+  "scoring_seconds": 1971.1,
+  "latency": {
+    "queries": 300,
+    "median_ms": 126.72815,
+    "mean_ms": 133.560261,
+    "p95_ms": 190.7232,
+    "affinity": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "torch_threads": 4
+  },
+  "seed_scope": "training shuffle and dropout; classifier initialization is unseeded"
+}

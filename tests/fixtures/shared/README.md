@@ -8,6 +8,6 @@ fixture kiểm tính đúng/integration, không phải benchmark hoặc relevanc
 - `manifest.json`: counts, text policy và SHA256 của cả bốn JSONL files.
 
 Đọc qua `contracts.io.iter_corpus/load_queries`, không tự ghép title/text hay đổi
-ID. Xem [base chung](../../../docs/SHARED_BASE.md) để biết API và model revision.
+ID. API nằm ở `contracts/`; model và revision ghim ở `contracts/resources/primary_model.json`.
 
-Kiểm từ repository root: `python scripts_shared/check_base.py`.
+Fixture được kiểm trong `tests/shared/test_contracts.py`.

@@ -1,0 +1,37 @@
+{
+  "encoders": {
+    "minilm": {
+      "median_ms": 8.7844,
+      "mean_ms": 8.952654666666668,
+      "p95_ms": 10.0883
+    },
+    "bge_small": {
+      "median_ms": 15.37355,
+      "mean_ms": 15.537317333333334,
+      "p95_ms": 17.3068
+    },
+    "bge_small_q": {
+      "median_ms": 15.94215,
+      "mean_ms": 16.314597,
+      "p95_ms": 18.2618
+    },
+    "arctic_xs": {
+      "median_ms": 8.3094,
+      "mean_ms": 8.584814333333334,
+      "p95_ms": 10.6232
+    },
+    "arctic_xs_q": {
+      "median_ms": 8.72405,
+      "mean_ms": 8.929693333333333,
+      "p95_ms": 10.4239
+    }
+  },
+  "affinity": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "torch_threads": 4,
+  "queries": 300
+}

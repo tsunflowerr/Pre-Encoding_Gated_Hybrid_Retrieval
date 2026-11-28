@@ -1,0 +1,66 @@
+{
+  "programmers": {
+    "status": "exploratory",
+    "recipe": {
+      "model": "google-bert/bert-base-uncased",
+      "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+      "held_out": "programmers",
+      "trained_on": [
+        "unix",
+        "android",
+        "gis",
+        "mathematica",
+        "webmasters"
+      ],
+      "label": "BM25 nDCG@10 == 0",
+      "max_length": 256,
+      "epochs": 1,
+      "batch": 8,
+      "learning_rate": 2e-05,
+      "seed": 42,
+      "seed_scope": "classification-head initialization, training shuffle and dropout"
+    },
+    "training": {
+      "steps": 496,
+      "mean_loss": 0.592722246843961,
+      "last_50_loss": 0.5709118157625198,
+      "seconds": 6215.2,
+      "queries": 3966,
+      "positive_rate": 0.5774079677256682
+    },
+    "model_sha256": "b11c30cb416dd9f8d81226bafacd7c57408eb691ece5dec8ccfa92ed6613f0fa",
+    "completed_at_utc": "2026-11-01T04:21:52.973717+00:00"
+  },
+  "unix": {
+    "status": "exploratory",
+    "recipe": {
+      "model": "google-bert/bert-base-uncased",
+      "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+      "held_out": "unix",
+      "trained_on": [
+        "programmers",
+        "android",
+        "gis",
+        "mathematica",
+        "webmasters"
+      ],
+      "label": "BM25 nDCG@10 == 0",
+      "max_length": 256,
+      "epochs": 1,
+      "batch": 8,
+      "learning_rate": 2e-05,
+      "seed": 42,
+      "seed_scope": "classification-head initialization, training shuffle and dropout"
+    },
+    "training": {
+      "steps": 472,
+      "mean_loss": 0.6083413458476632,
+      "last_50_loss": 0.5849532872438431,
+      "seconds": 3688.5,
+      "queries": 3770,
+      "positive_rate": 0.5657824933687002
+    },
+    "model_sha256": "34a05878214b5bb561563efa5e5b0389f4000e43fb45b7b851a14fd0788243ff",
+    "completed_at_utc": "2026-11-01T05:23:28.570229+00:00"
+  }
+}

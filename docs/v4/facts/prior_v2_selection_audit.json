@@ -1,0 +1,44 @@
+{
+  "programmers": {
+    "trained_on": [
+      "unix",
+      "android",
+      "gis",
+      "mathematica",
+      "webmasters"
+    ],
+    "area": {
+      "fail_v1_global": 0.3728649034665322,
+      "fail_v1_domain": 0.37327936962435293,
+      "fail_v1+qpp_global": 0.3726651220169114,
+      "fail_v1+qpp_domain": 0.373281750034068,
+      "low_v1_global": 0.3714604962363744,
+      "low_v1_domain": 0.37157955640086815,
+      "low_v1+qpp_global": 0.3718497223931035,
+      "low_v1+qpp_domain": 0.3719648922812867
+    },
+    "selected": "fail_v1+qpp_domain",
+    "frozen": "fail_v1+qpp_domain"
+  },
+  "unix": {
+    "trained_on": [
+      "programmers",
+      "android",
+      "gis",
+      "mathematica",
+      "webmasters"
+    ],
+    "area": {
+      "fail_v1_global": 0.37374100534598587,
+      "fail_v1_domain": 0.37383486630732543,
+      "fail_v1+qpp_global": 0.3730268465132166,
+      "fail_v1+qpp_domain": 0.37349214063977954,
+      "low_v1_global": 0.37179439223410926,
+      "low_v1_domain": 0.37202820408258785,
+      "low_v1+qpp_global": 0.3719687206738052,
+      "low_v1+qpp_domain": 0.3722970307768446
+    },
+    "selected": "fail_v1_domain",
+    "frozen": "fail_v1+qpp_domain"
+  }
+}

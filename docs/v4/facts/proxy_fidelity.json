@@ -1,0 +1,50 @@
+{
+  "arctic_xs_q/programmers": {
+    "queries": 300,
+    "mean_pearson": 0.39233570022917286
+  },
+  "arctic_xs_q/unix": {
+    "queries": 300,
+    "mean_pearson": 0.3837902814308034
+  },
+  "arctic_xs_q/android": {
+    "queries": 300,
+    "mean_pearson": 0.3186136362943019
+  },
+  "arctic_xs_q/gis": {
+    "queries": 300,
+    "mean_pearson": 0.28328727495294764
+  },
+  "arctic_xs_q/mathematica": {
+    "queries": 300,
+    "mean_pearson": 0.3813088890647539
+  },
+  "arctic_xs_q/webmasters": {
+    "queries": 300,
+    "mean_pearson": 0.3384615430222309
+  },
+  "arctic_xs_q/english": {
+    "queries": 300,
+    "mean_pearson": 0.3231465701538941
+  },
+  "arctic_xs_q/gaming": {
+    "queries": 300,
+    "mean_pearson": 0.3296139606146976
+  },
+  "arctic_xs_q/physics": {
+    "queries": 300,
+    "mean_pearson": 0.3357662604472326
+  },
+  "arctic_xs_q/stats": {
+    "queries": 300,
+    "mean_pearson": 0.30321560648626966
+  },
+  "arctic_xs_q/tex": {
+    "queries": 300,
+    "mean_pearson": 0.3191958008931385
+  },
+  "arctic_xs_q/wordpress": {
+    "queries": 300,
+    "mean_pearson": 0.31518070216082616
+  }
+}
