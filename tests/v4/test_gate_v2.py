@@ -152,7 +152,7 @@ def test_holm_step_down():
     import importlib.util
     import sys
 
-    path = Path(__file__).resolve().parents[2] / "scripts_shared/experiment_v4.py"
+    path = Path(__file__).resolve().parents[2] / "scripts/experiment_v4.py"
     module_spec = importlib.util.spec_from_file_location("experiment_v4", path)
     module = importlib.util.module_from_spec(module_spec)
     sys.modules["experiment_v4"] = module

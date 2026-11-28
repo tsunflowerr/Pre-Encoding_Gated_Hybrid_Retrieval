@@ -56,9 +56,9 @@ def main() -> None:
     ):
         raise ValueError("threshold input provenance differs")
     script_names = (
-        "scripts_c/select_thresholds.py",
-        "scripts_c/freeze_c6.py",
-        "scripts_c/export_c6_runs.py",
+        "scripts/v1/select_thresholds.py",
+        "scripts/v1/freeze_c6.py",
+        "scripts/v1/export_c6_runs.py",
     )
     frozen = {
         "schema_version": "c6_freeze_v1",

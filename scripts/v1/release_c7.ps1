@@ -12,7 +12,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Full test suite failed.' }
 if ($LASTEXITCODE -ne 0) { throw 'Part C test suite failed.' }
 & $ruff check .
 if ($LASTEXITCODE -ne 0) { throw 'Ruff check failed.' }
-& $python -X utf8 scripts_c/report_gating.py
+& $python -X utf8 scripts/v1/report_gating.py
 if ($LASTEXITCODE -ne 0) { throw 'C7 report regeneration failed.' }
 
 $report = Get-Content -LiteralPath 'results/reports/c7_report.json' -Raw -Encoding UTF8 |

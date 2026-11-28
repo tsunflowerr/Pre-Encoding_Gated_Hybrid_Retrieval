@@ -9,7 +9,7 @@ from contracts import Ranking, SearchHit
 from contracts.ranking import ranking_to_record
 from pegh.data.artifacts import file_hash, write_jsonl
 from pegh.evaluation.failures import outcome, select_cases
-from scripts_a.materialize_fold_runs import materialize_fold_runs
+from scripts.v1.materialize_fold_runs import materialize_fold_runs
 from tests.a.test_oof import _fixture
 
 

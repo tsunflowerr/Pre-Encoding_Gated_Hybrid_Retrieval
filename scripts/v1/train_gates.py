@@ -167,8 +167,8 @@ def main() -> None:
     label_config_path = root / "configs" / "gating" / "labels_v1.yaml"
     if c3["label_config_sha256"] != file_hash(label_config_path):
         raise ValueError("C3 label recipe changed after materialization")
-    c3_source_path = root / "scripts_c" / "build_training_tables.py"
-    if c3["source_sha256"]["scripts_c/build_training_tables.py"] != file_hash(c3_source_path):
+    c3_source_path = root / "scripts/v1" / "build_training_tables.py"
+    if c3["source_sha256"]["scripts/v1/build_training_tables.py"] != file_hash(c3_source_path):
         raise ValueError("C3 builder source changed after materialization")
     schema_path = root / config["feature_schema"]
     schema = json.loads(schema_path.read_text(encoding="utf-8"))
@@ -187,7 +187,7 @@ def main() -> None:
         "scipy": scipy.__version__,
     }
     source_hashes = {
-        "scripts_c/train_gates.py": file_hash(root / "scripts_c" / "train_gates.py"),
+        "scripts/v1/train_gates.py": file_hash(root / "scripts/v1" / "train_gates.py"),
         "src/pegh/gating/models.py": file_hash(root / "src" / "pegh" / "gating" / "models.py"),
     }
     results = []

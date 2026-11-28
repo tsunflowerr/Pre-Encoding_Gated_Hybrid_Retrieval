@@ -103,7 +103,7 @@ def main() -> None:
                 "feature_rows_sha256": file_hash(run_output),
                 "protocol_config_sha256": file_hash(config_path),
                 "extractor_sha256": file_hash(root / "src" / "pegh" / "gating" / "features.py"),
-                "materializer_sha256": file_hash(root / "scripts_c" / "materialize_features.py"),
+                "materializer_sha256": file_hash(root / "scripts/v1" / "materialize_features.py"),
             },
         )
         print(f"{domain}: materialized {len(records)} feature vectors")

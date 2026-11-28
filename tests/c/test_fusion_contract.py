@@ -4,7 +4,7 @@ import pytest
 
 from contracts.types import Ranking, SearchHit
 from pegh.fusion.engines import fuse_cc, fuse_rrf
-from scripts_c.select_fusion import _choose
+from scripts.v1.select_fusion import _choose
 
 
 def _ranking(scores: list[tuple[str, float]], retriever: str) -> Ranking:

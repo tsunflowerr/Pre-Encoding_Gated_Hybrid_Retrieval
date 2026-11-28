@@ -147,8 +147,8 @@ def test_derived_cache_is_bound_to_real_workspace_dependencies(workspace, kind):
     module.quality_cache(ws, "bm25", "unix")
     sources = [
         "configs/gating/protocol_v1.yaml",
-        "scripts_shared/experiment_v3.py",
-        "scripts_shared/experiment_v4.py",
+        "scripts/experiment_v3.py",
+        "scripts/experiment_v4.py",
     ]
     sources += [
         f"src/pegh/{p}"

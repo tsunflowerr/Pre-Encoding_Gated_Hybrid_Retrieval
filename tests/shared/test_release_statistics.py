@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from scripts_shared.report_release import paired_speedups
+from scripts.report_release import paired_speedups
 
 
 def test_speedup_bootstrap_keeps_methods_paired_and_domain_counts_fixed():

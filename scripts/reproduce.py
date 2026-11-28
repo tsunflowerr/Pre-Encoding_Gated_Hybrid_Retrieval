@@ -101,8 +101,8 @@ def prepare(root: Path, args) -> None:
                 root / "data/raw" / domain / "qrels.tsv",
                 settings["expected"]["qrels_sha256"],
             )
-    run(root, "scripts_a/fetch_inputs.py")
-    run(root, "scripts_a/prepare_data.py")
+    run(root, "scripts/v1/fetch_inputs.py")
+    run(root, "scripts/v1/prepare_data.py")
     for domain, settings in config["domains"].items():
         sparse = root / "artifacts/sparse" / domain
         if not (sparse / "manifest.json").exists():
@@ -121,7 +121,7 @@ def prepare(root: Path, args) -> None:
             else:
                 run(
                     root,
-                    "scripts_a/build_sparse.py",
+                    "scripts/v1/build_sparse.py",
                     "--corpus",
                     f"data/raw/{domain}/corpus.jsonl",
                     "--domain",
@@ -138,7 +138,7 @@ def prepare(root: Path, args) -> None:
         if not verification.exists():
             run(
                 root,
-                "scripts_b/verify_dense_index.py",
+                "scripts/v1/verify_dense_index.py",
                 "--index",
                 str(dense),
                 "--expected-count",
@@ -168,7 +168,7 @@ def prepare(root: Path, args) -> None:
             if method == "bm25":
                 run(
                     root,
-                    "scripts_a/generate_sparse_runs.py",
+                    "scripts/v1/generate_sparse_runs.py",
                     "--index",
                     str(sparse),
                     "--execution",
@@ -178,7 +178,7 @@ def prepare(root: Path, args) -> None:
             else:
                 run(
                     root,
-                    "scripts_b/generate_dense_runs.py",
+                    "scripts/v1/generate_dense_runs.py",
                     "--index",
                     str(dense),
                     "--cache-folder",
@@ -381,12 +381,12 @@ def train(root: Path, args) -> None:
         "select_thresholds": "results/thresholds/c6_validation.json",
     }
     for script, output in outputs.items():
-        step(root, script, f"scripts_c/{script}.py", [], [root / output])
+        step(root, script, f"scripts/v1/{script}.py", [], [root / output])
     execution = select_execution(root, args)
     step(
         root,
         "freeze",
-        "scripts_c/freeze_c6.py",
+        "scripts/v1/freeze_c6.py",
         [
             "--dense-root",
             args.dense_root,
@@ -442,7 +442,7 @@ def quality(root: Path, args) -> None:
     step(
         root,
         "export_primary",
-        "scripts_c/export_c6_runs.py",
+        "scripts/v1/export_c6_runs.py",
         [],
         [
             root / f"results/oof_runs/{method}/{domain}/fold_{fold}.jsonl.meta.json"
@@ -455,7 +455,7 @@ def quality(root: Path, args) -> None:
         step(
             root,
             f"materialize_bm25_{domain}",
-            "scripts_a/materialize_fold_runs.py",
+            "scripts/v1/materialize_fold_runs.py",
             [
                 "--run",
                 f"results/quality/bm25/{domain}.jsonl",
@@ -480,14 +480,14 @@ def quality(root: Path, args) -> None:
     step(
         root,
         "evaluate_primary",
-        "scripts_a/run_final_oof.py",
+        "scripts/v1/run_final_oof.py",
         ["--registry", str(quality_registry(root, primary)), "--output", "results/oof/c6_final"],
         [root / "results/oof/c6_final/summary.json", root / "results/oof/c6_final/per_query.csv"],
     )
     step(
         root,
         "export_controls",
-        "scripts_c/export_c6_controls.py",
+        "scripts/v1/export_c6_controls.py",
         [],
         [
             root / f"results/oof_runs/dense/{domain}/fold_{fold}.jsonl.meta.json"
@@ -501,7 +501,7 @@ def quality(root: Path, args) -> None:
     step(
         root,
         "evaluate_controls",
-        "scripts_a/run_final_oof.py",
+        "scripts/v1/run_final_oof.py",
         [
             "--registry",
             str(quality_registry(root, controls)),
@@ -513,7 +513,7 @@ def quality(root: Path, args) -> None:
     step(
         root,
         "quality_diagnostics",
-        "scripts_c/report_c6_diagnostics.py",
+        "scripts/v1/report_c6_diagnostics.py",
         [],
         [root / "results/oof/c6_final/random30_oracle.json"],
     )
@@ -572,13 +572,13 @@ def online(root: Path, args) -> None:
 def report(root: Path, args) -> None:
     run(
         root,
-        "scripts_c/report_gating.py",
+        "scripts/v1/report_gating.py",
         "--figure-dir",
         "results/reports/figures",
         "--facts-output",
         "results/reports/release-facts.json",
     )
-    run(root, "scripts_shared/report_release.py")
+    run(root, "scripts/report_release.py")
 
 
 def main() -> None:

@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts_shared.reproduce import completed_benchmark
+from scripts.reproduce import completed_benchmark
 from tests.b.test_profiling import inputs, registry, settings
 
 

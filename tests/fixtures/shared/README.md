@@ -8,6 +8,6 @@ fixture kiểm tính đúng/integration, không phải benchmark hoặc relevanc
 - `manifest.json`: counts, text policy và SHA256 của cả bốn JSONL files.
 
 Đọc qua `contracts.io.iter_corpus/load_queries`, không tự ghép title/text hay đổi
-ID. API nằm ở `contracts/`; model và revision ghim ở `contracts/resources/primary_model.json`.
+ID. API nằm ở `src/contracts/`; model và revision ghim ở `src/contracts/resources/primary_model.json`.
 
 Fixture được kiểm trong `tests/shared/test_contracts.py`.

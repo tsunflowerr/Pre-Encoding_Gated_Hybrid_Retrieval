@@ -42,13 +42,14 @@ packages = [
   "pegh.v3",
   "pegh.v4",
 ]
-package-dir = {"" = "src", "contracts" = "contracts"}
+package-dir = {"" = "src"}
 
 [tool.setuptools.package-data]
 contracts = ["schemas/*.json", "resources/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
 markers = ["model: needs the pinned real model and network/local model cache"]
 addopts = "-ra"
 

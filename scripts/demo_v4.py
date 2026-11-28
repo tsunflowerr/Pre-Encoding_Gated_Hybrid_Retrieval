@@ -3,7 +3,7 @@
 Uses the frozen gate (configs/v4/gate_v2.json) and its fixed fusion choices; the threshold
 encodes the operating budget of this domain's (unlabeled) query set. Standard library only:
 
-    python scripts_shared/demo_v4.py --domain unix --port 8765
+    python scripts/demo_v4.py --domain unix --port 8765
 """
 
 from __future__ import annotations

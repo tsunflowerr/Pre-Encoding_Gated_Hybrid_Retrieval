@@ -1,4 +1,4 @@
-# Run from any directory: powershell -NoProfile -ExecutionPolicy Bypass -File <repo>/scripts_c/finish_c0.ps1
+# Run from any directory: powershell -NoProfile -ExecutionPolicy Bypass -File <repo>/scripts/v1/finish_c0.ps1
 $ErrorActionPreference = 'Stop'
 $taskRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $taskRoot
@@ -21,14 +21,14 @@ foreach ($domain in @('programmers', 'unix')) {
         if (-not (Test-Path -LiteralPath "data/raw/$domain/$name")) { $taskMissingRaw = $true }
     }
 }
-if ($taskMissingRaw) { Run-Python @('scripts_a/fetch_inputs.py') }
-Run-Python @('scripts_a/prepare_data.py')
+if ($taskMissingRaw) { Run-Python @('scripts/v1/fetch_inputs.py') }
+Run-Python @('scripts/v1/prepare_data.py')
 
 foreach ($domain in @('programmers', 'unix')) {
     if (-not (Test-Path -LiteralPath "artifacts/sparse/$domain/index.sqlite3") -or
         -not (Test-Path -LiteralPath "artifacts/sparse/$domain/manifest.json")) {
         Run-Python @(
-            'scripts_a/build_sparse.py', '--corpus', "data/raw/$domain/corpus.jsonl",
+            'scripts/v1/build_sparse.py', '--corpus', "data/raw/$domain/corpus.jsonl",
             '--domain', $domain, '--output', "artifacts/sparse/$domain"
         )
     }
@@ -58,7 +58,7 @@ foreach ($domain in @('programmers', 'unix')) {
             continue
         }
         $taskArgs = @(
-            'scripts_b/build_dense.py', '--corpus', "data/raw/$domain/corpus.jsonl",
+            'scripts/v1/build_dense.py', '--corpus', "data/raw/$domain/corpus.jsonl",
             '--domain', $domain, '--expected-count', "$taskExpected", '--output', $taskIndex,
             '--cache-folder', 'artifacts/models', '--runtime', 'configs/runtime/cpu4.yaml'
         )
@@ -69,7 +69,7 @@ foreach ($domain in @('programmers', 'unix')) {
     $taskVerification = Join-Path $taskDenseRoot "$domain-verification.json"
     if (-not (Test-Path -LiteralPath $taskVerification)) {
         Run-Python @(
-            'scripts_b/verify_dense_index.py', '--index', $taskIndex,
+            'scripts/v1/verify_dense_index.py', '--index', $taskIndex,
             '--expected-count', "$taskExpected", '--output', $taskVerification
         )
     }
@@ -88,7 +88,7 @@ foreach ($domain in @('programmers', 'unix')) {
     }
     if (-not (Test-Path -LiteralPath $taskDenseRun)) {
         Run-Python @(
-            'scripts_b/generate_dense_runs.py', '--index', $taskIndex,
+            'scripts/v1/generate_dense_runs.py', '--index', $taskIndex,
             '--queries', "data/raw/$domain/queries.jsonl", '--output', $taskDenseRun,
             '--split', 'development_validation', '--cache-folder', 'artifacts/models',
             '--runtime', 'configs/runtime/cpu4.yaml'
@@ -141,7 +141,7 @@ foreach ($domain in @('programmers', 'unix')) {
         }
         $taskOutput = "results/c0_audit/${method}_$domain"
         Run-Python @(
-            'scripts_a/evaluate_quality.py', '--queries', "data/raw/$domain/queries.jsonl",
+            'scripts/v1/evaluate_quality.py', '--queries', "data/raw/$domain/queries.jsonl",
             '--qrels', "data/raw/$domain/qrels.tsv", '--run', $taskRun,
             '--domain', $domain, '--output', $taskOutput
         )

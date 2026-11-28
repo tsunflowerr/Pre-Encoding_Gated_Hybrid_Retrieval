@@ -18,13 +18,13 @@ Trong phép đo tuần tự trên CPU (Programmers và Unix), độ trễ trung 
 | Thư mục | Nội dung |
 |---|---|
 | `src/pegh/` | Thư viện: BM25 (`sparse/`), mã hóa và FAISS (`dense/`), dung hợp (`fusion/`), đặc trưng (`gating/`, `v3/features.py`), bộ quyết định PE-GH (`v4/gate.py`), phục vụ trực tuyến (`v4/online.py`), đo CPU (`profiling/`), đối chứng LiteGator và BERT (`v4/prior.py`) |
-| `contracts/` | Kiểu dữ liệu, đọc/ghi JSONL, ID, mô hình ghim revision |
+| `src/contracts/` | Kiểu dữ liệu, đọc/ghi JSONL, ID, mô hình ghim revision |
 | `configs/` | Cấu hình đã đóng băng: BM25, encoder, bộ quyết định (`v4/gate_v2.json`), giao thức đăng ký trước (`v4/preregistration.yaml`), máy đo (`runtime/`) |
 | `data/` | Chia năm phần và manifest của Programmers, Unix (dữ liệu thô tải về, không nằm trong Git) |
-| `scripts_a/`, `scripts_b/`, `scripts_c/` | Chuẩn bị dữ liệu, chỉ mục và pipeline PE-GH v1 cho Programmers và Unix (đầu vào của các vòng sau) |
-| `scripts_shared/` | `reproduce.py` (chạy pipeline v1), `experiment_v3.py`, `experiment_v4.py` (vòng v4 = PE-GH bản báo cáo), `demo_v4.py` |
+| `scripts/` | `reproduce.py` (chạy pipeline v1), `experiment_v3.py`, `experiment_v4.py` (vòng v4 = PE-GH bản báo cáo), `demo_v4.py` |
+| `scripts/v1/` | Các bước của pipeline v1 mà `reproduce.py` gọi: tải và chuẩn bị dữ liệu, chỉ mục BM25 và MiniLM, đặc trưng, huấn luyện và đóng băng bộ quyết định v1, lượt chạy OOF. Kết quả của các bước này là đầu vào của vòng v3, v4 |
 | `docs/v4/` | Số liệu đã đóng băng (`facts/`), hình và mô tả vòng v4 |
-| `docs/integration/2026-10-26/online-manifests/` | Danh sách truy vấn đo trực tuyến theo từng phần, đầu vào của bước `online-plan` |
+| `docs/online-manifests/` | Danh sách truy vấn đo trực tuyến theo từng phần, đầu vào của bước `online-plan` |
 | `tests/` | Kiểm tra tính đúng (không cần mô hình thật, trừ các test đánh dấu `model`) |
 
 Tên `v3`/`v4` chỉ vòng thực nghiệm. Hệ thống trong báo cáo là PE-GH v2, chốt ở vòng v4; PE-GH v1 (MiniLM) là hệ tham chiếu.
@@ -38,7 +38,7 @@ python -m pip install uv==0.13.3
 uv sync --locked --extra dev
 ```
 
-Mô hình (Arctic Embed XS, MiniLM, BERT-base) được tải theo revision ghim trong `configs/` khi chạy lần đầu. Dữ liệu CQADupStack bản BEIR được tải bằng `scripts_a/fetch_inputs.py` và `experiment_v3.py`/`experiment_v4.py` (bước `build`, `fetch`).
+Mô hình (Arctic Embed XS, MiniLM, BERT-base) được tải theo revision ghim trong `configs/` khi chạy lần đầu. Dữ liệu CQADupStack bản BEIR được tải bằng `scripts/v1/fetch_inputs.py` và `experiment_v3.py`/`experiment_v4.py` (bước `build`, `fetch`).
 
 ## 2. Demo
 
@@ -56,7 +56,7 @@ CI (`.github/workflows/ci.yml`) chạy ruff, các test trên và kiểm wheel tr
 Sau khi có chỉ mục và bộ quyết định (mục 3):
 
 ```bash
-uv run python scripts_shared/demo_v4.py --domain unix --port 8765
+uv run python scripts/demo_v4.py --domain unix --port 8765
 ```
 
 Mở `http://localhost:8765`, gõ câu hỏi để xem điểm rủi ro, nhánh được chọn, thời gian từng bước và kết quả.
@@ -68,18 +68,18 @@ Mỗi bước ghi kết quả ra ngoài Git (mặc định `~/.cache/pegh/...`, 
 **Bước 1. PE-GH v1 cho Programmers và Unix.** Bước này sinh dữ liệu thô, chỉ mục BM25, chỉ mục MiniLM, các đặc trưng và lượt chạy OOF của `h_star`/`pe_gh` v1. Vòng v4 đọc lại các kết quả này: đặc trưng v1 để kiểm parity, hai cấu hình v1 trong phiên CPU chính.
 
 ```bash
-uv run python scripts_a/fetch_inputs.py
-uv run python scripts_a/prepare_data.py
-uv run python scripts_b/build_dense.py --corpus data/raw/<miền>/corpus.jsonl --domain <miền> --output <dense-root>/<miền>   # programmers, unix
-uv run python scripts_shared/reproduce.py --stage prepare --dense-root <dense-root> --cache-folder <hf-cache>
-uv run python scripts_shared/reproduce.py --stage train   --dense-root <dense-root> --cache-folder <hf-cache>
-uv run python scripts_shared/reproduce.py --stage quality --dense-root <dense-root> --cache-folder <hf-cache>
+uv run python scripts/v1/fetch_inputs.py
+uv run python scripts/v1/prepare_data.py
+uv run python scripts/v1/build_dense.py --corpus data/raw/<miền>/corpus.jsonl --domain <miền> --output <dense-root>/<miền>   # programmers, unix
+uv run python scripts/reproduce.py --stage prepare --dense-root <dense-root> --cache-folder <hf-cache>
+uv run python scripts/reproduce.py --stage train   --dense-root <dense-root> --cache-folder <hf-cache>
+uv run python scripts/reproduce.py --stage quality --dense-root <dense-root> --cache-folder <hf-cache>
 ```
 
 **Bước 2. Vòng v3: bốn miền phát triển còn lại** (Android, GIS, Mathematica, Webmasters) và các cache dùng chung.
 
 ```bash
-uv run python scripts_shared/experiment_v3.py build
+uv run python scripts/experiment_v3.py build
 ```
 
 **Bước 3. Vòng v4: PE-GH bản báo cáo.** Thứ tự các bước:
@@ -94,7 +94,7 @@ uv run python scripts_shared/experiment_v3.py build
 | `report` | Chép `facts/` và vẽ hình vào `docs/v4/` | — |
 
 ```bash
-uv run python scripts_shared/experiment_v4.py <bước> --encoders arctic_xs_q
+uv run python scripts/experiment_v4.py <bước> --encoders arctic_xs_q
 ```
 
 Phiên CPU chính dùng 4 lõi, 50 truy vấn khởi động và 5 lần lặp (`configs/runtime/cpu4.yaml`). Các số liệu trong báo cáo được đo trên Windows, Intel Core i7-9850H, RAM 16 GB.
@@ -116,8 +116,8 @@ Theo thứ tự các mục của báo cáo (số dòng theo nhánh này):
 | Thuật toán 3.1 | Quyết định khi phục vụ: lượt bắt buộc, so ngưỡng | `src/pegh/v4/online.py:147-153` |
 | 4.2 | Chia năm phần, gom truy vấn trùng nội dung hoặc cùng liên quan | `src/pegh/data/splits.py:35` |
 | 4.3 | LiteGator (SVM tuyến tính), BERT | `src/pegh/v4/prior.py:32`, `:62`, `:104` |
-| 4.4 | Bootstrap theo nhóm, Holm | `src/pegh/v3/pipeline.py:432`, `scripts_shared/experiment_v3.py:448`, `scripts_shared/experiment_v4.py:652` |
-| 4.5, 5.3 | Đo đầu cuối trên CPU | `src/pegh/profiling/runner.py:17`, `scripts_shared/experiment_v4.py:837`, `:1052`, `:1092` |
+| 4.4 | Bootstrap theo nhóm, Holm | `src/pegh/v3/pipeline.py:432`, `scripts/experiment_v3.py:448`, `scripts/experiment_v4.py:652` |
+| 4.5, 5.3 | Đo đầu cuối trên CPU | `src/pegh/profiling/runner.py:17`, `scripts/experiment_v4.py:837`, `:1050`, `:1090` |
 
 ## 5. Giới hạn
 

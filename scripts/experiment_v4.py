@@ -950,9 +950,7 @@ def online_plan(ws: Workspace, args) -> None:
             )
             thresholds = {name: policy.threshold for name, policy in policies.items()}
             registry = []
-            v1_path = (
-                ws.repo / f"docs/integration/2026-10-26/online-manifests/{domain}_fold_{fold}.json"
-            )
+            v1_path = ws.repo / f"docs/online-manifests/{domain}_fold_{fold}.json"
             for entry in json.loads(v1_path.read_text(encoding="utf-8"))["registry"]:
                 if entry["id"] in ("h_star", "pe_gh"):
                     if "protocol_path" in entry["kwargs"]:

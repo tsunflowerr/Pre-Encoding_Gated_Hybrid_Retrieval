@@ -160,7 +160,7 @@ def main() -> None:
     controls = config["controls"]
     label_recipe_hash = object_hash({"targets": labels, "controls": controls})
     output_root = root / args.output_dir
-    builder_hash = file_hash(root / "scripts_c" / "build_training_tables.py")
+    builder_hash = file_hash(root / "scripts/v1" / "build_training_tables.py")
     artifacts: list[dict] = []
 
     for domain in sorted(split["domains"]):
@@ -212,8 +212,8 @@ def main() -> None:
         engine_key = str(Path("src") / "pegh" / "fusion" / "engines.py")
         if fusion_report["source_sha256"][engine_key] != engine_hash:
             raise ValueError("C1 report refers to a different fusion implementation")
-        selector_hash = file_hash(root / "scripts_c" / "select_fusion.py")
-        selector_key = str(Path("scripts_c") / "select_fusion.py")
+        selector_hash = file_hash(root / "scripts/v1" / "select_fusion.py")
+        selector_key = str(Path("scripts/v1") / "select_fusion.py")
         if fusion_report["source_sha256"][selector_key] != selector_hash:
             raise ValueError("C1 report refers to a different fusion selector")
         all_ids = set(split["domains"][domain]["buckets"][0])
@@ -349,7 +349,7 @@ def main() -> None:
         "fusion_report_hash": recorded_report_hash,
         "feature_schema_sha256": file_hash(feature_schema_path),
         "label_config_sha256": file_hash(config_path),
-        "source_sha256": {"scripts_c/build_training_tables.py": builder_hash},
+        "source_sha256": {"scripts/v1/build_training_tables.py": builder_hash},
         "label_recipe": labels,
         "control_policies": controls,
         "label_recipe_hash": label_recipe_hash,

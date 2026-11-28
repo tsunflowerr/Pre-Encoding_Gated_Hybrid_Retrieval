@@ -155,7 +155,7 @@ def npz_inputs(ws, encoder: str, domain: str, kind: str, *, prefix: str = "") ->
     if not checked_quality(ws.quality("bm25", domain), ws, "bm25", domain):
         raise FileNotFoundError("BM25 quality cache is required before derived arrays")
     for name in ("experiment_v3.py", "experiment_v4.py"):
-        files[name] = ws.repo / "scripts_shared" / name
+        files[name] = ws.repo / "scripts" / name
     return {
         "kind": kind,
         "domain": domain,

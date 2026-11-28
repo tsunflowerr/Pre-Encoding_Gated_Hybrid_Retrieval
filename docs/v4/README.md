@@ -391,7 +391,7 @@ Các con số đầy đủ nằm ở [facts/prior_comparison.json](facts/prior_c
 ## 8. Demo
 
 ```powershell
-python scripts_shared/demo_v4.py --domain unix --port 8765   # mở http://127.0.0.1:8765
+python scripts/demo_v4.py --domain unix --port 8765   # mở http://127.0.0.1:8765
 ```
 
 Gõ một câu hỏi tiếng Anh. Trang hiển thị:
@@ -452,7 +452,7 @@ Demo dùng đúng gate đã đóng băng; ngưỡng là phân vị ngân sách v
 Mặc định `--root ~/.cache/pegh/v4`. Các domain đã thấy được đọc chỉ-đọc từ v3 và v1. Không sửa mã trong lúc chạy `online`.
 
 ```powershell
-$py = "python"; $s = "scripts_shared/experiment_v4.py"; $E = "arctic_xs_q"
+$py = "python"; $s = "scripts/experiment_v4.py"; $E = "arctic_xs_q"
 $seen = "android","gis","mathematica","webmasters"     # programmers/unix đã có từ v1
 $new  = "english","gaming","physics","stats","tex","wordpress"
 # Tuần 1: chọn encoder trên dev, rồi chốt gate bằng LODO trên 6 domain đã thấy

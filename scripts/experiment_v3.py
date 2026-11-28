@@ -562,9 +562,7 @@ def online_plan(ws: Workspace, args) -> None:
                     "train_count": len(data.folds[fold]["train"]),
                 },
             )
-            v1_path = (
-                ws.repo / f"docs/integration/2026-10-26/online-manifests/{domain}_fold_{fold}.json"
-            )
+            v1_path = ws.repo / f"docs/online-manifests/{domain}_fold_{fold}.json"
             registry = []
             for entry in json.loads(v1_path.read_text(encoding="utf-8"))["registry"]:
                 if entry["id"] in ("h_star", "pe_gh"):

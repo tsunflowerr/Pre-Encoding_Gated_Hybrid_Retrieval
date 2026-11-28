@@ -1,4 +1,4 @@
-from scripts_c.select_thresholds import _grid
+from scripts.v1.select_thresholds import _grid
 
 
 def test_tied_validation_scores_skip_and_oov_is_counted() -> None:

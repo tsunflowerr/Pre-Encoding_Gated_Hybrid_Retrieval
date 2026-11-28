@@ -92,7 +92,7 @@ def main() -> None:
         or s_tie_preference != "candidate_order"
     ):
         raise ValueError("unsupported registered fusion tie policy")
-    source_files = (Path("scripts_c/select_fusion.py"), Path("src/pegh/fusion/engines.py"))
+    source_files = (Path("scripts/v1/select_fusion.py"), Path("src/pegh/fusion/engines.py"))
     source_hashes = {str(path): file_hash(root / path) for path in source_files}
     report = {
         "schema_version": "1.0",

@@ -36,7 +36,7 @@ foreach ($domain in $domains) {
                 $state.settings.repetitions -eq $Repetitions -and
                 $state.domain -eq $domain -and $state.fold -eq $fold) {
                 if (-not (Test-Path -LiteralPath (Join-Path $output 'summary.json'))) {
-                    & $python -X utf8 scripts_b/report_efficiency.py --run $output
+                    & $python -X utf8 scripts/v1/report_efficiency.py --run $output
                     if ($LASTEXITCODE -ne 0) { throw "Efficiency report failed: $name" }
                 }
                 Write-Host "Already complete: $name"
@@ -59,12 +59,12 @@ foreach ($domain in $domains) {
             Write-Host "Archived interrupted run: $archive"
         }
         $stageArgs = if ($DetailedStages) { @('--detailed-stages') } else { @() }
-        & $python -X utf8 scripts_b/benchmark_online.py `
+        & $python -X utf8 scripts/v1/benchmark_online.py `
             --registry $registry --queries $queries --warmup-queries $warmup `
             --domain $domain --split test --fold $fold --output $output `
             --repetitions $Repetitions --runtime $Runtime @stageArgs
         if ($LASTEXITCODE -ne 0) { throw "Benchmark failed: $name" }
-        & $python -X utf8 scripts_b/report_efficiency.py --run $output
+        & $python -X utf8 scripts/v1/report_efficiency.py --run $output
         if ($LASTEXITCODE -ne 0) { throw "Efficiency report failed: $name" }
     }
 }

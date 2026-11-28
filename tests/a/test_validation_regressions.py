@@ -15,8 +15,8 @@ from pegh.data.splits import validate_five_fold_splits
 from pegh.evaluation.oof import run_oof
 from pegh.sparse.config import BM25Config
 from pegh.sparse.index import SQLiteBM25, build_index
-from scripts_a.build_utility import main as utility_main
-from scripts_a.validate_providers import _bm25s_parity
+from scripts.v1.build_utility import main as utility_main
+from scripts.v1.validate_providers import _bm25s_parity
 from tests.a.test_oof import _fixture
 
 
